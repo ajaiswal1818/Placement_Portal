@@ -1,0 +1,35 @@
+{
+  "project_info": {
+    "project_number": "582507735584",
+    "firebase_url": "https://placement-portal-89289.firebaseio.com",
+    "project_id": "placement-portal-89289",
+    "storage_bucket": "placement-portal-89289.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:582507735584:android:e5c8bdf066027cb3",
+        "android_client_info": {
+          "package_name": "com.group6.placementportal"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAdQ4aTjAS34ixswReHC2sd1h7tTMtTXN0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "582507735584-e2b2vaj77vembetve7ra9thr9kgmts2u.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
