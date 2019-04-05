@@ -3,24 +3,26 @@ package com.group6.placementportal.DatabasePackage;
 import java.util.List;
 
 class Student {
-    private string FirstName;
-    private string LastName;
-    private string Department;
-    private string WebmailID;
-    private string Contact;
-    private string RollNo;
-    private string Gender;
+    private String FirstName;
+    private String LastName;
+    private String Department;
+
+
+    private String WebmailID;
+    private String Contact;
+    private String RollNo;
+    private String Gender;
     private double CPI;
-    private string Programme;
-    private List<string> Applied_Company_IDs;
+    private String Programme;
+    private List<String> Applied_Company_IDs;
     private int YearOfGraduation;
+    private String Password;
 
-
-    public Student(string firstName, string lastName, string department, string emailID, string contact, string rollNo, string gender, double CPI, string programme, List<string> applied_Company_IDs, int yearOfGraduation) {
+    public Student(String firstName, String lastName, String department, String webmailID, String contact, String rollNo, String gender, double CPI, String programme, List<String> applied_Company_IDs, int yearOfGraduation, String password) {
         FirstName = firstName;
         LastName = lastName;
         Department = department;
-        EmailID = emailID;
+        WebmailID = webmailID;
         Contact = contact;
         RollNo = rollNo;
         Gender = gender;
@@ -28,61 +30,70 @@ class Student {
         Programme = programme;
         Applied_Company_IDs = applied_Company_IDs;
         YearOfGraduation = yearOfGraduation;
+        Password = password;
     }
 
-    public string getFirstName() {
+    public String getPassword() {
+        return Password;
+    }
+
+    public void setPassword(String password) {
+        Password = password;
+    }
+
+    public String getWebmailID() {
+        return WebmailID;
+    }
+
+    public void setWebmailID(String webmailID) {
+        WebmailID = webmailID;
+    }
+
+    public String getFirstName() {
         return FirstName;
     }
 
-    public void setFirstName(string firstName) {
+    public void setFirstName(String firstName) {
         FirstName = firstName;
     }
 
-    public string getLastName() {
+    public String getLastName() {
         return LastName;
     }
 
-    public void setLastName(string lastName) {
+    public void setLastName(String lastName) {
         LastName = lastName;
     }
 
-    public string getDepartment() {
+    public String getDepartment() {
         return Department;
     }
 
-    public void setDepartment(string department) {
+    public void setDepartment(String department) {
         Department = department;
     }
 
-    public string getEmailID() {
-        return EmailID;
-    }
-
-    public void setEmailID(string emailID) {
-        EmailID = emailID;
-    }
-
-    public string getContact() {
+    public String getContact() {
         return Contact;
     }
 
-    public void setContact(string contact) {
+    public void setContact(String contact) {
         Contact = contact;
     }
 
-    public string getRollNo() {
+    public String getRollNo() {
         return RollNo;
     }
 
-    public void setRollNo(string rollNo) {
+    public void setRollNo(String rollNo) {
         RollNo = rollNo;
     }
 
-    public string getGender() {
+    public String getGender() {
         return Gender;
     }
 
-    public void setGender(string gender) {
+    public void setGender(String gender) {
         Gender = gender;
     }
 
@@ -94,19 +105,19 @@ class Student {
         this.CPI = CPI;
     }
 
-    public string getProgramme() {
+    public String getProgramme() {
         return Programme;
     }
 
-    public void setProgramme(string programme) {
+    public void setProgramme(String programme) {
         Programme = programme;
     }
 
-    public List<string> getApplied_Company_IDs() {
+    public List<String> getApplied_Company_IDs() {
         return Applied_Company_IDs;
     }
 
-    public void setApplied_Company_IDs(List<string> applied_Company_IDs) {
+    public void setApplied_Company_IDs(List<String> applied_Company_IDs) {
         Applied_Company_IDs = applied_Company_IDs;
     }
 
