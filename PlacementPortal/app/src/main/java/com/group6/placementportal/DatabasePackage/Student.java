@@ -6,7 +6,7 @@ class Student {
     private string FirstName;
     private string LastName;
     private string Department;
-    private string EmailID;
+    private string WebmailID;
     private string Contact;
     private string RollNo;
     private string Gender;

@@ -9,11 +9,24 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".LoginPage">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.microsoft.identity.client.BrowserTabActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <!--Add in your scheme/host from registered redirect URI-->
+                <!--By default, the scheme should be similar to 'msal[appId]' -->
+                <data android:scheme="msalee86c0ea-3976-49d4-a7d5-87368851d7bc"
+                    android:host="auth" />
             </intent-filter>
         </activity>
     </application>
