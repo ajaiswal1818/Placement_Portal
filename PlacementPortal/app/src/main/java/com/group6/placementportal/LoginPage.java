@@ -40,6 +40,10 @@ public class LoginPage extends AppCompatActivity {
     private String rollNo;
     private String password;
     private String check_password;
+    private String WebmailID;
+    private String RollNo;
+    private String Programme;
+    private String FullName;
 
     /* Azure AD v2 Configs */
     final static String SCOPES [] = {"https://graph.microsoft.com/User.Read"};
@@ -47,7 +51,7 @@ public class LoginPage extends AppCompatActivity {
 
     /* UI & Debugging Variables */
     private static final String TAG = LoginPage.class.getSimpleName();
-    private JSONObject userData;
+    private String userData;
     Button callGraphButton;
 //    Button signOutButton;
 
@@ -223,7 +227,15 @@ public class LoginPage extends AppCompatActivity {
             public void onResponse(JSONObject response) {
                 /* Successfully called graph, process data and send to UI */
                 Log.d(TAG, "Response: " + response.toString());
-                userData = response;
+                userData = response.toString();
+                try {
+                    FullName=response.getString("displayName");
+                    WebmailID=response.getString("mail");
+                    RollNo=response.getString("surname");
+                    Programme=response.getString("jobTitle");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
 //                updateGraphUI(response);
             }
         }, new Response.ErrorListener() {
@@ -264,8 +276,12 @@ public class LoginPage extends AppCompatActivity {
 //    }
 
     /* Set the UI for successful token acquisition data */
-    private void updateSuccessUI() {
+    private void updateSuccessUI(){
         Intent I = new Intent(getApplicationContext(),Student_Dashboard.class);
+        I.putExtra("fullName",FullName);
+        I.putExtra("Webmail",WebmailID);
+        I.putExtra("rollNo",RollNo);
+        I.putExtra("programme",Programme);
         startActivity(I);
 
     }
