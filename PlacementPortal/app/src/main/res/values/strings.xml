@@ -4,6 +4,12 @@
     <string name="gallery">gallery</string>
     <string name="slideshow">slideshow</string>
     <string name="tools">tools</string>
+    <string name="title_activity_student__profile">Student_Profile</string>
+    <string-array name="gender_dropbox">
+        <item> Male </item>
+        <item> Female </item>
+        <item> Others </item>
+    </string-array>
     <string name="title_activity_student__dashboard">Student_Dashboard</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
