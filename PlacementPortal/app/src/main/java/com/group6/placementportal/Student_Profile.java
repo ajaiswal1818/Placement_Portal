@@ -76,7 +76,8 @@ public class Student_Profile extends AppCompatActivity {
                 webmail=webmail_V.getText().toString();
                 cpi=cpi_V.getText().toString();
                 if(first_name.isEmpty()){
-                    Toast.makeText(Student_Profile.this, "blahblah", Toast.LENGTH_LONG).show();
+                    first_name_V.setError("UserName Should not be blank");
+                    //Toast.makeText(Student_Profile.this, "blahblah", Toast.LENGTH_LONG).show();
                     return;
                 }
                 if(last_name.isEmpty()){
