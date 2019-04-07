@@ -4,4 +4,10 @@
     <string name="gallery">gallery</string>
     <string name="slideshow">slideshow</string>
     <string name="tools">tools</string>
+    <string name="title_activity_student__profile">Student_Profile</string>
+    <string-array name="gender_dropbox">
+        <item> Male </item>
+        <item> Female </item>
+        <item> Others </item>
+    </string-array>
 </resources>

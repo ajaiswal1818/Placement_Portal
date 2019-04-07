@@ -7,7 +7,6 @@ class Student {
     private String LastName;
     private String Department;
 
-
     private String WebmailID;
     private String Contact;
     private String RollNo;
