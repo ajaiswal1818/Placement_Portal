@@ -1,33 +1,299 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Student_Profile">
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".Student_Profile"
+    tools:showIn="@layout/activity_student__profile">
 
-    <android.support.design.widget.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay">
+    <ScrollView
+        android:layout_width="43dp"
+        android:layout_height="14dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="368dp"
+        android:layout_marginBottom="661dp">
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            app:popupTheme="@style/AppTheme.PopupOverlay" />
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
+    </ScrollView>
 
-    </android.support.design.widget.AppBarLayout>
+    <TextView
+        android:id="@+id/cpi_lbl"
+        android:layout_width="162dp"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/first_name_text"
+        android:layout_alignBottom="@+id/first_name_text"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="19dp"
+        android:layout_marginTop="569dp"
+        android:layout_marginEnd="17dp"
+        android:layout_marginBottom="-546dp"
+        android:layout_toStartOf="@+id/first_name_text"
+        android:text="CPI"
+        android:textAlignment="center" />
 
-    <include layout="@layout/content_student__profile" />
+    <TextView
+        android:id="@+id/gender_lbl"
+        android:layout_width="162dp"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/first_name_text"
+        android:layout_alignBottom="@+id/first_name_text"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="23dp"
+        android:layout_marginTop="533dp"
+        android:layout_marginEnd="13dp"
+        android:layout_marginBottom="-510dp"
+        android:layout_toStartOf="@+id/first_name_text"
+        android:text="Gender"
+        android:textAlignment="center" />
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
+    <TextView
+        android:id="@+id/roll_no_lbl"
+        android:layout_width="162dp"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/roll_no_text"
+        android:layout_alignBottom="@+id/first_name_text"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="9dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="-94dp"
+        android:layout_toStartOf="@+id/roll_no_text"
+        android:text="Roll_No"
+        android:textAlignment="center" />
+
+    <TextView
+        android:id="@+id/dept_lbl"
+        android:layout_width="162dp"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/first_name_text"
+        android:layout_alignBottom="@+id/first_name_text"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="17dp"
+        android:layout_marginTop="235dp"
+        android:layout_marginEnd="19dp"
+        android:layout_marginBottom="-211dp"
+        android:layout_toStartOf="@+id/first_name_text"
+        android:text="Department"
+        android:textAlignment="center" />
+
+    <TextView
+        android:id="@+id/contact_lbl"
+        android:layout_width="162dp"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/first_name_text"
+        android:layout_alignBottom="@+id/first_name_text"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="13dp"
+        android:layout_marginTop="304dp"
+        android:layout_marginEnd="23dp"
+        android:layout_marginBottom="-280dp"
+        android:layout_toStartOf="@+id/first_name_text"
+        android:text="Contact"
+        android:textAlignment="center" />
+
+    <TextView
+        android:id="@+id/prog_lbl"
+        android:layout_width="162dp"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/first_name_text"
+        android:layout_alignBottom="@+id/first_name_text"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="362dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="-339dp"
+        android:layout_toStartOf="@+id/first_name_text"
+        android:text="Programme"
+        android:textAlignment="center" />
+
+    <TextView
+        android:id="@+id/yaer_lbl"
+        android:layout_width="162dp"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/first_name_text"
+        android:layout_alignBottom="@+id/first_name_text"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="19dp"
+        android:layout_marginTop="430dp"
+        android:layout_marginEnd="17dp"
+        android:layout_marginBottom="-407dp"
+        android:layout_toStartOf="@+id/first_name_text"
+        android:text="Year of Passing"
+        android:textAlignment="center" />
+
+    <TextView
+        android:id="@+id/webmail_lbl"
+        android:layout_width="162dp"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/first_name_text"
+        android:layout_alignBottom="@+id/first_name_text"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="169dp"
+        android:layout_marginEnd="11dp"
+        android:layout_marginBottom="-146dp"
+        android:layout_toStartOf="@+id/webmail_text"
+        android:text="WebMail_ID"
+        android:textAlignment="center" />
+
+    <TextView
+        android:id="@+id/last_name_lbl"
+        android:layout_width="162dp"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/last_name_text"
+        android:layout_alignBottom="@+id/last_name_text"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="17dp"
+        android:layout_marginEnd="230dp"
+        android:layout_marginBottom="12dp"
+        android:text="Last Name"
+        android:textAlignment="center" />
+
+    <EditText
+        android:id="@+id/dept_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@android:drawable/ic_dialog_email" />
+        android:layout_below="@+id/first_name_text"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="177dp"
+        android:layout_marginEnd="0dp"
+        android:ems="10"
+        android:inputType="textPersonName" />
 
-</android.support.design.widget.CoordinatorLayout>
+    <EditText
+        android:id="@+id/prog_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/first_name_text"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="312dp"
+        android:layout_marginEnd="2dp"
+        android:ems="10"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/year_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/first_name_text"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="370dp"
+        android:layout_marginEnd="3dp"
+        android:ems="10"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/last_name_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/first_name_text"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="9dp"
+        android:layout_marginEnd="4dp"
+        android:ems="10"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/first_name_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="3dp"
+        android:layout_marginEnd="2dp"
+        android:ems="10"
+        android:inputType="textPersonName" />
+
+    <TextView
+        android:id="@+id/first_name_lbl"
+        android:layout_width="162dp"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/first_name_text"
+        android:layout_alignEnd="@+id/first_name_text"
+        android:layout_alignBottom="@+id/first_name_text"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="17dp"
+        android:layout_marginTop="11dp"
+        android:layout_marginEnd="231dp"
+        android:layout_marginBottom="10dp"
+        android:text="First Name"
+        android:textAlignment="center" />
+
+    <EditText
+        android:id="@+id/roll_no_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/last_name_text"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="4dp"
+        android:ems="10"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/webmail_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/roll_no_text"
+        android:layout_alignEnd="@+id/first_name_text"
+        android:layout_alignBottom="@+id/roll_no_text"
+        android:layout_marginTop="9dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginBottom="-55dp"
+        android:ems="10"
+        android:inputType="textEmailAddress" />
+
+    <EditText
+        android:id="@+id/contact_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="3dp"
+        android:layout_marginBottom="333dp"
+        android:ems="10"
+        android:inputType="phone" />
+
+    <Spinner
+        android:id="@+id/gender_spinner"
+        android:layout_width="210dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="0dp"
+        android:layout_marginBottom="113dp"
+        android:entries="@array/gender_dropbox" />
+
+    <Button
+        android:id="@+id/btn_savechanges"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="162dp"
+        android:layout_marginBottom="14dp"
+        android:text="SAVE CHANGES" />
+
+    <EditText
+        android:id="@+id/cpi_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="64dp"
+        android:ems="10"
+        android:inputType="numberDecimal"
+        android:text="CPI" />
+
+</RelativeLayout>
