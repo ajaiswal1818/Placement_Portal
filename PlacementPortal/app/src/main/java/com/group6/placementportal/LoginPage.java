@@ -94,8 +94,10 @@ public class LoginPage extends AppCompatActivity {
             if (accounts != null && accounts.size() == 1) {
                 /* We have 1 account */
                 sampleApp.acquireTokenSilentAsync(SCOPES, accounts.get(0), getAuthSilentCallback());
+                Toast.makeText(LoginPage.this,accounts.get(0).getUsername(), Toast.LENGTH_LONG).show();
             } else {
                 /* We have no account or >1 account */
+                Toast.makeText(LoginPage.this,accounts.get(1).getUsername(), Toast.LENGTH_LONG).show();
             }
         } catch (IndexOutOfBoundsException e) {
             Log.d(TAG, "Account at this position does not exist: " + e.toString());
