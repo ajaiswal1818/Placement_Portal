@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.group6.placementportal">
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
@@ -11,24 +12,27 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".LoginPage">
+        <activity android:name=".release_Notices"></activity>
+        <activity android:name=".admin_home" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name="com.microsoft.identity.client.BrowserTabActivity">
+        <activity android:name=".LoginPage"></activity>
+        <activity android:name="com.microsoft.identity.client.BrowserTabActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
 
-                <!--Add in your scheme/host from registered redirect URI-->
-                <!--By default, the scheme should be similar to 'msal[appId]' -->
-                <data android:scheme="msalee86c0ea-3976-49d4-a7d5-87368851d7bc"
-                    android:host="auth" />
+                <!-- Add in your scheme/host from registered redirect URI -->
+                <!-- By default, the scheme should be similar to 'msal[appId]' -->
+                <data
+                    android:host="auth"
+                    android:scheme="msalee86c0ea-3976-49d4-a7d5-87368851d7bc" />
             </intent-filter>
         </activity>
     </application>
