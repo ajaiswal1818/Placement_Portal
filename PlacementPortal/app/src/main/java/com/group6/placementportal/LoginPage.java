@@ -44,6 +44,7 @@ public class LoginPage extends AppCompatActivity {
     private String RollNo;
     private String Programme;
     private String FullName;
+    private boolean firstTimeUser=false;
 
     /* Azure AD v2 Configs */
     final static String SCOPES [] = {"https://graph.microsoft.com/User.Read"};
@@ -98,10 +99,9 @@ public class LoginPage extends AppCompatActivity {
             if (accounts != null && accounts.size() == 1) {
                 /* We have 1 account */
                 sampleApp.acquireTokenSilentAsync(SCOPES, accounts.get(0), getAuthSilentCallback());
-                Toast.makeText(LoginPage.this,accounts.get(0).getUsername(), Toast.LENGTH_LONG).show();
+//                Toast.makeText(LoginPage.this,accounts.get(0).getUsername(), Toast.LENGTH_LONG).show();
             } else {
                 /* We have no account or >1 account */
-                Toast.makeText(LoginPage.this,accounts.get(1).getUsername(), Toast.LENGTH_LONG).show();
             }
         } catch (IndexOutOfBoundsException e) {
             Log.d(TAG, "Account at this position does not exist: " + e.toString());
@@ -121,24 +121,30 @@ public class LoginPage extends AppCompatActivity {
                 password = Password.getText().toString();
 
                 Login_Details= FirebaseDatabase.getInstance().getReference();
-                Login_Details = Login_Details.child("Student").child(rollNo).child("Password");
+                Login_Details = Login_Details.child("Student").child(rollNo);
 
 
                 Login_Details.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        check_password = dataSnapshot.getValue(String.class);
+                        check_password = dataSnapshot.child("Password").getValue(String.class);
                         if(password.equals(check_password)){
+                            FullName=dataSnapshot.child("FullName").getValue(String.class);
+                            WebmailID=dataSnapshot.getKey();
+                            RollNo=dataSnapshot.child("RollNo").getValue(String.class);
+                            Programme=dataSnapshot.child("Programme").getValue(String.class);
+                            firstTimeUser = false;
+                            Toast.makeText(LoginPage.this,WebmailID, Toast.LENGTH_LONG).show();
                             updateSuccessUI();
                         }
                         else{
-                            Toast.makeText(LoginPage.this, "UNsuccessfull", Toast.LENGTH_LONG).show();
+                            Toast.makeText(LoginPage.this, "Unsuccessful", Toast.LENGTH_LONG).show();
                         }
                     }
 
                     @Override
                     public void onCancelled(@NonNull DatabaseError databaseError) {
-                        Toast.makeText(LoginPage.this, "UNsuccessfull", Toast.LENGTH_LONG).show();
+                        Toast.makeText(LoginPage.this, "Unsuccessful", Toast.LENGTH_LONG).show();
                     }
                 });
 
@@ -233,10 +239,15 @@ public class LoginPage extends AppCompatActivity {
                     WebmailID=response.getString("mail");
                     RollNo=response.getString("surname");
                     Programme=response.getString("jobTitle");
+                    firstTimeUser = VerifyUser(WebmailID.split("@")[0]);
+                    Log.d(TAG,WebmailID.split("@")[0]);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-//                updateGraphUI(response);
+
+                /* update the UI to post call graph state */
+
+
             }
         }, new Response.ErrorListener() {
             @Override
@@ -261,6 +272,28 @@ public class LoginPage extends AppCompatActivity {
         queue.add(request);
     }
 
+    private boolean VerifyUser(final String webmailID){
+        final boolean[] isSignUp = {false};
+        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+        mDatabase = mDatabase.child("Student").child(webmailID);
+        mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                boolean value = dataSnapshot.hasChild("Password");
+                isSignUp[0]= (!value);
+                Log.d(TAG,!value+" f"+isSignUp[0]);
+                firstTimeUser=(!value);
+                updateSuccessUI();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+        return isSignUp[0];
+    }
+
     //
     // Helper methods manage UI updates
     // ================================
@@ -277,7 +310,13 @@ public class LoginPage extends AppCompatActivity {
 
     /* Set the UI for successful token acquisition data */
     private void updateSuccessUI(){
-        Intent I = new Intent(getApplicationContext(),Student_Dashboard.class);
+        Intent I;
+        Log.d(TAG,firstTimeUser + " ");
+        if(!firstTimeUser){
+            I = new Intent(getApplicationContext(),Student_Dashboard.class);
+        }else{
+            I = new Intent(getApplicationContext(),Student_Profile.class);
+        }
         I.putExtra("fullName",FullName);
         I.putExtra("Webmail",WebmailID);
         I.putExtra("rollNo",RollNo);
@@ -324,8 +363,8 @@ public class LoginPage extends AppCompatActivity {
                 /* call graph */
                 callGraphAPI();
 
-                /* update the UI to post call graph state */
-                updateSuccessUI();
+//                /* update the UI to post call graph state */
+//                updateSuccessUI();
             }
 
             @Override
@@ -366,9 +405,6 @@ public class LoginPage extends AppCompatActivity {
 
                 /* call graph */
                 callGraphAPI();
-
-                /* update the UI to post call graph state */
-                updateSuccessUI();
             }
 
             @Override
