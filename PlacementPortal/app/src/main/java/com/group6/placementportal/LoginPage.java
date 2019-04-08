@@ -1,5 +1,6 @@
 package com.group6.placementportal;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -8,7 +9,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -47,12 +47,12 @@ public class LoginPage extends AppCompatActivity {
             public void onClick(View v) {
                 rollNo = Webmail.getText().toString();
                 password = Password.getText().toString();
-
+                Intent company_dashboard = new Intent(LoginPage.this, company_dashboard.class);
                 Login_Details= FirebaseDatabase.getInstance().getReference();
                 Login_Details = Login_Details.child("Student").child(rollNo).child("Password");
+                startActivity(company_dashboard);
 
-
-                Login_Details.addListenerForSingleValueEvent(new ValueEventListener() {
+               /* Login_Details.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         check_password = dataSnapshot.getValue(String.class);
@@ -69,7 +69,11 @@ public class LoginPage extends AppCompatActivity {
                     public void onCancelled(@NonNull DatabaseError databaseError) {
                         Toast.makeText(LoginPage.this, "UNsuccessfull", Toast.LENGTH_LONG).show();
                     }
-                });
+
+
+
+                });*/
+
 
 
             }

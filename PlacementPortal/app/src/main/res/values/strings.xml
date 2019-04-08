@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Placement Portal</string>
+    <string name="title_activity_company_profile">company_profile</string>
 </resources>

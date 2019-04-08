@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:orientation="vertical"
+        android:layout_weight="1">
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/profile_card"
+            android:layout_width="100dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+
+
+            app:cardCornerRadius="8dp"
+            app:cardElevation="8dp">
+
+            <TextView
+                android:layout_height="50dp"
+                android:layout_width="100dp"
+                android:layout_gravity="center_horizontal|center_vertical"
+                android:text="Manage Profile" />
+
+        </android.support.v7.widget.CardView>
+
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/notices_card"
+            android:layout_width="100dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+
+
+
+            app:cardCornerRadius="8dp"
+            app:cardElevation="8dp">
+
+            <TextView
+                android:layout_height="50dp"
+                android:layout_width="100dp"
+                android:layout_gravity="center_horizontal|center_vertical"
+                android:text="Notices" />
+
+        </android.support.v7.widget.CardView>
+
+
+    </LinearLayout>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:orientation="vertical"
+        android:layout_weight="1">
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/book_card"
+            android:layout_width="100dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="8dp">
+
+            <TextView
+                android:layout_height="50dp"
+                android:layout_width="100dp"
+                android:layout_gravity="center_horizontal|center_vertical"
+                android:text="Manage Events" />
+
+        </android.support.v7.widget.CardView>
+
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/enrollments_card"
+            android:layout_width="100dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+
+
+
+            app:cardCornerRadius="8dp"
+            app:cardElevation="8dp">
+
+            <TextView
+                android:layout_height="50dp"
+                android:layout_width="100dp"
+                android:layout_gravity="center_horizontal|center_vertical"
+                android:text="Enrollments" />
+
+        </android.support.v7.widget.CardView>
+
+
+    </LinearLayout>
+
+</LinearLayout>
+
+
+
+
+
+
+
+
+
+
+
+
