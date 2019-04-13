@@ -139,18 +139,10 @@ public class Student_Profile<Student> extends AppCompatActivity {
                 user.setProgramme(prog);
                 user.setYearOfGraduation(year_int);
                 user.setPassword(password);
-                ref=FirebaseDatabase.getInstance().getReference("Student");
-                ref.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        ref.child(webmail).setValue(user);
-                    }
 
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                    }
-                });
+                ref=FirebaseDatabase.getInstance().getReference();
+                ref = ref.child("Student");
+                ref.child(webmail).setValue(user);
 
                 Intent i = new Intent(Student_Profile.this, Student_Dashboard.class);
                 startActivity(i);
