@@ -21,10 +21,11 @@ public class Student_ChangePass extends AppCompatActivity {
     private String NPass = "";
     private String NPass2 = "";
 
-    private String Prev_Pass = Student.getPassword();
-    private String Username = Student.getWebmailID();
+    private String Prev_Pass;
+    private String Username;
 
     private Button Change_Button;
+    private Student student;
 
     private DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
 
@@ -36,6 +37,10 @@ public class Student_ChangePass extends AppCompatActivity {
         CurrPass = findViewById(R.id.editCurrPass);
         NewPass = findViewById(R.id.editNewPass);
         NewPass2 = findViewById(R.id.editNewPass2);
+//      Get student from bundle
+//      student= Bundle data
+        Prev_Pass = student.getPassword();
+        Username = student.getWebmailID();
 
         Change_Button = findViewById(R.id.btn_Change_Pass);
         Change_Button.setOnClickListener(new View.OnClickListener() {
@@ -46,7 +51,7 @@ public class Student_ChangePass extends AppCompatActivity {
 
                 if(Prev_Pass.equals(Pass)){
                     if(NPass2.equals(NPass)){
-                        Student.setPassword(NPass);
+                        student.setPassword(NPass);
                         mDatabase.child("Student").child(Username).child("Password").setValue(NPass);
                     }
                     else{
