@@ -3,8 +3,7 @@ package com.group6.placementportal.DatabasePackage;
 import java.util.List;
 
 public class Student {
-    private static String FirstName;
-    private static String LastName;
+    private static String FullName;
     private static String Department;
 
     private static String WebmailID;
@@ -17,9 +16,8 @@ public class Student {
     private static int YearOfGraduation;
     private static String Password;
 
-    public Student(String firstName, String lastName, String department, String webmailID, String contact, String rollNo, String gender, double CPI_get, String programme, List<String> applied_Company_IDs, int yearOfGraduation, String password) {
-        FirstName = firstName;
-        LastName = lastName;
+    public Student(String firstName, String department, String webmailID, String contact, String rollNo, String gender, double CPI_get, String programme, List<String> applied_Company_IDs, int yearOfGraduation, String password) {
+        FullName = firstName;
         Department = department;
         WebmailID = webmailID;
         Contact = contact;
@@ -48,20 +46,12 @@ public class Student {
         WebmailID = webmailID;
     }
 
-    public static String getFirstName() {
-        return FirstName;
+    public static String getFullName() {
+        return FullName;
     }
 
-    public static void setFirstName(String firstName) {
-        FirstName = firstName;
-    }
-
-    public static String getLastName() {
-        return LastName;
-    }
-
-    public static void setLastName(String lastName) {
-        LastName = lastName;
+    public static void setFullName(String fullName) {
+        FullName = fullName;
     }
 
     public static String getDepartment() {
@@ -102,6 +92,9 @@ public class Student {
 
     public static void setCPI(double CPI_get) {
         CPI = CPI_get;
+    }
+
+    public Student() {
     }
 
     public static String getProgramme() {

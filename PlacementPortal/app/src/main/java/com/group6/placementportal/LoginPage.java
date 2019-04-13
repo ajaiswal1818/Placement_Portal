@@ -1,5 +1,6 @@
 package com.group6.placementportal;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -40,6 +41,13 @@ public class LoginPage extends AppCompatActivity {
     private String rollNo;
     private String password;
     private String check_password;
+    private String WebmailID;
+    private String RollNo;
+    private String Programme;
+    private String FullName;
+    private boolean firstTimeUser=false;
+
+    private ProgressDialog dialog;
 
     /* Azure AD v2 Configs */
     final static String SCOPES [] = {"https://graph.microsoft.com/User.Read"};
@@ -47,7 +55,7 @@ public class LoginPage extends AppCompatActivity {
 
     /* UI & Debugging Variables */
     private static final String TAG = LoginPage.class.getSimpleName();
-    private JSONObject userData;
+    private String userData;
     Button callGraphButton;
 //    Button signOutButton;
 
@@ -62,9 +70,14 @@ public class LoginPage extends AppCompatActivity {
 
         callGraphButton = findViewById(R.id.callGraph);
         //signOutButton = findViewById(R.id.clearCache);
+        dialog = new ProgressDialog(LoginPage.this);
+
+        dialog.setMessage("Please Wait");
+
 
         callGraphButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                dialog.show();
                 onCallGraphClicked();
             }
         });
@@ -94,10 +107,9 @@ public class LoginPage extends AppCompatActivity {
             if (accounts != null && accounts.size() == 1) {
                 /* We have 1 account */
                 sampleApp.acquireTokenSilentAsync(SCOPES, accounts.get(0), getAuthSilentCallback());
-                Toast.makeText(LoginPage.this,accounts.get(0).getUsername(), Toast.LENGTH_LONG).show();
+//                Toast.makeText(LoginPage.this,accounts.get(0).getUsername(), Toast.LENGTH_LONG).show();
             } else {
                 /* We have no account or >1 account */
-                Toast.makeText(LoginPage.this,accounts.get(1).getUsername(), Toast.LENGTH_LONG).show();
             }
         } catch (IndexOutOfBoundsException e) {
             Log.d(TAG, "Account at this position does not exist: " + e.toString());
@@ -113,28 +125,38 @@ public class LoginPage extends AppCompatActivity {
         login_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                dialog.show();
                 rollNo = Webmail.getText().toString();
                 password = Password.getText().toString();
 
                 Login_Details= FirebaseDatabase.getInstance().getReference();
-                Login_Details = Login_Details.child("Student").child(rollNo).child("Password");
+                Login_Details = Login_Details.child("Student").child(rollNo);
 
 
                 Login_Details.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        check_password = dataSnapshot.getValue(String.class);
+                        check_password = dataSnapshot.child("Password").getValue(String.class);
                         if(password.equals(check_password)){
+                            FullName=dataSnapshot.child("FullName").getValue(String.class);
+                            WebmailID=dataSnapshot.getKey();
+                            RollNo=dataSnapshot.child("RollNo").getValue(String.class);
+                            Programme=dataSnapshot.child("Programme").getValue(String.class);
+                            firstTimeUser = false;
+                            dialog.hide();
+                            Toast.makeText(LoginPage.this,WebmailID, Toast.LENGTH_LONG).show();
                             updateSuccessUI();
                         }
                         else{
-                            Toast.makeText(LoginPage.this, "UNsuccessfull", Toast.LENGTH_LONG).show();
+                            dialog.hide();
+                            Toast.makeText(LoginPage.this, "Unsuccessful", Toast.LENGTH_LONG).show();
                         }
                     }
 
                     @Override
                     public void onCancelled(@NonNull DatabaseError databaseError) {
-                        Toast.makeText(LoginPage.this, "UNsuccessfull", Toast.LENGTH_LONG).show();
+                        Toast.makeText(LoginPage.this, "Unsuccessful", Toast.LENGTH_LONG).show();
                     }
                 });
 
@@ -223,12 +245,27 @@ public class LoginPage extends AppCompatActivity {
             public void onResponse(JSONObject response) {
                 /* Successfully called graph, process data and send to UI */
                 Log.d(TAG, "Response: " + response.toString());
-                userData = response;
-//                updateGraphUI(response);
+                userData = response.toString();
+                try {
+                    FullName=response.getString("displayName");
+                    WebmailID=response.getString("mail");
+                    RollNo=response.getString("surname");
+                    Programme=response.getString("jobTitle");
+                    WebmailID = WebmailID.split("@")[0];
+                    firstTimeUser = VerifyUser(WebmailID);
+                    Log.d(TAG,WebmailID);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                /* update the UI to post call graph state */
+
+
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                dialog.hide();
                 Log.d(TAG, "Error: " + error.toString());
             }
         }) {
@@ -249,6 +286,28 @@ public class LoginPage extends AppCompatActivity {
         queue.add(request);
     }
 
+    private boolean VerifyUser(final String webmailID){
+        final boolean[] isSignUp = {false};
+        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+        mDatabase = mDatabase.child("Student").child(webmailID);
+        mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                boolean value = dataSnapshot.hasChild("Password");
+                isSignUp[0]= (!value);
+                Log.d(TAG,!value+" f"+isSignUp[0]);
+                firstTimeUser=(!value);
+                updateSuccessUI();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+        return isSignUp[0];
+    }
+
     //
     // Helper methods manage UI updates
     // ================================
@@ -264,8 +323,19 @@ public class LoginPage extends AppCompatActivity {
 //    }
 
     /* Set the UI for successful token acquisition data */
-    private void updateSuccessUI() {
-        Intent I = new Intent(getApplicationContext(),Student_Dashboard.class);
+    private void updateSuccessUI(){
+        dialog.hide();
+        Intent I;
+        Log.d(TAG,firstTimeUser + " ");
+        if(!firstTimeUser){
+            I = new Intent(getApplicationContext(),Student_Dashboard.class);
+        }else{
+            I = new Intent(getApplicationContext(),Student_Profile.class);
+        }
+        I.putExtra("fullName",FullName);
+        I.putExtra("Webmail",WebmailID);
+        I.putExtra("rollNo",RollNo);
+        I.putExtra("programme",Programme);
         startActivity(I);
 
     }
@@ -308,13 +378,14 @@ public class LoginPage extends AppCompatActivity {
                 /* call graph */
                 callGraphAPI();
 
-                /* update the UI to post call graph state */
-                updateSuccessUI();
+//                /* update the UI to post call graph state */
+//                updateSuccessUI();
             }
 
             @Override
             public void onError(MsalException exception) {
                 /* Failed to acquireToken */
+                dialog.hide();
                 Log.d(TAG, "Authentication failed: " + exception.toString());
 
                 if (exception instanceof MsalClientException) {
@@ -329,6 +400,7 @@ public class LoginPage extends AppCompatActivity {
             @Override
             public void onCancel() {
                 /* User canceled the authentication */
+                dialog.hide();
                 Log.d(TAG, "User cancelled login.");
             }
         };
@@ -350,14 +422,12 @@ public class LoginPage extends AppCompatActivity {
 
                 /* call graph */
                 callGraphAPI();
-
-                /* update the UI to post call graph state */
-                updateSuccessUI();
             }
 
             @Override
             public void onError(MsalException exception) {
                 /* Failed to acquireToken */
+                dialog.hide();
                 Log.d(TAG, "Authentication failed: " + exception.toString());
 
                 if (exception instanceof MsalClientException) {
@@ -369,6 +439,7 @@ public class LoginPage extends AppCompatActivity {
 
             @Override
             public void onCancel() {
+                dialog.hide();
                 /* User canceled the authentication */
                 Log.d(TAG, "User cancelled login.");
             }
