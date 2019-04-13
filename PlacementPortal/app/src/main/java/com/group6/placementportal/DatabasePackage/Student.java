@@ -2,9 +2,8 @@ package com.group6.placementportal.DatabasePackage;
 
 import java.util.List;
 
-class Student {
-    private String FirstName;
-    private String LastName;
+public class Student {
+    private String FullName;
     private String Department;
 
     private String WebmailID;
@@ -17,9 +16,8 @@ class Student {
     private int YearOfGraduation;
     private String Password;
 
-    public Student(String firstName, String lastName, String department, String webmailID, String contact, String rollNo, String gender, double CPI, String programme, List<String> applied_Company_IDs, int yearOfGraduation, String password) {
-        FirstName = firstName;
-        LastName = lastName;
+    public Student(String firstName, String department, String webmailID, String contact, String rollNo, String gender, double CPI, String programme, List<String> applied_Company_IDs, int yearOfGraduation, String password) {
+        FullName = firstName;
         Department = department;
         WebmailID = webmailID;
         Contact = contact;
@@ -48,20 +46,12 @@ class Student {
         WebmailID = webmailID;
     }
 
-    public String getFirstName() {
-        return FirstName;
+    public String getFullName() {
+        return FullName;
     }
 
-    public void setFirstName(String firstName) {
-        FirstName = firstName;
-    }
-
-    public String getLastName() {
-        return LastName;
-    }
-
-    public void setLastName(String lastName) {
-        LastName = lastName;
+    public void setFullName(String fullName) {
+        FullName = fullName;
     }
 
     public String getDepartment() {
@@ -102,6 +92,9 @@ class Student {
 
     public void setCPI(double CPI) {
         this.CPI = CPI;
+    }
+
+    public Student() {
     }
 
     public String getProgramme() {

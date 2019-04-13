@@ -68,6 +68,7 @@ public class LoginPage extends AppCompatActivity {
         callGraphButton = findViewById(R.id.callGraph);
         //signOutButton = findViewById(R.id.clearCache);
 
+
         callGraphButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 onCallGraphClicked();
