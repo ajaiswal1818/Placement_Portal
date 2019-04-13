@@ -1,5 +1,6 @@
 package com.group6.placementportal;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -46,6 +47,8 @@ public class LoginPage extends AppCompatActivity {
     private String FullName;
     private boolean firstTimeUser=false;
 
+    private ProgressDialog dialog;
+
     /* Azure AD v2 Configs */
     final static String SCOPES [] = {"https://graph.microsoft.com/User.Read"};
     final static String MSGRAPH_URL = "https://graph.microsoft.com/v1.0/me";
@@ -67,10 +70,14 @@ public class LoginPage extends AppCompatActivity {
 
         callGraphButton = findViewById(R.id.callGraph);
         //signOutButton = findViewById(R.id.clearCache);
+        dialog = new ProgressDialog(LoginPage.this);
+
+        dialog.setMessage("Please Wait");
 
 
         callGraphButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                dialog.show();
                 onCallGraphClicked();
             }
         });
@@ -118,6 +125,8 @@ public class LoginPage extends AppCompatActivity {
         login_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                dialog.show();
                 rollNo = Webmail.getText().toString();
                 password = Password.getText().toString();
 
@@ -135,10 +144,12 @@ public class LoginPage extends AppCompatActivity {
                             RollNo=dataSnapshot.child("RollNo").getValue(String.class);
                             Programme=dataSnapshot.child("Programme").getValue(String.class);
                             firstTimeUser = false;
+                            dialog.hide();
                             Toast.makeText(LoginPage.this,WebmailID, Toast.LENGTH_LONG).show();
                             updateSuccessUI();
                         }
                         else{
+                            dialog.hide();
                             Toast.makeText(LoginPage.this, "Unsuccessful", Toast.LENGTH_LONG).show();
                         }
                     }
@@ -240,8 +251,9 @@ public class LoginPage extends AppCompatActivity {
                     WebmailID=response.getString("mail");
                     RollNo=response.getString("surname");
                     Programme=response.getString("jobTitle");
-                    firstTimeUser = VerifyUser(WebmailID.split("@")[0]);
-                    Log.d(TAG,WebmailID.split("@")[0]);
+                    WebmailID = WebmailID.split("@")[0];
+                    firstTimeUser = VerifyUser(WebmailID);
+                    Log.d(TAG,WebmailID);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -253,6 +265,7 @@ public class LoginPage extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                dialog.hide();
                 Log.d(TAG, "Error: " + error.toString());
             }
         }) {
@@ -311,6 +324,7 @@ public class LoginPage extends AppCompatActivity {
 
     /* Set the UI for successful token acquisition data */
     private void updateSuccessUI(){
+        dialog.hide();
         Intent I;
         Log.d(TAG,firstTimeUser + " ");
         if(!firstTimeUser){
@@ -371,6 +385,7 @@ public class LoginPage extends AppCompatActivity {
             @Override
             public void onError(MsalException exception) {
                 /* Failed to acquireToken */
+                dialog.hide();
                 Log.d(TAG, "Authentication failed: " + exception.toString());
 
                 if (exception instanceof MsalClientException) {
@@ -385,6 +400,7 @@ public class LoginPage extends AppCompatActivity {
             @Override
             public void onCancel() {
                 /* User canceled the authentication */
+                dialog.hide();
                 Log.d(TAG, "User cancelled login.");
             }
         };
@@ -411,6 +427,7 @@ public class LoginPage extends AppCompatActivity {
             @Override
             public void onError(MsalException exception) {
                 /* Failed to acquireToken */
+                dialog.hide();
                 Log.d(TAG, "Authentication failed: " + exception.toString());
 
                 if (exception instanceof MsalClientException) {
@@ -422,6 +439,7 @@ public class LoginPage extends AppCompatActivity {
 
             @Override
             public void onCancel() {
+                dialog.hide();
                 /* User canceled the authentication */
                 Log.d(TAG, "User cancelled login.");
             }
