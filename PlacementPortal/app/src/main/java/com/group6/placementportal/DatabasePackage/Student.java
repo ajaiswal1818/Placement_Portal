@@ -2,22 +2,22 @@ package com.group6.placementportal.DatabasePackage;
 
 import java.util.List;
 
-class Student {
-    private String FirstName;
-    private String LastName;
-    private String Department;
+public class Student {
+    private static String FirstName;
+    private static String LastName;
+    private static String Department;
 
-    private String WebmailID;
-    private String Contact;
-    private String RollNo;
-    private String Gender;
-    private double CPI;
-    private String Programme;
-    private List<String> Applied_Company_IDs;
-    private int YearOfGraduation;
-    private String Password;
+    private static String WebmailID;
+    private static String Contact;
+    private static String RollNo;
+    private static String Gender;
+    private static double CPI;
+    private static String Programme;
+    private static List<String> Applied_Company_IDs;
+    private static int YearOfGraduation;
+    private static String Password;
 
-    public Student(String firstName, String lastName, String department, String webmailID, String contact, String rollNo, String gender, double CPI, String programme, List<String> applied_Company_IDs, int yearOfGraduation, String password) {
+    public Student(String firstName, String lastName, String department, String webmailID, String contact, String rollNo, String gender, double CPI_get, String programme, List<String> applied_Company_IDs, int yearOfGraduation, String password) {
         FirstName = firstName;
         LastName = lastName;
         Department = department;
@@ -25,106 +25,106 @@ class Student {
         Contact = contact;
         RollNo = rollNo;
         Gender = gender;
-        this.CPI = CPI;
+        CPI = CPI_get;
         Programme = programme;
         Applied_Company_IDs = applied_Company_IDs;
         YearOfGraduation = yearOfGraduation;
         Password = password;
     }
 
-    public String getPassword() {
+    public static String getPassword() {
         return Password;
     }
 
-    public void setPassword(String password) {
+    public static void setPassword(String password) {
         Password = password;
     }
 
-    public String getWebmailID() {
+    public static String getWebmailID() {
         return WebmailID;
     }
 
-    public void setWebmailID(String webmailID) {
+    public static void setWebmailID(String webmailID) {
         WebmailID = webmailID;
     }
 
-    public String getFirstName() {
+    public static String getFirstName() {
         return FirstName;
     }
 
-    public void setFirstName(String firstName) {
+    public static void setFirstName(String firstName) {
         FirstName = firstName;
     }
 
-    public String getLastName() {
+    public static String getLastName() {
         return LastName;
     }
 
-    public void setLastName(String lastName) {
+    public static void setLastName(String lastName) {
         LastName = lastName;
     }
 
-    public String getDepartment() {
+    public static String getDepartment() {
         return Department;
     }
 
-    public void setDepartment(String department) {
+    public static void setDepartment(String department) {
         Department = department;
     }
 
-    public String getContact() {
+    public static String getContact() {
         return Contact;
     }
 
-    public void setContact(String contact) {
+    public static void setContact(String contact) {
         Contact = contact;
     }
 
-    public String getRollNo() {
+    public static String getRollNo() {
         return RollNo;
     }
 
-    public void setRollNo(String rollNo) {
+    public static void setRollNo(String rollNo) {
         RollNo = rollNo;
     }
 
-    public String getGender() {
+    public static String getGender() {
         return Gender;
     }
 
-    public void setGender(String gender) {
+    public static void setGender(String gender) {
         Gender = gender;
     }
 
-    public double getCPI() {
+    public static double getCPI() {
         return CPI;
     }
 
-    public void setCPI(double CPI) {
-        this.CPI = CPI;
+    public static void setCPI(double CPI_get) {
+        CPI = CPI_get;
     }
 
-    public String getProgramme() {
+    public static String getProgramme() {
         return Programme;
     }
 
-    public void setProgramme(String programme) {
+    public static void setProgramme(String programme) {
         Programme = programme;
     }
 
-    public List<String> getApplied_Company_IDs() {
+    public static List<String> getApplied_Company_IDs() {
         return Applied_Company_IDs;
     }
 
-    public void setApplied_Company_IDs(List<String> applied_Company_IDs) {
+    public static void setApplied_Company_IDs(List<String> applied_Company_IDs) {
         Applied_Company_IDs = applied_Company_IDs;
     }
 
-    public int getYearOfGraduation() {
+    public static int getYearOfGraduation() {
         return YearOfGraduation;
     }
 
-    public void setYearOfGraduation(int yearOfGraduation) {
+    public static void setYearOfGraduation(int yearOfGraduation) {
         YearOfGraduation = yearOfGraduation;
     }
 }
