@@ -102,7 +102,7 @@ public class Apply_For_Jobs extends AppCompatActivity implements View.OnClickLis
     //so we are not explaining it
     private void uploadFile(Uri data) {
         progressBar.setVisibility(View.VISIBLE);
-        StorageReference sRef = mStorageReference.child(Constants.STORAGE_PATH_UPLOADS + System.currentTimeMillis() + ".pdf");
+        StorageReference sRef = mStorageReference.child(net.simplifiedlearning.firebasestorage.Constants.STORAGE_PATH_UPLOADS + System.currentTimeMillis() + ".pdf");
         sRef.putFile(data)
                 .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                     @SuppressWarnings("VisibleForTests")
@@ -111,7 +111,7 @@ public class Apply_For_Jobs extends AppCompatActivity implements View.OnClickLis
                         progressBar.setVisibility(View.GONE);
                         textViewStatus.setText("File Uploaded Successfully");
 
-                        Upload upload = new Upload(editTextFilename.getText().toString(), taskSnapshot.getDownloadUrl().toString());
+                        net.simplifiedlearning.firebasestorage.Upload upload = new net.simplifiedlearning.firebasestorage.Upload(editTextFilename.getText().toString(), taskSnapshot.getMetadata().getReference().getDownloadUrl().toString());
                         mDatabaseReference.child(mDatabaseReference.push().getKey()).setValue(upload);
                     }
                 })

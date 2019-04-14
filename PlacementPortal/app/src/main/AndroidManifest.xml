@@ -16,11 +16,19 @@
         <activity
             android:name=".ViewUploadsActivity"
             android:label="@string/title_activity_view_uploads"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar">
+
+        </activity>
         <activity
             android:name=".Apply_For_Jobs"
             android:label="@string/title_activity_apply__for__jobs"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar" >
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+        </activity>
         <activity
             android:name=".Student_Notifications"
             android:label="@string/title_activity_student__notifications"
@@ -41,11 +49,7 @@
         <activity
             android:name=".LoginPage"
             android:windowSoftInputMode="adjustPan">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name="com.microsoft.identity.client.BrowserTabActivity">
             <intent-filter>
