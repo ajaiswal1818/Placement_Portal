@@ -14,9 +14,21 @@
         android:theme="@style/AppTheme"
         android:windowSoftInputMode="adjustPan">
         <activity
+            android:name=".ViewUploadsActivity"
+            android:label="@string/title_activity_view_uploads"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".Apply_For_Jobs"
+            android:label="@string/title_activity_apply__for__jobs"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Student_Notifications"
+            android:label="@string/title_activity_student__notifications"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
             android:name=".View_Jobs"
             android:label="@string/title_activity_view__jobs"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Student_ChangePass" />
         <activity
             android:name=".Student_Profile"
