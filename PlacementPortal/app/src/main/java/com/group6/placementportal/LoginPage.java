@@ -26,9 +26,16 @@ public class LoginPage extends AppCompatActivity {
     private String rollNo;
     private String password;
     private String check_password;
+    public boolean isadmin=false;
 
-
-
+    public void onadminclicked(View v){
+        if(isadmin==true){
+            isadmin=false;
+        }
+        else{
+            isadmin=true;
+        }
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -47,10 +54,18 @@ public class LoginPage extends AppCompatActivity {
             public void onClick(View v) {
                 rollNo = Webmail.getText().toString();
                 password = Password.getText().toString();
-                Intent company_dashboard = new Intent(LoginPage.this, company_dashboard.class);
-                Login_Details= FirebaseDatabase.getInstance().getReference();
-                Login_Details = Login_Details.child("Student").child(rollNo).child("Password");
-                startActivity(company_dashboard);
+
+                if(isadmin){
+                    Intent admin_notices=new Intent(LoginPage.this, com.group6.placementportal.admin_notices.class);
+                    startActivity(admin_notices);
+                }
+                else{
+                    Intent company_dashboard = new Intent(LoginPage.this, company_dashboard.class);
+                  //  Login_Details= FirebaseDatabase.getInstance().getReference();
+                   // Login_Details = Login_Details.child("Student").child(rollNo).child("Password");
+                    startActivity(company_dashboard);
+                }
+
 
                /* Login_Details.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override

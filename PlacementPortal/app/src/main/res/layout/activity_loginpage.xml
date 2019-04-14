@@ -51,6 +51,7 @@
         android:id="@+id/is_admin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Admin?" />
+        android:text="Admin?"
+        android:onClick="onadminclicked"/>
 
 </RelativeLayout>
