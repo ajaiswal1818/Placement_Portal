@@ -38,8 +38,8 @@ public class company_dashboard extends AppCompatActivity {
             profile.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent company_profile=new Intent(company_dashboard.this, company_profile.class);
-                    startActivity(company_profile);
+                    Intent company_login=new Intent(company_dashboard.this, company_login.class);
+                    startActivity(company_login);
                 }
             });
 

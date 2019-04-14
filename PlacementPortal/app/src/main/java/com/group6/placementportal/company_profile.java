@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -21,9 +22,9 @@ public class company_profile extends AppCompatActivity {
     private EditText contact;
     private EditText email;
     private EditText hq;
-    private ArrayList<job> jobs=null;
+    private ArrayList<job> jobs;
     public company_profile() {
-
+        jobs=new ArrayList<job>();
     }
 
     private Activity activity;
@@ -37,19 +38,29 @@ public class company_profile extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_company_profile2);
         proc=findViewById(R.id.proceed);
-        name=findViewById(R.id.profile);
-        sector=findViewById(R.id.ctc);
-        contact=findViewById(R.id.location);
+        name=findViewById(R.id.name);
+        sector=findViewById(R.id.sector);
+        contact=findViewById(R.id.contact);
         email=findViewById(R.id.email);
         hq=findViewById(R.id.hq);
 
-        //final company c = new company(name.getText().toString(),1,sector.getText().toString(),contact.getText().toString(),email.getText().toString(),hq.getText().toString(), jobs);
         proc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent job_profile=new Intent(company_profile.this, job_profile.class);
-                //job_profile.putExtra("MyClass",c);
-                startActivity(job_profile);
+                if(name.getText().toString().trim()==""||sector.getText().toString().trim()==""||contact.getText().toString().trim()==""||email.getText().toString().trim()==""||hq.getText().toString().trim()=="")
+                {
+                    Toast.makeText(company_profile.this,"Can't leave any field empty",Toast.LENGTH_LONG).show();
+                }
+                else {
+                    company c = new company(name.getText().toString(),"1",sector.getText().toString(),contact.getText().toString(),email.getText().toString(),hq.getText().toString(), jobs);
+
+                Toast toast=Toast.makeText(getApplicationContext(),sector.getText().toString().trim(),Toast.LENGTH_SHORT);
+                toast.setMargin(50,50);
+                toast.show();
+                    Intent job_profile=new Intent(company_profile.this, job_profile.class);
+                    job_profile.putExtra("MyClass",c);
+                    startActivity(job_profile);
+                }
             }
         });
         /*Toolbar toolbar = findViewById(R.id.toolbar);

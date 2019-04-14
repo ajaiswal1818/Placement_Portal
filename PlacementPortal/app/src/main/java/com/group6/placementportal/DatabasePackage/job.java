@@ -7,7 +7,15 @@ public class job {
     private String profile;
     private float ctc;
     private String location;
-   // private File brochure;
+    private String brochure;
+
+    public String  getBrochure() {
+        return brochure;
+    }
+
+    public void setBrochure(String brochure) {
+        this.brochure = brochure;
+    }
 
     public int getJob_id() {
         return job_id;
@@ -49,12 +57,12 @@ public class job {
         this.brochure = brochure;
     }*/
 
-    public job(int job_id, String profile, float ctc, String location) {
+    public job(int job_id, String profile, float ctc, String location,String brochure) {
         this.job_id = job_id;
         this.profile = profile;
         this.ctc = ctc;
         this.location = location;
-        //this.brochure = brochure;
+        this.brochure = brochure;
     }
 
     public job() {
