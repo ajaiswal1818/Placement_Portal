@@ -30,6 +30,7 @@ public class company_dashboard extends AppCompatActivity {
 
 
     private android.support.v7.widget.CardView profile;
+        private android.support.v7.widget.CardView notices;
 
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
@@ -40,6 +41,15 @@ public class company_dashboard extends AppCompatActivity {
                 public void onClick(View v) {
                     Intent company_profile=new Intent(company_dashboard.this, company_profile.class);
                     startActivity(company_profile);
+                }
+            });
+
+            notices=findViewById(R.id.notices_card);
+            notices.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View v){
+                    Intent company_notices=new Intent(company_dashboard.this, company_notices.class);
+                    startActivity(company_notices);
                 }
             });
 

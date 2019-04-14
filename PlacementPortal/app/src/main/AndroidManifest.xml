@@ -13,9 +13,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".company_notices"
+            android:label="@string/title_activity_company_notices"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
             android:name=".company_profile"
             android:label="@string/title_activity_company_profile"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".LoginPage">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
