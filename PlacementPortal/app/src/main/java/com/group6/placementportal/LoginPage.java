@@ -137,7 +137,7 @@ public class LoginPage extends AppCompatActivity {
                 Login_Details.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        check_password = dataSnapshot.child("Password").getValue(String.class);
+                        check_password = dataSnapshot.child("password").getValue(String.class);
                         if(password.equals(check_password)){
                             FullName=dataSnapshot.child("FullName").getValue(String.class);
                             WebmailID=dataSnapshot.getKey();
@@ -293,7 +293,7 @@ public class LoginPage extends AppCompatActivity {
         mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                boolean value = dataSnapshot.hasChild("Password");
+                boolean value = dataSnapshot.hasChild("password");
                 isSignUp[0]= (!value);
                 Log.d(TAG,!value+" f"+isSignUp[0]);
                 firstTimeUser=(!value);
