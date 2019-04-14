@@ -46,6 +46,14 @@ public class Student_Profile<Student> extends AppCompatActivity {
     private String cpi;
     private String password;
 
+    public static boolean isNumeric(String str)
+    {
+        for (char c : str.toCharArray())
+        {
+            if (!Character.isDigit(c)) return false;
+        }
+        return true;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,12 +81,16 @@ public class Student_Profile<Student> extends AppCompatActivity {
 
         String  fullName= intent.getStringExtra("fullName");
         String Webmail = intent.getStringExtra("Webmail");
-        String rollNo=intent.getStringExtra("rollNo");
+        final String rollNo=intent.getStringExtra("rollNo");
         String programme=intent.getStringExtra("programme");
         full_name_V.setText(fullName);
         webmail_V.setText(Webmail);
         roll_no_V.setText(rollNo);
         prog_V.setText(programme);
+        full_name_V.setEnabled(false);
+        webmail_V.setEnabled(false);
+        roll_no_V.setEnabled(false);
+        prog_V.setEnabled(false);
 
         btn_save_V.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -126,9 +138,38 @@ public class Student_Profile<Student> extends AppCompatActivity {
                     return;
                 }
                 if (password.isEmpty()) {
-                    password_V.setError("Enter your Full Name");
+                    password_V.setError("Enter your Password");
                     return;
                 }
+                if(isNumeric(roll_no)==false){
+                    roll_no_V.setError("Roll No. can contain only digits");
+                    return;
+                }
+                if(roll_no.length()!=9){
+                    roll_no_V.setError("Roll No. should be of 9 digits");
+                    return;
+                }
+                if(year_of_graduation.length()!=4 || isNumeric(year_of_graduation)==false){
+                    year_of_graduation_V.setError("Invalid year");
+                    return;
+                }
+                if(isNumeric(contact)==false){
+                    contact_V.setError("Contact No. can contain only digits");
+                    return;
+                }
+                if(contact.length()!=10){
+                    contact_V.setError("Contact No. should be of 10 digits");
+                    return;
+                }
+                if(cpi.matches("\\d*\\.?\\d+")==false && isNumeric(cpi)==false){
+                    cpi_V.setError("Invalid CPI");
+                    return;
+                }
+                if(cpi_double>10 && cpi_double<0){
+                    cpi_V.setError("Invalid CPI");
+                    return;
+                }
+
                 user.setFullName(full_name);
                 user.setDepartment(dept);
                 user.setWebmailID(webmail);
@@ -140,8 +181,7 @@ public class Student_Profile<Student> extends AppCompatActivity {
                 user.setYearOfGraduation(year_int);
                 user.setPassword(password);
 
-                ref=FirebaseDatabase.getInstance().getReference();
-                ref = ref.child("Student");
+                ref=FirebaseDatabase.getInstance().getReference("Student");
                 ref.child(webmail).setValue(user);
 
                 Intent i = new Intent(Student_Profile.this, Student_Dashboard.class);
