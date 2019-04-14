@@ -4,6 +4,7 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
 
     <application
         android:allowBackup="true"
@@ -13,12 +14,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:windowSoftInputMode="adjustPan">
-        <activity
-            android:name=".ViewUploadsActivity"
-            android:label="@string/title_activity_view_uploads"
-            android:theme="@style/AppTheme.NoActionBar">
-
-        </activity>
         <activity
             android:name=".Apply_For_Jobs"
             android:label="@string/title_activity_apply__for__jobs"
