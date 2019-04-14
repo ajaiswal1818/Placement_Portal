@@ -101,44 +101,34 @@ public class Student_Profile<Student> extends AppCompatActivity {
                 gender = gender_V.getSelectedItem().toString();
                 roll_no = roll_no_V.getText().toString();
                 year_of_graduation = year_of_graduation_V.getText().toString();
-                int year_int=Integer.parseInt(year_of_graduation);
+
                 contact = contact_V.getText().toString();
                 webmail = webmail_V.getText().toString();
                 cpi = cpi_V.getText().toString();
-                double cpi_double=Double.parseDouble(cpi);
+
 
                 password=password_V.getText().toString();
-
+                //FULL NAME CHECK
                 if (full_name.isEmpty()) {
                     full_name_V.setError("Enter your Full Name");
                     return;
                 }
+
+                //DEPT CHECK
                 if (dept.isEmpty()) {
                     dept_V.setError("Enter your Department");
                     return;
                 }
+
+                //PROGRAMME CHECK
                 if (prog.isEmpty()) {
                     prog_V.setError("Enter your Programme");
                     return;
                 }
+
+                //ROLL NO CHECK
                 if (roll_no.isEmpty()) {
                     roll_no_V.setError("Enter your Roll No");
-                    return;
-                }
-                if (year_of_graduation.isEmpty()) {
-                    year_of_graduation_V.setError("Enter your Year of Graduation");
-                    return;
-                }
-                if (contact.isEmpty()) {
-                    contact_V.setError("Enter your Contact No");
-                    return;
-                }
-                if (cpi.isEmpty()) {
-                    cpi_V.setError("Enter your CPI");
-                    return;
-                }
-                if (password.isEmpty()) {
-                    password_V.setError("Enter your Password");
                     return;
                 }
                 if(isNumeric(roll_no)==false){
@@ -149,8 +139,20 @@ public class Student_Profile<Student> extends AppCompatActivity {
                     roll_no_V.setError("Roll No. should be of 9 digits");
                     return;
                 }
+
+                //YEAR OF GRADUATION CHECK
+                if (year_of_graduation.isEmpty()) {
+                    year_of_graduation_V.setError("Enter your Year of Graduation");
+                    return;
+                }
                 if(year_of_graduation.length()!=4 || isNumeric(year_of_graduation)==false){
                     year_of_graduation_V.setError("Invalid year");
+                    return;
+                }
+
+                //CONTACT CHECK
+                if (contact.isEmpty()) {
+                    contact_V.setError("Enter your Contact No");
                     return;
                 }
                 if(isNumeric(contact)==false){
@@ -161,15 +163,30 @@ public class Student_Profile<Student> extends AppCompatActivity {
                     contact_V.setError("Contact No. should be of 10 digits");
                     return;
                 }
+                //PASSWORD CHECK
+                if (password.isEmpty()) {
+                    password_V.setError("Enter your Password");
+                    return;
+                }
+
+                //CPI CHECKS
+                if (cpi.isEmpty()) {
+                    cpi_V.setError("Enter your CPI");
+                    return;
+                }
                 if(cpi.matches("\\d*\\.?\\d+")==false && isNumeric(cpi)==false){
                     cpi_V.setError("Invalid CPI");
                     return;
                 }
-                if(cpi_double>10 && cpi_double<0){
+                double cpi_double=Double.parseDouble(cpi);
+                if(cpi_double>10 || cpi_double<0){
                     cpi_V.setError("Invalid CPI");
                     return;
                 }
+                //CONVERT YEAR TO INT
+                int year_int=Integer.parseInt(year_of_graduation);
 
+                //FILL STUDENT OBJECT WITH DATA
                 user.setFullName(full_name);
                 user.setDepartment(dept);
                 user.setWebmailID(webmail);
@@ -180,10 +197,10 @@ public class Student_Profile<Student> extends AppCompatActivity {
                 user.setProgramme(prog);
                 user.setYearOfGraduation(year_int);
                 user.setPassword(password);
-
+                //INSERT STUDENT DATA TO FIREBASE
                 ref=FirebaseDatabase.getInstance().getReference("Student");
                 ref.child(webmail).setValue(user);
-
+                //NEW ACTIVITY
                 Intent i = new Intent(Student_Profile.this, Student_Dashboard.class);
                 startActivity(i);
             }
