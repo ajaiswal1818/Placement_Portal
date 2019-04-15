@@ -9,6 +9,7 @@
     tools:showIn="@layout/app_bar_student__notifications">
 
     <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_notifications"
         android:layout_width="395dp"
         android:layout_height="659dp"
         tools:layout_editor_absoluteX="8dp"
