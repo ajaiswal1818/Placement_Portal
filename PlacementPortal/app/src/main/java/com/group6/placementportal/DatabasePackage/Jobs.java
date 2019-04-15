@@ -1,6 +1,8 @@
 package com.group6.placementportal.DatabasePackage;
 
-public class Jobs {
+import java.io.Serializable;
+
+public class Jobs implements Serializable {
     private int job_id;
     private String profile;
     private float ctc;
@@ -10,8 +12,9 @@ public class Jobs {
     private String company_name;
     private String branches;
     private float cutoff_cpi;
+    private String job_requirements;
 
-    public Jobs(int job_id, String profile, float ctc, String location, String brochure, String company_id, String company_name, String branches, float cutoff_cpi) {
+    public Jobs(int job_id, String profile, float ctc, String location, String brochure, String company_id, String company_name, String branches, float cutoff_cpi, String job_requirements) {
         this.job_id = job_id;
         this.profile = profile;
         this.ctc = ctc;
@@ -21,6 +24,15 @@ public class Jobs {
         this.company_name = company_name;
         this.branches = branches;
         this.cutoff_cpi = cutoff_cpi;
+        this.job_requirements = job_requirements;
+    }
+
+    public String getJob_requirements() {
+        return job_requirements;
+    }
+
+    public void setJob_requirements(String job_requirements) {
+        this.job_requirements = job_requirements;
     }
 
     public Jobs() {
