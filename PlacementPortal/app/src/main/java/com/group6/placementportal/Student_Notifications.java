@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -21,11 +22,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.group6.placementportal.DatabasePackage.Notifications;
+import com.group6.placementportal.DatabasePackage.Student;
 
 import java.util.ArrayList;
 import java.util.Collections;
-
-import com.group6.placementportal.DatabasePackage.Student;
 
 public class Student_Notifications extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -66,10 +66,21 @@ public class Student_Notifications extends AppCompatActivity
                 for(DataSnapshot dataSnapshot1: dataSnapshot.getChildren())
                 {
                     Notifications p = dataSnapshot1.getValue(Notifications.class);
-                    String ID= p.getNotiication_ID();
+                    String ID= p.getNotification_ID();
                     //TO DO TASK LEFT
                     //check for id in students list of notifications IDS and then add to the list
-                    list.add(p);
+                    String list_of_IDs=user.getList_of_Notification_IDs();
+                    String[] split_IDs =list_of_IDs.split("\\,");
+                    boolean flag1=false;
+                    for(int i=0;i<split_IDs.length;i++){
+                        Log.d("myTag", split_IDs[i]+" "+ID+" "+ split_IDs[i].equals(ID));
+                        if(split_IDs[i].equals(ID)){
+                            flag1=true;
+                        }
+                    }
+                    if(flag1==true) {
+                        list.add(p);
+                    }
                 }
                 Collections.reverse(list);
                 adapter = new MyAdapter_Notifications(Student_Notifications.this,list);
