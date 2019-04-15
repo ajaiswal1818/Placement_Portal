@@ -144,7 +144,7 @@ public class View_Jobs extends AppCompatActivity
             startActivity(i);
 
         } else if (id == R.id.nav_change_pass) {
-            Intent i = new Intent(getApplicationContext(), Student_ChangePass.class);
+            Intent i = new Intent(getApplicationContext(), Student_ChangePassword.class);
             i.putExtra("user",user);
             startActivity(i);
 
