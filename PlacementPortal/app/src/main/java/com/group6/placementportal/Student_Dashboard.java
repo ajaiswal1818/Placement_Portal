@@ -63,6 +63,10 @@ public class Student_Dashboard extends AppCompatActivity
         recyclerView = findViewById(R.id.recyclerNotices);
         recyclerView.setLayoutManager( new LinearLayoutManager(this));
 
+        Intent intent = new Intent(this, Student_Foreground_Notifications.class);
+        intent.putExtra("user_credentials","vakul170101076");
+        startService(intent);
+
         sampleApp = null;
         if (sampleApp == null) {
             sampleApp = new PublicClientApplication(

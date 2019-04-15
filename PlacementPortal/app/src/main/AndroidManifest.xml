@@ -72,6 +72,8 @@
                     android:scheme="msalee86c0ea-3976-49d4-a7d5-87368851d7bc" />
             </intent-filter>
         </activity>
+        <service android:name=".Student_Foreground_Notifications"
+            android:exported="false" />
     </application>
 
 </manifest>

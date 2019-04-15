@@ -32,10 +32,12 @@ public class Student_Notifications extends AppCompatActivity
 
         private Student user;
 
-    DatabaseReference reference;
-    RecyclerView recyclerView;
-    ArrayList<Notifications> list;
-    MyAdapter_Notifications adapter;
+        private int num;
+
+    private DatabaseReference reference;
+    private RecyclerView recyclerView;
+    private ArrayList<Notifications> list;
+    private MyAdapter_Notifications adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
