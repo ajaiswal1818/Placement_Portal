@@ -18,11 +18,7 @@
             android:name=".Apply_For_Jobs"
             android:label="@string/title_activity_apply__for__jobs"
             android:theme="@style/AppTheme.NoActionBar" >
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
 
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
         </activity>
         <activity
             android:name=".Student_Notifications"
@@ -44,7 +40,11 @@
         <activity
             android:name=".LoginPage"
             android:windowSoftInputMode="adjustPan">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity android:name="com.microsoft.identity.client.BrowserTabActivity">
             <intent-filter>
