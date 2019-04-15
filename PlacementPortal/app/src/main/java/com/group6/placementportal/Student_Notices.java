@@ -9,7 +9,6 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -31,7 +30,7 @@ import com.group6.placementportal.DatabasePackage.Notices;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Student_Dashboard extends AppCompatActivity
+public class Student_Notices extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private static final String TAG = "Student_Notices";
@@ -40,14 +39,11 @@ public class Student_Dashboard extends AppCompatActivity
 
     private DatabaseReference mCommentsReference;
     private ValueEventListener mPostListener;
-    //    private String mPostKey;
+//    private String mPostKey;
     private NoticeAdapter mAdapter;
 
     private TextView Topic;
     private TextView Content;
-
-    private String strTopic;
-    private String strContent;
 
     private RecyclerView mCommentsRecycler;
 
@@ -88,26 +84,22 @@ public class Student_Dashboard extends AppCompatActivity
         Content = findViewById(R.id.Notice_Content);
 
         mCommentsRecycler = findViewById(R.id.recyclerNotices);
+    }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        // Add value event listener to the post
+        // [START post_value_event_listener]
         ValueEventListener postListener = new ValueEventListener() {
-
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 // Get Post object and use the values to update the UI
-                Notices notice;
-
-                strTopic = "Nothing Here;";
-                strContent = "Nothing Here";
-
-                if (dataSnapshot.child("Notices").child("Topic").getValue() != null)
-                    strTopic = dataSnapshot.child("Notices").child("Topic").getValue().toString();
-                if (dataSnapshot.child("Notices").child("Content").getValue() != null)
-                    strContent = dataSnapshot.child("Notices").child("Content").getValue().toString();
-
-                notice = new Notices(strTopic, strContent);
+                Notices notice = dataSnapshot.getValue(Notices.class);
                 // [START_EXCLUDE]
-                Topic.setText(strTopic);
-                Content.setText(strContent);
+                Topic.setText(notice.getTopic());
+                Content.setText(notice.getContent());
 
                 // [END_EXCLUDE]
             }
@@ -117,7 +109,7 @@ public class Student_Dashboard extends AppCompatActivity
                 // Getting Post failed, log a message
                 Log.w(TAG, "loadPost:onCancelled", databaseError.toException());
                 // [START_EXCLUDE]
-                Toast.makeText(Student_Dashboard.this, "Failed to load post.",
+                Toast.makeText(Student_Notices.this, "Failed to load post.",
                         Toast.LENGTH_SHORT).show();
                 // [END_EXCLUDE]
             }
@@ -125,16 +117,33 @@ public class Student_Dashboard extends AppCompatActivity
         mCommentsReference.addValueEventListener(postListener);
         // [END post_value_event_listener]
 
-//         Keep copy of post listener so we can remove it when app stops
+        // Keep copy of post listener so we can remove it when app stops
         mPostListener = postListener;
 
         // Listen for comments
         mAdapter = new NoticeAdapter(this, mCommentsReference);
         mCommentsRecycler.setAdapter(mAdapter);
-        mCommentsRecycler.setLayoutManager(new LinearLayoutManager(this));
-
     }
 
+
+
+    @Override
+    public void onStop() {
+        super.onStop();
+
+        // Remove post value event listener
+        if (mPostListener != null) {
+            mCommentsReference.removeEventListener(mPostListener);
+        }
+
+        // Clean up comments listener
+        mAdapter.cleanupListener();
+    }
+
+//    @Override
+//    public void onClick(View v) {
+//        // if you want to open a notice write code for it here. And add implements View.OnClickListener at top.
+//    }
 
     private static class NoticeViewHolder extends RecyclerView.ViewHolder {
 
@@ -176,11 +185,8 @@ public class Student_Dashboard extends AppCompatActivity
 
                     Notices notices ;
 
-                    Topic="Nothing Here;";
-                    Content="Nothing Here";
-
-                    if(dataSnapshot.child("Notices").child("Topic").getValue()!=null)Topic = dataSnapshot.child("Notices").child("Topic").getValue().toString();
-                    if(dataSnapshot.child("Notices").child("Content").getValue()!=null)Content = dataSnapshot.child("Notices").child("Content").getValue().toString();
+                    Topic = dataSnapshot.child("Topic").getValue().toString();
+                    Content = dataSnapshot.child("Content").getValue().toString();
 
                     notices = new Notices(Topic,Content);
 
@@ -198,15 +204,7 @@ public class Student_Dashboard extends AppCompatActivity
 
                     // A notices has changed, use the key to determine if we are displaying this
                     // notices and if so displayed the changed notices.
-                    Notices newNotice ;
-
-                    Topic="Nothing Here;";
-                    Content="Nothing Here";
-
-                    if(dataSnapshot.child("Notices").child("Topic").getValue()!=null)Topic = dataSnapshot.child("Notices").child("Topic").getValue().toString();
-                    if(dataSnapshot.child("Notices").child("Content").getValue()!=null)Content = dataSnapshot.child("Notices").child("Content").getValue().toString();
-
-                    newNotice  = new Notices(Topic,Content);
+                    Notices newNotice = dataSnapshot.getValue(Notices.class);
                     String noticesKey = dataSnapshot.getKey();
 
                     // [START_EXCLUDE]
@@ -252,15 +250,7 @@ public class Student_Dashboard extends AppCompatActivity
 
                     // A notices has changed position, use the key to determine if we are
                     // displaying this notices and if so move it.
-                    Notices notices ;
-
-                    Topic="Nothing Here;";
-                    Content="Nothing Here";
-
-                    if(dataSnapshot.child("Notices").child("Topic").getValue()!=null)Topic = dataSnapshot.child("Notices").child("Topic").getValue().toString();
-                    if(dataSnapshot.child("Notices").child("Content").getValue()!=null)Content = dataSnapshot.child("Notices").child("Content").getValue().toString();
-
-                    notices = new Notices(Topic,Content);
+                    Notices movedNotice = dataSnapshot.getValue(Notices.class);
                     String noticesKey = dataSnapshot.getKey();
 
                     // ...
