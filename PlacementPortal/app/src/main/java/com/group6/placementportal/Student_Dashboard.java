@@ -140,6 +140,9 @@ public class Student_Dashboard extends AppCompatActivity
             startActivity(i);
 
         } else if (id == R.id.nav_help) {
+
+        }
+        else if(id == R.id.nav_signout){
             onSignOutClicked();
         }
 
@@ -161,6 +164,7 @@ public class Student_Dashboard extends AppCompatActivity
 
             if (accounts == null) {
                 /* We have no accounts */
+                updateSignedOutUI();
 
             } else if (accounts.size() == 1) {
                 /* We have 1 account */

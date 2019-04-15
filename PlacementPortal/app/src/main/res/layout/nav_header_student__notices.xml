@@ -16,6 +16,7 @@
         android:id="@+id/btn_SignOut"
         android:layout_width="130dp"
         android:layout_height="wrap_content"
+        android:clickable="true"
         android:text="Sign Out" />
 
     <ImageView
