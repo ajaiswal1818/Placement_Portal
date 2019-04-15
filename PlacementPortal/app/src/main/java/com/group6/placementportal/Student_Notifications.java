@@ -46,7 +46,7 @@ public class Student_Notifications extends AppCompatActivity
         }
     }
 
-    
+
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
