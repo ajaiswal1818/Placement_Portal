@@ -88,7 +88,7 @@ public class Student_Dashboard extends AppCompatActivity
         Content = findViewById(R.id.Notice_Content);
 
         mCommentsRecycler = findViewById(R.id.recyclerNotices);
-        
+
         // Listen for comments
         mAdapter = new NoticeAdapter(this, mCommentsReference);
         mCommentsRecycler.setAdapter(mAdapter);
@@ -135,7 +135,7 @@ public class Student_Dashboard extends AppCompatActivity
 
                     // A new notices has been added, add it to the displayed list
 
-                    Notices notices = dataSnapshot.getValue(Notices.class);
+                    Notices notices = dataSnapshot.child(dataSnapshot.getKey()).getValue(Notices.class);
 
                     // [START_EXCLUDE]
                     // Update RecyclerView
@@ -151,7 +151,7 @@ public class Student_Dashboard extends AppCompatActivity
 
                     // A notices has changed, use the key to determine if we are displaying this
                     // notices and if so displayed the changed notices.
-                    Notices newNotice = dataSnapshot.getValue(Notices.class);
+                    Notices newNotice = dataSnapshot.child(dataSnapshot.getKey()).getValue(Notices.class);
 
                     String noticesKey = dataSnapshot.getKey();
 
@@ -198,7 +198,8 @@ public class Student_Dashboard extends AppCompatActivity
 
                     // A notices has changed position, use the key to determine if we are
                     // displaying this notices and if so move it.
-                    Notices notices = dataSnapshot.getValue(Notices.class);
+
+                    Notices notices = dataSnapshot.child(dataSnapshot.getKey()).getValue(Notices.class);
 
                     String noticesKey = dataSnapshot.getKey();
 
