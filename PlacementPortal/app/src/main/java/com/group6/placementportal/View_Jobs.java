@@ -85,9 +85,9 @@ public class View_Jobs extends AppCompatActivity
                     Log.d("myTag", flag1+" ");
                     Log.d("myTag", flag2+" ");
                 if(flag1==true && flag2==true){
-
-                }
                     list.add(p);
+                }
+
                 }
                 adapter = new MyAdapter(View_Jobs.this,list);
                 recyclerView.setAdapter(adapter);
