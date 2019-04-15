@@ -5,7 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bgapps">
+    android:background="@mipmap/bgapps">
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -33,7 +33,7 @@
 
             <ImageView
 
-                android:src="@drawable/logor"
+                android:src="@mipmap/logor"
                 android:id="@+id/logo"
                 android:layout_alignParentRight="true"
                 android:layout_width="82dp"
@@ -82,7 +82,7 @@
                     <ImageView
                         android:layout_width="80dp"
                         android:layout_height="80dp"
-                        android:src="@drawable/manageprofile"
+                        android:src="@mipmap/manageprofile"
 
                         />
                     <TextView
@@ -118,7 +118,7 @@
                     <ImageView
                         android:layout_width="80dp"
                         android:layout_height="80dp"
-                        android:src="@drawable/notices"
+                        android:src="@mipmap/notices"
 
                         />
 
@@ -154,7 +154,7 @@
                     <ImageView
                         android:layout_width="80dp"
                         android:layout_height="80dp"
-                        android:src="@drawable/events"
+                        android:src="@mipmap/events"
 
                         />
                     <TextView
@@ -190,7 +190,7 @@
                     <ImageView
                         android:layout_width="80dp"
                         android:layout_height="80dp"
-                        android:src="@drawable/enrollments"
+                        android:src="@mipmap/enrollments"
                         android:id="@+id/enrollment"
 
                         />

@@ -3,4 +3,5 @@
     <string name="title_activity_company_profile">company_profile</string>
     <string name="title_activity_company_notices">company_notices</string>
     <string name="title_activity_admin_notices">admin_notices</string>
+    <string name="title_activity_recipients_tab">recipients_tab</string>
 </resources>

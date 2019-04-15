@@ -9,6 +9,10 @@ public class notices2company {
     private String title;
     private String description;
 
+    public notices2company(){
+        
+    }
+
     public String getTitle() {
         return title;
     }
