@@ -3,49 +3,57 @@ package com.group6.placementportal;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
+import android.util.Log;
+import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-import com.group6.placementportal.DatabasePackage.Notices;
 import com.group6.placementportal.DatabasePackage.Student;
 import com.microsoft.identity.client.IAccount;
 import com.microsoft.identity.client.PublicClientApplication;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
-public class Student_Dashboard extends AppCompatActivity
+public class Student_ChangePassword extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    private DatabaseReference reference;
-    private RecyclerView recyclerView;
-    private ArrayList<Notices> list;
-    private MyAdapter_Notices adapter;
+    private EditText CurrPass ;
+    private EditText NewPass ;
+    private EditText NewPass2;
+
+    private String Pass = "";
+    private String NPass = "";
+    private String NPass2 = "";
+
+    private String Prev_Pass;
+    private String Username;
+
     private PublicClientApplication sampleApp;
+
+    private Button Change_Button;
     private Student user;
+
+    private DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
 
     private static final String TAG = Student_Dashboard.class.getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_student__notices);
+        setContentView(R.layout.activity_student__change_password);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -58,10 +66,12 @@ public class Student_Dashboard extends AppCompatActivity
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        CurrPass = findViewById(R.id.editCurrPass);
+        NewPass = findViewById(R.id.editNewPass);
+        NewPass2 = findViewById(R.id.editNewPass2);
+//      Get student from bundle
+//      student= Bundle data
         user = (Student) getIntent().getSerializableExtra("user");
-
-        recyclerView = findViewById(R.id.recyclerNotices);
-        recyclerView.setLayoutManager( new LinearLayoutManager(this));
 
         sampleApp = null;
         if (sampleApp == null) {
@@ -71,37 +81,42 @@ public class Student_Dashboard extends AppCompatActivity
         }
 
 
-        reference = FirebaseDatabase.getInstance().getReference().child("Notices");
-        reference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                list = new ArrayList<Notices>();
-                for(DataSnapshot dataSnapshot1: dataSnapshot.getChildren())
-                {
-                    Notices p = dataSnapshot1.getValue(Notices.class);
-                    list.add(p);
-                }
-                Collections.reverse(list);
-                adapter = new MyAdapter_Notices(Student_Dashboard.this,list);
-                recyclerView.setAdapter(adapter);
-            }
+        Change_Button = findViewById(R.id.btn_Change_Pass);
+        Change_Button.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Prev_Pass = user.getPassword();
+                Username = user.getWebmailID();
+                Pass = CurrPass.getText().toString();
+                NPass = NewPass.getText().toString();
+                NPass2 = NewPass2.getText().toString();
+                Toast.makeText(getApplicationContext(), user.getPassword(), Toast.LENGTH_SHORT).show();
+                if(Prev_Pass.equals(Pass)){
+                    if(NPass2.equals(NPass)){
+                        user.setPassword(NPass);
+                        mDatabase.child("Student").child(Username).child("password").setValue(NPass);
+                    }
+                    else{
+                        Toast.makeText(getApplicationContext(), "Passwords do not match", Toast.LENGTH_SHORT).show();
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                Toast.makeText(Student_Dashboard.this, "Opsss.... Something is wrong", Toast.LENGTH_SHORT).show();
+                    }
+                }
+                else{
+                    Toast.makeText(getApplicationContext(), "Incorrect Password", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
             super.onBackPressed();
         }
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -198,7 +213,7 @@ public class Student_Dashboard extends AppCompatActivity
     }
 
     private void updateSignedOutUI() {
-        Intent intent = new Intent(Student_Dashboard.this,LoginPage.class);
+        Intent intent = new Intent(Student_ChangePassword.this,LoginPage.class);
         startActivity(intent);
     }
 }
