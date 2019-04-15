@@ -20,7 +20,6 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/content_student__dashboard" />
-
+    <include layout="@layout/content_student__notices" />
 
 </android.support.design.widget.CoordinatorLayout>
