@@ -2,21 +2,15 @@ package com.group6.placementportal;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.Toast;
 
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-import com.group6.placementportal.DatabasePackage.Student;
 
 public class Student_Profile<Student> extends AppCompatActivity {
 
@@ -101,7 +95,6 @@ public class Student_Profile<Student> extends AppCompatActivity {
                 gender = gender_V.getSelectedItem().toString();
                 roll_no = roll_no_V.getText().toString();
                 year_of_graduation = year_of_graduation_V.getText().toString();
-
                 contact = contact_V.getText().toString();
                 webmail = webmail_V.getText().toString();
                 cpi = cpi_V.getText().toString();
