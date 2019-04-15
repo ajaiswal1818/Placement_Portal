@@ -1,6 +1,8 @@
 package com.group6.placementportal;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.view.View;
@@ -43,49 +45,44 @@ public class View_Jobs extends AppCompatActivity
         }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.view__jobs, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        if (id == R.id.nav_dash) {
+            Intent i = new Intent(getApplicationContext(), Student_Dashboard.class);
+            startActivity(i);
 
-        } else if (id == R.id.nav_slideshow) {
+        } else if (id == R.id.nav_notifications) {
+            Intent i = new Intent(getApplicationContext(), Student_Notifications.class);
+            startActivity(i);
 
-        } else if (id == R.id.nav_manage) {
+        } else if (id == R.id.nav_prefr) {
 
-        } else if (id == R.id.nav_share) {
+        } else if (id == R.id.nav_company) {
+            Intent i = new Intent(getApplicationContext(), View_Jobs.class);
+            startActivity(i);
 
-        } else if (id == R.id.nav_send) {
+        } else if (id == R.id.nav_calendar) {
+
+        } else if (id == R.id.nav_my_profile) {
+
+        } else if (id == R.id.nav_edit_profile) {
+            Intent i = new Intent(getApplicationContext(), Student_Profile.class);
+            startActivity(i);
+
+        } else if (id == R.id.nav_change_pass) {
+            Intent i = new Intent(getApplicationContext(), Student_ChangePass.class);
+            startActivity(i);
+
+        } else if (id == R.id.nav_help) {
 
         }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
-    tools:context="net.simplifiedlearning.firebasestorage.Apply_For_Jobs">
+    tools:context=".Apply_For_Jobs">
 
     <TextView
         android:id="@+id/editTextFileName"
