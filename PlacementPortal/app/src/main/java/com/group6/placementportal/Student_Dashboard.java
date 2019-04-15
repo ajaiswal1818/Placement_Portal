@@ -1,6 +1,5 @@
 package com.group6.placementportal;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -12,15 +11,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
-import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -29,39 +23,22 @@ import com.google.firebase.database.ValueEventListener;
 import com.group6.placementportal.DatabasePackage.Notices;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Collections;
 
 public class Student_Dashboard extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    private static final String TAG = "Student_Notices";
-
-    public static final String EXTRA_POST_KEY = "post_key";
-
-    private DatabaseReference mCommentsReference;
-    private ValueEventListener mPostListener;
-    //    private String mPostKey;
-    private NoticeAdapter mAdapter;
-
-    private TextView Topic;
-    private TextView Content;
-
-    private String strTopic;
-    private String strContent;
-
-    private RecyclerView mCommentsRecycler;
-
+    DatabaseReference reference;
+    RecyclerView recyclerView;
+    ArrayList<Notices> list;
+    MyAdapter_Notices adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_student__notices);
-
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-//        fetchNotices();
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -72,175 +49,30 @@ public class Student_Dashboard extends AppCompatActivity
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        // get Post key
-//        mPostKey = getIntent().getStringExtra(EXTRA_POST_KEY);
-//        if (mPostKey == null) {
-//            throw new IllegalArgumentException("Must pass EXTRA_POST_KEY");
-//        }
-
-        //Initialize Database
-
-        mCommentsReference = FirebaseDatabase.getInstance().getReference()
-                .child("Notices");
-
-        // Initialize Views
-        Topic = findViewById(R.id.Notice_Topic);
-        Content = findViewById(R.id.Notice_Content);
-
-        mCommentsRecycler = findViewById(R.id.recyclerNotices);
-
-        // Listen for comments
-        mAdapter = new NoticeAdapter(this, mCommentsReference);
-        mCommentsRecycler.setAdapter(mAdapter);
-        mCommentsRecycler.setLayoutManager(new LinearLayoutManager(this));
-
-    }
+        recyclerView = findViewById(R.id.recyclerNotices);
+        recyclerView.setLayoutManager( new LinearLayoutManager(this));
 
 
-    private static class NoticeViewHolder extends RecyclerView.ViewHolder {
-
-        private TextView topicView;
-        private TextView contentView;
-
-        private NoticeViewHolder(View itemView) {
-            super(itemView);
-
-            topicView = itemView.findViewById(R.id.Notice_Topic);
-            contentView = itemView.findViewById(R.id.Notice_Content);
-        }
-    }
-
-    private static class NoticeAdapter extends RecyclerView.Adapter<NoticeViewHolder> {
-
-        private Context mContext;
-        private DatabaseReference mDatabaseReference;
-        private ChildEventListener mChildEventListener;
-
-        private List<String> mNoticeIds = new ArrayList<>();
-        private List<Notices> mNotices = new ArrayList<>();
-
-        private String Topic;
-        private String Content;
-
-        public NoticeAdapter(final Context context, DatabaseReference ref) {
-            mContext = context;
-            mDatabaseReference = ref;
-
-            // Create child event listener
-            // [START child_event_listener_recycler]
-            ChildEventListener childEventListener = new ChildEventListener() {
-                @Override
-                public void onChildAdded(DataSnapshot dataSnapshot, String previousChildName) {
-                    Log.d(TAG, "onChildAdded:" + dataSnapshot.getKey());
-
-                    // A new notices has been added, add it to the displayed list
-
-                    Notices notices = dataSnapshot.child(dataSnapshot.getKey()).getValue(Notices.class);
-
-                    // [START_EXCLUDE]
-                    // Update RecyclerView
-                    mNoticeIds.add(dataSnapshot.getKey());
-                    mNotices.add(notices);
-                    notifyItemInserted(mNotices.size() - 1);
-                    // [END_EXCLUDE]
+        reference = FirebaseDatabase.getInstance().getReference().child("Notices");
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                list = new ArrayList<Notices>();
+                for(DataSnapshot dataSnapshot1: dataSnapshot.getChildren())
+                {
+                    Notices p = dataSnapshot1.getValue(Notices.class);
+                    list.add(p);
                 }
+                Collections.reverse(list);
+                adapter = new MyAdapter_Notices(Student_Dashboard.this,list);
+                recyclerView.setAdapter(adapter);
+            }
 
-                @Override
-                public void onChildChanged(DataSnapshot dataSnapshot, String previousChildName) {
-                    Log.d(TAG, "onChildChanged:" + dataSnapshot.getKey());
-
-                    // A notices has changed, use the key to determine if we are displaying this
-                    // notices and if so displayed the changed notices.
-                    Notices newNotice = dataSnapshot.child(dataSnapshot.getKey()).getValue(Notices.class);
-
-                    String noticesKey = dataSnapshot.getKey();
-
-                    // [START_EXCLUDE]
-                    int noticesIndex = mNoticeIds.indexOf(noticesKey);
-                    if (noticesIndex > -1) {
-                        // Replace with the new data
-                        mNotices.set(noticesIndex, newNotice);
-
-                        // Update the RecyclerView
-                        notifyItemChanged(noticesIndex);
-                    } else {
-                        Log.w(TAG, "onChildChanged:unknown_child:" + noticesKey);
-                    }
-                    // [END_EXCLUDE]
-                }
-
-                @Override
-                public void onChildRemoved(DataSnapshot dataSnapshot) {
-                    Log.d(TAG, "onChildRemoved:" + dataSnapshot.getKey());
-
-                    // A notices has changed, use the key to determine if we are displaying this
-                    // notices and if so remove it.
-                    String noticesKey = dataSnapshot.getKey();
-
-                    // [START_EXCLUDE]
-                    int noticesIndex = mNoticeIds.indexOf(noticesKey);
-                    if (noticesIndex > -1) {
-                        // Remove data from the list
-                        mNoticeIds.remove(noticesIndex);
-                        mNotices.remove(noticesIndex);
-
-                        // Update the RecyclerView
-                        notifyItemRemoved(noticesIndex);
-                    } else {
-                        Log.w(TAG, "onChildRemoved:unknown_child:" + noticesKey);
-                    }
-                    // [END_EXCLUDE]
-                }
-
-                @Override
-                public void onChildMoved(DataSnapshot dataSnapshot, String previousChildName) {
-                    Log.d(TAG, "onChildMoved:" + dataSnapshot.getKey());
-
-                    // A notices has changed position, use the key to determine if we are
-                    // displaying this notices and if so move it.
-
-                    Notices notices = dataSnapshot.child(dataSnapshot.getKey()).getValue(Notices.class);
-
-                    String noticesKey = dataSnapshot.getKey();
-
-                    // ...
-                }
-
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
-                    Log.w(TAG, "postNotices:onCancelled", databaseError.toException());
-                    Toast.makeText(mContext, "Failed to load noticess.",
-                            Toast.LENGTH_SHORT).show();
-                }
-            };
-            ref.addChildEventListener(childEventListener);
-            // [END child_event_listener_recycler]
-
-            // Store reference to listener so it can be removed on app stop
-            mChildEventListener = childEventListener;
-        }
-
-        @Override
-        public NoticeViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            LayoutInflater inflater = LayoutInflater.from(mContext);
-            View view = inflater.inflate(R.layout.content_student__notices, parent, false);
-            return new NoticeViewHolder(view);
-        }
-
-        @Override
-        public void onBindViewHolder(@NonNull NoticeViewHolder holder, int position) {
-            Notices notices = mNotices.get(position);
-            holder.topicView.setText(notices.getTopic());
-            holder.contentView.setText(notices.getContent());
-        }
-
-        @Override
-        public int getItemCount() {
-            return mNotices.size();
-        }
-
-
-
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Toast.makeText(Student_Dashboard.this, "Opsss.... Something is wrong", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override
@@ -251,6 +83,13 @@ public class Student_Dashboard extends AppCompatActivity
         } else {
             super.onBackPressed();
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.activity_student__dashboard_drawer, menu);
+        return true;
     }
 
 
@@ -290,6 +129,4 @@ public class Student_Dashboard extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-
-
 }
