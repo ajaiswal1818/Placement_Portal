@@ -15,8 +15,12 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.group6.placementportal.DatabasePackage.Student;
+
 public class Student_Notifications extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+        private Student user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +39,7 @@ public class Student_Notifications extends AppCompatActivity
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-
+        user=(Student) getIntent().getSerializableExtra("user");
     }
 
     @Override
@@ -58,16 +62,19 @@ public class Student_Notifications extends AppCompatActivity
 
         if (id == R.id.nav_dash) {
             Intent i = new Intent(getApplicationContext(), Student_Dashboard.class);
+            i.putExtra("user",user);
             startActivity(i);
 
         } else if (id == R.id.nav_notifications) {
             Intent i = new Intent(getApplicationContext(), Student_Notifications.class);
+            i.putExtra("user",user);
             startActivity(i);
 
         } else if (id == R.id.nav_prefr) {
 
         } else if (id == R.id.nav_company) {
             Intent i = new Intent(getApplicationContext(), View_Jobs.class);
+            i.putExtra("user",user);
             startActivity(i);
 
         } else if (id == R.id.nav_calendar) {
@@ -76,10 +83,12 @@ public class Student_Notifications extends AppCompatActivity
 
         } else if (id == R.id.nav_edit_profile) {
             Intent i = new Intent(getApplicationContext(), Student_Profile.class);
+            i.putExtra("user",user);
             startActivity(i);
 
         } else if (id == R.id.nav_change_pass) {
             Intent i = new Intent(getApplicationContext(), Student_ChangePass.class);
+            i.putExtra("user",user);
             startActivity(i);
 
         } else if (id == R.id.nav_help) {

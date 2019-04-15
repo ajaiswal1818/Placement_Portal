@@ -22,6 +22,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.group6.placementportal.DatabasePackage.Notices;
+import com.group6.placementportal.DatabasePackage.Student;
 import com.microsoft.identity.client.IAccount;
 import com.microsoft.identity.client.PublicClientApplication;
 
@@ -37,6 +38,7 @@ public class Student_Dashboard extends AppCompatActivity
     private ArrayList<Notices> list;
     private MyAdapter_Notices adapter;
     private PublicClientApplication sampleApp;
+    private Student user;
 
     private static final String TAG = Student_Dashboard.class.getSimpleName();
 
@@ -55,6 +57,8 @@ public class Student_Dashboard extends AppCompatActivity
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        user = (Student) getIntent().getSerializableExtra("user");
 
         recyclerView = findViewById(R.id.recyclerNotices);
         recyclerView.setLayoutManager( new LinearLayoutManager(this));
@@ -115,16 +119,19 @@ public class Student_Dashboard extends AppCompatActivity
 
         if (id == R.id.nav_dash) {
             Intent i = new Intent(getApplicationContext(), Student_Dashboard.class);
+            i.putExtra("user",user);
             startActivity(i);
 
         } else if (id == R.id.nav_notifications) {
             Intent i = new Intent(getApplicationContext(), Student_Notifications.class);
+            i.putExtra("user",user);
             startActivity(i);
 
         } else if (id == R.id.nav_prefr) {
 
         } else if (id == R.id.nav_company) {
             Intent i = new Intent(getApplicationContext(), View_Jobs.class);
+            i.putExtra("user",user);
             startActivity(i);
 
         } else if (id == R.id.nav_calendar) {
@@ -133,10 +140,12 @@ public class Student_Dashboard extends AppCompatActivity
 
         } else if (id == R.id.nav_edit_profile) {
             Intent i = new Intent(getApplicationContext(), Student_Profile.class);
+            i.putExtra("user",user);
             startActivity(i);
 
         } else if (id == R.id.nav_change_pass) {
             Intent i = new Intent(getApplicationContext(), Student_ChangePass.class);
+            i.putExtra("user",user);
             startActivity(i);
 
         } else if (id == R.id.nav_help) {

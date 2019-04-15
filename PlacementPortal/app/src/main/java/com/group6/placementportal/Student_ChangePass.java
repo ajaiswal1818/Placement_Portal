@@ -25,7 +25,7 @@ public class Student_ChangePass extends AppCompatActivity {
     private String Username;
 
     private Button Change_Button;
-    private Student student;
+    private Student user;
 
     private DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
 
@@ -39,34 +39,31 @@ public class Student_ChangePass extends AppCompatActivity {
         NewPass2 = findViewById(R.id.editNewPass2);
 //      Get student from bundle
 //      student= Bundle data
-        Prev_Pass = student.getPassword();
-        Username = student.getWebmailID();
+        user = (Student) getIntent().getSerializableExtra("user");
 
         Change_Button = findViewById(R.id.btn_Change_Pass);
         Change_Button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                Prev_Pass = user.getPassword();
+                Username = user.getWebmailID();
                 Pass = CurrPass.getText().toString();
                 NPass = NewPass.getText().toString();
                 NPass2 = NewPass2.getText().toString();
-
+                Toast.makeText(getApplicationContext(), user.getPassword(), Toast.LENGTH_SHORT).show();
                 if(Prev_Pass.equals(Pass)){
                     if(NPass2.equals(NPass)){
-                        student.setPassword(NPass);
-                        mDatabase.child("Student").child(Username).child("Password").setValue(NPass);
+                        user.setPassword(NPass);
+                        mDatabase.child("Student").child(Username).child("password").setValue(NPass);
                     }
                     else{
-                        Toast toast = Toast.makeText(getApplicationContext(), "Passwords do not match", Toast.LENGTH_SHORT);
-                        toast.show();
+                        Toast.makeText(getApplicationContext(), "Passwords do not match", Toast.LENGTH_SHORT).show();
+
                     }
                 }
                 else{
-                    Toast toast = Toast.makeText(getApplicationContext(), "Incorrect Password", Toast.LENGTH_SHORT);
-                    toast.show();
+                    Toast.makeText(getApplicationContext(), "Incorrect Password", Toast.LENGTH_SHORT).show();
                 }
             }
         });
     }
-
-
-
 }

@@ -194,8 +194,9 @@ public class Student_Profile<Student> extends AppCompatActivity {
                 ref=FirebaseDatabase.getInstance().getReference("Student");
                 ref.child(webmail).setValue(user);
                 //NEW ACTIVITY
-                Intent i = new Intent(Student_Profile.this, Student_Dashboard.class);
-                startActivity(i);
+                Intent I = new Intent(Student_Profile.this, Student_Dashboard.class);
+                I.putExtra("user",user);
+                startActivity(I);
             }
         });
 

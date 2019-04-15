@@ -25,6 +25,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.group6.placementportal.DatabasePackage.Student;
 import com.microsoft.identity.client.AuthenticationCallback;
 import com.microsoft.identity.client.AuthenticationResult;
 import com.microsoft.identity.client.IAccount;
@@ -54,6 +55,7 @@ public class LoginPage extends AppCompatActivity {
     private String RollNo;
     private String Programme;
     private String FullName;
+    private Student user;
     private boolean firstTimeUser=false;
 
     private ProgressDialog dialog;
@@ -148,13 +150,10 @@ public class LoginPage extends AppCompatActivity {
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         check_password = dataSnapshot.child("password").getValue(String.class);
                         if(password.equals(check_password)){
-                            FullName=dataSnapshot.child("FullName").getValue(String.class);
-                            WebmailID=dataSnapshot.getKey();
-                            RollNo=dataSnapshot.child("RollNo").getValue(String.class);
-                            Programme=dataSnapshot.child("Programme").getValue(String.class);
+                            user = dataSnapshot.getValue(Student.class);
                             firstTimeUser = false;
                             dialog.hide();
-                            Toast.makeText(LoginPage.this,WebmailID, Toast.LENGTH_LONG).show();
+                            Toast.makeText(LoginPage.this,user.getWebmailID(), Toast.LENGTH_LONG).show();
                             updateSuccessUI();
                         }
                         else{
@@ -306,6 +305,9 @@ public class LoginPage extends AppCompatActivity {
                 isSignUp[0]= (!value);
                 Log.d(TAG,!value+" f"+isSignUp[0]);
                 firstTimeUser=(!value);
+                if(value){
+                    user = dataSnapshot.getValue(Student.class);
+                }
                 updateSuccessUI();
             }
 
@@ -338,13 +340,14 @@ public class LoginPage extends AppCompatActivity {
         Log.d(TAG,firstTimeUser + " ");
         if(!firstTimeUser){
             I = new Intent(getApplicationContext(),Student_Dashboard.class);
+            I.putExtra("user",user);
         }else{
             I = new Intent(getApplicationContext(),Student_Profile.class);
+            I.putExtra("fullName",FullName);
+            I.putExtra("Webmail",WebmailID);
+            I.putExtra("rollNo",RollNo);
+            I.putExtra("programme",Programme);
         }
-        I.putExtra("fullName",FullName);
-        I.putExtra("Webmail",WebmailID);
-        I.putExtra("rollNo",RollNo);
-        I.putExtra("programme",Programme);
         startActivity(I);
 
     }

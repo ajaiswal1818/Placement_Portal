@@ -44,8 +44,8 @@ public class MyAdapter_Notices extends RecyclerView.Adapter<MyAdapter_Notices.My
         TextView notice_topic,notice_content;
         public MyViewHolder(View itemView) {
             super(itemView);
-            notice_topic = (TextView) itemView.findViewById(R.id.Notice_Topic);
-            notice_content = (TextView) itemView.findViewById(R.id.Notice_Content);
+            notice_topic =itemView.findViewById(R.id.Notice_Topic);
+            notice_content =itemView.findViewById(R.id.Notice_Content);
         }
     }
 }
