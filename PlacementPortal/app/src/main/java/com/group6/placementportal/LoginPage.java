@@ -85,7 +85,7 @@ public class LoginPage extends AppCompatActivity {
 
         dialog.setMessage("Please Wait");
 
-
+        Log.d("TAG",(callGraphButton!=null)+" ");
         callGraphButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 dialog.show();
