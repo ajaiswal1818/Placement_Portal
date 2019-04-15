@@ -17,5 +17,9 @@
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
+    <string name="title_activity_view__jobs">View_Jobs</string>
+    <string name="title_activity_student__notifications">Student_Notifications</string>
+    <string name="title_activity_apply__for__jobs">Apply_For_Jobs</string>
+    <string name="title_activity_view_uploads">ViewUploadsActivity</string>
     <string name="title_activity_student__notices">Student_Notices</string>
 </resources>
