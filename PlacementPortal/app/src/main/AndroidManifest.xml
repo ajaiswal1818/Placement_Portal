@@ -18,6 +18,7 @@
             android:name=".Apply_For_Jobs"
             android:label="@string/title_activity_apply__for__jobs"
             android:theme="@style/AppTheme.NoActionBar" >
+
         </activity>
         <activity
             android:name=".Student_Notifications"
@@ -26,7 +27,8 @@
         <activity
             android:name=".View_Jobs"
             android:label="@string/title_activity_view__jobs"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar" >
+        </activity>
         <activity android:name=".Student_ChangePass" />
         <activity
             android:name=".Student_Profile"
