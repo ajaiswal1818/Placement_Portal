@@ -1,6 +1,7 @@
 package com.group6.placementportal.DatabasePackage;
 
 public class Notices {
+    private String Id;
     private String Topic;
     private String Content;
 
@@ -8,7 +9,8 @@ public class Notices {
 
     }
 
-    public Notices(String topic,String content){
+    public Notices(String id,String topic,String content){
+        this.Id = id;
         this.Topic = topic;
         this.Content = content;
     }

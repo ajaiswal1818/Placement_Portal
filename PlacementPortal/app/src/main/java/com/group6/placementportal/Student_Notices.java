@@ -183,12 +183,12 @@ public class Student_Notices extends AppCompatActivity
 
                     // A new notices has been added, add it to the displayed list
 
-                    Notices notices ;
+                    Notices notices = dataSnapshot.getValue(Notices.class);
 
-                    Topic = dataSnapshot.child("Topic").getValue().toString();
-                    Content = dataSnapshot.child("Content").getValue().toString();
-
-                    notices = new Notices(Topic,Content);
+//                    Topic = dataSnapshot.child("Topic").getValue().toString();
+//                    Content = dataSnapshot.child("Content").getValue().toString();
+//
+//                    notices = new Notices(Topic,Content);
 
                     // [START_EXCLUDE]
                     // Update RecyclerView
