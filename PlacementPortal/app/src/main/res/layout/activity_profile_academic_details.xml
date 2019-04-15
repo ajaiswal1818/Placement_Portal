@@ -4,12 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity_profile_academic_details">
+    tools:context=".activity_profile_academic_details"
+    android:padding="8dp">
 
 
     <ExpandableListView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/lvExp"
+        android:layout_marginTop="20dp"
+        android:layout_marginHorizontal="10dp"
         ></ExpandableListView>
 </RelativeLayout>
