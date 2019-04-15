@@ -89,44 +89,44 @@ public class Student_Dashboard extends AppCompatActivity
 
         mCommentsRecycler = findViewById(R.id.recyclerNotices);
 
-        ValueEventListener postListener = new ValueEventListener() {
-
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                // Get Post object and use the values to update the UI
-                Notices notice;
-
-                strTopic = "Nothing Here;";
-                strContent = "Nothing Here";
-
-                if (dataSnapshot.child("Notices").child("Topic").getValue() != null)
-                    strTopic = dataSnapshot.child("Notices").child("Topic").getValue().toString();
-                if (dataSnapshot.child("Notices").child("Content").getValue() != null)
-                    strContent = dataSnapshot.child("Notices").child("Content").getValue().toString();
-
-                notice = new Notices(strTopic, strContent);
-                // [START_EXCLUDE]
-                Topic.setText(strTopic);
-                Content.setText(strContent);
-
-                // [END_EXCLUDE]
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                // Getting Post failed, log a message
-                Log.w(TAG, "loadPost:onCancelled", databaseError.toException());
-                // [START_EXCLUDE]
-                Toast.makeText(Student_Dashboard.this, "Failed to load post.",
-                        Toast.LENGTH_SHORT).show();
-                // [END_EXCLUDE]
-            }
-        };
-        mCommentsReference.addValueEventListener(postListener);
-        // [END post_value_event_listener]
-
-//         Keep copy of post listener so we can remove it when app stops
-        mPostListener = postListener;
+//        ValueEventListener postListener = new ValueEventListener() {
+//
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                // Get Post object and use the values to update the UI
+//                Notices notice;
+//
+//                strTopic = "Nothing Here;";
+//                strContent = "Nothing Here";
+//
+//                if (dataSnapshot.child("Notices").child("Topic").getValue() != null)
+//                    strTopic = dataSnapshot.child("Notices").child("Topic").getValue().toString();
+//                if (dataSnapshot.child("Notices").child("Content").getValue() != null)
+//                    strContent = dataSnapshot.child("Notices").child("Content").getValue().toString();
+//
+//                notice = new Notices(strTopic, strContent);
+//                // [START_EXCLUDE]
+//                Topic.setText(strTopic);
+//                Content.setText(strContent);
+//
+//                // [END_EXCLUDE]
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError databaseError) {
+//                // Getting Post failed, log a message
+//                Log.w(TAG, "loadPost:onCancelled", databaseError.toException());
+//                // [START_EXCLUDE]
+//                Toast.makeText(Student_Dashboard.this, "Failed to load post.",
+//                        Toast.LENGTH_SHORT).show();
+//                // [END_EXCLUDE]
+//            }
+//        };
+//        mCommentsReference.addValueEventListener(postListener);
+//        // [END post_value_event_listener]
+//
+////         Keep copy of post listener so we can remove it when app stops
+//        mPostListener = postListener;
 
         // Listen for comments
         mAdapter = new NoticeAdapter(this, mCommentsReference);
@@ -299,11 +299,7 @@ public class Student_Dashboard extends AppCompatActivity
             return mNotices.size();
         }
 
-        public void cleanupListener() {
-            if (mChildEventListener != null) {
-                mDatabaseReference.removeEventListener(mChildEventListener);
-            }
-        }
+
 
     }
 
