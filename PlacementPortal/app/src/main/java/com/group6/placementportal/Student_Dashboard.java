@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -21,17 +22,23 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.group6.placementportal.DatabasePackage.Notices;
+import com.microsoft.identity.client.IAccount;
+import com.microsoft.identity.client.PublicClientApplication;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 public class Student_Dashboard extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    DatabaseReference reference;
-    RecyclerView recyclerView;
-    ArrayList<Notices> list;
-    MyAdapter_Notices adapter;
+    private DatabaseReference reference;
+    private RecyclerView recyclerView;
+    private ArrayList<Notices> list;
+    private MyAdapter_Notices adapter;
+    private PublicClientApplication sampleApp;
+
+    private static final String TAG = Student_Dashboard.class.getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +58,13 @@ public class Student_Dashboard extends AppCompatActivity
 
         recyclerView = findViewById(R.id.recyclerNotices);
         recyclerView.setLayoutManager( new LinearLayoutManager(this));
+
+        sampleApp = null;
+        if (sampleApp == null) {
+            sampleApp = new PublicClientApplication(
+                    this.getApplicationContext(),
+                    R.raw.auth_config);
+        }
 
 
         reference = FirebaseDatabase.getInstance().getReference().child("Notices");
@@ -126,11 +140,52 @@ public class Student_Dashboard extends AppCompatActivity
             startActivity(i);
 
         } else if (id == R.id.nav_help) {
-
+            onSignOutClicked();
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    /* Clears an account's tokens from the cache.
+     * Logically similar to "sign out" but only signs out of this app.
+     */
+    private void onSignOutClicked() {
+
+        /* Attempt to get a account and remove their cookies from cache */
+        List<IAccount> accounts = null;
+
+        try {
+            accounts = sampleApp.getAccounts();
+
+            if (accounts == null) {
+                /* We have no accounts */
+
+            } else if (accounts.size() == 1) {
+                /* We have 1 account */
+                /* Remove from token cache */
+                sampleApp.removeAccount(accounts.get(0));
+                updateSignedOutUI();
+
+            }
+            else {
+                /* We have multiple accounts */
+                for (int i = 0; i < accounts.size(); i++) {
+                    sampleApp.removeAccount(accounts.get(i));
+                }
+                updateSignedOutUI();
+            }
+
+            Toast.makeText(getBaseContext(), "Signed Out!", Toast.LENGTH_SHORT).show();
+
+        } catch (IndexOutOfBoundsException e) {
+            Log.d(TAG, "User at this position does not exist: " + e.toString());
+        }
+    }
+
+    private void updateSignedOutUI() {
+        Intent intent = new Intent(Student_Dashboard.this,LoginPage.class);
+        startActivity(intent);
     }
 }
