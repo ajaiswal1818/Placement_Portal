@@ -1,8 +1,9 @@
 package com.group6.placementportal.DatabasePackage;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Student {
+public class Student implements Serializable {
     private String FullName;
     private String Department;
 

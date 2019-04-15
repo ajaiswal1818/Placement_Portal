@@ -25,8 +25,12 @@ import com.group6.placementportal.DatabasePackage.Notifications;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import com.group6.placementportal.DatabasePackage.Student;
+
 public class Student_Notifications extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+        private Student user;
 
     DatabaseReference reference;
     RecyclerView recyclerView;
@@ -49,6 +53,7 @@ public class Student_Notifications extends AppCompatActivity
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        user=(Student) getIntent().getSerializableExtra("user");
         recyclerView = findViewById(R.id.recycler_notifications);
         recyclerView.setLayoutManager( new LinearLayoutManager(this));
 
@@ -104,16 +109,19 @@ public class Student_Notifications extends AppCompatActivity
 
         if (id == R.id.nav_dash) {
             Intent i = new Intent(getApplicationContext(), Student_Dashboard.class);
+            i.putExtra("user",user);
             startActivity(i);
 
         } else if (id == R.id.nav_notifications) {
             Intent i = new Intent(getApplicationContext(), Student_Notifications.class);
+            i.putExtra("user",user);
             startActivity(i);
 
         } else if (id == R.id.nav_prefr) {
 
         } else if (id == R.id.nav_company) {
             Intent i = new Intent(getApplicationContext(), View_Jobs.class);
+            i.putExtra("user",user);
             startActivity(i);
 
         } else if (id == R.id.nav_calendar) {
@@ -122,10 +130,12 @@ public class Student_Notifications extends AppCompatActivity
 
         } else if (id == R.id.nav_edit_profile) {
             Intent i = new Intent(getApplicationContext(), Student_Profile.class);
+            i.putExtra("user",user);
             startActivity(i);
 
         } else if (id == R.id.nav_change_pass) {
             Intent i = new Intent(getApplicationContext(), Student_ChangePass.class);
+            i.putExtra("user",user);
             startActivity(i);
 
         } else if (id == R.id.nav_help) {
