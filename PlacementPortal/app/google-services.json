@@ -13,7 +13,28 @@
           "package_name": "com.group6.placementportal"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "582507735584-kpg64lro2o5rl9pucggi53v5t1tfgur3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.group6.placementportal",
+            "certificate_hash": "9289ea9c87231b9b58e66a8c39a0fffc6f4b710c"
+          }
+        },
+        {
+          "client_id": "582507735584-c4gvkevt3ttbdojugr68s5nt2deakihd.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.group6.placementportal",
+            "certificate_hash": "93662b224d7af893f6ee2dacead6510642c6a4dd"
+          }
+        },
+        {
+          "client_id": "582507735584-e2b2vaj77vembetve7ra9thr9kgmts2u.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyAdQ4aTjAS34ixswReHC2sd1h7tTMtTXN0"

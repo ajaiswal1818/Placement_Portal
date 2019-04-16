@@ -4,16 +4,50 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:largeHeap="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:windowSoftInputMode="adjustPan">
+        <activity android:name=".LoginPage">
+
+        </activity>
+        <activity android:name=".job_list" />
+        <activity
+            android:name=".company_enrollments"
+            android:label="@string/title_activity_company_enrollments"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".recipients_tab"
+            android:label="@string/title_activity_recipients_tab"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".admin_notices"
+            android:label="@string/title_activity_admin_notices"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".company_notices"
+            android:label="@string/title_activity_company_notices"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".company_profile"
+            android:label="@string/title_activity_company_profile"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".MainLogin">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        
         <activity
             android:name=".Student_ChangePassword"
             android:label="@string/title_activity_student__change_password"
@@ -48,16 +82,7 @@
             android:theme="@style/AppTheme.NoActionBar">
 
         </activity>
-        <activity
-            android:name=".LoginPage"
-            android:windowSoftInputMode="adjustPan">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-
-        </activity>
+      
         <activity android:name="com.microsoft.identity.client.BrowserTabActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -74,6 +99,9 @@
         </activity>
         <service android:name=".Student_Foreground_Notifications"
             android:exported="false" />
+        <activity android:name=".company_dashboard" />
+        <activity android:name=".job_profile" />
+        <activity android:name=".company_login" />
     </application>
 
 </manifest>
