@@ -70,7 +70,9 @@ public class company_login extends AppCompatActivity {
             public void onClick(View v) {
                 username.setText("");
                 password.setText("");
+                company c=null;
                 Intent company_profile=new Intent(company_login.this, company_profile.class);
+                company_profile.putExtra("MyClass",c);
                 startActivity(company_profile);
             }
         });
@@ -79,7 +81,7 @@ public class company_login extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                valid.addValueEventListener(new ValueEventListener() {
+                valid.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         if(dataSnapshot.exists())
@@ -96,11 +98,11 @@ public class company_login extends AppCompatActivity {
                                         if(encryption.encryptOrNull(password.getText().toString()).equals(son.child("password").getValue().toString()))
                                         {
                                             company c = son.getValue(company.class);
-                                            Intent job_profile=new Intent(company_login.this, job_profile.class);
-                                            job_profile.putExtra("MyClass",c);
-                                            job_profile.putExtra("PrevActivity","company_login");
+                                            Intent company_dashboard=new Intent(company_login.this, company_dashboard.class);
+                                            company_dashboard.putExtra("MyClass",c);
+                                            //company_dashboard.putExtra("PrevActivity","company_login");
                                             finish();
-                                            startActivity(job_profile);
+                                            startActivity(company_dashboard);
                                         }
                                         else
                                         {

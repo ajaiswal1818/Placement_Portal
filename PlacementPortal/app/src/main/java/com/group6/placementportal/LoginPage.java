@@ -54,7 +54,7 @@ public class LoginPage extends AppCompatActivity {
                 password = Password.getText().toString();
                 /*Login_Details= FirebaseDatabase.getInstance().getReference();
                 String str= Login_Details.child("Company").push().getKey();*/
-                Intent company_dashboard = new Intent(LoginPage.this, company_dashboard.class);
+                Intent company_login = new Intent(LoginPage.this, company_login.class);
                // company c= new company("Apple",str,"tech","9819298398","apple@iphone.com","California");
 
                /* Login_Details.child("Company").setValue(c).addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -74,7 +74,7 @@ public class LoginPage extends AppCompatActivity {
                 Toast toast=Toast.makeText(getApplicationContext(),Login_Details.toString(),Toast.LENGTH_SHORT);
                 toast.setMargin(50,50);
                 toast.show();*/
-                startActivity(company_dashboard);
+                startActivity(company_login);
 
                /* Login_Details.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override

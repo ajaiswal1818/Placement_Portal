@@ -21,6 +21,7 @@ import java.util.ArrayList;
 
 public class company_profile extends AppCompatActivity {
 
+    private company c;
     private Button proc;
     private int c_id;
     private EditText name;
@@ -47,6 +48,11 @@ public class company_profile extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_company_profile2);
+       /* if((company) getIntent().getSerializableExtra("MyClass")!=null)
+        {
+            this.c=(company) getIntent().getSerializableExtra("MyClass");
+        }*/
+
         proc=findViewById(R.id.proceed);
         name=findViewById(R.id.name);
         sector=findViewById(R.id.sector);
@@ -85,7 +91,7 @@ public class company_profile extends AppCompatActivity {
                             {
                                 if(son.child("username").exists() && son.child("username").getValue().toString().equals(username.getText().toString()))
                                 {
-                                    Toast.makeText(company_profile.this,"Username already exists, choose another"+son.child("username").getValue().toString(),Toast.LENGTH_LONG).show();
+                                    Toast.makeText(company_profile.this,"Username already exists, choose another",Toast.LENGTH_LONG).show();
                                     flag =0;
                                     break;
                                 }

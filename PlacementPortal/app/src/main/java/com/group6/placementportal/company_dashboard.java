@@ -16,11 +16,12 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
+import com.group6.placementportal.DatabasePackage.company;
 
 
 public class company_dashboard extends AppCompatActivity {
 
+    private company c;
         private Activity activity;
 
 
@@ -34,12 +35,16 @@ public class company_dashboard extends AppCompatActivity {
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_companydashboard);
-              profile   = findViewById(R.id.profile_card);
+
+            this.c=(company) getIntent().getSerializableExtra("MyClass");
+            profile   = findViewById(R.id.profile_card);
             profile.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent company_login=new Intent(company_dashboard.this, company_login.class);
-                    startActivity(company_login);
+                    Intent company_profile=new Intent(company_dashboard.this, company_profile.class);
+                    //company_profile.putExtra("MyClass",c);
+                    finish();
+                    startActivity(company_profile);
                 }
             });
 
