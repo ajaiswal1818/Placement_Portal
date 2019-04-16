@@ -17,10 +17,15 @@
         android:theme="@style/AppTheme"
         android:windowSoftInputMode="adjustPan">
         <activity
+            android:name=".Admin_DashBoard"
+            android:label="@string/title_activity_admin__dash_board"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".Login_Page_Admin" />
+        <activity android:name=".LoginPage" />
+        <activity
             android:name=".Student_JRF"
             android:label="@string/title_activity_student__jrf"
             android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity android:name=".LoginPage"></activity>
         <activity android:name=".job_list" />
         <activity
             android:name=".company_enrollments"
@@ -52,19 +57,19 @@
         <activity
             android:name=".Student_ChangePassword"
             android:label="@string/title_activity_student__change_password"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Apply_For_Jobs"
             android:label="@string/title_activity_apply__for__jobs"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Student_Notifications"
             android:label="@string/title_activity_student__notifications"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".View_Jobs"
             android:label="@string/title_activity_view__jobs"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Student_Profile"
             android:label="@string/title_activity_student__profile"

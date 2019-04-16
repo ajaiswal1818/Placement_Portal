@@ -41,5 +41,14 @@ public class MainLogin extends AppCompatActivity {
                 startActivity(company_login);
             }
         });
+
+        admin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent company_login=new Intent(MainLogin.this, Login_Page_Admin.class);
+                startActivity(company_login);
+            }
+        });
     }
 }
