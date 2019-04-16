@@ -15,11 +15,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".job_list"></activity>
+        <activity android:name=".LoginPage"></activity>
+        <activity android:name=".job_list" />
         <activity
             android:name=".company_enrollments"
             android:label="@string/title_activity_company_enrollments"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".recipients_tab"
             android:label="@string/title_activity_recipients_tab"
@@ -36,7 +37,7 @@
             android:name=".company_profile"
             android:label="@string/title_activity_company_profile"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".LoginPage">
+        <activity android:name=".MainLogin">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
