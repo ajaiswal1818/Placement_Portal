@@ -9,6 +9,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -21,6 +22,8 @@ public class recipients_tab extends AppCompatActivity {
     private CardArrayAdapter cardArrayAdapter;
     private ListView listView;
     private DatabaseReference db= FirebaseDatabase.getInstance().getReference("Company");
+
+
 
     protected void onStart() {
         super.onStart();
@@ -37,6 +40,7 @@ public class recipients_tab extends AppCompatActivity {
                             String company_name = c.child("company_name").getValue().toString();
                             String company_id = c.child("compnany_id").getValue().toString();
                             Card card_new = new Card("Name: " + company_name, "ID: " + company_id);
+
                             cardArrayAdapter.add(card_new);
                         }
                       //  Log.d("check check", c.getRef().toString());
@@ -77,6 +81,10 @@ public class recipients_tab extends AppCompatActivity {
 
 
         listView.setAdapter(cardArrayAdapter);
+    }
+
+    public void recipients_select(){
+        Log.d("Idea","Mast");
     }
 
 }

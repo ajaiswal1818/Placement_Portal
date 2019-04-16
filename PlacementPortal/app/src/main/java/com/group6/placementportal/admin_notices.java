@@ -142,4 +142,9 @@ public class admin_notices extends AppCompatActivity {
         });
         db.child("total_count").setValue(count);
     }
+
+
+    public void recipients_select(View view) {
+        Log.d("Idea","correct");
+    }
 }
