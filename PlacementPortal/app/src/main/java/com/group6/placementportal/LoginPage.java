@@ -145,7 +145,7 @@ public class LoginPage extends AppCompatActivity {
                 Login_Details = Login_Details.child("Student").child(rollNo);
 
 
-               /* Login_Details.addListenerForSingleValueEvent(new ValueEventListener() {
+                Login_Details.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         check_password = dataSnapshot.child("password").getValue(String.class);
@@ -169,7 +169,7 @@ public class LoginPage extends AppCompatActivity {
 
 
 
-                });*/
+                });
 
 
 
