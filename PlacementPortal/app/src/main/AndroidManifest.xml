@@ -15,11 +15,7 @@
         android:theme="@style/AppTheme"
         android:windowSoftInputMode="adjustPan">
         <activity android:name=".activity_profile_academic_details">
-            <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
-
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter></activity>
+            </activity>
         <activity
             android:name=".Apply_For_Jobs"
             android:label="@string/title_activity_apply__for__jobs"
@@ -36,7 +32,13 @@
         <activity
             android:name=".Student_Profile"
             android:label="@string/title_activity_student__profile"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".Student_Dashboard"
             android:label="@string/title_activity_student__dashboard"
