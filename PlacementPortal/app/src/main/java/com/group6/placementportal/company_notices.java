@@ -32,36 +32,7 @@ public class company_notices extends AppCompatActivity {
     protected void onStart(){
         super.onStart();
 
-        db.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if(dataSnapshot.exists()){
-                    Log.d("check",dataSnapshot.getRef().toString());
-                    for(DataSnapshot notice :dataSnapshot.getChildren()){
-                       // Log.d("check notices",notice.getRef().toString());
-                        String key;
-                        if( ! notice.getKey().toString().equals("total_count")){
-                            Log.d("check check",notice.getRef().toString());
-                            notices2company nc=notice.getValue(notices2company.class);
-                           Card card_new = new Card(nc.getTitle().toString(), nc.getDescription().toString());
-                            cardArrayAdapter.add(card_new);
-                            Log.d(nc.getTitle().toString(),nc.getDescription().toString());
-                        }
 
-                    }
-                   ListView listview=findViewById(R.id.card_listView);
-                    listview.addHeaderView(new View(company_notices.this));
-                    listview.addHeaderView(new View(company_notices.this));
-                    listview.setAdapter(cardArrayAdapter);
-                }
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
        /* db.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
@@ -123,6 +94,37 @@ public class company_notices extends AppCompatActivity {
 
 
         listView.setAdapter(cardArrayAdapter);
+
+        db.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot.exists()){
+                    Log.d("check",dataSnapshot.getRef().toString());
+                    for(DataSnapshot notice :dataSnapshot.getChildren()){
+                        // Log.d("check notices",notice.getRef().toString());
+                        String key;
+                        if( ! notice.getKey().toString().equals("total_count")){
+                            Log.d("check check",notice.getRef().toString());
+                            notices2company nc=notice.getValue(notices2company.class);
+                            Card card_new = new Card(nc.getTitle().toString(), nc.getDescription().toString());
+                            cardArrayAdapter.add(card_new);
+                            Log.d(nc.getTitle().toString(),nc.getDescription().toString());
+                        }
+
+                    }
+                    ListView listview=findViewById(R.id.card_listView);
+                    listview.addHeaderView(new View(company_notices.this));
+                    listview.addHeaderView(new View(company_notices.this));
+                    listview.setAdapter(cardArrayAdapter);
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
 
 
 
