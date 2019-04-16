@@ -11,7 +11,27 @@ public class company implements Serializable {
     private String contact_no;
     private String email_address;
     private String headoffice;
+    private String username;
+    private String password;
     private ArrayList<job> jobs;
+    public company() {
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 /*    public company() {
     }*/
 
@@ -71,7 +91,7 @@ public class company implements Serializable {
         this.jobs = jobs;
     }
 
-    public company(String company_name, String compnany_id, String sector, String contact_no, String email_address, String headoffice, ArrayList<job> jobs) {
+    public company(String company_name, String compnany_id, String sector, String contact_no, String email_address, String headoffice, ArrayList<job> jobs,String username,String password) {
         this.company_name = company_name;
         this.compnany_id = compnany_id;
         this.sector = sector;
@@ -79,5 +99,7 @@ public class company implements Serializable {
         this.email_address = email_address;
         this.headoffice = headoffice;
         this.jobs = jobs;
+        this.username=username;
+        this.password=password;
     }
 }

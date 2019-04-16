@@ -1,4 +1,18 @@
 <resources>
     <string name="app_name">Placement Portal</string>
     <string name="title_activity_company_profile">company_profile</string>
+
+    <string-array name="Department">
+        <item>Biosciences and Bioengineering </item>
+        <item>Computer Science and Engineering</item>
+        <item>Chemistry</item>
+        <item>Civil Engineering</item>
+        <item>Design</item>
+        <item>Electronics and Electrical Engineering</item>
+        <item>Humanities and Social Sciences</item>
+        <item>Mathematics</item>
+        <item>Mechanical Engineering</item>
+        <item>Physics</item>
+    </string-array>
+
 </resources>
