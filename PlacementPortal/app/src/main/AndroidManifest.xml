@@ -14,9 +14,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".company_enrollments"
+            android:label="@string/title_activity_company_enrollments"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
             android:name=".recipients_tab"
             android:label="@string/title_activity_recipients_tab"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".admin_notices"
             android:label="@string/title_activity_admin_notices"

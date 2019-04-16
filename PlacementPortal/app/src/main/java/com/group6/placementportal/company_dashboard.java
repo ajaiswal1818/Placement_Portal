@@ -31,11 +31,12 @@ public class company_dashboard extends AppCompatActivity {
 
     private android.support.v7.widget.CardView profile;
         private android.support.v7.widget.CardView notices;
-
+   private android.support.v7.widget.CardView enrollments;
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_companydashboard);
               profile   = findViewById(R.id.profile_card);
+              enrollments=findViewById(R.id.enrollments_card);
             profile.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -50,6 +51,14 @@ public class company_dashboard extends AppCompatActivity {
                 public void onClick(View v){
                     Intent company_notices=new Intent(company_dashboard.this, company_notices.class);
                     startActivity(company_notices);
+                }
+            });
+
+            enrollments.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent company_enrollements=new Intent(company_dashboard.this,company_enrollments.class);
+                    startActivity(company_enrollements);
                 }
             });
 

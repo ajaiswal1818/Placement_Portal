@@ -83,8 +83,6 @@ public class recipients_tab extends AppCompatActivity {
         listView.setAdapter(cardArrayAdapter);
     }
 
-    public void recipients_select(){
-        Log.d("Idea","Mast");
-    }
+
 
 }
