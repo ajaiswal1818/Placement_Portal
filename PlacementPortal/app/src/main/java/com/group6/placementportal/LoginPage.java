@@ -1,6 +1,9 @@
 package com.group6.placementportal;
 
+import com.group6.placementportal.DatabasePackage.company;
 import android.content.Intent;
+import android.media.session.MediaSession;
+import android.os.TokenWatcher;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -14,6 +17,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 
 import java.net.PasswordAuthentication;
 
@@ -60,10 +65,10 @@ public class LoginPage extends AppCompatActivity {
                     startActivity(admin_notices);
                 }
                 else{
-                    Intent company_dashboard = new Intent(LoginPage.this, company_dashboard.class);
+                    Intent company_login = new Intent(LoginPage.this, company_login.class);
                   //  Login_Details= FirebaseDatabase.getInstance().getReference();
                    // Login_Details = Login_Details.child("Student").child(rollNo).child("Password");
-                    startActivity(company_dashboard);
+                    startActivity(company_login);
                 }
 
 
@@ -95,5 +100,4 @@ public class LoginPage extends AppCompatActivity {
         });
 
     }
-
 }
