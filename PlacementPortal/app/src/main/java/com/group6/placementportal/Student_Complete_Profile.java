@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class student_profile extends AppCompatActivity {
+public class Student_Complete_Profile extends AppCompatActivity {
 
     private ExpandableListView listView,listView2;
     private ExpandableListAdapter listAdapter;
@@ -18,7 +18,7 @@ public class student_profile extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.student_profile);
+        setContentView(R.layout.Student_Complete_Profile);
         listView = findViewById(R.id.lvExp);
         listView2 = findViewById(R.id.pdExp);
         initData();
