@@ -20,6 +20,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -54,6 +56,9 @@ public class Student_JRF extends AppCompatActivity
     private DatabaseReference mDatabaseReference;
     private TextView file_name_photo;
     private TextView file_name_sign;
+    private EditText application,programmingLanguage,year,project,post;
+    private String mapplication,mprogrammingLanguage,myear,mproject,mpost;
+    private RadioButton yesBtn,noBtn;
 
 
     private static final String TAG = Student_JRF.class.getSimpleName();
@@ -91,6 +96,13 @@ public class Student_JRF extends AppCompatActivity
         apply = findViewById(R.id.btn_apply);
         file_name_photo=findViewById(R.id.txt_uploadphoto);
         file_name_sign=findViewById(R.id.txt_uploadsign);
+        application = findViewById(R.id.editApplication);
+        programmingLanguage = findViewById(R.id.editProgLang);
+        year = findViewById(R.id.editYear);
+        project = findViewById(R.id.editapplyproject);
+        post = findViewById(R.id.editapplypost);
+        yesBtn = findViewById(R.id.rbtnyes);
+        noBtn = findViewById(R.id.rbtnno);
 
         uploadphoto.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -109,15 +121,31 @@ public class Student_JRF extends AppCompatActivity
         apply.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(pdfUriphoto!=null) {
-                    uploadFilephoto(pdfUriphoto);
+                mapplication = application.getText().toString();
+                mprogrammingLanguage = programmingLanguage.getText().toString();
+                myear = year.getText().toString();
+                mproject = project.getText().toString();
+                mpost = post.getText().toString();
+
+                if(mapplication==null){
+                    return;
                 }
-                else{
-                    Toast.makeText(Student_JRF.this,"Select Photo",Toast.LENGTH_SHORT).show();
+                if(mprogrammingLanguage==null){
+                    return;
+                }
+                if(myear==null){
+                    return;
+                }
+                if(mproject==null){
+                    return;
+                }
+                if(mpost==null){
+                    return;
                 }
 
                 if(pdfUrisign!=null && pdfUriphoto!=null) {
                     uploadFilesign(pdfUrisign);
+                    uploadFilephoto(pdfUriphoto);
                 }
                 else{
                     Toast.makeText(Student_JRF.this,"Select Signature",Toast.LENGTH_SHORT).show();
@@ -200,7 +228,7 @@ public class Student_JRF extends AppCompatActivity
         progressDialog.setTitle("Requesting Process");
         progressDialog.show();
 
-        final StorageReference ref = mStorageReference.child("Uploads").child("JRF").child("vakul170101076").child("Sign");
+        final StorageReference ref = mStorageReference.child("Uploads").child("JRF").child(user.getWebmailID()).child("Sign");
         ref.putFile(data)
                 .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                     @Override
@@ -210,7 +238,7 @@ public class Student_JRF extends AppCompatActivity
                             public void onSuccess(Uri uri) {
                                 progressDialog.hide();
                                 String upload = uri.toString();
-                                mDatabaseReference.child("JRF").child("vakul170101076").child("Sign").setValue(upload);
+                                mDatabaseReference.child("JRF").child(user.getWebmailID()).child("Sign").setValue(upload);
                                 Toast.makeText(Student_JRF.this,"File Upload Successful",Toast.LENGTH_SHORT).show();
                             }
                         });
@@ -232,11 +260,11 @@ public class Student_JRF extends AppCompatActivity
 
     private void uploadFilephoto(Uri data) {
         progressDialog = new ProgressDialog(this);
-        progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-        progressDialog.setTitle("Requesting Process");
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressDialog.setTitle("Please Wait");
         progressDialog.show();
 
-        final StorageReference ref = mStorageReference.child("Uploads").child("JRF").child("vakul170101076").child("Photo");
+        final StorageReference ref = mStorageReference.child("Uploads").child("JRF").child(user.getWebmailID()).child("Photo");
         ref.putFile(data)
                 .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                     @Override
@@ -246,7 +274,14 @@ public class Student_JRF extends AppCompatActivity
                             public void onSuccess(Uri uri) {
                                 progressDialog.hide();
                                 String upload = uri.toString();
-                                mDatabaseReference.child("JRF").child("vakul170101076").child("Photo").setValue(upload);
+                                mDatabaseReference.child("JRF").child(user.getWebmailID()).child("Photo").setValue(upload);
+                                mDatabaseReference.child("JRF").child(user.getWebmailID()).child("Student_Name").setValue(user.getFullName());
+                                mDatabaseReference.child("JRF").child(user.getWebmailID()).child("Application_No").setValue(mapplication);
+                                mDatabaseReference.child("JRF").child(user.getWebmailID()).child("ProgrammingLanguages").setValue(mprogrammingLanguage);
+                                mDatabaseReference.child("JRF").child(user.getWebmailID()).child("YearandType").setValue(myear);
+                                mDatabaseReference.child("JRF").child(user.getWebmailID()).child("AppliedProject").setValue(mproject);
+                                mDatabaseReference.child("JRF").child(user.getWebmailID()).child("Qualified").setValue("yes");
+                                mDatabaseReference.child("JRF").child(user.getWebmailID()).child("Webmail").setValue(user.getWebmailID());
                                 Toast.makeText(Student_JRF.this,"File Upload Successful",Toast.LENGTH_SHORT).show();
                             }
                         });
@@ -265,19 +300,6 @@ public class Student_JRF extends AppCompatActivity
         });
 
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     @Override
