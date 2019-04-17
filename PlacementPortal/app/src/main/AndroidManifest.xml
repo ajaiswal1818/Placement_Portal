@@ -17,11 +17,19 @@
         android:theme="@style/AppTheme"
         android:windowSoftInputMode="adjustPan">
         <activity
+            android:name=".JRF_Application_Requests"
+            android:label="@string/title_activity_jrf__application__requests"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
             android:name=".Admin_DashBoard"
             android:label="@string/title_activity_admin__dash_board"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Login_Page_Admin" />
         <activity android:name=".LoginPage" />
+        <activity
+            android:name=".Student_JRF"
+            android:label="Student_JRF"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity android:name=".job_list" />
         <activity
             android:name=".company_enrollments"
@@ -73,7 +81,7 @@
         <activity
             android:name=".Student_Dashboard"
             android:label="@string/title_activity_student__dashboard"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity android:name="com.microsoft.identity.client.BrowserTabActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
