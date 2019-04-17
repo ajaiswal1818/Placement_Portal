@@ -36,6 +36,8 @@ public class JRF_Approval_Profile extends AppCompatActivity {
     private Notifications notif;
     private Student user;
     private String list_of_notif;
+    private long children;
+    private String ID;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -90,6 +92,21 @@ public class JRF_Approval_Profile extends AppCompatActivity {
                     }
                 });
                 mDatabaseReference2.child("List_of_Notification_IDs").setValue(list_of_notif);
+
+                mDatabaseReference.child("Notifications").addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        children = dataSnapshot.getChildrenCount();
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+                children+=1;
+                ID=Long.toString(children);
+
                 mDatabaseReference.child("Notifications").child(notif.getNotification_ID()).child("Description").setValue("JRF application form rejected");
                 mDatabaseReference.child("Notifications").child(notif.getNotification_ID()).child("Read").setValue("False");
                 mDatabaseReference.child("Notifications").child(notif.getNotification_ID()).child("Subject").setValue("JRF APPLICATION REQUEST");
@@ -116,10 +133,24 @@ public class JRF_Approval_Profile extends AppCompatActivity {
                     }
                 });
                 mDatabaseReference2.child("List_of_Notification_IDs").setValue(list_of_notif);
-                mDatabaseReference.child("Notifications").child(notif.getNotification_ID()).child("Description").setValue("JRF application form approved");
-                mDatabaseReference.child("Notifications").child(notif.getNotification_ID()).child("Read").setValue("False");
-                mDatabaseReference.child("Notifications").child(notif.getNotification_ID()).child("Subject").setValue("JRF APPLICATION REQUEST");
-                mDatabaseReference.child("Notifications").child(notif.getNotification_ID()).child("notification_ID").setValue(notif.getNotification_ID());
+
+                mDatabaseReference.child("Notifications").addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        children = dataSnapshot.getChildrenCount();
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+                children+=1;
+                ID=Long.toString(children);
+                mDatabaseReference.child("Notifications").child(ID).child("Description").setValue("JRF application form approved");
+                mDatabaseReference.child("Notifications").child(ID).child("Read").setValue("False");
+                mDatabaseReference.child("Notifications").child(ID).child("Subject").setValue("JRF APPLICATION REQUEST");
+                mDatabaseReference.child("Notifications").child(ID).child("notification_ID").setValue(notif.getNotification_ID());
 
             }
         });
