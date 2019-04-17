@@ -1,5 +1,6 @@
 package com.group6.placementportal;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -55,9 +56,10 @@ public class Admin_DashBoard extends AppCompatActivity
 
         if (id == R.id.nav_jrf_application_requests) {
             // Handle the camera action
+        } else if (id == R.id.nav_approve_notice) {
+            Intent i = new Intent(getApplicationContext(), Admin_ApproveNotice.class);
+            startActivity(i);
         }
-//        }else if (id == R.id.nav_gallery) {
-//
 //        } else if (id == R.id.nav_slideshow) {
 //
 //        } else if (id == R.id.nav_manage) {
