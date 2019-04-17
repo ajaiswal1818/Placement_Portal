@@ -1,24 +1,19 @@
 package com.group6.placementportal;
 
 import android.content.Context;
-import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.google.firebase.database.core.Tag;
-import com.group6.placementportal.DatabasePackage.Jobs;
 import com.group6.placementportal.DatabasePackage.JRF_applications;
 
 import java.util.ArrayList;
 
-public class Adapter_JRF_Admin extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
+public class Adapter_JRF_Admin extends RecyclerView.Adapter<Adapter_JRF_Admin.MyViewHolder> {
 
     Context context;
     ArrayList<JRF_applications> profiles;
@@ -37,10 +32,10 @@ public class Adapter_JRF_Admin extends RecyclerView.Adapter<MyAdapter.MyViewHold
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, final int position) {
-        holder.application_no.setText(profiles.get(position).getCompany_name());
-        holder.student_name.setText(profiles.get(position).getProfile());
-        holder.project.setText(profiles.get(position).getLocation());
-        holder.post.setText(profiles.get(position).getLocation());
+        holder.application_no.setText(profiles.get(position).getApplication_No());
+        holder.student_name.setText(profiles.get(position).getStudent_Name());
+        holder.project.setText(profiles.get(position).getAppliedProject());
+        holder.post.setText(profiles.get(position).getAppliedPost());
         holder.parentlayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

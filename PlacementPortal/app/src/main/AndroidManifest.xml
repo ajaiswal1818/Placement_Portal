@@ -28,7 +28,7 @@
         <activity android:name=".LoginPage" />
         <activity
             android:name=".Student_JRF"
-            android:label="@string/title_activity_student__jrf"
+            android:label="Student_JRF"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity android:name=".job_list" />
         <activity
