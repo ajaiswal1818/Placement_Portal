@@ -30,9 +30,9 @@ import java.util.Collections;
 public class Student_Notifications extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-        private Student user;
+    private Student user;
 
-        private int num;
+    private int num;
 
     private DatabaseReference reference;
     private RecyclerView recyclerView;
@@ -55,9 +55,9 @@ public class Student_Notifications extends AppCompatActivity
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        user=(Student) getIntent().getSerializableExtra("user");
+        user = (Student) getIntent().getSerializableExtra("user");
         recyclerView = findViewById(R.id.recycler_notifications);
-        recyclerView.setLayoutManager( new LinearLayoutManager(this));
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
 
         reference = FirebaseDatabase.getInstance().getReference().child("Notifications");
@@ -65,27 +65,26 @@ public class Student_Notifications extends AppCompatActivity
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 list = new ArrayList<Notifications>();
-                for(DataSnapshot dataSnapshot1: dataSnapshot.getChildren())
-                {
+                for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
                     Notifications p = dataSnapshot1.getValue(Notifications.class);
-                    String ID= p.getNotification_ID();
+                    String ID = p.getNotification_ID();
                     //TO DO TASK LEFT
                     //check for id in students list of notifications IDS and then add to the list
-                    String list_of_IDs=user.getList_of_Notification_IDs();
-                    String[] split_IDs =list_of_IDs.split("\\,");
-                    boolean flag1=false;
-                    for(int i=0;i<split_IDs.length;i++){
-                        Log.d("myTag", split_IDs[i]+" "+ID+" "+ split_IDs[i].equals(ID));
-                        if(split_IDs[i].equals(ID)){
-                            flag1=true;
+                    String list_of_IDs = user.getList_of_Notification_IDs();
+                    String[] split_IDs = list_of_IDs.split("\\,");
+                    boolean flag1 = false;
+                    for (int i = 0; i < split_IDs.length; i++) {
+                        Log.d("myTag", split_IDs[i] + " " + ID + " " + split_IDs[i].equals(ID));
+                        if (split_IDs[i].equals(ID)) {
+                            flag1 = true;
                         }
                     }
-                    if(flag1==true) {
+                    if (flag1 == true) {
                         list.add(p);
                     }
                 }
                 Collections.reverse(list);
-                adapter = new MyAdapter_Notifications(Student_Notifications.this,list);
+                adapter = new MyAdapter_Notifications(Student_Notifications.this, list);
                 recyclerView.setAdapter(adapter);
             }
 
@@ -122,19 +121,19 @@ public class Student_Notifications extends AppCompatActivity
 
         if (id == R.id.nav_dash) {
             Intent i = new Intent(getApplicationContext(), Student_Dashboard.class);
-            i.putExtra("user",user);
+            i.putExtra("user", user);
             startActivity(i);
 
         } else if (id == R.id.nav_notifications) {
             Intent i = new Intent(getApplicationContext(), Student_Notifications.class);
-            i.putExtra("user",user);
+            i.putExtra("user", user);
             startActivity(i);
 
         } else if (id == R.id.nav_prefr) {
 
         } else if (id == R.id.nav_company) {
             Intent i = new Intent(getApplicationContext(), View_Jobs.class);
-            i.putExtra("user",user);
+            i.putExtra("user", user);
             startActivity(i);
 
         } else if (id == R.id.nav_calendar) {
@@ -143,12 +142,12 @@ public class Student_Notifications extends AppCompatActivity
 
         } else if (id == R.id.nav_edit_profile) {
             Intent i = new Intent(getApplicationContext(), Student_Profile.class);
-            i.putExtra("user",user);
+            i.putExtra("user", user);
             startActivity(i);
 
         } else if (id == R.id.nav_change_pass) {
             Intent i = new Intent(getApplicationContext(), Student_ChangePassword.class);
-            i.putExtra("user",user);
+            i.putExtra("user", user);
             startActivity(i);
 
         } else if (id == R.id.nav_help) {

@@ -6,8 +6,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import com.group6.placementportal.DatabasePackage.Notices;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -30,6 +32,8 @@ public class MyAdapter_Notices extends RecyclerView.Adapter<MyAdapter_Notices.My
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+
+        Picasso.get().load(profiles.get(position).getImageURL()).into(holder.notice_image);
         holder.notice_topic.setText(profiles.get(position).getTopic());
         holder.notice_content.setText(profiles.get(position).getContent());
     }
@@ -42,8 +46,10 @@ public class MyAdapter_Notices extends RecyclerView.Adapter<MyAdapter_Notices.My
     class MyViewHolder extends RecyclerView.ViewHolder
     {
         TextView notice_topic,notice_content;
+        ImageView notice_image;
         public MyViewHolder(View itemView) {
             super(itemView);
+            notice_image = itemView.findViewById(R.id.Notice_Image);
             notice_topic =itemView.findViewById(R.id.Notice_Topic);
             notice_content =itemView.findViewById(R.id.Notice_Content);
         }

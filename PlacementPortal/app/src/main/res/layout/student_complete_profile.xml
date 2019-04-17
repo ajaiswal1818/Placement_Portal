@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Student_Complete_Profile"
+    android:padding="8dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="Academic Details"
+            android:layout_gravity="center"
+            android:textSize="25sp"
+            android:layout_marginTop="20dp"
+            android:textColor="@color/colorPrimary"
+            android:id="@+id/acad_details_header"
+            />
+
+        <com.group6.placementportal.MyExpandableListView
+            android:id="@+id/lvExp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginTop="20dp"></com.group6.placementportal.MyExpandableListView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Personal Details"
+            android:layout_gravity="center"
+            android:textSize="25sp"
+            android:layout_marginTop="20dp"
+            android:textColor="@color/colorPrimary"
+            android:id="@+id/personal_details_header"
+            />
+
+        <com.group6.placementportal.MyExpandableListView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/pdExp"
+            android:layout_marginTop="20dp"
+            android:layout_marginHorizontal="10dp"
+            ></com.group6.placementportal.MyExpandableListView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginTop="20dp">
+
+
+            <Button
+                android:id="@+id/btn_save"
+                android:layout_width="146dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/roundbtn"
+                android:text="Save "
+
+                android:textColor="@android:color/white"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/pdExp"
+                app:layout_constraintVertical_bias="0.273" />
+
+            <Button
+                android:id="@+id/btn_back"
+                android:layout_width="145dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/roundbtn"
+                android:text="Back"
+
+                android:textColor="@android:color/white"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/pdExp"
+                app:layout_constraintVertical_bias="0.273" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+
+</ScrollView>
