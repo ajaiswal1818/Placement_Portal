@@ -1,7 +1,11 @@
 package com.group6.placementportal;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
 
@@ -9,28 +13,43 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class Student_Complete_Profile extends AppCompatActivity {
+public class JRF_Approval_Profile extends AppCompatActivity {
 
-    private ExpandableListView listView,listView2;
+    private ExpandableListView listView,listView2,listView3;
     private ExpandableListAdapter listAdapter;
     private List<String> listDataHeader;
     private HashMap<String,List<String>> listHashMap;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.student_complete_profile);
-        listView = findViewById(R.id.lvExp);
-        listView2 = findViewById(R.id.pdExp);
+        setContentView(R.layout.activity_jrf__approval__profile);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        FloatingActionButton fab = findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }
+        });
+
+        listView = findViewById(R.id.lv2Exp);
+        listView2 = findViewById(R.id.lvExp);
+        listView3 = findViewById(R.id.pdExp);
         initData();
         listAdapter = new com.group6.placementportal.ExpandableListAdapter(this,listDataHeader,listHashMap);
         listView.setAdapter(listAdapter);
         initData2();
         listAdapter = new com.group6.placementportal.ExpandableListAdapter(this,listDataHeader,listHashMap);
         listView2.setAdapter(listAdapter);
-
+        initData3();
+        listAdapter = new com.group6.placementportal.ExpandableListAdapter(this,listDataHeader,listHashMap);
+        listView3.setAdapter(listAdapter);
     }
 
-    private void initData2() {
+    private void initData3() {
         listDataHeader = new ArrayList<>();
         listHashMap = new HashMap<>();
 
@@ -53,7 +72,7 @@ public class Student_Complete_Profile extends AppCompatActivity {
 
     }
 
-    private void initData() {
+    private void initData2() {
         listDataHeader = new ArrayList<>();
         listHashMap = new HashMap<>();
 
@@ -95,4 +114,18 @@ public class Student_Complete_Profile extends AppCompatActivity {
         listHashMap.put(listDataHeader.get(1),HigherSecondary);
         listHashMap.put(listDataHeader.get(2),Graduation);
     }
+
+    private void initData() {
+        listDataHeader = new ArrayList<>();
+        listHashMap = new HashMap<>();
+        listDataHeader.add("Registration Details");
+        List<String> RegRDetails = new ArrayList<>();
+        RegRDetails.add("Name");
+        RegRDetails.add("Father's Name");
+        RegRDetails.add("Date of Birth");
+        RegRDetails.add("Gender");
+        RegRDetails.add("Category");
+        listHashMap.put(listDataHeader.get(0),RegRDetails);
+    }
+
 }

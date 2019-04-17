@@ -17,9 +17,13 @@
         android:theme="@style/AppTheme"
         android:windowSoftInputMode="adjustPan">
         <activity
+            android:name=".JRF_Approval_Profile"
+            android:label="@string/title_activity_jrf__approval__profile"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
             android:name=".Student_Profile_Approval"
             android:label="@string/title_activity_student__profile__approval"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Student_Requests"
             android:label="@string/title_activity_student__requests"

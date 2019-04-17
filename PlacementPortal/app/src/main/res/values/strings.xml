@@ -49,4 +49,5 @@
     <string name="title_activity_admin__approve_notice">Admin_ApproveNotice</string>
     <string name="title_activity_student__requests">Student_Requests</string>
     <string name="title_activity_student__profile__approval">Student_Profile_Approval</string>
+    <string name="title_activity_jrf__approval__profile">JRF_Approval_Profile</string>
 </resources>
