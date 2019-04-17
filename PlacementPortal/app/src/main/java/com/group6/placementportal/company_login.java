@@ -53,9 +53,12 @@ public class company_login extends AppCompatActivity {
     private EditText password;
     private DatabaseReference valid;
     private boolean flag=true;
+    public company c=null;
     Encryption encryption = Encryption.getDefault("Key", "Salt", new byte[16]);
 
-
+    public company getUser(){
+        return c;
+    }
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_company_login2);
@@ -97,7 +100,7 @@ public class company_login extends AppCompatActivity {
                                     {
                                         if(encryption.encryptOrNull(password.getText().toString()).equals(son.child("password").getValue().toString()))
                                         {
-                                            company c = son.getValue(company.class);
+                                            c = son.getValue(company.class);
                                             Intent company_dashboard=new Intent(company_login.this, company_dashboard.class);
                                             company_dashboard.putExtra("MyClass",c);
                                             //company_dashboard.putExtra("PrevActivity","company_login");
