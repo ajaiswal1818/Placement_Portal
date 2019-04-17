@@ -16,20 +16,26 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:windowSoftInputMode="adjustPan">
-        <activity android:name=".student_profile">
 
+        <activity android:name=".student_profile">
         </activity>
+
+        <activity android:name=".NoticeFromCompany"></activity>
+
+        <activity
+            android:name=".Admin_ApproveNotice"
+            android:label="@string/title_activity_admin__approve_notice"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Apply_For_Jobs"
             android:label="@string/title_activity_apply__for__jobs"
             android:theme="@style/AppTheme.NoActionBar">
-
         </activity>
 
         <activity
             android:name=".JRF_Application_Requests"
             android:label="@string/title_activity_jrf__application__requests"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Admin_DashBoard"
             android:label="@string/title_activity_admin__dash_board"
@@ -39,7 +45,7 @@
         <activity
             android:name=".Student_JRF"
             android:label="Student_JRF"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".job_list" />
         <activity
             android:name=".company_enrollments"
@@ -64,7 +70,6 @@
         <activity android:name=".MainLogin">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -89,16 +94,14 @@
             android:name=".Student_Profile"
             android:label="@string/title_activity_student__profile"
             android:theme="@style/AppTheme.NoActionBar">
-
         </activity>
         <activity
             android:name=".Student_Dashboard"
             android:label="@string/title_activity_student__dashboard"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".LoginPage"
             android:windowSoftInputMode="adjustPan">
-
         </activity>
         <activity android:name="com.microsoft.identity.client.BrowserTabActivity">
             <intent-filter>
@@ -118,7 +121,6 @@
         <service
             android:name=".Student_Foreground_Notifications"
             android:exported="false" />
-
         <activity android:name=".company_dashboard" />
         <activity android:name=".job_profile" />
         <activity android:name=".company_login" />

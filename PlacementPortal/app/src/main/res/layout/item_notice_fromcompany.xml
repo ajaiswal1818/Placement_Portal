@@ -20,12 +20,6 @@
             android:textStyle="bold"
             android:padding="10dp"/>
 
-        <ImageView
-            android:id="@+id/Notice_Image"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:srcCompat="@android:drawable/screen_background_light" />
-
         <TextView
             android:id="@+id/Notice_Content"
             android:layout_width="match_parent"
@@ -33,6 +27,24 @@
             android:padding="5dp"
             android:text="This will be the message given to the students"
             android:textSize="24sp" />
+
+        <ImageView
+            android:id="@+id/Notice_Image"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:srcCompat="@android:drawable/screen_background_light" />
+
+        <Button
+            android:id="@+id/btn_approve"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Approve" />
+
+        <Button
+            android:id="@+id/btn_reject"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Reject" />
 
     </LinearLayout>
 
