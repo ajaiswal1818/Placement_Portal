@@ -23,6 +23,8 @@ public class MainLogin extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                Intent admin_send_notification=new Intent(MainLogin.this, admin_send_notification.class);
+                startActivity(admin_send_notification);
             }
         });
         company.setOnClickListener(new View.OnClickListener() {

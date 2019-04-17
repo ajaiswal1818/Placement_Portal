@@ -33,6 +33,7 @@ public class company_dashboard extends AppCompatActivity {
     private android.support.v7.widget.CardView profile;
         private android.support.v7.widget.CardView notices;
    private android.support.v7.widget.CardView enrollments;
+    private android.support.v7.widget.CardView events;
    private Button button;
 
 
@@ -41,6 +42,7 @@ public class company_dashboard extends AppCompatActivity {
             setContentView(R.layout.activity_companydashboard);
               profile   = findViewById(R.id.profile_card);
               enrollments=findViewById(R.id.enrollments_card);
+
 
             this.c=(company) getIntent().getSerializableExtra("MyClass");
             profile   = findViewById(R.id.profile_card);
