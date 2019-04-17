@@ -29,15 +29,18 @@ public class company_dashboard extends AppCompatActivity {
                 this.activity = activity;
         }
 
-
-    private android.support.v7.widget.CardView profile;
+        private Button send;
+        private android.support.v7.widget.CardView profile;
         private android.support.v7.widget.CardView notices;
-   private android.support.v7.widget.CardView enrollments;
+        private android.support.v7.widget.CardView enrollments;
+
+
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_companydashboard);
               profile   = findViewById(R.id.profile_card);
               enrollments=findViewById(R.id.enrollments_card);
+              send = findViewById(R.id.send_notifications);
 
             this.c=(company) getIntent().getSerializableExtra("MyClass");
             profile   = findViewById(R.id.profile_card);
@@ -65,6 +68,15 @@ public class company_dashboard extends AppCompatActivity {
                 public void onClick(View v) {
                     Intent company_enrollements=new Intent(company_dashboard.this,company_enrollments.class);
                     startActivity(company_enrollements);
+                }
+            });
+
+            send.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    Intent intent=new Intent(company_dashboard.this, Sending_Notifications.class);
+                    startActivity(intent);
                 }
             });
 
