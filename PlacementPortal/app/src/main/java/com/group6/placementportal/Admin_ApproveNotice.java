@@ -78,27 +78,26 @@ public class Admin_ApproveNotice extends AppCompatActivity
                     @Override
                     public void rejectnotice(int position) {
 
-                        Notices check = list.get(position);
+                        final Notices check = list.get(position);
 
                         DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
-                        Query a = ref.child("Notices").orderByChild("Topic").equalTo(check.getTopic());
-                        Query b = ref.child("Notices").orderByChild("Content").equalTo(check.getContent());
+                        Query a = ref.child("Notices");
 
-                        if(a == b){
-                            a.addListenerForSingleValueEvent(new ValueEventListener() {
-                                @Override
-                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                    for (DataSnapshot snapshot: dataSnapshot.getChildren()) {
-                                        snapshot.getRef().removeValue();
-                                    }
-                                }
 
-                                @Override
-                                public void onCancelled(@NonNull DatabaseError databaseError) {
-                                    Log.e(TAG, "onCancelled", databaseError.toException());
+                        a.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                for (DataSnapshot snapshot: dataSnapshot.getChildren()) {
+                                    if(snapshot.child("Topic").getValue() == check)snapshot.getRef().removeValue();
                                 }
-                            });
-                        }
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
+                                Log.e(TAG, "onCancelled", databaseError.toException());
+                            }
+                        });
+
 
                         list.remove(position);
 
@@ -107,7 +106,7 @@ public class Admin_ApproveNotice extends AppCompatActivity
                     @Override
                     public void approvenotice(int position){
 
-                        Notices check = list.get(position);
+                        final Notices check = list.get(position);
 
                         String uploadId = refnoticetocompany.push().getKey();
 
@@ -115,24 +114,23 @@ public class Admin_ApproveNotice extends AppCompatActivity
 
 
                         DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
-                        Query a = ref.child("Notices").orderByChild("Topic").equalTo(check.getTopic());
-                        Query b = ref.child("Notices").orderByChild("Content").equalTo(check.getContent());
+                        Query a = ref.child("Notices");
 
-                        if(a == b){
-                            a.addListenerForSingleValueEvent(new ValueEventListener() {
-                                @Override
-                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                    for (DataSnapshot snapshot: dataSnapshot.getChildren()) {
-                                        snapshot.getRef().removeValue();
-                                    }
-                                }
 
-                                @Override
-                                public void onCancelled(@NonNull DatabaseError databaseError) {
-                                    Log.e(TAG, "onCancelled", databaseError.toException());
+                        a.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                for (DataSnapshot snapshot: dataSnapshot.getChildren()) {
+                                    if(snapshot.child("Topic").getValue() == check)snapshot.getRef().removeValue();
                                 }
-                            });
-                        }
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
+                                Log.e(TAG, "onCancelled", databaseError.toException());
+                            }
+                        });
+
 
 
 
