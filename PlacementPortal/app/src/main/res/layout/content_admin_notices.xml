@@ -6,44 +6,58 @@
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".admin_notices"
-    tools:showIn="@layout/activity_admin_notices">
+    tools:showIn="@layout/activity_admin_notices"
+    android:layout_gravity="center">
 
     <EditText
         android:id="@+id/title"
-        android:layout_width="wrap_content"
+        android:layout_width="220dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="50dp"
+        android:gravity="center"
         android:layout_marginEnd="8dp"
         android:contentDescription="Notice Title"
+        android:layout_marginTop="200dp"
         android:ems="10"
         android:hint="Title"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@drawable/input"/>
 
     <EditText
         android:id="@+id/description"
-        android:layout_width="wrap_content"
+        android:layout_width="220dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="100dp"
+        android:gravity="center"
         android:layout_marginEnd="8dp"
+        android:layout_marginTop="20dp"
         android:ems="10"
         android:hint="Description"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title" />
+        app:layout_constraintTop_toBottomOf="@+id/title"
+        android:background="@drawable/input"/>
+
+
 
     <Button
-        android:id="@+id/send_button"
-        android:layout_width="148dp"
+        android:id="@+id/show_company"
+        android:layout_width="220dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="100dp"
-        android:layout_marginEnd="8dp"
+        android:onClick="open_recipients_tab"
+        android:text="Select Recipents"
+        app:layout_constraintBottom_toTopOf="@+id/send_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/description"
+        android:background="@drawable/roundbtn"
+        android:textColor="@color/colorText"/>
+    <Button
+        android:id="@+id/send_button"
+        android:layout_width="220dp"
+        android:layout_height="wrap_content"
         android:width="50dp"
         android:text="Send"
         android:onClick="send_notice"
@@ -51,21 +65,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/description"
-        />
-
-    <Button
-        android:id="@+id/show_company"
-        android:layout_width="182dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:onClick="open_recipients_tab"
-        android:text="Select Recipents"
-        app:layout_constraintBottom_toTopOf="@+id/send_button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/description" />
+        android:background="@drawable/roundbtn"
+        android:textColor="@color/colorText"/>
 
 </android.support.constraint.ConstraintLayout>
