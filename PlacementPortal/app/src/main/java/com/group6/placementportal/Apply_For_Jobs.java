@@ -179,7 +179,9 @@ public class Apply_For_Jobs extends AppCompatActivity {
                             public void onSuccess(Uri uri) {
                                 progressDialog.hide();
                                 String upload = uri.toString();
-                                mDatabaseReference.child("Jobs").child(jobs.getJob_id()).child("Applied Students").child(user.getWebmailID()).setValue(upload);
+                                mDatabaseReference.child("Jobs").child(jobs.getJob_id()).child("Applied Students").child(user.getWebmailID()).child("CV").setValue(upload);
+                                mDatabaseReference.child("Jobs").child(jobs.getJob_id()).child("Applied Students").child(user.getWebmailID()).child("Status").setValue("0");
+                                mDatabaseReference.child("Jobs").child(jobs.getJob_id()).child("Applied Students").child(user.getWebmailID()).child("Approval").setValue("No");
                                 Toast.makeText(Apply_For_Jobs.this,"File Upload Successful",Toast.LENGTH_SHORT).show();
                             }
                         });
