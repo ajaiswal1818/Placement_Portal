@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_dash"
+            android:title="Dashboard" />
+        <item
+            android:id="@+id/nav_notifications"
+            android:title="Notifications" />
+        <item
+            android:id="@+id/nav_prefr"
+            android:title="Give Preferences" />
+        <item
+            android:id="@+id/nav_company"
+            android:title="Company" />
+        <item
+            android:id="@+id/nav_calendar"
+            android:title="Calendar" />
+        <item
+            android:id="@+id/nav_my_profile"
+            android:title="My Profile" />
+        <item
+            android:id="@+id/nav_edit_profile"
+            android:title="Edit Profile" />
+        <item
+            android:id="@+id/nav_change_pass"
+            android:title="Change Password" />
+        <item
+            android:id="@+id/nav_help"
+            android:title="Help" />
+        <item
+            android:id="@+id/nav_signout"
+            android:title="Sign Out" />
+
+    </group>
+
+</menu>

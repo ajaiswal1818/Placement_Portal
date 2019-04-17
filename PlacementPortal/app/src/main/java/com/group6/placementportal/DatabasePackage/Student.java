@@ -1,12 +1,11 @@
 package com.group6.placementportal.DatabasePackage;
 
+import java.io.Serializable;
 import java.util.List;
 
-class Student {
-    private String FirstName;
-    private String LastName;
+public class Student implements Serializable {
+    private String FullName;
     private String Department;
-
 
     private String WebmailID;
     private String Contact;
@@ -17,10 +16,10 @@ class Student {
     private List<String> Applied_Company_IDs;
     private int YearOfGraduation;
     private String Password;
+    private String List_of_Notification_IDs;
 
-    public Student(String firstName, String lastName, String department, String webmailID, String contact, String rollNo, String gender, double CPI, String programme, List<String> applied_Company_IDs, int yearOfGraduation, String password) {
-        FirstName = firstName;
-        LastName = lastName;
+    public Student(String fullName, String department, String webmailID, String contact, String rollNo, String gender, double CPI, String programme, List<String> applied_Company_IDs, int yearOfGraduation, String password, String list_of_Notification_IDs) {
+        FullName = fullName;
         Department = department;
         WebmailID = webmailID;
         Contact = contact;
@@ -31,38 +30,18 @@ class Student {
         Applied_Company_IDs = applied_Company_IDs;
         YearOfGraduation = yearOfGraduation;
         Password = password;
+        List_of_Notification_IDs = list_of_Notification_IDs;
     }
 
-    public String getPassword() {
-        return Password;
+    public Student() {
     }
 
-    public void setPassword(String password) {
-        Password = password;
+    public String getFullName() {
+        return FullName;
     }
 
-    public String getWebmailID() {
-        return WebmailID;
-    }
-
-    public void setWebmailID(String webmailID) {
-        WebmailID = webmailID;
-    }
-
-    public String getFirstName() {
-        return FirstName;
-    }
-
-    public void setFirstName(String firstName) {
-        FirstName = firstName;
-    }
-
-    public String getLastName() {
-        return LastName;
-    }
-
-    public void setLastName(String lastName) {
-        LastName = lastName;
+    public void setFullName(String fullName) {
+        FullName = fullName;
     }
 
     public String getDepartment() {
@@ -71,6 +50,14 @@ class Student {
 
     public void setDepartment(String department) {
         Department = department;
+    }
+
+    public String getWebmailID() {
+        return WebmailID;
+    }
+
+    public void setWebmailID(String webmailID) {
+        WebmailID = webmailID;
     }
 
     public String getContact() {
@@ -127,5 +114,21 @@ class Student {
 
     public void setYearOfGraduation(int yearOfGraduation) {
         YearOfGraduation = yearOfGraduation;
+    }
+
+    public String getPassword() {
+        return Password;
+    }
+
+    public void setPassword(String password) {
+        Password = password;
+    }
+
+    public String getList_of_Notification_IDs() {
+        return List_of_Notification_IDs;
+    }
+
+    public void setList_of_Notification_IDs(String list_of_Notification_IDs) {
+        List_of_Notification_IDs = list_of_Notification_IDs;
     }
 }
