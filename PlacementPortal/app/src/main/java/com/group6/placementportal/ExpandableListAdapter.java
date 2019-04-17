@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.group6.placementportal.DatabasePackage.Student;
@@ -67,7 +68,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
             LayoutInflater inflater = (LayoutInflater)this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView=inflater.inflate(R.layout.list_group,null);
         }
-        TextView lblListHeader = (TextView)convertView.findViewById(R.id.lblListHeader);
+        TextView lblListHeader = convertView.findViewById(R.id.lblListHeader);
         lblListHeader.setTypeface(null, Typeface.BOLD);
         lblListHeader.setText(headerTitle);
         return convertView;
@@ -83,7 +84,9 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
         }
 
         TextView txtListChild = (TextView)convertView.findViewById(R.id.lblListItem);
+        EditText txtList = convertView.findViewById(R.id.lblValue);
         txtListChild.setText(childText);
+        //txtList.setText();
         return convertView;
 
     }
