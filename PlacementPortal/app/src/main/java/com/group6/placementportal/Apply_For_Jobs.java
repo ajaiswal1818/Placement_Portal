@@ -12,7 +12,6 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,8 +27,6 @@ import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.group6.placementportal.DatabasePackage.Jobs;
-
-import java.security.PrivilegedAction;
 
 public class Apply_For_Jobs extends AppCompatActivity {
 
@@ -95,6 +92,7 @@ public class Apply_For_Jobs extends AppCompatActivity {
 
             }
         });
+
 
         //attaching listeners to views
         fileName = findViewById(R.id.editTextFileName);
