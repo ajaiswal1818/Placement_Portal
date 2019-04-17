@@ -4,11 +4,16 @@ public class Notifications {
     private String Subject;
     private String Description;
     private Boolean read;
+    private String Notification_ID;
 
-    public Notifications(String subject, String description, Boolean read) {
+    public Notifications(String subject, String description, Boolean read, String notification_ID) {
         Subject = subject;
         Description = description;
         this.read = read;
+        Notification_ID = notification_ID;
+    }
+
+    public Notifications() {
     }
 
     public String getSubject() {
@@ -33,5 +38,13 @@ public class Notifications {
 
     public void setRead(Boolean read) {
         this.read = read;
+    }
+
+    public String getNotification_ID() {
+        return Notification_ID;
+    }
+
+    public void setNotification_ID(String notification_ID) {
+        Notification_ID = notification_ID;
     }
 }

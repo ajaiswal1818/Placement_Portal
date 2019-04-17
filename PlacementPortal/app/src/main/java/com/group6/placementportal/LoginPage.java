@@ -1,36 +1,46 @@
 package com.group6.placementportal;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
-import android.app.Activity;
-import android.content.Intent;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-import com.android.volley.*;
+
+import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.microsoft.identity.client.*;
+import com.group6.placementportal.DatabasePackage.Student;
+import com.microsoft.identity.client.AuthenticationCallback;
+import com.microsoft.identity.client.AuthenticationResult;
+import com.microsoft.identity.client.IAccount;
+import com.microsoft.identity.client.PublicClientApplication;
 import com.microsoft.identity.client.exception.MsalClientException;
 import com.microsoft.identity.client.exception.MsalException;
 import com.microsoft.identity.client.exception.MsalServiceException;
 import com.microsoft.identity.client.exception.MsalUiRequiredException;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class LoginPage extends AppCompatActivity {
 
@@ -45,6 +55,7 @@ public class LoginPage extends AppCompatActivity {
     private String RollNo;
     private String Programme;
     private String FullName;
+    private Student user;
     private boolean firstTimeUser=false;
 
     private ProgressDialog dialog;
@@ -74,7 +85,7 @@ public class LoginPage extends AppCompatActivity {
 
         dialog.setMessage("Please Wait");
 
-
+        Log.d("TAG",(callGraphButton!=null)+" ");
         callGraphButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 dialog.show();
@@ -139,13 +150,10 @@ public class LoginPage extends AppCompatActivity {
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         check_password = dataSnapshot.child("password").getValue(String.class);
                         if(password.equals(check_password)){
-                            FullName=dataSnapshot.child("FullName").getValue(String.class);
-                            WebmailID=dataSnapshot.getKey();
-                            RollNo=dataSnapshot.child("RollNo").getValue(String.class);
-                            Programme=dataSnapshot.child("Programme").getValue(String.class);
+                            user = dataSnapshot.getValue(Student.class);
                             firstTimeUser = false;
                             dialog.hide();
-                            Toast.makeText(LoginPage.this,WebmailID, Toast.LENGTH_LONG).show();
+                            Toast.makeText(LoginPage.this,user.getWebmailID(), Toast.LENGTH_LONG).show();
                             updateSuccessUI();
                         }
                         else{
@@ -158,11 +166,17 @@ public class LoginPage extends AppCompatActivity {
                     public void onCancelled(@NonNull DatabaseError databaseError) {
                         Toast.makeText(LoginPage.this, "Unsuccessful", Toast.LENGTH_LONG).show();
                     }
+
+
+
                 });
+
 
 
             }
         });
+
+
 
     }
 
@@ -297,6 +311,9 @@ public class LoginPage extends AppCompatActivity {
                 isSignUp[0]= (!value);
                 Log.d(TAG,!value+" f"+isSignUp[0]);
                 firstTimeUser=(!value);
+                if(value){
+                    user = dataSnapshot.getValue(Student.class);
+                }
                 updateSuccessUI();
             }
 
@@ -329,13 +346,14 @@ public class LoginPage extends AppCompatActivity {
         Log.d(TAG,firstTimeUser + " ");
         if(!firstTimeUser){
             I = new Intent(getApplicationContext(),Student_Dashboard.class);
+            I.putExtra("user",user);
         }else{
             I = new Intent(getApplicationContext(),Student_Profile.class);
+            I.putExtra("fullName",FullName);
+            I.putExtra("Webmail",WebmailID);
+            I.putExtra("rollNo",RollNo);
+            I.putExtra("programme",Programme);
         }
-        I.putExtra("fullName",FullName);
-        I.putExtra("Webmail",WebmailID);
-        I.putExtra("rollNo",RollNo);
-        I.putExtra("programme",Programme);
         startActivity(I);
 
     }
