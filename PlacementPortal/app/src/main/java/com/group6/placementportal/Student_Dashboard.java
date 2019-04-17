@@ -75,7 +75,7 @@ public class Student_Dashboard extends AppCompatActivity
         }
 
 
-        reference = FirebaseDatabase.getInstance().getReference().child("Notices");
+        reference = FirebaseDatabase.getInstance().getReference().child("noticestostudents");
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
