@@ -12,7 +12,6 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,8 +28,6 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.group6.placementportal.DatabasePackage.Jobs;
 import com.group6.placementportal.DatabasePackage.Student;
-
-import java.security.PrivilegedAction;
 
 public class Apply_For_Jobs extends AppCompatActivity {
 
@@ -98,6 +95,7 @@ public class Apply_For_Jobs extends AppCompatActivity {
 
             }
         });
+
 
         //attaching listeners to views
         fileName = findViewById(R.id.editTextFileName);
@@ -181,7 +179,8 @@ public class Apply_For_Jobs extends AppCompatActivity {
                             public void onSuccess(Uri uri) {
                                 progressDialog.hide();
                                 String upload = uri.toString();
-                                mDatabaseReference.child("Jobs").child(jobs.getJob_id()).child("Applied Students").child(user.getWebmailID()).setValue(upload);
+                                mDatabaseReference.child("Jobs").child(jobs.getJob_id()).child("Applied Students").child(user.getWebmailID()).child("CV").setValue(upload);
+                                mDatabaseReference.child("Jobs").child(jobs.getJob_id()).child("Applied Students").child(user.getWebmailID()).child("Status").setValue("0");
                                 Toast.makeText(Apply_For_Jobs.this,"File Upload Successful",Toast.LENGTH_SHORT).show();
                             }
                         });

@@ -153,7 +153,9 @@ public class Student_Dashboard extends AppCompatActivity
             startActivity(i);
 
         } else if (id == R.id.nav_help) {
-
+            Intent i = new Intent(getApplicationContext(), Student_JRF.class);
+            i.putExtra("user",user);
+            startActivity(i);
         }
         else if(id == R.id.nav_signout){
             onSignOutClicked();
