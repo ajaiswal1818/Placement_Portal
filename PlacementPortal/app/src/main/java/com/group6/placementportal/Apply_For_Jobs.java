@@ -27,11 +27,13 @@ import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.group6.placementportal.DatabasePackage.Jobs;
+import com.group6.placementportal.DatabasePackage.Student;
 
 public class Apply_For_Jobs extends AppCompatActivity {
 
     private Uri pdfUri;
     private Jobs jobs;
+    private Student user;
 
     //these are the views
     private TextView fileName;
@@ -50,6 +52,7 @@ public class Apply_For_Jobs extends AppCompatActivity {
         setContentView(R.layout.content_apply__for__jobs);
 
         jobs = (Jobs) getIntent().getSerializableExtra("job_profile");
+        user = (Student) getIntent().getSerializableExtra("user");
 
         job_profile = findViewById(R.id.job_profile);
         job_requirements = findViewById(R.id.job_requirements);
@@ -166,7 +169,7 @@ public class Apply_For_Jobs extends AppCompatActivity {
         progressDialog.setProgress(0);
         progressDialog.show();
 
-        final StorageReference ref = mStorageReference.child("Uploads").child("1");
+        final StorageReference ref = mStorageReference.child("Uploads").child(jobs.getJob_id()).child(user.getWebmailID());
         ref.putFile(data)
                 .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                     @Override
@@ -176,7 +179,7 @@ public class Apply_For_Jobs extends AppCompatActivity {
                             public void onSuccess(Uri uri) {
                                 progressDialog.hide();
                                 String upload = uri.toString();
-                                mDatabaseReference.child("Upload").setValue(upload);
+                                mDatabaseReference.child("Jobs").child(jobs.getJob_id()).child("Applied Students").child(user.getWebmailID()).setValue(upload);
                                 Toast.makeText(Apply_For_Jobs.this,"File Upload Successful",Toast.LENGTH_SHORT).show();
                             }
                         });
