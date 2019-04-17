@@ -11,6 +11,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -19,6 +20,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.group6.placementportal.DatabasePackage.Notices;
 
@@ -29,9 +31,12 @@ public class Admin_ApproveNotice extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private DatabaseReference reference;
+    private DatabaseReference refnoticetocompany;
     private RecyclerView recyclerView;
     private ArrayList<Notices> list;
     private MyAdapter_Notices_FromCompany adapter;
+
+    private static final String TAG = Admin_ApproveNotice.class.getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +58,7 @@ public class Admin_ApproveNotice extends AppCompatActivity
         recyclerView = findViewById(R.id.recyclerNoticesfromCompany);
         recyclerView.setLayoutManager( new LinearLayoutManager(this));
 
+        refnoticetocompany = FirebaseDatabase.getInstance().getReference().child("noticestostudents");
         reference = FirebaseDatabase.getInstance().getReference().child("Notices");
         reference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -71,12 +77,65 @@ public class Admin_ApproveNotice extends AppCompatActivity
                 adapter.setOnItemClickListener(new MyAdapter_Notices_FromCompany.OnItemClickListener() {
                     @Override
                     public void rejectnotice(int position) {
+
+                        Notices check = list.get(position);
+
+                        DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
+                        Query a = ref.child("Notices").orderByChild("Topic").equalTo(check.getTopic());
+                        Query b = ref.child("Notices").orderByChild("Content").equalTo(check.getContent());
+
+                        if(a == b){
+                            a.addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                    for (DataSnapshot snapshot: dataSnapshot.getChildren()) {
+                                        snapshot.getRef().removeValue();
+                                    }
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError databaseError) {
+                                    Log.e(TAG, "onCancelled", databaseError.toException());
+                                }
+                            });
+                        }
+
                         list.remove(position);
 
                     }
 
                     @Override
-                    public void approvenotice(int position) {
+                    public void approvenotice(int position){
+
+                        Notices check = list.get(position);
+
+                        String uploadId = refnoticetocompany.push().getKey();
+
+                        refnoticetocompany.child(uploadId).setValue(check);
+
+
+                        DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
+                        Query a = ref.child("Notices").orderByChild("Topic").equalTo(check.getTopic());
+                        Query b = ref.child("Notices").orderByChild("Content").equalTo(check.getContent());
+
+                        if(a == b){
+                            a.addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                    for (DataSnapshot snapshot: dataSnapshot.getChildren()) {
+                                        snapshot.getRef().removeValue();
+                                    }
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError databaseError) {
+                                    Log.e(TAG, "onCancelled", databaseError.toException());
+                                }
+                            });
+                        }
+
+
+
                         list.remove(position);
                     }
                 });

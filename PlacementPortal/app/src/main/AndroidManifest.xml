@@ -16,10 +16,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:windowSoftInputMode="adjustPan">
+        <activity android:name=".NoticeFromCompany"></activity>
         <activity
             android:name=".Admin_ApproveNotice"
             android:label="@string/title_activity_admin__approve_notice"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".JRF_Application_Requests"
             android:label="@string/title_activity_jrf__application__requests"
