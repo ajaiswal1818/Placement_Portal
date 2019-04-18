@@ -16,7 +16,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:windowSoftInputMode="adjustPan">
-        <activity android:name=".open_notification"></activity>
+        <activity android:name=".sending_emails"></activity>
+        <activity android:name=".open_notification" />
         <activity android:name=".list_notification" />
         <activity android:name=".admin_send_notification" />
         <activity android:name=".Sending_Notifications" />
