@@ -5,25 +5,17 @@
     android:layout_height="wrap_content"
     android:layout_marginLeft="10dp"
     android:layout_marginTop="10dp"
-    android:layout_marginRight="10dp">
+    android:layout_marginRight="10dp"
+    >
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center"
-        android:background="@color/colorCardView"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/txt_job_profile"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="20dp"
-            android:gravity="center"
-            android:text="JOB PROFILE :"
-            android:textColor="@color/colorText" />
+        android:background="@color/colorCard"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:paddingVertical="12dp">
 
         <TextView
             android:id="@+id/txt_company_name"
@@ -34,6 +26,20 @@
             android:layout_marginRight="20dp"
             android:gravity="center"
             android:text="COMPANY NAME :"
+            android:textColor="@color/colorAccent"
+            android:textSize="25dp" />
+
+        <TextView
+            android:id="@+id/txt_job_profile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="20dp"
+            android:gravity="center"
+            android:text="JOB PROFILE :"
+            android:textSize="20dp"
+            android:textStyle="bold"
             android:textColor="@color/colorText" />
 
         <TextView
@@ -45,6 +51,7 @@
             android:layout_marginRight="20dp"
             android:gravity="center"
             android:text="JOB LOCATION :"
+            android:textStyle="italic"
             android:textColor="@color/colorText" />
 
         <TextView
