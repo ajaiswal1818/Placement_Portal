@@ -35,7 +35,7 @@ public class admin_send_notification extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Intent notification_list=new Intent(admin_send_notification.this, notification_list.class);
+                Intent notification_list=new Intent(admin_send_notification.this, list_notification.class);
                 startActivity(notification_list);
 
             }
