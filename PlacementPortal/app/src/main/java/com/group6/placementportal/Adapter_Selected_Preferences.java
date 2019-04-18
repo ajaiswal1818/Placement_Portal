@@ -18,12 +18,14 @@ import com.group6.placementportal.helper.ItemTouchHelperAdapter;
 import com.group6.placementportal.helper.ItemTouchHelperViewHolder;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 /**
  * @author Paul Burke (ipaulpro)
  */
-public class Adapter_Selected_Preferences extends RecyclerView.Adapter<Adapter_Selected_Preferences.MyViewHolder> implements ItemTouchHelperAdapter{
+public class Adapter_Selected_Preferences extends RecyclerView.Adapter<Adapter_Selected_Preferences.MyViewHolder>{
 
     Context context;
     ArrayList<Jobs> profiles;
@@ -35,13 +37,8 @@ public class Adapter_Selected_Preferences extends RecyclerView.Adapter<Adapter_S
         profiles = p;
         user = student;
     }
-    private final List<Jobs> mItems = new ArrayList<>();
 
 
-
-    public Adapter_Selected_Preferences() {
-        mItems.addAll(profiles);
-    }
 
     @NonNull
     @Override
@@ -56,33 +53,12 @@ public class Adapter_Selected_Preferences extends RecyclerView.Adapter<Adapter_S
         holder.company_name.setText(profiles.get(position).getCompany_name());
         holder.job_profile.setText(profiles.get(position).getProfile());
         holder.job_location.setText(profiles.get(position).getLocation());
-        holder.parentlayout.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                if (MotionEventCompat.getActionMasked(event) == MotionEvent.ACTION_DOWN) {
-                    mDragStartListener.onDragStarted(holder);
-                }
-                return false;
-            }
-        });
-    }
-    @Override
-    public void onItemDismiss(int position) {
-        mItems.remove(position);
-        notifyItemRemoved(position);
-    }
 
-    @Override
-    public void onItemMove(int fromPosition, int toPosition) {
-        Jobs prev = mItems.remove(fromPosition);
-        mItems.add(toPosition > fromPosition ? toPosition - 1 : toPosition, prev);
-        notifyItemMoved(fromPosition, toPosition);
     }
-
 
     @Override
     public int getItemCount() {
-        return mItems.size();
+        return profiles.size();
     }
     class MyViewHolder extends RecyclerView.ViewHolder implements
             ItemTouchHelperViewHolder

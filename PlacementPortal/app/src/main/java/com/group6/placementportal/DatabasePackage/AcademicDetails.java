@@ -33,6 +33,9 @@ public class AcademicDetails {
     private String sem7cpi;
     private String sem7date;
 
+    private String sem8cpi;
+    private String sem8date;
+
     public AcademicDetails(String sec_perc, String sec_year, String sec_board, String highsec_perc, String highsec_year, String highsec_board, String course, String univ_board, String sem1cpi, String sem1date, String sem2cpi, String sem2date, String sem3cpi, String sem3date, String sem4cpi, String sem4date, String sem5cpi, String sem5date, String sem6cpi, String sem6date, String sem7cpi, String sem7date, String sem8cpi, String sem8date) {
         this.sec_perc = sec_perc;
         this.sec_year = sec_year;
@@ -59,9 +62,6 @@ public class AcademicDetails {
         this.sem8cpi = sem8cpi;
         this.sem8date = sem8date;
     }
-
-    private String sem8cpi;
-    private String sem8date;
 
     public AcademicDetails() {
     }
