@@ -118,6 +118,21 @@
                 android:textColorHint="@color/colorTextHint"
                 tools:layout_editor_absoluteX="25dp"
                 tools:layout_editor_absoluteY="332dp" />
+            <EditText
+                android:id="@+id/job_requirements"
+                android:layout_width="360dp"
+                android:layout_height="46dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/input"
+                android:ems="10"
+                android:hint="Job Requirements"
+                android:textSize="16sp"
+                android:paddingStart="10dp"
+                android:layout_gravity="center"
+                android:inputType="text"
+                android:textColorHint="@color/colorTextHint"
+                tools:layout_editor_absoluteX="25dp"
+                tools:layout_editor_absoluteY="332dp" />
 
             <ScrollView
                 android:layout_width="match_parent"
@@ -211,6 +226,7 @@
                 android:visibility="invisible"
                 tools:layout_editor_absoluteX="124dp"
                 tools:layout_editor_absoluteY="525dp" />
+
 
 
             <Button

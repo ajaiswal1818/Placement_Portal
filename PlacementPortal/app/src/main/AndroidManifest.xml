@@ -23,7 +23,6 @@
             android:name=".Student_Application_Forms"
             android:label="@string/title_activity_student__application__forms"
             android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity android:name=".student_RA" />
         <activity
             android:name=".JRF_Approval_Profile"
             android:label="@string/title_activity_jrf__approval__profile"
@@ -99,10 +98,7 @@
         <activity
             android:name=".Student_ChangePassword"
             android:label="@string/title_activity_student__change_password"
-            android:theme="@style/AppTheme.NoActionBar" /> <!-- <activity -->
-        <!-- android:name=".Apply_For_Jobs" -->
-        <!-- android:label="@string/title_activity_apply__for__jobs" -->
-        <!-- android:theme="@style/AppTheme.NoActionBar" /> -->
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Student_Notifications"
             android:label="@string/title_activity_student__notifications"
@@ -110,13 +106,13 @@
         <activity
             android:name=".View_Jobs"
             android:label="@string/title_activity_view__jobs"
-            android:theme="@style/AppTheme.NoActionBar" /> <!-- //<activity android:name=".Student_ChangePass" /> -->
-        <!--
-<activity
+            android:theme="@style/AppTheme.NoActionBar" />
+        
+        <activity
             android:name=".View_Interns"
             android:label="@string/title_activity_view__interns"
             android:theme="@style/AppTheme.NoActionBar" />
-        -->
+        
         <activity
             android:name=".Student_Profile"
             android:label="@string/title_activity_student__profile"
