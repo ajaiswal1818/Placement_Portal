@@ -1,6 +1,9 @@
 package com.group6.placementportal;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
@@ -42,6 +45,10 @@ public class Admin_ApproveNotice extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin__approve_notice);
+        if(isNetworkAvailable()==false){
+            Toast.makeText(Admin_ApproveNotice.this,"NO INTERNET CONNECTION", Toast.LENGTH_LONG).show();
+            return;
+        }
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -145,6 +152,13 @@ public class Admin_ApproveNotice extends AppCompatActivity
                 Toast.makeText(Admin_ApproveNotice.this, "Opsss.... Something is wrong", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 
     @Override
