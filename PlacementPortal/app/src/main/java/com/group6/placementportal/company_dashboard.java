@@ -24,12 +24,12 @@ public class company_dashboard extends AppCompatActivity {
     private company c;
         private Activity activity;
 
-
+        private DatabaseReference database;
         public void onAttach(Activity activity) {
                 this.activity = activity;
         }
 
-
+    private android.support.v7.widget.CardView manage_events;
     private android.support.v7.widget.CardView profile;
         private android.support.v7.widget.CardView notices;
    private android.support.v7.widget.CardView enrollments;
@@ -40,6 +40,8 @@ public class company_dashboard extends AppCompatActivity {
             setContentView(R.layout.activity_companydashboard);
               profile   = findViewById(R.id.profile_card);
               enrollments=findViewById(R.id.enrollments_card);
+              manage_events= findViewById(R.id.book_card);
+              database= FirebaseDatabase.getInstance().getReference();
               addnotices = findViewById(R.id.AddNotices);
 
             this.c=(company) getIntent().getSerializableExtra("MyClass");
@@ -48,8 +50,9 @@ public class company_dashboard extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     Intent company_profile=new Intent(company_dashboard.this, company_profile.class);
-                    //company_profile.putExtra("MyClass",c);
-                    finish();
+                    company_profile.putExtra("MyClass",c);
+                    company_profile.putExtra("coming_from","dashboard");
+                    //finish();
                     startActivity(company_profile);
                 }
             });
@@ -59,6 +62,7 @@ public class company_dashboard extends AppCompatActivity {
                 @Override
                 public void onClick(View v){
                     Intent company_notices=new Intent(company_dashboard.this, company_notices.class);
+                    company_notices.putExtra("MyClass",c);
                     startActivity(company_notices);
                 }
             });
@@ -76,6 +80,17 @@ public class company_dashboard extends AppCompatActivity {
                 public void onClick(View v) {
                     Intent company_enrollements=new Intent(company_dashboard.this, NoticeFromCompany.class);
                     startActivity(company_enrollements);
+                }
+            });
+            manage_events.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                        Intent company_enrollements = new Intent(company_dashboard.this, Company_Application_Slots.class);
+                        company_enrollements.putExtra("id", c.getCompany_id());
+                        Toast.makeText(company_dashboard.this,c.getCompany_id(),Toast.LENGTH_SHORT).show();
+                        startActivity(company_enrollements);
+
                 }
             });
 

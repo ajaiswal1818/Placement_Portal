@@ -14,11 +14,11 @@
             android:id="@+id/nav_prefr"
             android:title="Give Preferences" />
         <item
-            android:id="@+id/nav_company"
-            android:title="Company" />
+            android:id="@+id/nav_jobs"
+            android:title="Jobs" />
         <item
-            android:id="@+id/nav_calendar"
-            android:title="Calendar" />
+            android:id="@+id/nav_interns"
+            android:title="Interns" />
         <item
             android:id="@+id/nav_my_profile"
             android:title="My Profile" />

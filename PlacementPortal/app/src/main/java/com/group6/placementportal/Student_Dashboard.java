@@ -14,6 +14,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
@@ -25,6 +26,7 @@ import com.group6.placementportal.DatabasePackage.Notices;
 import com.group6.placementportal.DatabasePackage.Student;
 import com.microsoft.identity.client.IAccount;
 import com.microsoft.identity.client.PublicClientApplication;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -39,6 +41,7 @@ public class Student_Dashboard extends AppCompatActivity
     private MyAdapter_Notices adapter;
     private PublicClientApplication sampleApp;
     private Student user;
+    private int flag;
 
     private static final String TAG = Student_Dashboard.class.getSimpleName();
 
@@ -133,12 +136,15 @@ public class Student_Dashboard extends AppCompatActivity
 
         } else if (id == R.id.nav_prefr) {
 
-        } else if (id == R.id.nav_company) {
+        } else if (id == R.id.nav_jobs) {
             Intent i = new Intent(getApplicationContext(), View_Jobs.class);
             i.putExtra("user",user);
             startActivity(i);
 
-        } else if (id == R.id.nav_calendar) {
+        } else if (id == R.id.nav_interns) {
+            Intent i = new Intent(getApplicationContext(), View_Interns.class);
+            i.putExtra("user",user);
+            startActivity(i);
 
         } else if (id == R.id.nav_my_profile) {
             Intent i = new Intent(getApplicationContext(), Student_Complete_Profile.class);
@@ -146,7 +152,7 @@ public class Student_Dashboard extends AppCompatActivity
             startActivity(i);
 
         } else if (id == R.id.nav_edit_profile) {
-            Intent i = new Intent(getApplicationContext(), Student_Profile.class);
+            Intent i = new Intent(getApplicationContext(), Student_Complete_Profile.class);
             i.putExtra("user",user);
             startActivity(i);
 
@@ -156,7 +162,7 @@ public class Student_Dashboard extends AppCompatActivity
             startActivity(i);
 
         } else if (id == R.id.nav_help) {
-            Intent i = new Intent(getApplicationContext(), Student_JRF.class);
+            Intent i = new Intent(getApplicationContext(), Student_Application_Forms.class);
             i.putExtra("user",user);
             startActivity(i);
         }
@@ -207,7 +213,9 @@ public class Student_Dashboard extends AppCompatActivity
     }
 
     private void updateSignedOutUI() {
+        flag=1;
         Intent intent = new Intent(Student_Dashboard.this,LoginPage.class);
+        intent.putExtra("flag",flag);
         startActivity(intent);
     }
 }

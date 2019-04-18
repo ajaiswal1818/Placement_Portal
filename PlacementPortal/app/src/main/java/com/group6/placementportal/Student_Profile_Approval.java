@@ -17,6 +17,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.group6.placementportal.DatabasePackage.AcademicDetails;
+import com.group6.placementportal.DatabasePackage.Data;
 import com.group6.placementportal.DatabasePackage.Notifications;
 import com.group6.placementportal.DatabasePackage.PersonalDetails;
 import com.group6.placementportal.DatabasePackage.Student;
@@ -27,10 +28,14 @@ import java.util.List;
 
 public class Student_Profile_Approval extends AppCompatActivity {
 
-    private ExpandableListView listView,listView2;
+    private ExpandableListView listView,listView2,listView3;
     private ExpandableListAdapter listAdapter;
     private List<String> listDataHeader;
-    private HashMap<String,List<String>> listHashMap;
+    private Data data;
+    private AcademicDetails acads;
+    private PersonalDetails pers;
+    private DatabaseReference reference;
+    private HashMap<String,List<Data>> listHashMap;
     private DatabaseReference mDatabaseReference;
     private DatabaseReference mDatabaseReference2;
     private DatabaseReference mDatabaseReference3;
@@ -40,8 +45,6 @@ public class Student_Profile_Approval extends AppCompatActivity {
     private Student user;
     private String list_of_notif;
     private long children;
-    private AcademicDetails acad;
-    private PersonalDetails pers;
 
 
 
@@ -128,7 +131,7 @@ public class Student_Profile_Approval extends AppCompatActivity {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         children = dataSnapshot.getChildrenCount();
-                        acad=dataSnapshot.child("AcademicDetails_Temp").child("vakul170101076").getValue(AcademicDetails.class);
+                        acads=dataSnapshot.child("AcademicDetails_Temp").child("vakul170101076").getValue(AcademicDetails.class);
                         pers=dataSnapshot.child("PersonalDetails_Temp").child("vakul170101076").getValue(PersonalDetails.class);
                     }
 
@@ -159,72 +162,148 @@ public class Student_Profile_Approval extends AppCompatActivity {
                 mDatabaseReference.child("Notifications").child(Long.toString(children)).child("Subject").setValue("STUDENT APPROVAL/DISAPPROVAL");
                 mDatabaseReference.child("Notifications").child(Long.toString(children)).child("notification_ID").setValue(Long.toString(children));
 
-                mDatabaseReference.child("AcademicDetails").child("vakul170101076").setValue(acad);
+                mDatabaseReference.child("AcademicDetails").child("vakul170101076").setValue(acads);
                 mDatabaseReference.child("PersonalDetails").child("vakul170101076").setValue(pers);
             }
         });
+    }
+
+    private void initData2() {
+
+
+        listDataHeader = new ArrayList<>();
+        listHashMap = new HashMap<>();
+
+        reference.child("vakul170101076").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                boolean check = dataSnapshot.hasChild("PersonalDetails");
+                if(check){
+                    pers = dataSnapshot.getValue(PersonalDetails.class);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+        if(pers==null){
+            pers = new PersonalDetails("","","","","","","","","","","");
+        }
+
+        listDataHeader.add("Personal Details");
+
+        List<Data> PersonalDetails = new ArrayList<>();
+
+        data = new Data("Name",pers.getName());
+        PersonalDetails.add(data);
+        data = new Data("Father's Name",pers.getFather_Name());
+        PersonalDetails.add(data);
+        data = new Data("Date of Birth",pers.getDOB());
+        PersonalDetails.add(data);
+        data = new Data("Gender",pers.getGender());
+        PersonalDetails.add(data);
+        data = new Data("Category",pers.getCategory());
+        PersonalDetails.add(data);
+        data = new Data("Religion",pers.getReligion());
+        PersonalDetails.add(data);
+        data = new Data("State belongs to",pers.getState());
+        PersonalDetails.add(data);
+        data = new Data("Address",pers.getAddress());
+        PersonalDetails.add(data);
+        data = new Data("Mobile Number",pers.getMobile());
+        PersonalDetails.add(data);
+        data = new Data("Phone Number",pers.getPhone());
+        PersonalDetails.add(data);
+        data = new Data("Email Id",pers.getEmail());
+        PersonalDetails.add(data);
+
+
+        listHashMap.put(listDataHeader.get(0),PersonalDetails);
+
     }
 
     private void initData() {
         listDataHeader = new ArrayList<>();
         listHashMap = new HashMap<>();
 
-        listDataHeader.add("Personal Details");
+        reference.child("vakul170101076").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                boolean check = dataSnapshot.hasChild("AcademicDetails");
+                if(check){
+                    acads = dataSnapshot.getValue(AcademicDetails.class);
+                }
+            }
 
-        List<String> PersonalDetails = new ArrayList<>();
-        PersonalDetails.add("Name");
-        PersonalDetails.add("Father's Name");
-        PersonalDetails.add("Date of Birth");
-        PersonalDetails.add("Gender");
-        PersonalDetails.add("Category");
-        PersonalDetails.add("Religion");
-        PersonalDetails.add("State belongs to");
-        PersonalDetails.add("Address");
-        PersonalDetails.add("Mobile Number");
-        PersonalDetails.add("Phone Number");
-        PersonalDetails.add("Email Id");
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
 
-        listHashMap.put(listDataHeader.get(0),PersonalDetails);
-
-    }
-
-    private void initData2() {
-        listDataHeader = new ArrayList<>();
-        listHashMap = new HashMap<>();
+            }
+        });
+        if(acads==null){
+            acads = new AcademicDetails("","","","","","","","","","","","","","","","","","","","","","","","");
+        }
 
         listDataHeader.add("Secondary");
         listDataHeader.add("Higher Secondary");
         listDataHeader.add("Graduation");
 
-        List<String> Secondary = new ArrayList<>();
-        Secondary.add("Percentage");
-        Secondary.add("Year of Passing");
-        Secondary.add("Board");
+        List<Data> Secondary = new ArrayList<>();
+        data = new Data("Percentage",acads.getSec_perc());
+        Secondary.add(data);
+        data = new Data("Year of Passing",acads.getSec_year());
+        Secondary.add(data);
+        data = new Data("Board",acads.getSec_board());
+        Secondary.add(data);
 
-        List<String> HigherSecondary = new ArrayList<>();
-        HigherSecondary.add("Percentage");
-        HigherSecondary.add("Year of Passing");
-        HigherSecondary.add("Board");
+        List<Data> HigherSecondary = new ArrayList<>();
+        data = new Data("Percentage",acads.getHighsec_perc());
+        HigherSecondary.add(data);
+        data = new Data("Year of Passing",acads.getHighsec_year());
+        HigherSecondary.add(data);
+        data = new Data("Board",acads.getHighsec_board());
+        HigherSecondary.add(data);
 
-        List<String> Graduation = new ArrayList<>();
-        Graduation.add("Course Name");
-        Graduation.add("University Board");
-        Graduation.add("Semester 1 CPI");
-        Graduation.add("Date of Passing");
-        Graduation.add("Semester 2 CPI");
-        Graduation.add("Date of Passing");
-        Graduation.add("Semester 3 CPI");
-        Graduation.add("Date of Passing");
-        Graduation.add("Semester 4 CPI");
-        Graduation.add("Date of Passing");
-        Graduation.add("Semester 5 CPI");
-        Graduation.add("Date of Passing");
-        Graduation.add("Semester 6 CPI");
-        Graduation.add("Date of Passing");
-        Graduation.add("Semester 7 CPI");
-        Graduation.add("Date of Passing");
-        Graduation.add("Semester 8 CPI");
-        Graduation.add("Date of Passing");
+        List<Data> Graduation = new ArrayList<>();
+        data = new Data("Course Name",acads.getCourse());
+        Graduation.add(data);
+        data = new Data("University Board",acads.getUniv_board());
+        Graduation.add(data);
+        data = new Data("Semester 1 CPI",acads.getSem1cpi());
+        Graduation.add(data);
+        data = new Data("Date of Passing",acads.getSem1date());
+        Graduation.add(data);
+        data = new Data("Semester 2 CPI",acads.getSem2cpi());
+        Graduation.add(data);
+        data = new Data("Date of Passing",acads.getSem2date());
+        Graduation.add(data);
+        data = new Data("Semester 3 CPI",acads.getSem3cpi());
+        Graduation.add(data);
+        data = new Data("Date of Passing",acads.getSem3date());
+        Graduation.add(data);
+        data = new Data("Semester 4 CPI",acads.getSem4cpi());
+        Graduation.add(data);
+        data = new Data("Date of Passing",acads.getSem4date());
+        Graduation.add(data);
+        data = new Data("Semester 5 CPI",acads.getSem5cpi());
+        Graduation.add(data);
+        data = new Data("Date of Passing",acads.getSem5date());
+        Graduation.add(data);
+        data = new Data("Semester 6 CPI",acads.getSem6cpi());
+        Graduation.add(data);
+        data = new Data("Date of Passing",acads.getSem6date());
+        Graduation.add(data);
+        data = new Data("Semester 7 CPI",acads.getSem7cpi());
+        Graduation.add(data);
+        data = new Data("Date of Passing",acads.getSem7date());
+        Graduation.add(data);
+        data = new Data("Semester 8 CPI",acads.getSem8cpi());
+        Graduation.add(data);
+        data = new Data("Date of Passing",acads.getSem8date());
+        Graduation.add(data);
+
 
         listHashMap.put(listDataHeader.get(0),Secondary);
         listHashMap.put(listDataHeader.get(1),HigherSecondary);
