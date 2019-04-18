@@ -88,7 +88,7 @@ public class Apply_For_Jobs extends AppCompatActivity {
         mDatabaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                list=dataSnapshot.child("Student").child(user.getWebmailID()).child("List_of_Applied_Job_IDs").getValue(String.class);
+                list=dataSnapshot.child("Student").child(user.getWebmailID()).child("preferences").getValue(String.class);
             }
 
             @Override
@@ -201,7 +201,7 @@ public class Apply_For_Jobs extends AppCompatActivity {
         mDatabaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                list=dataSnapshot.child("Student").child(user.getWebmailID()).child("List_of_Applied_Job_IDs").getValue(String.class);
+                list=dataSnapshot.child("Student").child(user.getWebmailID()).child("preferences").getValue(String.class);
                 list+=",";
                 list+=(jobs.getJob_id());
             }
@@ -223,7 +223,7 @@ public class Apply_For_Jobs extends AppCompatActivity {
                                 mDatabaseReference.child("Jobs").child(jobs.getJob_id()).child("Applied Students").child(user.getWebmailID()).child("CV").setValue(upload);
                                 mDatabaseReference.child("Jobs").child(jobs.getJob_id()).child("Applied Students").child(user.getWebmailID()).child("Status").setValue("0");
                                 mDatabaseReference.child("Jobs").child(jobs.getJob_id()).child("Applied Students").child(user.getWebmailID()).child("Approval").setValue("No");
-                                mDatabaseReference.child("Student").child(user.getWebmailID()).child("List_of_Applied_Job_IDs").setValue(list);
+                                mDatabaseReference.child("Student").child(user.getWebmailID()).child("preferences").setValue(list);
                                 Toast.makeText(Apply_For_Jobs.this,"File Upload Successful",Toast.LENGTH_SHORT).show();
                             }
                         });
