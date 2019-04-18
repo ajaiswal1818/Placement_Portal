@@ -46,6 +46,11 @@
             android:label="@string/title_activity_apply__for__jobs"
             android:theme="@style/AppTheme.NoActionBar" />
 
+        <activity android:name=".sending_emails"></activity>
+        <activity android:name=".open_notification" />
+        <activity android:name=".list_notification" />
+        <activity android:name=".admin_send_notification" />
+        <activity android:name=".Sending_Notifications" />
         <activity
             android:name=".Apply_For_Interns"
             android:label="@string/title_activity_apply__for__interns"
@@ -103,6 +108,10 @@
             android:label="@string/title_activity_student__change_password"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
+            android:name=".Apply_For_Jobs"
+            android:label="@string/title_activity_apply__for__jobs"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
             android:name=".Student_Notifications"
             android:label="@string/title_activity_student__notifications"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -110,7 +119,6 @@
             android:name=".View_Jobs"
             android:label="@string/title_activity_view__jobs"
             android:theme="@style/AppTheme.NoActionBar" />
-        
         <activity
             android:name=".View_Interns"
             android:label="@string/title_activity_view__interns"

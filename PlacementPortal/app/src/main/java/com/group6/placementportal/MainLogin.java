@@ -31,7 +31,6 @@ public class MainLogin extends AppCompatActivity {
         admin =findViewById(R.id.admin);
         company = findViewById(R.id.company);
         student =findViewById(R.id.student);
-
         admin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -55,5 +54,6 @@ public class MainLogin extends AppCompatActivity {
                 startActivity(company_login);
             }
         });
+
     }
 }

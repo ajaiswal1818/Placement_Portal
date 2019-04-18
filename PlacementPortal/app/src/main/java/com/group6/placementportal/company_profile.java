@@ -88,7 +88,7 @@ public class company_profile extends AppCompatActivity {
         }
 
         proc=findViewById(R.id.proceed);
-        name=findViewById(R.id.name);
+        name=findViewById(R.id.sub);
         sector=findViewById(R.id.sector);
         contact=findViewById(R.id.contact);
         email=findViewById(R.id.email);

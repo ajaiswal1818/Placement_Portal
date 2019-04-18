@@ -33,7 +33,9 @@ public class company_dashboard extends AppCompatActivity {
     private android.support.v7.widget.CardView profile;
         private android.support.v7.widget.CardView notices;
    private android.support.v7.widget.CardView enrollments;
-    private android.support.v7.widget.CardView addnotices;
+    private android.support.v7.widget.CardView events;
+   private Button button;
+
 
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
@@ -43,6 +45,7 @@ public class company_dashboard extends AppCompatActivity {
               manage_events= findViewById(R.id.book_card);
               database= FirebaseDatabase.getInstance().getReference();
               addnotices = findViewById(R.id.AddNotices);
+
 
             this.c=(company) getIntent().getSerializableExtra("MyClass");
             profile   = findViewById(R.id.profile_card);
@@ -58,6 +61,7 @@ public class company_dashboard extends AppCompatActivity {
             });
 
             notices=findViewById(R.id.notices_card);
+            button= findViewById(R.id.send_notifications);
             notices.setOnClickListener(new View.OnClickListener(){
                 @Override
                 public void onClick(View v){
@@ -75,6 +79,13 @@ public class company_dashboard extends AppCompatActivity {
                 }
             });
 
+            button.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View v){
+                    Intent intent=new Intent(company_dashboard.this, Sending_Notifications.class);
+                    startActivity(intent);
+                }
+            });
             addnotices.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
