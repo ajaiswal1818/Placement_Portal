@@ -12,6 +12,9 @@
         android:id="@+id/nav_approve_notice"
         android:icon="@drawable/ic_menu_camera"
         android:title="Company Notices" />
-
+    <item
+        android:id="@+id/Company_slots"
+        android:icon="@drawable/ic_menu_camera"
+        android:title="Company_Slots" />
 
 </menu>
