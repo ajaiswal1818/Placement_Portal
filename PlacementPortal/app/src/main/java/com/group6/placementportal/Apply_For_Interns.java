@@ -2,8 +2,11 @@ package com.group6.placementportal;
 
 import android.Manifest;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -50,6 +53,11 @@ public class Apply_For_Interns extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.content_apply__for__jobs);
+
+        if(isNetworkAvailable()==false){
+            Toast.makeText(Apply_For_Interns.this,"NO INTERNET CONNECTION", Toast.LENGTH_LONG).show();
+            return;
+        }
 
         interns = (Interns) getIntent().getSerializableExtra("intern_profile");
         user = (Student) getIntent().getSerializableExtra("user");
@@ -116,6 +124,12 @@ public class Apply_For_Interns extends AppCompatActivity {
                 }
             }
         });
+    }
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 
     //this function will get the pdf from the storage

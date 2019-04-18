@@ -65,4 +65,6 @@ Adapter_JRF_Admin extends RecyclerView.Adapter<Adapter_JRF_Admin.MyViewHolder> {
             parentlayout = itemView.findViewById(R.id.cardview_jrf);
         }
     }
+
+
 }
