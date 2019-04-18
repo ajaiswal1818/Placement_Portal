@@ -35,42 +35,8 @@ public class MainLogin extends AppCompatActivity {
         admin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                reference= FirebaseDatabase.getInstance().getReference("Company");
-                reference.addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        if(dataSnapshot.exists())
-                        {
-                            flag=0;
-                            Iterable<DataSnapshot> all_children = dataSnapshot.getChildren();
-                            for(DataSnapshot dataSnapshot1: all_children)
-                            {
-                                if(dataSnapshot1.child("approved").exists() && dataSnapshot1.child("approved").getValue().toString().equals("Pending"))
-                                {
-                                    flag=1;
-                                    break;
-                                }
-                            }
-                            if(flag==0)
-                            {
-                                Toast.makeText(MainLogin.this, "No company with pending request", Toast.LENGTH_SHORT).show();
-                            }
-                            else
-                            {
-                                Intent company_login=new Intent(MainLogin.this, approve_company.class);
-                                startActivity(company_login);
-                            }
-
-                        }
-
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-                        // Toast.makeText(approve_company.this, "Oops ... something is wrong", Toast.LENGTH_SHORT).show();
-                    }
-                });
-
+                Intent company_login=new Intent(MainLogin.this, approve_company.class);
+                startActivity(company_login);
             }
         });
         company.setOnClickListener(new View.OnClickListener() {

@@ -12,6 +12,10 @@
         android:id="@+id/nav_approve_notice"
         android:icon="@drawable/ic_menu_camera"
         android:title="Company Notices" />
+    <item
+        android:id="@+id/nav_approve_company"
+        android:icon="@drawable/ic_menu_camera"
+        android:title="Approve Company" />
 
 
 </menu>

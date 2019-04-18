@@ -9,63 +9,93 @@
     tools:showIn="@layout/activity_admin_notices"
     android:layout_gravity="center">
 
-    <EditText
-        android:id="@+id/title"
-        android:layout_width="220dp"
-        android:layout_height="wrap_content"
-        android:gravity="center"
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:contentDescription="Notice Title"
-        android:layout_marginTop="200dp"
-        android:ems="10"
-        android:hint="Title"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:background="@drawable/input"/>
-
-    <EditText
-        android:id="@+id/description"
-        android:layout_width="220dp"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:layout_marginEnd="8dp"
-        android:layout_marginTop="20dp"
-        android:ems="10"
-        android:hint="Description"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title"
-        android:background="@drawable/input"/>
-
-
-
-    <Button
-        android:id="@+id/show_company"
-        android:layout_width="220dp"
-        android:layout_height="wrap_content"
-        android:onClick="open_recipients_tab"
-        android:text="Select Recipents"
-        app:layout_constraintBottom_toTopOf="@+id/send_button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/description"
-        android:background="@drawable/roundbtn"
-        android:textColor="@color/colorText"/>
-    <Button
-        android:id="@+id/send_button"
-        android:layout_width="220dp"
-        android:layout_height="wrap_content"
-        android:width="50dp"
-        android:text="Send"
-        android:onClick="send_notice"
+        android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/description"
-        android:background="@drawable/roundbtn"
-        android:textColor="@color/colorText"/>
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:paddingVertical="20dp">
+
+            <EditText
+                android:id="@+id/title"
+                android:layout_width="220dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/input"
+                android:contentDescription="Notice Title"
+                android:ems="10"
+                android:gravity="center"
+                android:hint="Title"
+                android:inputType="textPersonName"
+                android:textColorHint="@color/colorTextHint"
+                android:textSize="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <EditText
+                android:id="@+id/description"
+                android:layout_width="220dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/input"
+                android:ems="10"
+                android:gravity="center"
+                android:hint="Description"
+                android:inputType="textPersonName"
+                android:textColorHint="@color/colorTextHint"
+                android:textSize="18dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/title" />
+
+
+            <Button
+                android:id="@+id/show_company"
+                android:layout_width="220dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/roundbtn"
+                android:onClick="open_recipients_tab"
+                android:text="Select Recipents"
+                android:textColor="@color/colorWhite"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toTopOf="@+id/send_button"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/description" />
+
+            <Button
+                android:id="@+id/send_button"
+                android:layout_width="220dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:width="50dp"
+                android:background="@drawable/roundbtn"
+                android:onClick="send_notice"
+                android:text="Send"
+                android:textColor="@color/colorWhite"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/description" />
+        </LinearLayout>
+    </ScrollView>
+
+
 
 </android.support.constraint.ConstraintLayout>

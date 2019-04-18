@@ -51,4 +51,12 @@
     <string name="title_activity_student__requests">Student_Requests</string>
     <string name="title_activity_student__profile__approval">Student_Profile_Approval</string>
     <string name="title_activity_jrf__approval__profile">JRF_Approval_Profile</string>
+    <string name="title_activity_application__forms">Application_Forms</string>
+    <string name="title_activity_student__application__forms">Student_Application_Forms</string>
+    <string name="tab_text_1">Tab 1</string>
+    <string name="tab_text_2">Tab 2</string>
+    <string name="tab_text_3">Tab 3</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

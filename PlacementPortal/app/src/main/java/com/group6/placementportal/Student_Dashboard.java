@@ -14,6 +14,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
@@ -25,6 +26,7 @@ import com.group6.placementportal.DatabasePackage.Notices;
 import com.group6.placementportal.DatabasePackage.Student;
 import com.microsoft.identity.client.IAccount;
 import com.microsoft.identity.client.PublicClientApplication;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -159,7 +161,7 @@ public class Student_Dashboard extends AppCompatActivity
             startActivity(i);
 
         } else if (id == R.id.nav_help) {
-            Intent i = new Intent(getApplicationContext(), Student_JRF.class);
+            Intent i = new Intent(getApplicationContext(), Student_Application_Forms.class);
             i.putExtra("user",user);
             startActivity(i);
         }
