@@ -13,17 +13,18 @@
         android:id="@+id/title"
         android:layout_width="220dp"
         android:layout_height="wrap_content"
-        android:gravity="center"
+        android:layout_marginTop="80dp"
         android:layout_marginEnd="8dp"
+        android:background="@drawable/input"
         android:contentDescription="Notice Title"
-        android:layout_marginTop="200dp"
         android:ems="10"
+        android:gravity="center"
         android:hint="Title"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:background="@drawable/input"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/description"
@@ -41,31 +42,78 @@
         android:background="@drawable/input"/>
 
 
-
     <Button
         android:id="@+id/show_company"
-        android:layout_width="220dp"
+        android:layout_width="310dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="92dp"
+        android:background="@drawable/roundbtn"
         android:onClick="open_recipients_tab"
         android:text="Select Recipents"
-        app:layout_constraintBottom_toTopOf="@+id/send_button"
+        android:textColor="@color/colorText"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/description"
-        android:background="@drawable/roundbtn"
-        android:textColor="@color/colorText"/>
+        app:layout_constraintTop_toBottomOf="@+id/upload" />
+
     <Button
         android:id="@+id/send_button"
         android:layout_width="220dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:width="50dp"
-        android:text="Send"
+        android:background="@drawable/roundbtn"
         android:onClick="send_notice"
+        android:text="Send"
+        android:textColor="@color/colorText"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/show_company" />
+
+    <Button
+        android:id="@+id/select_file"
+        android:layout_width="134dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="356dp"
+        android:width="50dp"
+        android:background="@drawable/roundbtn"
+        android:text="Select file to upload"
+        android:textColor="@color/colorText"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/status"
+        app:layout_constraintHorizontal_bias="0.078"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/description"
+        app:layout_constraintVertical_bias="0.826" />
+
+    <Button
+        android:id="@+id/upload"
+        android:layout_width="220dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="8dp"
+        android:width="50dp"
         android:background="@drawable/roundbtn"
-        android:textColor="@color/colorText"/>
+        android:text="upload file"
+        android:textColor="@color/colorText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/select_file" />
+
+    <TextView
+        android:id="@+id/status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="104dp"
+        android:text="TextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/description" />
 
 </android.support.constraint.ConstraintLayout>

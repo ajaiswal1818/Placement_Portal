@@ -42,18 +42,22 @@ public class job_list extends AppCompatActivity {
         recyclerView.setLayoutManager( new LinearLayoutManager(this));
 
         fab=findViewById(R.id.fab);
-        reference = FirebaseDatabase.getInstance().getReference().child("Company").child("jobs");
+        reference = FirebaseDatabase.getInstance().getReference().child("Company").child(c).child("jobs");
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 list = new ArrayList<job>();
-                for(DataSnapshot dataSnapshot1: dataSnapshot.getChildren())
+                if(dataSnapshot.exists())
                 {
-                    job p = dataSnapshot1.getValue(job.class);
-                    list.add(p);
+                    for(DataSnapshot dataSnapshot1: dataSnapshot.getChildren())
+                    {
+                        job p = dataSnapshot1.getValue(job.class);
+                        list.add(p);
+                    }
+                    adapter = new job_adapter(job_list.this,list,c);
+                    recyclerView.setAdapter(adapter);
                 }
-                adapter = new job_adapter(job_list.this,list,c);
-                recyclerView.setAdapter(adapter);
+
             }
 
             @Override

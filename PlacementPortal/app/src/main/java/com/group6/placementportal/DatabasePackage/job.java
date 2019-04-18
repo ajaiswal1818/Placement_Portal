@@ -12,6 +12,15 @@ public class job implements Serializable {
     private String brochure;
     private float cpi;
     private String departments;
+    private String job_requirements;
+
+    public String getJob_requirements() {
+        return job_requirements;
+    }
+
+    public void setJob_requirements(String job_requirements) {
+        this.job_requirements = job_requirements;
+    }
 
     public float getCpi() {
         return cpi;
@@ -77,7 +86,7 @@ public class job implements Serializable {
         this.brochure = brochure;
     }*/
 
-    public job(String job_id, String profile, float ctc, String location,String brochure,float cpi,String departments) {
+    public job(String job_id, String profile, float ctc, String location,String brochure,float cpi,String departments,String job_requirements) {
         this.job_id = job_id;
         this.profile = profile;
         this.ctc = ctc;
@@ -85,6 +94,7 @@ public class job implements Serializable {
         this.brochure = brochure;
         this.cpi=cpi;
         this.departments=departments;
+        this.job_requirements=job_requirements;
     }
 
     public job() {

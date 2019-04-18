@@ -55,7 +55,11 @@
             android:name=".Student_JRF"
             android:label="Student_JRF"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".job_list" />
+        <activity
+            android:name=".job_list"
+            android:label=".job_list"
+            android:theme="@style/AppTheme.NoActionBar" />
+
         <activity android:name=".intern_list" />
         <activity
             android:name=".company_enrollments"
@@ -137,7 +141,6 @@
 
         <activity android:name=".company_dashboard" />
         <activity android:name=".job_profile" />
-        <activity android:name=".intern_profile" />
         <activity android:name=".company_login" />
     </application>
 

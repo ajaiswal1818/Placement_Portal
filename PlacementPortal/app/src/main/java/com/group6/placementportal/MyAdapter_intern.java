@@ -1,3 +1,4 @@
+/*
 package com.group6.placementportal;
 
 import android.content.Context;
@@ -70,4 +71,4 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
             parentlayout = itemView.findViewById(R.id.cardview_apply_interns);
         }
     }
-}
+}*/

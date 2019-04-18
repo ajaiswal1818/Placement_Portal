@@ -1,3 +1,4 @@
+/*
 package com.group6.placementportal;
 
 import android.content.Intent;
@@ -157,3 +158,4 @@ public class View_Interns extends AppCompatActivity
         return true;
     }
 }
+*/
