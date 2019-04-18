@@ -100,6 +100,7 @@ public class company_login extends AppCompatActivity {
                                             company c = son.getValue(company.class);
                                             Intent company_dashboard=new Intent(company_login.this, company_dashboard.class);
                                             company_dashboard.putExtra("MyClass",c);
+                                            Toast.makeText(company_login.this,c.getCompany_id(),Toast.LENGTH_SHORT).show();
                                             //company_dashboard.putExtra("PrevActivity","company_login");
                                             finish();
                                             startActivity(company_dashboard);

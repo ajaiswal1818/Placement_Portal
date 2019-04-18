@@ -251,14 +251,14 @@ public class job_profile extends AppCompatActivity {
             public void onClick(View v) {
                 if (profile.getText().toString().trim().equals("") && ctc.getText().toString().trim().equals("") && location.getText().toString().trim().equals("") && file.equals("") && cpi.getText().toString().equals("") && dep.equals("")) {
                     if (prevActivity.equals("company_profile")) {
-                        c.setCompnany_id(String.valueOf(max_id + 1));
+                        c.setCompany_id(String.valueOf(max_id + 1));
                         add_comp.child("Max_entry").setValue(String.valueOf(max_id + 1));
-                        add_comp.child(c.getCompnany_id()).setValue(c);
+                        add_comp.child(c.getCompany_id()).setValue(c);
                         Intent company_login = new Intent(job_profile.this, company_login.class);
                         finish();
                         startActivity(company_login);
                     } else {
-                        add_comp.child(c.getCompnany_id()).setValue(c);
+                        add_comp.child(c.getCompany_id()).setValue(c);
                         Intent company_login = new Intent(job_profile.this, company_login.class);
                         finish();
                         startActivity(company_login);
@@ -275,13 +275,13 @@ public class job_profile extends AppCompatActivity {
                     c.setJobs(j1);
 
                     if (prevActivity.equals("company_profile")) {
-                        c.setCompnany_id(String.valueOf(max_id + 1));
+                        c.setCompany_id(String.valueOf(max_id + 1));
                         add_comp.child("Max_entry").setValue(String.valueOf(max_id + 1));
-                        add_comp.child(c.getCompnany_id()).setValue(c);
+                        add_comp.child(c.getCompany_id()).setValue(c);
                         Intent company_login = new Intent(job_profile.this, company_login.class);
                         startActivity(company_login);
                     } else {
-                        add_comp.child(c.getCompnany_id()).setValue(c);
+                        add_comp.child(c.getCompany_id()).setValue(c);
                         Intent company_login = new Intent(job_profile.this, company_login.class);
                         startActivity(company_login);
                     }

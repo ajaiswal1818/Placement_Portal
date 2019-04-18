@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class company implements Serializable {
     private String company_name;
-    private String compnany_id;
+    private String company_id;
     private String sector;
     private String contact_no;
     private String email_address;
@@ -43,12 +43,12 @@ public class company implements Serializable {
         this.company_name = company_name;
     }
 
-    public String getCompnany_id() {
-        return compnany_id;
+    public String getCompany_id() {
+        return company_id;
     }
 
-    public void setCompnany_id(String compnany_id) {
-        this.compnany_id = compnany_id;
+    public void setCompany_id(String compnany_id) {
+        this.company_id = compnany_id;
     }
 
     public String getSector() {
@@ -93,7 +93,7 @@ public class company implements Serializable {
 
     public company(String company_name, String compnany_id, String sector, String contact_no, String email_address, String headoffice, ArrayList<job> jobs,String username,String password) {
         this.company_name = company_name;
-        this.compnany_id = compnany_id;
+        this.company_id = compnany_id;
         this.sector = sector;
         this.contact_no = contact_no;
         this.email_address = email_address;

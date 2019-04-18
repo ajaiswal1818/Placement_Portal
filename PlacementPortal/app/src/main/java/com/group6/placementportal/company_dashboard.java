@@ -24,20 +24,23 @@ public class company_dashboard extends AppCompatActivity {
     private company c;
         private Activity activity;
 
-
+        private DatabaseReference database;
         public void onAttach(Activity activity) {
                 this.activity = activity;
         }
 
-
+    private android.support.v7.widget.CardView manage_events;
     private android.support.v7.widget.CardView profile;
         private android.support.v7.widget.CardView notices;
    private android.support.v7.widget.CardView enrollments;
+
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_companydashboard);
               profile   = findViewById(R.id.profile_card);
               enrollments=findViewById(R.id.enrollments_card);
+              manage_events= findViewById(R.id.book_card);
+              database= FirebaseDatabase.getInstance().getReference();
 
             this.c=(company) getIntent().getSerializableExtra("MyClass");
             profile   = findViewById(R.id.profile_card);
@@ -65,6 +68,18 @@ public class company_dashboard extends AppCompatActivity {
                 public void onClick(View v) {
                     Intent company_enrollements=new Intent(company_dashboard.this,company_enrollments.class);
                     startActivity(company_enrollements);
+                }
+            });
+
+            manage_events.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                        Intent company_enrollements = new Intent(company_dashboard.this, Company_Application_Slots.class);
+                        company_enrollements.putExtra("id", c.getCompany_id());
+                        Toast.makeText(company_dashboard.this,c.getCompany_id(),Toast.LENGTH_SHORT).show();
+                        startActivity(company_enrollements);
+
                 }
             });
 

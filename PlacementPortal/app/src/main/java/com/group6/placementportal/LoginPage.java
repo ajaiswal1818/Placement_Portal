@@ -144,7 +144,6 @@ public class LoginPage extends AppCompatActivity {
                 Login_Details= FirebaseDatabase.getInstance().getReference();
                 Login_Details = Login_Details.child("Student").child(rollNo);
 
-
                /* Login_Details.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
