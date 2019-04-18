@@ -177,6 +177,7 @@ public class job_profile extends AppCompatActivity {
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     if (dataSnapshot.exists()) {
                         job_det = (Jobs) dataSnapshot.child(id).getValue();
+                        allot();
                     }
                 }
 
@@ -185,35 +186,7 @@ public class job_profile extends AppCompatActivity {
 
                 }
             });
-            cpi.setEnabled(false);
-            profile.setEnabled(false);
-            ctc.setEnabled(false);
-            location.setEnabled(false);
-            branch.setEnabled(false);
-            job_requirements.setEnabled(false);
 
-            cpi.setText(String.valueOf(job_det.getCutoff_cpi()));
-            profile.setText(job_det.getProfile());
-            ctc.setText(String.valueOf(job_det.getCtc()));
-            location.setText(job_det.getLocation());
-            branch.setText(job_det.getBranches());
-            job_requirements.setText(job_det.getJob_requirements());
-
-            branch_button.setVisibility(View.INVISIBLE);
-            submit.setVisibility(View.INVISIBLE);
-            upload.setText("View Selected File");
-            select.setVisibility(View.INVISIBLE);
-
-            status.setText(job_det.getBrochure());
-
-            status.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Uri uri = Uri.parse(job_det.getBrochure()); // missing 'http://' will cause crashed
-                    Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-                    startActivity(intent);
-                }
-            });
         }
         else
         {
@@ -567,4 +540,36 @@ public class job_profile extends AppCompatActivity {
         downloadManager.enqueue(request);
     }
 
+    public void allot()
+    {
+        cpi.setEnabled(false);
+        profile.setEnabled(false);
+        ctc.setEnabled(false);
+        location.setEnabled(false);
+        branch.setEnabled(false);
+        job_requirements.setEnabled(false);
+
+        cpi.setText(String.valueOf(job_det.getCutoff_cpi()));
+        profile.setText(job_det.getProfile());
+        ctc.setText(String.valueOf(job_det.getCtc()));
+        location.setText(job_det.getLocation());
+        branch.setText(job_det.getBranches());
+        job_requirements.setText(job_det.getJob_requirements());
+
+        branch_button.setVisibility(View.INVISIBLE);
+        submit.setVisibility(View.INVISIBLE);
+        upload.setText("View Selected File");
+        select.setVisibility(View.INVISIBLE);
+
+        status.setText(job_det.getBrochure());
+//getBrochure!=" " check
+        status.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Uri uri = Uri.parse(job_det.getBrochure()); // missing 'http://' will cause crashed
+                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                startActivity(intent);
+            }
+        });
+    }
 }

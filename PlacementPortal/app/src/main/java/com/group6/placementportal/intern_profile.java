@@ -177,6 +177,7 @@ public class intern_profile extends AppCompatActivity {
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     if (dataSnapshot.exists()) {
                         intern_det = (Interns) dataSnapshot.child(id).getValue();
+                        allot();
                     }
                 }
 
@@ -185,35 +186,7 @@ public class intern_profile extends AppCompatActivity {
 
                 }
             });
-            cpi.setEnabled(false);
-            profile.setEnabled(false);
-            ctc.setEnabled(false);
-            location.setEnabled(false);
-            branch.setEnabled(false);
-            intern_requirements.setEnabled(false);
 
-            cpi.setText(String.valueOf(intern_det.getCutoff_cpi()));
-            profile.setText(intern_det.getProfile());
-            ctc.setText(String.valueOf(intern_det.getCtc()));
-            location.setText(intern_det.getLocation());
-            branch.setText(intern_det.getBranches());
-            intern_requirements.setText(intern_det.getIntern_requirements());
-
-            branch_button.setVisibility(View.INVISIBLE);
-            submit.setVisibility(View.INVISIBLE);
-            upload.setText("View Selected File");
-            select.setVisibility(View.INVISIBLE);
-
-            status.setText(intern_det.getBrochure());
-
-            status.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Uri uri = Uri.parse(intern_det.getBrochure()); // missing 'http://' will cause crashed
-                    Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-                    startActivity(intent);
-                }
-            });
         }
         else
         {
@@ -567,4 +540,36 @@ public class intern_profile extends AppCompatActivity {
         downloadManager.enqueue(request);
     }
 
+    public void allot()
+    {
+        cpi.setEnabled(false);
+        profile.setEnabled(false);
+        ctc.setEnabled(false);
+        location.setEnabled(false);
+        branch.setEnabled(false);
+        intern_requirements.setEnabled(false);
+
+        cpi.setText(String.valueOf(intern_det.getCutoff_cpi()));
+        profile.setText(intern_det.getProfile());
+        ctc.setText(String.valueOf(intern_det.getCtc()));
+        location.setText(intern_det.getLocation());
+        branch.setText(intern_det.getBranches());
+        intern_requirements.setText(intern_det.getIntern_requirements());
+
+        branch_button.setVisibility(View.INVISIBLE);
+        submit.setVisibility(View.INVISIBLE);
+        upload.setText("View Selected File");
+        select.setVisibility(View.INVISIBLE);
+
+        status.setText(intern_det.getBrochure());
+//getBrochure!=" " check
+        status.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Uri uri = Uri.parse(intern_det.getBrochure()); // missing 'http://' will cause crashed
+                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                startActivity(intent);
+            }
+        });
+    }
 }
