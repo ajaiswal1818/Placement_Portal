@@ -1,4 +1,3 @@
-/*
 package com.group6.placementportal;
 
 import android.content.Intent;
@@ -86,7 +85,7 @@ public class View_Interns extends AppCompatActivity
                     }
 
                 }
-                adapter = new MyAdapter(View_Interns.this,list,user);
+                adapter = new MyAdapter(View_Interns.this ,list ,user);
                 recyclerView.setAdapter(adapter);
             }
 
@@ -158,4 +157,3 @@ public class View_Interns extends AppCompatActivity
         return true;
     }
 }
-*/
