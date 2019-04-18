@@ -17,6 +17,20 @@
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
 
+    <string-array name="Department">
+        <item>BT</item>
+        <item>CSE</item>
+        <item>CL</item>
+        <item>CE</item>
+        <item>DoD</item>
+        <item>ECE</item>
+        <item>EEE</item>
+        <item>HSS</item>
+        <item>MnC</item>
+        <item>ME</item>
+        <item>EP</item>
+    </string-array>
+
     <string name="title_activity_view__jobs">View_Jobs</string>
     <string name="title_activity_student__notifications">Student_Notifications</string>
     <string name="title_activity_apply__for__jobs">Apply_For_Jobs</string>
@@ -25,19 +39,6 @@
     <string name="title_activity_student__notices">Student_Notices</string>
     <string name="title_activity_student__change_password">Student_ChangePassword</string>
     <string name="title_activity_company_profile">company_profile</string>
-
-    <string-array name="Department">
-        <item>Biosciences and Bioengineering </item>
-        <item>Computer Science and Engineering</item>
-        <item>Chemistry</item>
-        <item>Civil Engineering</item>
-        <item>Design</item>
-        <item>Electronics and Electrical Engineering</item>
-        <item>Humanities and Social Sciences</item>
-        <item>Mathematics</item>
-        <item>Mechanical Engineering</item>
-        <item>Physics</item>
-    </string-array>
 
     <string name="title_activity_company_notices">company_notices</string>
     <string name="title_activity_admin_notices">admin_notices</string>

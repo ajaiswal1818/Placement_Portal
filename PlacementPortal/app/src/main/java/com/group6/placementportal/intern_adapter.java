@@ -47,7 +47,7 @@ public class intern_adapter extends RecyclerView.Adapter<intern_adapter.MyViewHo
                 @Override
                 public void onClick(View view) {
                     Intent intern_profile=new Intent(context, intern_profile.class);
-                    intern_profile.putExtra("MyClassID",id);
+                    intern_profile.putExtra("MyClassID",id + "_"+ intern_array.get(position).getIntern_id());
                     intern_profile.putExtra("PrevActivity","recycleview");
                     //intern_profile.putExtra("PrevActivity","intern_list");
                     context.startActivity(intern_profile);

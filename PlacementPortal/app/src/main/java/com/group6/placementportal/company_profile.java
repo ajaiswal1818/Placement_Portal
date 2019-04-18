@@ -60,7 +60,7 @@ public class company_profile extends AppCompatActivity {
 
 
         valid= FirebaseDatabase.getInstance().getReference("Company");
-        valid.addValueEventListener(new ValueEventListener() {
+        valid.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
@@ -285,6 +285,7 @@ public class company_profile extends AppCompatActivity {
                 public void onClick(View v) {
                     Intent pass=new Intent(company_profile.this, company_change_password.class);
                     pass.putExtra("MyClassID",c1.getCompany_id());
+                    pass.putExtra("Class",c1);
                     startActivity(pass);
                 }
             });
@@ -294,7 +295,7 @@ public class company_profile extends AppCompatActivity {
         else
         {
             valid= FirebaseDatabase.getInstance().getReference("Company");
-            valid.addValueEventListener(new ValueEventListener() {
+            valid.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
@@ -315,11 +316,14 @@ public class company_profile extends AppCompatActivity {
             goto_jobs.setVisibility(View.INVISIBLE);
             goto_interns.setVisibility(View.INVISIBLE);
             change_password.setVisibility(View.INVISIBLE);
-            username.setText("Username : " + String.valueOf(max_id + 1));
-            username.setEnabled(false);
+            username.setEnabled(true);
             proc.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    if(username.getText().toString().contains(".")){
+                        username.setError("Username can't contain . ");
+                        return;
+                    }
                     if(isNumeric(contact.getText().toString())==false){
                         contact.setError("Contact No. can contain only digits");
                         return;
@@ -339,13 +343,35 @@ public class company_profile extends AppCompatActivity {
                         Toast.makeText(company_profile.this,"Can't leave any field empty",Toast.LENGTH_LONG).show();
                     }
                     else {
-                        company c = new company(name.getText().toString(),"1",sector.getText().toString(),contact.getText().toString(),email.getText().toString(),hq.getText().toString(),String.valueOf(max_id + 1),encryption.encryptOrNull(password.getText().toString()),"Pending");
-                        c.setCompany_id(String.valueOf(max_id + 1));
-                        valid.child(c.getCompany_id()).setValue(c);
-                        Toast.makeText(company_profile.this,"Your request has been sent to the admin for approval.",Toast.LENGTH_LONG).show();
-                        Intent company_login=new Intent(company_profile.this, company_login.class);
-                        finish();
-                        startActivity(company_login);
+                        valid= FirebaseDatabase.getInstance().getReference("Company");
+                        valid.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                                // it is first going to bottom code and then it comes to onDataChange
+                                // need to fix this
+                                if(dataSnapshot.exists()) {
+                                    if (dataSnapshot.hasChild(username.getText().toString())) {
+                                        Toast.makeText(company_profile.this, "Username already exists, choose another", Toast.LENGTH_LONG).show();
+                                    }
+                                    else {
+                                        company c = new company(name.getText().toString(), "1", sector.getText().toString(), contact.getText().toString(), email.getText().toString(), hq.getText().toString(), username.getText().toString(), encryption.encryptOrNull(password.getText().toString()), "Pending");
+                                        c.setCompany_id(username.getText().toString());
+                                        valid.child(c.getCompany_id()).setValue(c);
+                                        Toast.makeText(company_profile.this, "Your request has been sent to the admin for approval.", Toast.LENGTH_LONG).show();
+                                        Intent company_login = new Intent(company_profile.this, company_login.class);
+                                        finish();
+                                        startActivity(company_login);
+                                    }
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                            }
+                        });
+
                     }
                 }
             });

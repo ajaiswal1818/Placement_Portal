@@ -99,26 +99,7 @@ public class company_login extends AppCompatActivity {
                                 }
                                 else
                                 {
-                              //      Toast.makeText(company_login.this,son.child("username").getKey(),Toast.LENGTH_LONG).show();
-
-                                    if(son.child("username").getValue().toString().equals(username.getText().toString()))
-                                    {
-                                        if(encryption.encryptOrNull(password.getText().toString()).equals(son.child("password").getValue().toString()))
-                                        {
-                                            company c = son.getValue(company.class);
-                                            Intent company_dashboard=new Intent(company_login.this, company_dashboard.class);
-                                            company_dashboard.putExtra("MyClass",c);
-                                            Toast.makeText(company_login.this,c.getCompany_id(),Toast.LENGTH_SHORT).show();
-                                            //company_dashboard.putExtra("PrevActivity","company_login");
-                                            finish();
-                                            startActivity(company_dashboard);
-                                        }
-                                        else
-                                        {
-                                            Toast.makeText(company_login.this,"Invalid username or password",Toast.LENGTH_LONG).show();
-                                        }
-                                        break;
-                                    }
+                                    Toast.makeText(company_login.this,"Incorrect Login Credentials",Toast.LENGTH_LONG).show();
                                 }
                             }
                             else if(dataSnapshot.child(username.getText().toString()).child("approved").getValue().toString().equals("Rejected"))

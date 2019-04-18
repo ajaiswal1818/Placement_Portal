@@ -1,6 +1,10 @@
 package com.group6.placementportal.DatabasePackage;
 
-public class intern {
+import java.io.File;
+import java.io.Serializable;
+import java.util.ArrayList;
+
+public class intern implements Serializable {
     private String intern_id;
     private String profile;
     private float ctc;
@@ -8,6 +12,39 @@ public class intern {
     private String brochure;
     private float cpi;
     private String departments;
+    private String intern_requirements;
+
+    public String getIntern_requirements() {
+        return intern_requirements;
+    }
+
+    public void setIntern_requirements(String intern_requirements) {
+        this.intern_requirements = intern_requirements;
+    }
+
+    public float getCpi() {
+        return cpi;
+    }
+
+    public void setCpi(float cpi) {
+        this.cpi = cpi;
+    }
+
+    public String getDepartments() {
+        return departments;
+    }
+
+    public void setDepartments(String departments) {
+        this.departments = departments;
+    }
+
+    public String  getBrochure() {
+        return brochure;
+    }
+
+    public void setBrochure(String brochure) {
+        this.brochure = brochure;
+    }
 
     public String getIntern_id() {
         return intern_id;
@@ -41,37 +78,25 @@ public class intern {
         this.location = location;
     }
 
-    public String getBrochure() {
+    /*public File getBrochure() {
         return brochure;
     }
 
-    public void setBrochure(String brochure) {
+    public void setBrochure(File brochure) {
         this.brochure = brochure;
-    }
+    }*/
 
-    public float getCpi() {
-        return cpi;
-    }
-
-    public void setCpi(float cpi) {
-        this.cpi = cpi;
-    }
-
-    public String getDepartments() {
-        return departments;
-    }
-
-    public void setDepartments(String departments) {
-        this.departments = departments;
-    }
-
-    public intern(String intern_id, String profile, float ctc, String location, String brochure, float cpi, String departments) {
+    public intern(String intern_id, String profile, float ctc, String location,String brochure,float cpi,String departments,String intern_requirements) {
         this.intern_id = intern_id;
         this.profile = profile;
         this.ctc = ctc;
         this.location = location;
         this.brochure = brochure;
-        this.cpi = cpi;
-        this.departments = departments;
+        this.cpi=cpi;
+        this.departments=departments;
+        this.intern_requirements=intern_requirements;
+    }
+
+    public intern() {
     }
 }

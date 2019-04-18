@@ -47,7 +47,7 @@ public class job_adapter extends RecyclerView.Adapter<job_adapter.MyViewHolder> 
                 @Override
                 public void onClick(View view) {
                     Intent job_profile=new Intent(context, job_profile.class);
-                    job_profile.putExtra("MyClassID",id);
+                    job_profile.putExtra("MyClassID",id + "_"+ job_array.get(position).getJob_id());
                     job_profile.putExtra("PrevActivity","recycleview");
                     //job_profile.putExtra("PrevActivity","job_list");
                     context.startActivity(job_profile);

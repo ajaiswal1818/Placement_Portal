@@ -42,18 +42,22 @@ public class intern_list extends AppCompatActivity {
         recyclerView.setLayoutManager( new LinearLayoutManager(this));
 
         fab=findViewById(R.id.fab);
-        reference = FirebaseDatabase.getInstance().getReference().child("Company").child("interns");
+        reference = FirebaseDatabase.getInstance().getReference().child("Company").child(c).child("interns");
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 list = new ArrayList<intern>();
-                for(DataSnapshot dataSnapshot1: dataSnapshot.getChildren())
+                if(dataSnapshot.exists())
                 {
-                    intern p = dataSnapshot1.getValue(intern.class);
-                    list.add(p);
+                    for(DataSnapshot dataSnapshot1: dataSnapshot.getChildren())
+                    {
+                        intern p = dataSnapshot1.getValue(intern.class);
+                        list.add(p);
+                    }
+                    adapter = new intern_adapter(intern_list.this,list,c);
+                    recyclerView.setAdapter(adapter);
                 }
-                adapter = new intern_adapter(intern_list.this,list,c);
-                recyclerView.setAdapter(adapter);
+
             }
 
             @Override

@@ -11,7 +11,9 @@ import com.group6.placementportal.DatabasePackage.company;
 import com.group6.placementportal.DatabasePackage.intern;
 
 import android.Manifest;
+import android.app.DownloadManager;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -89,6 +91,8 @@ public class intern_profile extends AppCompatActivity {
     private EditText ctc;
     private EditText location;
     private EditText cpi;
+    private EditText intern_requirements;
+    private Interns intern_det;
 
     private Button add;
     private Button upload;
@@ -99,6 +103,7 @@ public class intern_profile extends AppCompatActivity {
     private DatabaseReference add_comp;
     private FirebaseDatabase database;
     private FirebaseStorage storage;
+    private StorageReference ref;
     private ProgressDialog progressDialog;
     private Uri pdfUri;
     private intern j1;
@@ -131,7 +136,7 @@ public class intern_profile extends AppCompatActivity {
         setContentView(R.layout.activity_intern_profile2);
 
         prevActivity = (String) getIntent().getSerializableExtra("PrevActivity");
-        id = getIntent().getSerializableExtra("MyClassID").toString();
+        id = getIntent().getStringExtra("MyClassID");
         file = "";
         dep = "";
         //String str1 = Integer.toString(id.getCompany_id());
@@ -143,6 +148,8 @@ public class intern_profile extends AppCompatActivity {
         ctc = findViewById(R.id.ctc);
         location = findViewById(R.id.location);
         branch = findViewById(R.id.branch);
+        intern_requirements = findViewById(R.id.intern_requirements);
+
         branch_button = findViewById(R.id.branch_button);
 
         available_branches = getResources().getStringArray(R.array.Department);
@@ -164,20 +171,26 @@ public class intern_profile extends AppCompatActivity {
 
         if(prevActivity.equals("recycleview"))
         {
-            cpi.setEnabled(false);
-            profile.setEnabled(false);
-            ctc.setEnabled(false);
-            location.setEnabled(false);
-            branch.setEnabled(false);
-            branch_button.setVisibility(View.INVISIBLE);
-            submit.setVisibility(View.INVISIBLE);
-            upload.setText("View uploaded file");
-            select.setVisibility(View.INVISIBLE);
+            add_comp = FirebaseDatabase.getInstance().getReference("Interns");
+            add_comp.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    if (dataSnapshot.exists()) {
+                        intern_det = (Interns) dataSnapshot.child(id).getValue();
+                        allot();
+                    }
+                }
 
-            // Write code to download
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+
         }
         else
         {
+            upload.setText("Upload file");
             branch_button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -286,7 +299,7 @@ public class intern_profile extends AppCompatActivity {
                         return;
                     }
 
-                    if (profile.getText().toString().trim().equals("") || ctc.getText().toString().trim().equals("") || location.getText().toString().trim().equals("")||cpi.getText().toString().equals("") && dep.equals("")) {
+                    if (profile.getText().toString().trim().equals("") || ctc.getText().toString().trim().equals("") || location.getText().toString().trim().equals("")||cpi.getText().toString().equals("") || dep.equals("") || intern_requirements.getText().toString().equals("")) {
                         Toast.makeText(intern_profile.this, "Can't leave any field empty", Toast.LENGTH_LONG).show();
                     }
                     else {
@@ -311,8 +324,8 @@ public class intern_profile extends AppCompatActivity {
                                     add_comp.child(id).child("interns").child(intern_id).setValue(j1);
                                     DatabaseReference add_comp1;
                                     add_comp1=FirebaseDatabase.getInstance().getReference("Interns");
-                                    Interns new_intern=new Interns(id + j1.getIntern_id(),j1.getProfile(),j1.getCtc(),j1.getLocation(),j1.getBrochure(),id,comp_name,j1.getDepartments(),j1.getCpi(),"Nothing");
-                                    add_comp1.child(id + j1.getIntern_id()).setValue(new_intern);
+                                    Interns new_intern=new Interns(id + "_" +  j1.getIntern_id(),j1.getProfile(),j1.getCtc(),j1.getLocation(),j1.getBrochure(),id,comp_name,j1.getDepartments(),j1.getCpi(),j1.getIntern_requirements());
+                                    add_comp1.child(id + "_" + j1.getIntern_id()).setValue(new_intern);
                                 }
                             }
 
@@ -379,7 +392,7 @@ public class intern_profile extends AppCompatActivity {
         }
     }
 
-    private void uploadFile(Uri pdfUri) {
+    private void uploadFile(final Uri pdfUri) {
         // Do cancel upload and remove uploaded file
         // Once selected to upload allow to not upload
         // Remove selected file in add_intern() function
@@ -427,7 +440,9 @@ public class intern_profile extends AppCompatActivity {
                     else
                     {
                         intern_id="0";
+
                     }
+                    uploadpdf(pdfUri);
                 }
             }
 
@@ -439,8 +454,12 @@ public class intern_profile extends AppCompatActivity {
 
 
 
+
+    }
+    public void uploadpdf(Uri pdfUri){
         add_comp = FirebaseDatabase.getInstance().getReference();
-        final StorageReference storageReference = storage.getReference().child("Brochures_for_intern").child(id).child(intern_id);
+        ref=FirebaseStorage.getInstance().getReference();
+        final StorageReference storageReference = ref.child("Brochures_for_intern").child(id).child(intern_id);
         storageReference.putFile(pdfUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
@@ -454,28 +473,6 @@ public class intern_profile extends AppCompatActivity {
                     }
                 });
             }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                progressDialog.hide();
-                Toast.makeText(getApplicationContext(), "File Upload Failed", Toast.LENGTH_LONG).show();
-            }
-
-            //String url = storageReference.child("Company").getDownloadUrl().toString();// taskSnapshot.getMetadata().getReference().getDownloadUrl().toString();// taskSnapshot.getDownloadUrl().toString();
-            //file = url;
-                /*DatabaseReference reference=database.getReference();
-
-                reference.child(filename).setValue(url).addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if(task.isSuccessful())
-                            Toast.makeText(intern_profile.this,"Uploaded successfully",Toast.LENGTH_SHORT).show();
-                        else
-                            Toast.makeText(intern_profile.this,"Failed to upload",Toast.LENGTH_SHORT).show();
-
-                    }
-                });*/
-
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
@@ -498,7 +495,6 @@ public class intern_profile extends AppCompatActivity {
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == 9 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
             selectPDF();
         } else
@@ -527,13 +523,53 @@ public class intern_profile extends AppCompatActivity {
 
     public void add_intern() {
         check = 1;
-        j1 = new intern("1", profile.getText().toString(), Float.parseFloat(ctc.getText().toString()), location.getText().toString(), file, Float.parseFloat(cpi.getText().toString()), dep);
-
+        j1 = new intern("1", profile.getText().toString(), Float.parseFloat(ctc.getText().toString()), location.getText().toString(), file, Float.parseFloat(cpi.getText().toString()), dep, intern_requirements.getText().toString());
         profile.setText("");
         ctc.setText("");
         location.setText("");
         cpi.setText("");
         dep="";
     }
+    public void downloadFiles(Context context, String Filename, String FileDestination, String url)
+    {
+        DownloadManager downloadManager = (DownloadManager) context.getSystemService(Context.DOWNLOAD_SERVICE);
+        Uri uri = Uri.parse(url);
+        DownloadManager.Request request = new DownloadManager.Request(uri);
+        request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+        request.setDestinationInExternalFilesDir(context, FileDestination, Filename);
+        downloadManager.enqueue(request);
+    }
 
+    public void allot()
+    {
+        cpi.setEnabled(false);
+        profile.setEnabled(false);
+        ctc.setEnabled(false);
+        location.setEnabled(false);
+        branch.setEnabled(false);
+        intern_requirements.setEnabled(false);
+
+        cpi.setText(String.valueOf(intern_det.getCutoff_cpi()));
+        profile.setText(intern_det.getProfile());
+        ctc.setText(String.valueOf(intern_det.getCtc()));
+        location.setText(intern_det.getLocation());
+        branch.setText(intern_det.getBranches());
+        intern_requirements.setText(intern_det.getIntern_requirements());
+
+        branch_button.setVisibility(View.INVISIBLE);
+        submit.setVisibility(View.INVISIBLE);
+        upload.setText("View Selected File");
+        select.setVisibility(View.INVISIBLE);
+
+        status.setText(intern_det.getBrochure());
+//getBrochure!=" " check
+        status.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Uri uri = Uri.parse(intern_det.getBrochure()); // missing 'http://' will cause crashed
+                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                startActivity(intent);
+            }
+        });
+    }
 }

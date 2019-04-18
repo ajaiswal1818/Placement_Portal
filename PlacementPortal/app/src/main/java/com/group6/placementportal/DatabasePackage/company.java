@@ -56,8 +56,8 @@ public class company implements Serializable {
         return company_id;
     }
 
-    public void setCompany_id(String compnany_id) {
-        this.company_id = compnany_id;
+    public void setCompany_id(String company_id) {
+        this.company_id = company_id;
     }
 
     public String getSector() {
@@ -95,7 +95,7 @@ public class company implements Serializable {
 
     public company(String company_name, String company_id, String sector, String contact_no, String email_address, String headoffice,String username,String password,String approved) {
         this.company_name = company_name;
-        this.company_id = compnany_id;
+        this.company_id = company_id;
         this.sector = sector;
         this.contact_no = contact_no;
         this.email_address = email_address;

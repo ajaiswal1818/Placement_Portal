@@ -62,6 +62,7 @@ public class company_dashboard extends AppCompatActivity {
                 @Override
                 public void onClick(View v){
                     Intent company_notices=new Intent(company_dashboard.this, company_notices.class);
+                    company_notices.putExtra("MyClass",c);
                     startActivity(company_notices);
                 }
             });
