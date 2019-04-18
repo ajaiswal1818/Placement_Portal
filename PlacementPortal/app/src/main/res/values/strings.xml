@@ -40,12 +40,21 @@
     <string name="title_activity_student__change_password">Student_ChangePassword</string>
     <string name="title_activity_company_profile">company_profile</string>
 
+
+
     <string name="title_activity_company_notices">company_notices</string>
     <string name="title_activity_admin_notices">admin_notices</string>
     <string name="title_activity_recipients_tab">recipients_tab</string>
     <string name="title_activity_company_enrollments">company_enrollments</string>
     <string name="action_settings">Settings</string>
     <string name="section_format">Hello World from section: %1$d</string>
+    <string name="title_activity_company_enrolments_screen1">company_enrolments_screen1</string>
+    <string name="title_activity_admin_enrollments_screen1">admin_enrollments_screen1</string>
+    <string name="title_activity_admin_enrollments">admin_enrollments</string>
+    <string name="title_activity_admin_checkout_the_portal">admin_checkout_the_portal</string>
+    <string name="title_activity_admin__dash_board">Admin_DashBoard</string>
+    <string name="title_activity_jrf__application__requests">JRF_Application_Requests</string>
+    <string name="title_activity_admin__approve_notice">Admin_ApproveNotice</string>
     <string name="dialog_title">Student-Emails</string>
     <string name="ok_label">OK</string>
     <string name="dismiss_label">DISMISS</string>
@@ -59,9 +68,6 @@
         <item>aryamanaranya@gmail.com</item>
         <item>sunnykr1530@gmail.com</item>
     </string-array>
-    <string name="title_activity_admin__dash_board">Admin DashBoard</string>
-    <string name="title_activity_jrf__application__requests">JRF Application Requests</string>
-    <string name="title_activity_admin__approve_notice">Admin ApproveNotice</string>
     <string name="title_activity_student__requests">Student_Requests</string>
     <string name="title_activity_student__profile__approval">Student_Profile_Approval</string>
     <string name="title_activity_jrf__approval__profile">JRF_Approval_Profile</string>

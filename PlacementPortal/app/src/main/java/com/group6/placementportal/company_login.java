@@ -53,9 +53,12 @@ public class company_login extends AppCompatActivity {
     private EditText password;
     private DatabaseReference valid;
     private boolean flag=true;
+    public company c=null;
     Encryption encryption = Encryption.getDefault("Key", "Salt", new byte[16]);
 
-
+    public company getUser(){
+        return c;
+    }
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_company_login2);
