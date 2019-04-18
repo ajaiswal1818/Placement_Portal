@@ -60,6 +60,10 @@ public class Admin_DashBoard extends AppCompatActivity
             Intent i = new Intent(getApplicationContext(), Admin_ApproveNotice.class);
             startActivity(i);
         }
+        else if (id== R.id.Company_slots){
+            Intent i = new Intent(getApplicationContext(), Company_Slots_Admin.class);
+            startActivity(i);
+        }
 //        } else if (id == R.id.nav_slideshow) {
 //
 //        } else if (id == R.id.nav_manage) {
