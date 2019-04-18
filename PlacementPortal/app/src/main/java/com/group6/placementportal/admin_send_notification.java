@@ -25,12 +25,23 @@ public class admin_send_notification extends AppCompatActivity {
 
 
     private Button send_notification;
+    private Button send_mail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_send_notification);
         send_notification =findViewById(R.id.send_notification);
+        send_mail = findViewById(R.id.send_mail);
+
+        send_mail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(admin_send_notification.this,sending_emails.class);
+                startActivity(intent);
+            }
+        });
+
         send_notification.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

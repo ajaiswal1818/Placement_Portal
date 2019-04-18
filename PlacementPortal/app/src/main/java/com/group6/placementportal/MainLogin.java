@@ -11,7 +11,6 @@ public class MainLogin extends AppCompatActivity {
     private Button admin;
     private Button company;
     private Button student;
-    private Button send_button;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -19,7 +18,6 @@ public class MainLogin extends AppCompatActivity {
         admin =findViewById(R.id.admin);
         company = findViewById(R.id.company);
         student =findViewById(R.id.student);
-        send_button = findViewById(R.id.send_mail);
         admin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -45,13 +43,5 @@ public class MainLogin extends AppCompatActivity {
             }
         });
 
-        send_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Intent i=new Intent(MainLogin.this, sending_emails.class);
-                startActivity(i);
-            }
-        });
     }
 }
