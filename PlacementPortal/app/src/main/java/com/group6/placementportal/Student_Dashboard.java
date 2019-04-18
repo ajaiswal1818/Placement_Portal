@@ -133,12 +133,15 @@ public class Student_Dashboard extends AppCompatActivity
 
         } else if (id == R.id.nav_prefr) {
 
-        } else if (id == R.id.nav_company) {
+        } else if (id == R.id.nav_jobs) {
             Intent i = new Intent(getApplicationContext(), View_Jobs.class);
             i.putExtra("user",user);
             startActivity(i);
 
-        } else if (id == R.id.nav_calendar) {
+        } else if (id == R.id.nav_interns) {
+            Intent i = new Intent(getApplicationContext(), View_Interns.class);
+            i.putExtra("user",user);
+            startActivity(i);
 
         } else if (id == R.id.nav_my_profile) {
             Intent i = new Intent(getApplicationContext(), Student_Complete_Profile.class);
@@ -146,7 +149,7 @@ public class Student_Dashboard extends AppCompatActivity
             startActivity(i);
 
         } else if (id == R.id.nav_edit_profile) {
-            Intent i = new Intent(getApplicationContext(), Student_Profile.class);
+            Intent i = new Intent(getApplicationContext(), Student_Complete_Profile.class);
             i.putExtra("user",user);
             startActivity(i);
 

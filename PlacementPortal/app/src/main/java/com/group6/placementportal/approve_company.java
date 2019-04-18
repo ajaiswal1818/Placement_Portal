@@ -23,52 +23,52 @@ import com.group6.placementportal.DatabasePackage.job;
 
 import java.util.ArrayList;
 
-public class job_list extends AppCompatActivity {
+public class approve_company extends AppCompatActivity {
 
-    private String c;
+    private String id;
     private DatabaseReference reference;
     private RecyclerView recyclerView;
-    private job_adapter adapter;
-    private ArrayList<job> list;
-    private Button fab;
+    private approve_company_adapter adapter;
+    private ArrayList<company> list;
+    // private Button go;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_job_list);
+        setContentView(R.layout.activity_approve_company);
 
-        c = getIntent().getSerializableExtra("id").toString();
+        // c = getIntent().getSerializableExtra("id").toString();
 
-        recyclerView =findViewById(R.id.add_job_list);
+        recyclerView =findViewById(R.id.view_companies);
         recyclerView.setLayoutManager( new LinearLayoutManager(this));
 
-        fab=findViewById(R.id.fab);
-        reference = FirebaseDatabase.getInstance().getReference().child("Company").child("jobs");
+        // go=findViewById(R.id.go);
+        reference = FirebaseDatabase.getInstance().getReference().child("Company");
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                list = new ArrayList<job>();
-                for(DataSnapshot dataSnapshot1: dataSnapshot.getChildren())
+                list = new ArrayList<>();
+                if(dataSnapshot.exists())
                 {
-                    job p = dataSnapshot1.getValue(job.class);
-                    list.add(p);
+                    for(DataSnapshot dataSnapshot1: dataSnapshot.getChildren())
+                    {
+                        if(dataSnapshot1.child("approved").exists() && dataSnapshot1.child("approved").getValue().toString().equals("Pending"))
+                        {
+                            company c = dataSnapshot1.getValue(company.class);
+                            list.add(c);
+                        }
+                    }
+                    adapter = new approve_company_adapter(approve_company.this,list);
+                    recyclerView.setAdapter(adapter);
                 }
-                adapter = new job_adapter(job_list.this,list,c);
-                recyclerView.setAdapter(adapter);
+                else
+                {
+                    Toast.makeText(approve_company.this,"No companies to show with pending approval status",Toast.LENGTH_LONG).show();
+                }
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                Toast.makeText(job_list.this, "Oops ... something is wrong", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent job_profile=new Intent(job_list.this, job_profile.class);
-                job_profile.putExtra("MyClassID",c);
-                job_profile.putExtra("PrevActivity","job_list");
-                startActivity(job_profile);
+                Toast.makeText(approve_company.this, "Oops ... something is wrong", Toast.LENGTH_SHORT).show();
             }
         });
     }

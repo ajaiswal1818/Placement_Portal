@@ -20,6 +20,7 @@
     <string name="title_activity_view__jobs">View_Jobs</string>
     <string name="title_activity_student__notifications">Student_Notifications</string>
     <string name="title_activity_apply__for__jobs">Apply_For_Jobs</string>
+    <string name="title_activity_apply__for__interns">Apply_For_Jobs</string>
     <string name="title_activity_view_uploads">ViewUploadsActivity</string>
     <string name="title_activity_student__notices">Student_Notices</string>
     <string name="title_activity_student__change_password">Student_ChangePassword</string>

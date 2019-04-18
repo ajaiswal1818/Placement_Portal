@@ -129,12 +129,16 @@ public class View_Jobs extends AppCompatActivity
 
         } else if (id == R.id.nav_prefr) {
 
-        } else if (id == R.id.nav_company) {
+        } else if (id == R.id.nav_jobs) {
             Intent i = new Intent(getApplicationContext(), View_Jobs.class);
             i.putExtra("user",user);
             startActivity(i);
 
-        } else if (id == R.id.nav_calendar) {
+        } else if (id == R.id.nav_interns) {
+            Intent i = new Intent(getApplicationContext(), View_Interns.class);
+            i.putExtra("user",user);
+            startActivity(i);
+
 
         } else if (id == R.id.nav_my_profile) {
 
