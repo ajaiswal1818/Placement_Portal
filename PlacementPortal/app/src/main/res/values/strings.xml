@@ -17,9 +17,24 @@
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
 
+    <string-array name="Department">
+        <item>BT</item>
+        <item>CSE</item>
+        <item>CL</item>
+        <item>CE</item>
+        <item>DoD</item>
+        <item>ECE</item>
+        <item>EEE</item>
+        <item>HSS</item>
+        <item>MnC</item>
+        <item>ME</item>
+        <item>EP</item>
+    </string-array>
+
     <string name="title_activity_view__jobs">View_Jobs</string>
     <string name="title_activity_student__notifications">Student_Notifications</string>
     <string name="title_activity_apply__for__jobs">Apply_For_Jobs</string>
+    <string name="title_activity_apply__for__interns">Apply_For_Jobs</string>
     <string name="title_activity_view_uploads">ViewUploadsActivity</string>
     <string name="title_activity_student__notices">Student_Notices</string>
     <string name="title_activity_student__change_password">Student_ChangePassword</string>

@@ -38,6 +38,10 @@
             android:name=".Apply_For_Jobs"
             android:label="@string/title_activity_apply__for__jobs"
             android:theme="@style/AppTheme.NoActionBar" />
+        <!--<activity
+            android:name=".Apply_For_Interns"
+            android:label="@string/title_activity_apply__for__interns"
+            android:theme="@style/AppTheme.NoActionBar" />-->
         <activity
             android:name=".JRF_Application_Requests"
             android:label="@string/title_activity_jrf__application__requests"
@@ -52,10 +56,13 @@
             android:label="Student_JRF"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".job_list" />
+        <activity android:name=".intern_list" />
         <activity
             android:name=".company_enrollments"
             android:label="@string/title_activity_company_enrollments"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".approve_company" />
+        <activity android:name=".company_change_password" />
         <activity
             android:name=".recipients_tab"
             android:label="@string/title_activity_recipients_tab"
@@ -94,6 +101,10 @@
             android:name=".View_Jobs"
             android:label="@string/title_activity_view__jobs"
             android:theme="@style/AppTheme.NoActionBar" /> <!-- //<activity android:name=".Student_ChangePass" /> -->
+        <!--<activity
+            android:name=".View_Interns"
+            android:label="@string/title_activity_view__interns"
+            android:theme="@style/AppTheme.NoActionBar" />-->
         <activity
             android:name=".Student_Profile"
             android:label="@string/title_activity_student__profile"
@@ -126,6 +137,7 @@
 
         <activity android:name=".company_dashboard" />
         <activity android:name=".job_profile" />
+        <activity android:name=".intern_profile" />
         <activity android:name=".company_login" />
     </application>
 

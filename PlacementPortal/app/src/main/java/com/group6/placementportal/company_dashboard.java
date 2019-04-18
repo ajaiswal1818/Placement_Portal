@@ -48,8 +48,9 @@ public class company_dashboard extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     Intent company_profile=new Intent(company_dashboard.this, company_profile.class);
-                    //company_profile.putExtra("MyClass",c);
-                    finish();
+                    company_profile.putExtra("MyClass",c);
+                    company_profile.putExtra("coming_from","dashboard");
+                    //finish();
                     startActivity(company_profile);
                 }
             });

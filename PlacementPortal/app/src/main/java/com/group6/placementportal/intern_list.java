@@ -17,58 +17,58 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.group6.placementportal.DatabasePackage.Jobs;
+import com.group6.placementportal.DatabasePackage.Interns;
 import com.group6.placementportal.DatabasePackage.company;
-import com.group6.placementportal.DatabasePackage.job;
+import com.group6.placementportal.DatabasePackage.intern;
 
 import java.util.ArrayList;
 
-public class job_list extends AppCompatActivity {
+public class intern_list extends AppCompatActivity {
 
     private String c;
     private DatabaseReference reference;
     private RecyclerView recyclerView;
-    private job_adapter adapter;
-    private ArrayList<job> list;
+    private intern_adapter adapter;
+    private ArrayList<intern> list;
     private Button fab;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_job_list);
+        setContentView(R.layout.activity_intern_list);
 
         c = getIntent().getSerializableExtra("id").toString();
 
-        recyclerView =findViewById(R.id.add_job_list);
+        recyclerView =findViewById(R.id.add_intern_list);
         recyclerView.setLayoutManager( new LinearLayoutManager(this));
 
         fab=findViewById(R.id.fab);
-        reference = FirebaseDatabase.getInstance().getReference().child("Company").child("jobs");
+        reference = FirebaseDatabase.getInstance().getReference().child("Company").child("interns");
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                list = new ArrayList<job>();
+                list = new ArrayList<intern>();
                 for(DataSnapshot dataSnapshot1: dataSnapshot.getChildren())
                 {
-                    job p = dataSnapshot1.getValue(job.class);
+                    intern p = dataSnapshot1.getValue(intern.class);
                     list.add(p);
                 }
-                adapter = new job_adapter(job_list.this,list,c);
+                adapter = new intern_adapter(intern_list.this,list,c);
                 recyclerView.setAdapter(adapter);
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                Toast.makeText(job_list.this, "Oops ... something is wrong", Toast.LENGTH_SHORT).show();
+                Toast.makeText(intern_list.this, "Oops ... something is wrong", Toast.LENGTH_SHORT).show();
             }
         });
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent job_profile=new Intent(job_list.this, job_profile.class);
-                job_profile.putExtra("MyClassID",c);
-                job_profile.putExtra("PrevActivity","job_list");
-                startActivity(job_profile);
+                Intent intern_profile=new Intent(intern_list.this, intern_profile.class);
+                intern_profile.putExtra("MyClassID",c);
+                intern_profile.putExtra("PrevActivity","intern_list");
+                startActivity(intern_profile);
             }
         });
     }

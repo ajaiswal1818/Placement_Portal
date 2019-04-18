@@ -5,7 +5,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class job implements Serializable {
-    private int job_id;
+    private String job_id;
     private String profile;
     private float ctc;
     private String location;
@@ -37,11 +37,11 @@ public class job implements Serializable {
         this.brochure = brochure;
     }
 
-    public int getJob_id() {
+    public String getJob_id() {
         return job_id;
     }
 
-    public void setJob_id(int job_id) {
+    public void setJob_id(String job_id) {
         this.job_id = job_id;
     }
 
@@ -77,7 +77,7 @@ public class job implements Serializable {
         this.brochure = brochure;
     }*/
 
-    public job(int job_id, String profile, float ctc, String location,String brochure,float cpi,String departments) {
+    public job(String job_id, String profile, float ctc, String location,String brochure,float cpi,String departments) {
         this.job_id = job_id;
         this.profile = profile;
         this.ctc = ctc;
