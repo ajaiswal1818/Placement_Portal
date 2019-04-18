@@ -12,6 +12,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,6 +35,8 @@ public class Apply_For_Jobs extends AppCompatActivity {
     private Uri pdfUri;
     private Jobs jobs;
     private Student user;
+    private String list;
+    private Long children;
 
     //these are the views
     private TextView fileName;
@@ -42,6 +45,7 @@ public class Apply_For_Jobs extends AppCompatActivity {
     //the firebase objects for storage and database
     private StorageReference mStorageReference;
     private DatabaseReference mDatabaseReference;
+    private Button btn_apply;
 
     //TextViews
     private TextView job_profile,job_requirements,salary,brochure,cutoff_cpi,job_location,company_name,company_contact,company_email,company_headquarters;
@@ -51,8 +55,10 @@ public class Apply_For_Jobs extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.content_apply__for__jobs);
 
+        btn_apply.setEnabled(false);
         jobs = (Jobs) getIntent().getSerializableExtra("job_profile");
         user = (Student) getIntent().getSerializableExtra("user");
+        btn_apply=findViewById(R.id.buttonUploadFIle);
 
         job_profile = findViewById(R.id.job_profile);
         job_requirements = findViewById(R.id.job_requirements);
@@ -78,6 +84,28 @@ public class Apply_For_Jobs extends AppCompatActivity {
         //getting firebase objects
         mStorageReference = FirebaseStorage.getInstance().getReference();
         mDatabaseReference = FirebaseDatabase.getInstance().getReference();
+
+        mDatabaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                list=dataSnapshot.child("Student").child(user.getWebmailID()).child("preferences").getValue(String.class);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+        String[] split_list =list.split("\\,");
+        boolean flag=false;
+        for(int i=0;i<split_list.length;i++){
+            if(split_list[i].equals(jobs.getJob_id())){
+                flag=true;
+            }
+        }
+        if(flag==true){
+            btn_apply.setEnabled(false);
+        }
 
         Log.d("TAG",jobs.getCompany_id()+" ");
         mDatabaseReference.child("Company").child(jobs.getCompany_id()).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -170,6 +198,19 @@ public class Apply_For_Jobs extends AppCompatActivity {
         progressDialog.show();
 
         final StorageReference ref = mStorageReference.child("Uploads").child(jobs.getJob_id()).child(user.getWebmailID());
+        mDatabaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                list=dataSnapshot.child("Student").child(user.getWebmailID()).child("preferences").getValue(String.class);
+                list+=",";
+                list+=(jobs.getJob_id());
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
         ref.putFile(data)
                 .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                     @Override
@@ -182,6 +223,7 @@ public class Apply_For_Jobs extends AppCompatActivity {
                                 mDatabaseReference.child("Jobs").child(jobs.getJob_id()).child("Applied Students").child(user.getWebmailID()).child("CV").setValue(upload);
                                 mDatabaseReference.child("Jobs").child(jobs.getJob_id()).child("Applied Students").child(user.getWebmailID()).child("Status").setValue("0");
                                 mDatabaseReference.child("Jobs").child(jobs.getJob_id()).child("Applied Students").child(user.getWebmailID()).child("Approval").setValue("No");
+                                mDatabaseReference.child("Student").child(user.getWebmailID()).child("preferences").setValue(list);
                                 Toast.makeText(Apply_For_Jobs.this,"File Upload Successful",Toast.LENGTH_SHORT).show();
                             }
                         });

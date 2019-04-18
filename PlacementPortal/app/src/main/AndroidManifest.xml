@@ -16,6 +16,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:windowSoftInputMode="adjustPan">
+        <activity android:name=".Company_Slots_Admin_second"></activity>
+        <activity android:name=".Company_Slots_Admin" />
+        <activity android:name=".student_RA" />
         <activity
             android:name=".Student_Application_Forms"
             android:label="@string/title_activity_student__application__forms"

@@ -51,6 +51,7 @@
     <string name="title_activity_student__requests">Student_Requests</string>
     <string name="title_activity_student__profile__approval">Student_Profile_Approval</string>
     <string name="title_activity_jrf__approval__profile">JRF_Approval_Profile</string>
+    <string name="title_activity_all__company__slots">All_Company_Slots</string>
     <string name="title_activity_application__forms">Application_Forms</string>
     <string name="title_activity_student__application__forms">Student_Application_Forms</string>
     <string name="tab_text_1">Tab 1</string>

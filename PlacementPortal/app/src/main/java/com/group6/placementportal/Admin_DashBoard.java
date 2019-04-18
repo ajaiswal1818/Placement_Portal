@@ -70,43 +70,12 @@ public class Admin_DashBoard extends AppCompatActivity
         } else if (id == R.id.nav_approve_notice) {
             Intent i = new Intent(getApplicationContext(), Admin_ApproveNotice.class);
             startActivity(i);
-        } else if (id == R.id.nav_approve_company) {
-            reference= FirebaseDatabase.getInstance().getReference("Company");
-            reference.addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    if(dataSnapshot.exists())
-                    {
-                        flag=0;
-                        Iterable<DataSnapshot> all_children = dataSnapshot.getChildren();
-                        for(DataSnapshot dataSnapshot1: all_children)
-                        {
-                            if(dataSnapshot1.child("approved").exists() && dataSnapshot1.child("approved").getValue().toString().equals("Pending"))
-                            {
-                                flag=1;
-                                break;
-                            }
-                        }
-                        if(flag==0)
-                        {
-                            Toast.makeText(Admin_DashBoard.this, "No company with pending request", Toast.LENGTH_SHORT).show();
-                        }
-                        else
-                        {
-                            Intent company_login=new Intent(Admin_DashBoard.this, approve_company.class);
-                            startActivity(company_login);
-                        }
-
-                    }
-
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
-                    // Toast.makeText(approve_company.this, "Oops ... something is wrong", Toast.LENGTH_SHORT).show();
-                }
-            });
-        } //else if (id == R.id.nav_manage) {
+        }
+        else if (id== R.id.Company_slots){
+            Intent i = new Intent(getApplicationContext(), Company_Slots_Admin.class);
+            startActivity(i);
+        }
+//        } else if (id == R.id.nav_slideshow) {
 //
 //        } else if (id == R.id.nav_share) {
 //

@@ -41,6 +41,7 @@ public class Student_Dashboard extends AppCompatActivity
     private MyAdapter_Notices adapter;
     private PublicClientApplication sampleApp;
     private Student user;
+    private int flag;
 
     private static final String TAG = Student_Dashboard.class.getSimpleName();
 
@@ -212,7 +213,9 @@ public class Student_Dashboard extends AppCompatActivity
     }
 
     private void updateSignedOutUI() {
+        flag=1;
         Intent intent = new Intent(Student_Dashboard.this,LoginPage.class);
+        intent.putExtra("flag",flag);
         startActivity(intent);
     }
 }
