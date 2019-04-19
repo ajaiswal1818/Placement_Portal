@@ -13,6 +13,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.group6.placementportal.DatabasePackage.Notifications_Admin;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +25,7 @@ public class list_notification extends AppCompatActivity {
     RecyclerView.LayoutManager mLayoutManager;
     DatabaseReference db;
     // ArrayList<notification_card> list = new ArrayList<>();
-    ArrayList<notification_card> cardList = new ArrayList<>();
+    ArrayList<Notifications_Admin> cardList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +42,7 @@ public class list_notification extends AppCompatActivity {
         mLayoutManager = new LinearLayoutManager(list_notification.this);
         mrecyclerView.setLayoutManager(mLayoutManager);
 
-            db = FirebaseDatabase.getInstance().getReference().child("notification_card");
+            db = FirebaseDatabase.getInstance().getReference().child("Notifications_Admin");
             db.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -49,12 +50,14 @@ public class list_notification extends AppCompatActivity {
                     {
                         for(DataSnapshot dataSnapshot1: dataSnapshot.getChildren()){
 
-                            notification_card x = dataSnapshot1.getValue(notification_card.class);
+                            Notifications_Admin x = dataSnapshot1.getValue(Notifications_Admin.class);
                             assert x != null;
-                            String subject = x.getText1();
-                            String destination = x.getText2();
-                            String pdflink = x.getText3();
-                            cardList.add(new notification_card(subject, destination,pdflink));
+                            String subject = x.getSubject();
+                            String destination = x.getDescription();
+                            String pdflink = x.getPdflink();
+                            String notification_id = x.getNotification_ID();
+
+                            cardList.add(new Notifications_Admin(subject, destination,pdflink,notification_id));
                         }
 
                         mAdapter = new notification_layout(list_notification.this,cardList);

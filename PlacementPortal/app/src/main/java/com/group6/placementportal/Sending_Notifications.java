@@ -43,7 +43,7 @@ public class Sending_Notifications extends AppCompatActivity {
     private TextView fileName;
     private ProgressDialog progressDialog;
     private Button send;
-    int size ;
+    long size ;
 //    private Button select;
 //    private Button upload;
 
@@ -199,7 +199,9 @@ public class Sending_Notifications extends AppCompatActivity {
             mDatabaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    size = (int) dataSnapshot.getChildrenCount() + 1;
+                     if(dataSnapshot.exists()) {
+                         size = (long) dataSnapshot.getChildrenCount() ;
+                     }
                 }
 
                 @Override
@@ -208,7 +210,7 @@ public class Sending_Notifications extends AppCompatActivity {
                 }
             });
 
-            String id = Integer.toString(size);
+            String id = Long.toString(size+1);
 
             Notifications_Admin notification = new Notifications_Admin(newSubject,newDescription,upload,id);
 
