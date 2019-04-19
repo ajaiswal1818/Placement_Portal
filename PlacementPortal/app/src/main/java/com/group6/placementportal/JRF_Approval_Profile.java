@@ -42,7 +42,7 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 
-public class JRF_Approval_Profile extends AppCompatActivity {
+public class JRF_Approval_Profile extends AppCompatActivity{
 
     private ExpandableListView listView, listView2, listView3;
     private ExpandableListAdapter listAdapter;

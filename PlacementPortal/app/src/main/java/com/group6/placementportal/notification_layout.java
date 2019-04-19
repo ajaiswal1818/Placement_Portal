@@ -8,11 +8,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.group6.placementportal.DatabasePackage.Notifications_Admin;
+
 import java.util.ArrayList;
 
 public class notification_layout extends RecyclerView.Adapter<notification_layout.notificationViewHolder> {
 
-    ArrayList<notification_card> ncard;
+    ArrayList<Notifications_Admin> ncard;
     Context context;
 
     public static class notificationViewHolder extends RecyclerView.ViewHolder {
@@ -27,7 +29,7 @@ public class notification_layout extends RecyclerView.Adapter<notification_layou
         }
     }
 
-    public notification_layout(Context c, ArrayList<notification_card> p) {
+    public notification_layout(Context c, ArrayList<Notifications_Admin> p) {
         context = c;
         ncard = p;
     }
@@ -41,11 +43,11 @@ public class notification_layout extends RecyclerView.Adapter<notification_layou
 
     @Override
     public void onBindViewHolder(@NonNull notificationViewHolder notificationViewHolder, int i) {
-        notification_card currentItem = ncard.get(i);
+        Notifications_Admin currentItem = ncard.get(i);
 
-        notificationViewHolder.subject.setText(currentItem.getText1());
-        notificationViewHolder.description.setText(currentItem.getText2());
-        notificationViewHolder.pdflink.setText(currentItem.getText3());
+        notificationViewHolder.subject.setText(currentItem.getSubject());
+        notificationViewHolder.description.setText(currentItem.getDescription());
+        notificationViewHolder.pdflink.setText(currentItem.getPdflink());
     }
 
     @Override
