@@ -45,10 +45,10 @@ public class admin_enrolments_screen1_adapter extends RecyclerView.Adapter<admin
         holder.parentlayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final String job_id=Integer.toString(position);
+                final String job_id=profiles.get(position).getJob_id();
                 //intent.putExtra("job_profile", profiles.get(position));
                // final String job_id=Integer.toString(position);
-                reference = FirebaseDatabase.getInstance().getReference().child("Jobs").child(job_id).child("Applied Students");
+                reference = FirebaseDatabase.getInstance().getReference().child("Jobs").child(profiles.get(position).getJob_id()).child("Applied Students");
                 reference.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

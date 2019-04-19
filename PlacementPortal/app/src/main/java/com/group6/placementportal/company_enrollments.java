@@ -113,10 +113,12 @@ public class company_enrollments extends AppCompatActivity {
                                         Student p_copy=p;
                                         screen=getIntent().getIntExtra("Screen",0);
 
-                                        String pos_db= (String) dataSnapshot2.child("Status").getValue();
-                                        String approval_status=(String) dataSnapshot2.child("Approval").getValue();
+                                        String pos_db="";
+                                        pos_db = (String) dataSnapshot2.child("Status").getValue();
+                                        String approval_status="";
+                                        approval_status = (String) dataSnapshot2.child("Approval").getValue();
                                         Log.d("pos_db and position",pos_db+"   "+Integer.toString(position));
-                                        if(pos_db.equals(Integer.toString(position) ) && ( (screen==0 && approval_status.equals("Yes") ) || screen==1 ) ){
+                                        if(pos_db!=null && approval_status!=null && pos_db.equals(Integer.toString(position) ) && ( (screen==0 && approval_status.equals("Yes") ) || screen==1 ) ){
                                             list.add(p_copy);
                                             Log.d("..pos_db and position",pos_db+"   "+Integer.toString(position));
                                             screen=getIntent().getIntExtra("Screen",0);
@@ -125,15 +127,19 @@ public class company_enrollments extends AppCompatActivity {
                                                 Log.d("adapter","changed");
                                                 recyclerView=findViewById(R.id.enrolments_recycler);
 
-                                                recyclerView.setLayoutManager(new LinearLayoutManager(company_enrollments.this));
-                                                recyclerView.setAdapter(adapter);
+                                                if(recyclerView!=null){
+                                                    recyclerView.setLayoutManager((new LinearLayoutManager(company_enrollments.this)));
+                                                    recyclerView.setAdapter(adapter);
+                                                }
                                             }
                                             else if(screen==1){
                                                 adapter1=new admin_enrollment_adapter(company_enrollments.this,list,job_id,position);
                                                 recyclerView=findViewById(R.id.enrolments_recycler);
+                                                if(recyclerView!=null){
+                                                    recyclerView.setLayoutManager((new LinearLayoutManager(company_enrollments.this)));
+                                                    recyclerView.setAdapter(adapter1);
 
-                                                recyclerView.setLayoutManager((new LinearLayoutManager(company_enrollments.this)));
-                                                recyclerView.setAdapter(adapter1);
+                                                }
                                             }
 
                                             //recyclerView.onFinishTemporaryDetach();

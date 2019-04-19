@@ -55,7 +55,7 @@ public class single_dialog_companyenrollments_0 extends DialogFragment {
 
             }
             else if(which_items==3){
-                items=new CharSequence[]{"Promote to Applied","Promote to Technical Round","Promote to Shortlisted"};
+                items=new CharSequence[]{};
 
             }
         }
@@ -237,12 +237,16 @@ public class single_dialog_companyenrollments_0 extends DialogFragment {
                           reference = FirebaseDatabase.getInstance().getReference().child("Jobs").child(job_id).child("Applied Students").child(student).child("Status").setValue("1");
                           reference = FirebaseDatabase.getInstance().getReference().child("Jobs").child(job_id).child("Applied Students").child(student).child("Approval").setValue("No");
 
+                          reference = FirebaseDatabase.getInstance().getReference().child("Jobs").child(job_id).child("Applied Students").child(student).child("is_notified").removeValue();
+
+
                       }
 
                       else if (option_number == 1) {
                           Toast.makeText(getActivity(), "Rejected", Toast.LENGTH_SHORT).show();
                           reference = FirebaseDatabase.getInstance().getReference().child("Jobs").child(job_id).child("Applied Students").child(student).child("Status").setValue("3");
                           reference = FirebaseDatabase.getInstance().getReference().child("Jobs").child(job_id).child("Applied Students").child(student).child("Approval").setValue("No");
+                          reference = FirebaseDatabase.getInstance().getReference().child("Jobs").child(job_id).child("Applied Students").child(student).child("is_notified").removeValue();
 
                       }
 
@@ -253,13 +257,16 @@ public class single_dialog_companyenrollments_0 extends DialogFragment {
                           Toast.makeText(getActivity(), "Shifting to Shortlisted", Toast.LENGTH_SHORT).show();
                           reference = FirebaseDatabase.getInstance().getReference().child("Jobs").child(job_id).child("Applied Students").child(student).child("Status").setValue("2");
                            reference = FirebaseDatabase.getInstance().getReference().child("Jobs").child(job_id).child("Applied Students").child(student).child("Approval").setValue("No");
+                           reference = FirebaseDatabase.getInstance().getReference().child("Jobs").child(job_id).child("Applied Students").child(student).child("is_notified").removeValue();
 
-                      } else if (option_number == 1) {
+
+                       } else if (option_number == 1) {
                           Toast.makeText(getActivity(), "Rejected", Toast.LENGTH_SHORT).show();
                           reference = FirebaseDatabase.getInstance().getReference().child("Jobs").child(job_id).child("Applied Students").child(student).child("Status").setValue("3");
                            reference = FirebaseDatabase.getInstance().getReference().child("Jobs").child(job_id).child("Applied Students").child(student).child("Approval").setValue("No");
+                           reference = FirebaseDatabase.getInstance().getReference().child("Jobs").child(job_id).child("Applied Students").child(student).child("is_notified").removeValue();
 
-                      }
+                       }
 
 
                   }

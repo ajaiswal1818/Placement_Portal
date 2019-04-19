@@ -47,7 +47,7 @@ public class enrolments_screen1_adpater extends RecyclerView.Adapter<enrolments_
             public void onClick(View view) {
 
                 //intent.putExtra("job_profile", profiles.get(position));
-                final String job_id=Integer.toString(position);
+                final String job_id=profiles.get(position).getJob_id();
                 reference = FirebaseDatabase.getInstance().getReference().child("Jobs").child(job_id).child("Applied Students");
                 reference.addValueEventListener(new ValueEventListener() {
                     @Override

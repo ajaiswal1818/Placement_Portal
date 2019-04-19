@@ -42,7 +42,7 @@ public class admin_enrollments_screen1 extends AppCompatActivity {
                 {
                     Jobs p = dataSnapshot1.getValue(Jobs.class);
 
-                    String company_name=p.getCompany_name().toString();
+                   // String company_name=p.getCompany_name().toString();
                    /* if(user!=null){
                         if(user.getCompnany_id().equals(company_id)){
                             list.add(p);
