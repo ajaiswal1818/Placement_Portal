@@ -81,7 +81,7 @@
                     android:layout_marginTop="10dp"
                     >
 
-                    <EditText
+                    <TextView
                         android:id="@+id/txt_from"
                         android:layout_width="150dp"
                         android:layout_height="wrap_content"
@@ -92,14 +92,13 @@
                         android:ems="10"
                         android:gravity="center"
                         android:hint="From"
-                        android:inputType="text|date"
                         android:paddingHorizontal="30dp"
                         android:textColorHint="@color/colorTextHint"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
-                    <EditText
+                    <TextView
                         android:id="@+id/txt_to"
                         android:layout_width="150dp"
                         android:layout_height="wrap_content"
@@ -110,7 +109,6 @@
                         android:ems="10"
                         android:gravity="center"
                         android:hint="To"
-                        android:inputType="text|date"
                         android:paddingHorizontal="30dp"
                         android:textColorHint="@color/colorTextHint"
                         app:layout_constraintEnd_toEndOf="parent"

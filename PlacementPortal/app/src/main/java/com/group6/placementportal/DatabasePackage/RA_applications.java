@@ -18,7 +18,7 @@ public class RA_applications implements Serializable {
     public RA_applications() {
     }
 
-    public RA_applications(String name_of_org, String designation, String from_duration, String to_duration, String appliedPost, String type_of_job, String student_Name, String interview_Date, String interview_Time, String webmail) {
+    public RA_applications(String name_of_org, String designation, String from_duration, String to_duration,String type_of_job, String student_Name, String interview_Date, String interview_Time, String webmail) {
         Name_of_Org = name_of_org;
         Designation = designation;
         From_Duration = from_duration;

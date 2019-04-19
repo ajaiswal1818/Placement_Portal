@@ -59,10 +59,10 @@ Adapter_RA_Admin extends RecyclerView.Adapter<Adapter_RA_Admin.MyViewHolder> {
         CardView parentlayout;
         public MyViewHolder(View itemView) {
             super(itemView);
-            name_of_org = itemView.findViewById(R.id.txt_name_of_org);
+            name_of_org = itemView.findViewById(R.id.txt_name_of_orgs);
             student_name = itemView.findViewById(R.id.txt_Student_Name);
-            work_type = itemView.findViewById(R.id.txt_nature_of_work);
-            designations = itemView.findViewById(R.id.txt_designation);
+            work_type = itemView.findViewById(R.id.txt_nature_of_works);
+            designations = itemView.findViewById(R.id.txt_designations);
             parentlayout = itemView.findViewById(R.id.cardview_ra);
         }
     }

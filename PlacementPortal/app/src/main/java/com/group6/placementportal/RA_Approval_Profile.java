@@ -477,15 +477,15 @@ public class RA_Approval_Profile extends AppCompatActivity {
                 List<Data> RegRDetails = new ArrayList<>();
                 registrationDetails = dataSnapshot.getValue(RA_applications.class);
 
-                data = new Data("Application No.", registrationDetails.getName_of_Org());
+                data = new Data("Name of Organisation", registrationDetails.getName_of_Org());
                 RegRDetails.add(data);
-                data = new Data("Programming Languages", registrationDetails.getDesignation());
+                data = new Data("Designation", registrationDetails.getDesignation());
                 RegRDetails.add(data);
-                data = new Data("Year and Type of Experiences", registrationDetails.getFrom_Duration());
+                data = new Data("From", registrationDetails.getFrom_Duration());
                 RegRDetails.add(data);
-                data = new Data("Applied For Project", registrationDetails.getTo_Duration());
+                data = new Data("To", registrationDetails.getTo_Duration());
                 RegRDetails.add(data);
-                data = new Data("Applied For Post", registrationDetails.getType_of_Job());
+                data = new Data("Type of Job", registrationDetails.getType_of_Job());
                 RegRDetails.add(data);
 
                 listHashMap.put(listDataHeader.get(0), RegRDetails);
