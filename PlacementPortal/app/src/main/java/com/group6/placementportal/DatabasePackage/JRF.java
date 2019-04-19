@@ -2,7 +2,6 @@ package com.group6.placementportal.DatabasePackage;
 
 import android.Manifest;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -30,7 +29,6 @@ import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.group6.placementportal.R;
-import com.group6.placementportal.Student_JRF;
 import com.microsoft.identity.client.PublicClientApplication;
 
 import static android.app.Activity.RESULT_OK;

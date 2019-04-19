@@ -18,12 +18,19 @@
         android:theme="@style/AppTheme"
         android:windowSoftInputMode="adjustPan">
         <activity
+            android:name=".admin_job_or_intern"
+            android:label="@string/title_activity_admin_job_or_intern"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".job_or_intern"
+            android:label="@string/title_activity_job_or_intern"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
             android:name=".Help_Students"
             android:label="@string/title_activity_help__students"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Company_Slots_Admin_second" />
         <activity android:name=".Company_Slots_Admin" />
-        <activity android:name=".student_RA" />
         <activity
             android:name=".admin_checkout_the_portal"
             android:label="@string/title_activity_admin_checkout_the_portal"
@@ -40,11 +47,11 @@
         <activity
             android:name=".Student_Application_Forms"
             android:label="@string/title_activity_student__application__forms"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".GivePreference"
             android:label="@string/title_activity_give_preference"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".JRF_Approval_Profile"
             android:label="@string/title_activity_jrf__approval__profile"
@@ -94,11 +101,7 @@
             android:name=".Admin_DashBoard"
             android:label="@string/title_activity_admin__dash_board"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Login_Page_Admin" /> <!-- <activity android:name=".LoginPage" /> -->
-        <activity
-            android:name=".Student_JRF"
-            android:label="Student_JRF"
-            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".Login_Page_Admin" />
         <activity
             android:name=".job_list"
             android:label=".job_list"
@@ -132,10 +135,6 @@
         <activity
             android:name=".Student_ChangePassword"
             android:label="@string/title_activity_student__change_password"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".Apply_For_Jobs"
-            android:label="@string/title_activity_apply__for__jobs"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Student_Notifications"
@@ -178,7 +177,10 @@
 
         <activity android:name=".company_dashboard" />
         <activity android:name=".job_profile" />
+        <activity android:name=".intern_profile" />
+        <activity android:name=".Company_Application_Slots"/>
         <activity android:name=".company_login" />
+        <activity android:name=".view_pdf"/>
     </application>
 
 </manifest>

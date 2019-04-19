@@ -1,13 +1,16 @@
 package com.group6.placementportal;
 
 import android.content.ContentResolver;
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
+import android.os.Bundle;
 import android.os.Handler;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.Button;
@@ -50,6 +53,11 @@ public class NoticeFromCompany extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notice_from_company);
 
+        if(isNetworkAvailable()==false){
+            Toast.makeText(NoticeFromCompany.this,"NO INTERNET CONNECTION", Toast.LENGTH_LONG).show();
+            return;
+        }
+
         image= (ImageView)findViewById(R.id.imageView);
         Choose= (Button)findViewById(R.id.Upload_Pic);
         Load= (Button)findViewById(R.id.Load);
@@ -73,9 +81,24 @@ public class NoticeFromCompany extends AppCompatActivity {
         Load.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(t1.getText().toString().equals("")){
+                    t1.setError("Field Required");
+                    return;
+                }
+                if(t2.getText().toString().equals("")){
+                    t2.setError("Field Required");
+                    return;
+                }
                 Upload_file();
             }
         });
+    }
+
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 
     @Override
@@ -83,7 +106,7 @@ public class NoticeFromCompany extends AppCompatActivity {
         super.onActivityResult(requestCode,resultCode,data);
         if(resultCode==RESULT_OK && requestCode == PICK_IMAGE && data!= null && data.getData() !=null ){
             imageUri=data.getData();
-            Picasso.get().load(imageUri).into(image);
+            if(imageUri!=null)Picasso.get().load(imageUri).into(image);
 
         }
     }
@@ -96,11 +119,11 @@ public class NoticeFromCompany extends AppCompatActivity {
 
     private  void Upload_file(){
         if (imageUri!=null){
-            StorageReference filereference = mstorage.child("Upload_CompanyNotices").child(System.currentTimeMillis()+"."+getFileExtension(imageUri));
+            final StorageReference filereference = mstorage.child("Upload_CompanyNotices").child(System.currentTimeMillis()+"."+getFileExtension(imageUri));
             filereference.putFile(imageUri)
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
-                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                        public void onSuccess(final UploadTask.TaskSnapshot taskSnapshot) {
                             Handler handler = new Handler();
                             handler.postDelayed(new Runnable() {
                                 @Override
@@ -109,9 +132,14 @@ public class NoticeFromCompany extends AppCompatActivity {
                                 }
                             }, 500);
                             Toast.makeText(NoticeFromCompany.this, "UplaodSuccessfull", Toast.LENGTH_SHORT).show();
-                            Notices new_notice = new Notices();
+                            final Notices new_notice = new Notices();
                             new_notice.setTopic(t1.getText().toString());
-                            new_notice.setImageURL(taskSnapshot.getMetadata().getReference().getDownloadUrl().toString());
+                            filereference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                @Override
+                                public void onSuccess(Uri uri) {
+                                    new_notice.setImageURL(uri.toString());
+                                }
+                            });
 
                             new_notice.setContent(t2.getText().toString());
 

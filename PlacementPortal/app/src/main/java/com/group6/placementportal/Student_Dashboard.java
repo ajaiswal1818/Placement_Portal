@@ -1,6 +1,9 @@
 package com.group6.placementportal;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -12,9 +15,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
@@ -26,7 +27,6 @@ import com.group6.placementportal.DatabasePackage.Notices;
 import com.group6.placementportal.DatabasePackage.Student;
 import com.microsoft.identity.client.IAccount;
 import com.microsoft.identity.client.PublicClientApplication;
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -49,6 +49,13 @@ public class Student_Dashboard extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student__notices);
+
+        if(isNetworkAvailable()==false){
+            Toast.makeText(Student_Dashboard.this,"NO INTERNET CONNECTION", Toast.LENGTH_LONG).show();
+            return;
+        }
+
+
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -98,6 +105,13 @@ public class Student_Dashboard extends AppCompatActivity
                 Toast.makeText(Student_Dashboard.this, "Opsss.... Something is wrong", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 
     @Override
@@ -161,11 +175,11 @@ public class Student_Dashboard extends AppCompatActivity
             Intent i = new Intent(getApplicationContext(), Student_Application_Forms.class);
             i.putExtra("user",user);
             startActivity(i);
-        } else if (id == R.id.nav_inst_profile) {
+        } else if (id == R.id.nav_help) {
             Intent i = new Intent(getApplicationContext(), Student_Application_Forms.class);
             i.putExtra("user",user);
             startActivity(i);
-        } else if (id == R.id.nav_help) {
+        } else if (id == R.id.nav_inst_profile) {
             Intent i = new Intent(getApplicationContext(), Help_Students.class);
             i.putExtra("user",user);
             startActivity(i);

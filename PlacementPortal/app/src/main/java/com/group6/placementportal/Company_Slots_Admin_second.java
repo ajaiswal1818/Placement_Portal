@@ -1,8 +1,11 @@
 package com.group6.placementportal;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -40,6 +43,10 @@ public class Company_Slots_Admin_second extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_company__slots__admin_second);
 
+        if(isNetworkAvailable()==false){
+            Toast.makeText(Company_Slots_Admin_second.this,"NO INTERNET CONNECTION", Toast.LENGTH_LONG).show();
+            return;
+        }
         s1=findViewById(R.id.spinner2);
         t1=findViewById(R.id.Company_id);
         t2=findViewById(R.id.Company_name);
@@ -95,5 +102,11 @@ public class Company_Slots_Admin_second extends AppCompatActivity {
         });
 
 
+    }
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 }

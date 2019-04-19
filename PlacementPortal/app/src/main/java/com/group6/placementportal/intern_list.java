@@ -1,13 +1,14 @@
 package com.group6.placementportal;
 
+import android.content.Context;
 import android.content.Intent;
-import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v7.app.AppCompatActivity;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -17,8 +18,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.group6.placementportal.DatabasePackage.Interns;
-import com.group6.placementportal.DatabasePackage.company;
 import com.group6.placementportal.DatabasePackage.intern;
 
 import java.util.ArrayList;
@@ -35,6 +34,11 @@ public class intern_list extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_intern_list);
+
+        if(isNetworkAvailable()==false){
+            Toast.makeText(intern_list.this,"NO INTERNET CONNECTION", Toast.LENGTH_LONG).show();
+            return;
+        }
 
         c = getIntent().getSerializableExtra("id").toString();
 
@@ -76,5 +80,12 @@ public class intern_list extends AppCompatActivity {
             }
         });
     }
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+    }
+
 }
 

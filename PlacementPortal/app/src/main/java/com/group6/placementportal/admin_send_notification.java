@@ -1,25 +1,14 @@
 package com.group6.placementportal;
 
+import android.content.Context;
 import android.content.Intent;
-import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.util.Log;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
-
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-import com.group6.placementportal.DatabasePackage.Notifications;
-import com.group6.placementportal.DatabasePackage.Student;
-
-import java.util.ArrayList;
-import java.util.Collections;
 
 public class admin_send_notification extends AppCompatActivity {
 
@@ -31,6 +20,10 @@ public class admin_send_notification extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_send_notification);
+        if(isNetworkAvailable()==false){
+            Toast.makeText(admin_send_notification.this,"NO INTERNET CONNECTION", Toast.LENGTH_LONG).show();
+            return;
+        }
         send_notification =findViewById(R.id.send_notification);
         send_mail = findViewById(R.id.send_mail);
 
@@ -51,5 +44,11 @@ public class admin_send_notification extends AppCompatActivity {
 
             }
         });
+    }
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 }

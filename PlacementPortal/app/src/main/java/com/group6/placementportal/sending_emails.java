@@ -1,14 +1,17 @@
 package com.group6.placementportal;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AlertDialog.Builder;
-import android.support.v7.app.AppCompatActivity;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -30,6 +33,11 @@ public class sending_emails extends AppCompatActivity {
         et_message=findViewById(R.id.message);
         b_send=findViewById(R.id.send);
         b_select=findViewById(R.id.select);
+
+        if(isNetworkAvailable()==false){
+            Toast.makeText(sending_emails.this,"NO INTERNET CONNECTION", Toast.LENGTH_LONG).show();
+            return;
+        }
 
         listItems = getResources().getStringArray(R.array.student_name);
         checkedItems = new boolean[listItems.length];
@@ -112,4 +120,11 @@ public class sending_emails extends AppCompatActivity {
 
 
     }
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+    }
+
 }

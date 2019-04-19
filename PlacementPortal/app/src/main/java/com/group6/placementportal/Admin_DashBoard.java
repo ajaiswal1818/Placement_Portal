@@ -84,6 +84,22 @@ public class Admin_DashBoard extends AppCompatActivity
             Intent i = new Intent(getApplicationContext(), Company_Slots_Admin.class);
             startActivity(i);
         }
+        else if (id== R.id.nav_approve_company){
+            Intent i = new Intent(getApplicationContext(), approve_company.class);
+            startActivity(i);
+        }
+        else if (id== R.id.nav_manage_enroll){
+            Intent i = new Intent(getApplicationContext(), admin_enrollments_screen1.class);
+            startActivity(i);
+        }
+        else if (id== R.id.nav_notice_to_company){
+            Intent i = new Intent(getApplicationContext(), admin_notices.class);
+            startActivity(i);
+        }
+        else if (id== R.id.nav_checkout){
+            Intent i = new Intent(getApplicationContext(), admin_checkout_the_portal.class);
+            startActivity(i);
+        }
 //        } else if (id == R.id.nav_slideshow) {
 //
 //        } else if (id == R.id.nav_share) {

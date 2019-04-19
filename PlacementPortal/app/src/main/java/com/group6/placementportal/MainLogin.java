@@ -1,21 +1,16 @@
 package com.group6.placementportal;
 
+import android.content.Context;
 import android.content.Intent;
-import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-import com.group6.placementportal.DatabasePackage.company;
-
-import java.util.ArrayList;
 
 public class MainLogin extends AppCompatActivity {
 
@@ -28,13 +23,18 @@ public class MainLogin extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_login);
+        if(isNetworkAvailable()==false){
+            Toast.makeText(MainLogin.this,"NO INTERNET CONNECTION", Toast.LENGTH_LONG).show();
+            return;
+        }
+
         admin =findViewById(R.id.admin);
         company = findViewById(R.id.company);
         student =findViewById(R.id.student);
         admin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent company_login=new Intent(MainLogin.this, approve_company.class);
+                Intent company_login=new Intent(MainLogin.this, Admin_DashBoard.class);
                 startActivity(company_login);
             }
         });
@@ -56,4 +56,11 @@ public class MainLogin extends AppCompatActivity {
         });
 
     }
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+    }
+
 }

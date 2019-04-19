@@ -6,6 +6,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.media.ExifInterface;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
@@ -32,6 +33,7 @@ public class Company_Application_Slots extends AppCompatActivity {
     private Spinner s2;
     private Spinner s3;
     private Button load;
+    private Button check;
     ArrayList[][] Interview_Slots= new ArrayList[3][8];
     ArrayList[][] online_Slots= new ArrayList[15][8];
     ArrayList[][] technical_Slots= new ArrayList[15][8];
@@ -73,7 +75,7 @@ public class Company_Application_Slots extends AppCompatActivity {
         s2=(Spinner) findViewById(R.id.date);
         s3=(Spinner) findViewById(R.id.slots);
         load=(Button) findViewById(R.id.Load);
-
+        check=(Button) findViewById(R.id.booked_slots);
 
         Type_array.add(0,"Choose Type");
         Type_array.add("Technical_Round");
@@ -89,7 +91,7 @@ public class Company_Application_Slots extends AppCompatActivity {
                 "16/11/2019","17/11/2019","18/11/2019","19/11/2019","20/11/2019","21/11/2019","22/11/2019","23/11/2019","24/11/2019","25/11/2019","26/11/2019","27/11/2019","28/11/2019","29/11/2019","30/11/2019"
         };
         String[] date_2 = new String[] {
-                "1/12/2019","2/12/2019","3/12/2019"
+                "01/12/2019","02/12/2019","03/12/2019"
         };
 
         final String[] time = new String[] {
@@ -122,8 +124,10 @@ public class Company_Application_Slots extends AppCompatActivity {
                             type_allocated=new_company_data.getType();
                             date_allocated=new_company_data.getDate();
                             time_allocated=new_company_data.getSlot();
-
-                            int date_no=convert_date(date_allocated)-16;
+                            int date_no;
+                            if (type_allocated.equals("Interview")){date_no=convert_date(date_allocated)-1;}
+                            else
+                                date_no=convert_date(date_allocated)-16;
                             int time_no=convert_slot(time_allocated);
 
                             if(type_allocated.equals("Technical_Round"))technical_Slots[date_no][time_no].add(1);
@@ -181,22 +185,7 @@ public class Company_Application_Slots extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 slots.clear();
-                if (position==0)date_selected="16/11/2019";
-                else if (position==1)date_selected="17/11/2019";
-                else if (position==2)date_selected="18/11/2019";
-                else if (position==3)date_selected="19/11/2019";
-                else if (position==4)date_selected="20/11/2019";
-                else if (position==5)date_selected="21/11/2019";
-                else if (position==6)date_selected="22/11/2019";
-                else if (position==7)date_selected="23/11/2019";
-                else if (position==8)date_selected="24/11/2019";
-                else if (position==9)date_selected="25/11/2019";
-                else if (position==10)date_selected="26/11/2019";
-                else if (position==11)date_selected="27/11/2019";
-                else if (position==12)date_selected="28/11/2019";
-                else if (position==13)date_selected="29/11/2019";
-                else date_selected="30/11/2019";
-
+                date_selected=s2.getSelectedItem().toString();
                 for (int i=0;i<8;i++) {
                     if (type_select==1) {
                         if (technical_Slots[position][i].size()<2) slots.add(convert_timeno(i));
@@ -227,15 +216,7 @@ public class Company_Application_Slots extends AppCompatActivity {
         s3.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if (position==0) time_selected="2:00-5:00";
-                else if (position==1)time_selected="5:00-8:00";
-                else if (position==2)time_selected="5:00-8:00";
-                else if (position==3)time_selected="5:00-8:00";
-                else if (position==4)time_selected="5:00-8:00";
-                else if (position==5)time_selected="5:00-8:00";
-                else if (position==6)time_selected="5:00-8:00";
-                else time_selected="23:00-2:00";
-
+                time_selected=s3.getSelectedItem().toString();
             }
 
             @Override
@@ -248,7 +229,13 @@ public class Company_Application_Slots extends AppCompatActivity {
 
             public void onClick(View v) {
                 String Round;
-                int date_new= convert_date(date_selected)-16;
+
+                int date_new;
+                if (type_select==4){
+                    date_new=convert_date(date_selected)-1;
+                }
+                else
+                    date_new=convert_date(date_selected)-16;
                 int time_new=convert_slot(time_selected);
                 if (type_select==1){
                     if (technical_Slots[date_new][time_new].size()==0)place_allocated="TECH_ROOM1";
@@ -264,7 +251,7 @@ public class Company_Application_Slots extends AppCompatActivity {
                     place_allocated="NULL";
                 }
                 else{
-                    if (technical_Slots[date_new][time_new].size()==0)place_allocated="TECH_ROOM1";
+                    if (Interview_Slots[date_new][time_new].size()==0)place_allocated="INTERVIEW_ROOM1";
                     else if (Interview_Slots[date_new][time_new].size()==1)place_allocated="INTERVIEW_ROOM2";
                     else if (Interview_Slots[date_new][time_new].size()==2)place_allocated="INTERVIEW_ROOM3";
                     else if (Interview_Slots[date_new][time_new].size()==3)place_allocated="INTERVIEW_ROOM4";
@@ -292,6 +279,15 @@ public class Company_Application_Slots extends AppCompatActivity {
                     startActivity(intent);
 
                 }
+            }
+        });
+
+        check.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent company_enrollements = new Intent(Company_Application_Slots.this, Company_Slots_Admin_second.class);
+                company_enrollements.putExtra("id", id);
+                startActivity(company_enrollements);
             }
         });
 

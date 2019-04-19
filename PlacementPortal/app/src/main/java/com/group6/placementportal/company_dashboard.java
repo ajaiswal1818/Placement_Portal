@@ -15,6 +15,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.group6.placementportal.DatabasePackage.company;
 
+import static com.group6.placementportal.R.id.send_notification;
+
 
 public class company_dashboard extends AppCompatActivity {
 
@@ -31,7 +33,7 @@ public class company_dashboard extends AppCompatActivity {
     private android.support.v7.widget.CardView notices;
     private android.support.v7.widget.CardView enrollments;
     private android.support.v7.widget.CardView events;
-    private Button button;
+    private android.support.v7.widget.CardView notification;
     private android.support.v7.widget.CardView addnotices;
 
 
@@ -49,6 +51,7 @@ public class company_dashboard extends AppCompatActivity {
               manage_events= findViewById(R.id.book_card);
               database= FirebaseDatabase.getInstance().getReference();
               addnotices = findViewById(R.id.AddNotices);
+              notification=findViewById(R.id.notification);
 
 
             this.c=(company) getIntent().getSerializableExtra("MyClass");
@@ -65,7 +68,7 @@ public class company_dashboard extends AppCompatActivity {
             });
 
             notices=findViewById(R.id.notices_card);
-            button= findViewById(R.id.send_notifications);
+
             notices.setOnClickListener(new View.OnClickListener(){
                 @Override
                 public void onClick(View v){
@@ -75,22 +78,24 @@ public class company_dashboard extends AppCompatActivity {
                 }
             });
 
+            notification.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent i=new Intent(company_dashboard.this,Sending_Notifications.class);
+                    i.putExtra("MyClass",c);
+                    startActivity(i);
+                }
+            });
             enrollments.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent company_enrollments_screen1=new Intent(company_dashboard.this,company_enrolments_screen1.class);
+                    Intent company_enrollments_screen1=new Intent(company_dashboard.this,job_or_intern.class);
                     company_enrollments_screen1.putExtra("MyClass",c);
                     startActivity(company_enrollments_screen1);
                 }
             });
 
-            button.setOnClickListener(new View.OnClickListener(){
-                @Override
-                public void onClick(View v){
-                    Intent intent=new Intent(company_dashboard.this, Sending_Notifications.class);
-                    startActivity(intent);
-                }
-            });
+
             addnotices.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

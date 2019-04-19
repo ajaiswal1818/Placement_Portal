@@ -1,4 +1,7 @@
 <resources>
+    <string name="linktoapp">
+    <a href = "https://nitish6174.github.io/resume-generator/">CLICK HERE TO GO TO CV GENERATOR</a>
+</string>
     <string name="app_name">Placement Portal</string>
     <string name="impor">import</string>
     <string name="gallery">gallery</string>
@@ -82,4 +85,6 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_give_preference">GivePreference</string>
     <string name="title_activity_help__students">Help_Students</string>
+    <string name="title_activity_job_or_intern">job_or_intern</string>
+    <string name="title_activity_admin_job_or_intern">admin_job_or_intern</string>
 </resources>

@@ -9,7 +9,7 @@
     tools:openDrawer="start">
 
     <include
-        layout="@layout/app_bar_student__jrf"
+        layout="@layout/app_bar_help"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
@@ -19,7 +19,7 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
-        app:headerLayout="@layout/nav_header_student__notices"
-        app:menu="@menu/activity_student__dashboard_drawer" />
+        app:headerLayout="@layout/nav_header_help"
+        app:menu="@menu/activity_help_drawer" />
 
 </android.support.v4.widget.DrawerLayout>
