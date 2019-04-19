@@ -7,40 +7,26 @@
     tools:context=".job_profile">
 
     <Button
-        android:id="@+id/add"
-        android:layout_width="255dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:text=" add another profile"
-        app:layout_constraintBottom_toTopOf="@+id/submit"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.45"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/upload"
-        app:layout_constraintVertical_bias="0.356" />
-
-    <Button
         android:id="@+id/submit"
         android:layout_width="241dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="28dp"
         android:background="@color/design_default_color_primary"
-        android:text="Submit"
+        android:text="add profile"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/remove" />
 
     <EditText
         android:id="@+id/profile"
         android:layout_width="342dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="56dp"
         android:layout_marginEnd="8dp"
         android:ems="10"
         android:hint="Profile"
@@ -108,12 +94,12 @@
         android:layout_width="197dp"
         android:layout_height="42dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
         android:text="No file selected"
         android:textSize="18sp"
         app:layout_constraintEnd_toStartOf="@+id/upload"
-        app:layout_constraintHorizontal_bias="0.383"
+        app:layout_constraintHorizontal_bias="0.591"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
@@ -134,15 +120,12 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
         android:text="remove upload"
         android:visibility="invisible"
-        app:layout_constraintBottom_toTopOf="@+id/add"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.181"
+        app:layout_constraintHorizontal_bias="0.114"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/status"
-        app:layout_constraintVertical_bias="0.47" />
+        app:layout_constraintTop_toBottomOf="@+id/status" />
 
     <EditText
         android:id="@+id/cpi"
@@ -174,7 +157,7 @@
     <Button
         android:id="@+id/branch_button"
         android:layout_width="112dp"
-        android:layout_height="43dp"
+        android:layout_height="68dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"

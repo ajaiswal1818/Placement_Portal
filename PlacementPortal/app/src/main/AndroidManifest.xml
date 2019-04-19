@@ -30,11 +30,53 @@
             android:label="@string/title_activity_company_enrolments_screen1"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".LoginPage" />
+        <activity
+            android:name=".JRF_Approval_Profile"
+            android:label="@string/title_activity_jrf__approval__profile"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".Student_Profile_Approval"
+            android:label="@string/title_activity_student__profile__approval"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Student_Requests"
+            android:label="@string/title_activity_student__requests"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".Student_Complete_Profile" />
+        <activity android:name=".NoticeFromCompany" />
+        <activity
+            android:name=".Admin_ApproveNotice"
+            android:label="@string/title_activity_admin__approve_notice"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Apply_For_Jobs"
+            android:label="@string/title_activity_apply__for__jobs"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <!--<activity
+            android:name=".Apply_For_Interns"
+            android:label="@string/title_activity_apply__for__interns"
+            android:theme="@style/AppTheme.NoActionBar" />-->
+        <activity
+            android:name=".JRF_Application_Requests"
+            android:label="@string/title_activity_jrf__application__requests"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Admin_DashBoard"
+            android:label="@string/title_activity_admin__dash_board"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".Login_Page_Admin" /> <!-- <activity android:name=".LoginPage" /> -->
+        <activity
+            android:name=".Student_JRF"
+            android:label="Student_JRF"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".job_list" />
+        <activity android:name=".intern_list" />
         <activity
             android:name=".company_enrollments"
             android:label="@string/title_activity_company_enrollments"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".approve_company" />
+        <activity android:name=".company_change_password" />
         <activity
             android:name=".recipients_tab"
             android:label="@string/title_activity_recipients_tab"
@@ -63,10 +105,6 @@
             android:label="@string/title_activity_student__change_password"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".Apply_For_Jobs"
-            android:label="@string/title_activity_apply__for__jobs"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
             android:name=".Student_Notifications"
             android:label="@string/title_activity_student__notifications"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -74,6 +112,10 @@
             android:name=".View_Jobs"
             android:label="@string/title_activity_view__jobs"
             android:theme="@style/AppTheme.NoActionBar" />
+        <!--<activity-->
+            <!--android:name=".View_Interns"-->
+            <!--android:label="@string/title_activity_view__interns"-->
+            <!--android:theme="@style/AppTheme.NoActionBar" />-->
         <activity
             android:name=".Student_Profile"
             android:label="@string/title_activity_student__profile"
@@ -82,6 +124,7 @@
             android:name=".Student_Dashboard"
             android:label="@string/title_activity_student__dashboard"
             android:theme="@style/AppTheme.NoActionBar" />
+
         <activity android:name="com.microsoft.identity.client.BrowserTabActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -103,6 +146,7 @@
 
         <activity android:name=".company_dashboard" />
         <activity android:name=".job_profile" />
+        <activity android:name=".intern_profile" />
         <activity android:name=".company_login" />
     </application>
 

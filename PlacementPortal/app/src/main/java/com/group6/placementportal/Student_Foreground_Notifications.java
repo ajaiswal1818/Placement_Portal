@@ -36,10 +36,22 @@ public class Student_Foreground_Notifications extends IntentService {
     }
 
     @Override
+    public int onStartCommand(Intent intent, int flags, int startID){
+        super.onStartCommand(intent,flags,startID);
+        return START_STICKY;
+    }
+
+    @Override
     protected void onHandleIntent(Intent intent) {
-        String user = intent.getStringExtra("user_credentials");
-
-
+        String user;
+        if(intent == null){
+            user = "vakul170101076";
+            Log.d("User", "Currently Not Logged In ");
+        }
+        else {
+            user = intent.getStringExtra("user_credentials");
+            Log.d("User", "Currently Logged In ");
+        }
 
         reference.child("Student").child(user).child("List_of_Notification_IDs").addValueEventListener(new ValueEventListener() {
             @Override

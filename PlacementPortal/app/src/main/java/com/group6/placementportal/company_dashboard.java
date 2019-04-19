@@ -33,11 +33,14 @@ public class company_dashboard extends AppCompatActivity {
     private android.support.v7.widget.CardView profile;
         private android.support.v7.widget.CardView notices;
    private android.support.v7.widget.CardView enrollments;
+    private android.support.v7.widget.CardView addnotices;
+
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_companydashboard);
               profile   = findViewById(R.id.profile_card);
               enrollments=findViewById(R.id.enrollments_card);
+              addnotices = findViewById(R.id.AddNotices);
 
             this.c=(company) getIntent().getSerializableExtra("MyClass");
             profile   = findViewById(R.id.profile_card);
@@ -45,8 +48,9 @@ public class company_dashboard extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     Intent company_profile=new Intent(company_dashboard.this, company_profile.class);
-                    //company_profile.putExtra("MyClass",c);
-                    finish();
+                    company_profile.putExtra("MyClass",c);
+                    company_profile.putExtra("coming_from","dashboard");
+                    //finish();
                     startActivity(company_profile);
                 }
             });
@@ -66,6 +70,14 @@ public class company_dashboard extends AppCompatActivity {
                     Intent company_enrollments_screen1=new Intent(company_dashboard.this,company_enrolments_screen1.class);
                     company_enrollments_screen1.putExtra("MyClass",c);
                     startActivity(company_enrollments_screen1);
+                }
+            });
+
+            addnotices.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent company_enrollements=new Intent(company_dashboard.this, NoticeFromCompany.class);
+                    startActivity(company_enrollements);
                 }
             });
 

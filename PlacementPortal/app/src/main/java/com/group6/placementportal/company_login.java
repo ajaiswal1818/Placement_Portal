@@ -75,7 +75,8 @@ public class company_login extends AppCompatActivity {
                 password.setText("");
                 company c=null;
                 Intent company_profile=new Intent(company_login.this, company_profile.class);
-                company_profile.putExtra("MyClass",c);
+                //  company_profile.putExtra("MyClass",c);
+                company_profile.putExtra("coming_from","signup");
                 startActivity(company_profile);
             }
         });
@@ -87,34 +88,34 @@ public class company_login extends AppCompatActivity {
                 valid.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        if(dataSnapshot.exists())
+                        if(dataSnapshot.exists() && dataSnapshot.hasChild(username.getText().toString()))
                         {
-                            Iterable<DataSnapshot> all_children= dataSnapshot.getChildren();
-                            for (DataSnapshot son : all_children)
+                            if(dataSnapshot.child(username.getText().toString()).child("approved").exists() && dataSnapshot.child(username.getText().toString()).child("approved").getValue().toString().equals("Approved"))
                             {
-                                if(son.child("username").exists())
+                                if (encryption.encryptOrNull(password.getText().toString()).equals(dataSnapshot.child(username.getText().toString()).child("password").getValue().toString())) {
+                                    company c = dataSnapshot.child(username.getText().toString()).getValue(company.class);
+                                    Intent company_dashboard = new Intent(company_login.this, company_dashboard.class);
+                                    company_dashboard.putExtra("MyClass", c);
+                                    //company_dashboard.putExtra("PrevActivity","company_login");
+                                    finish();
+                                    startActivity(company_dashboard);
+                                }
+                                else
                                 {
-                              //      Toast.makeText(company_login.this,son.child("username").getKey(),Toast.LENGTH_LONG).show();
-
-                                    if(son.child("username").getValue().toString().equals(username.getText().toString()))
-                                    {
-                                        if(encryption.encryptOrNull(password.getText().toString()).equals(son.child("password").getValue().toString()))
-                                        {
-                                            c = son.getValue(company.class);
-                                            Intent company_dashboard=new Intent(company_login.this, company_dashboard.class);
-                                            company_dashboard.putExtra("MyClass",c);
-                                            //company_dashboard.putExtra("PrevActivity","company_login");
-                                            finish();
-                                            startActivity(company_dashboard);
-                                        }
-                                        else
-                                        {
-                                            Toast.makeText(company_login.this,"Invalid username or password",Toast.LENGTH_LONG).show();
-                                        }
-                                        break;
-                                    }
+                                    Toast.makeText(company_login.this,"Incorrect Login Credentials",Toast.LENGTH_LONG).show();
                                 }
                             }
+                            else if(dataSnapshot.child(username.getText().toString()).child("approved").getValue().toString().equals("Rejected"))
+                            {
+                                Toast.makeText(company_login.this,"Sorry, your request has been rejected by the admin.\nPlease contact admin for more details.",Toast.LENGTH_LONG).show();
+                            }
+                            else {
+                                Toast.makeText(company_login.this,"Your request to admin is pending for approval, can't login now.",Toast.LENGTH_LONG).show();
+                            }
+                        }
+                        else
+                        {
+                            Toast.makeText(company_login.this,"Incorrect Login Credentials",Toast.LENGTH_LONG).show();
                         }
                     }
 
@@ -123,6 +124,7 @@ public class company_login extends AppCompatActivity {
 
                     }
                 });
+
             }
         });
 
