@@ -167,7 +167,10 @@
 
         <activity android:name=".company_dashboard" />
         <activity android:name=".job_profile" />
+        <activity android:name=".intern_profile" />
+        <activity android:name=".Company_Application_Slots"/>
         <activity android:name=".company_login" />
+        <activity android:name=".view_pdf"/>
     </application>
 
 </manifest>

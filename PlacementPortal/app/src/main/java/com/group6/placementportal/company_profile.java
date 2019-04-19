@@ -43,6 +43,7 @@ public class company_profile extends AppCompatActivity {
     private EditText hq;
     private EditText username;
     private EditText password;
+    private EditText password2;
     private DatabaseReference valid;
     private ArrayList<job> jobs;
     private int flag;
@@ -102,6 +103,7 @@ public class company_profile extends AppCompatActivity {
         hq=findViewById(R.id.hq);
         username=findViewById(R.id.username);
         password=findViewById(R.id.password);
+        password2=findViewById(R.id.password2);
         change_password=findViewById(R.id.change_password);
         goto_jobs=findViewById(R.id.goto_jobs);
         goto_interns=findViewById(R.id.goto_interns);
@@ -120,6 +122,7 @@ public class company_profile extends AppCompatActivity {
             hq.setText(c1.getHeadoffice());
             username.setText("Username : " + c1.getUsername());
             password.setVisibility(View.INVISIBLE);
+            password2.setVisibility(View.INVISIBLE);
             change_password.setVisibility(View.VISIBLE);
             name.setEnabled(false);
             sector.setEnabled(false);
@@ -140,6 +143,15 @@ public class company_profile extends AppCompatActivity {
                         proc.setEnabled(true);
                         Toast.makeText(company_profile.this,"Can't leave any field empty",Toast.LENGTH_LONG).show();
                     }
+                    if(isNumeric(contact.getText().toString())==false){
+                        contact.setError("Contact No. can contain only digits");
+                        return;
+                    }
+                    if(contact.getText().toString().length()!=10){
+                        contact.setError("Contact No. should be of 10 digits");
+                        return;
+                    }
+
                 }
 
                 @Override
@@ -160,6 +172,12 @@ public class company_profile extends AppCompatActivity {
                     {
                         proc.setEnabled(true);
                         Toast.makeText(company_profile.this,"Can't leave any field empty",Toast.LENGTH_LONG).show();
+                    }
+                    String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+[\\.+[a-z]+]+";
+                    if(!email.getText().toString().matches(emailPattern))
+                    {
+                        email.setError("Email format is incorrect");
+                        return;
                     }
                 }
 
@@ -327,8 +345,8 @@ public class company_profile extends AppCompatActivity {
             proc.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if(username.getText().toString().contains(".")){
-                        username.setError("Username can't contain . ");
+                    if(username.getText().toString().contains(".")||username.getText().toString().contains("_")||username.getText().toString().contains(",")||username.getText().toString().contains(":")||username.getText().toString().contains(" ")||username.getText().toString().contains(";")){
+                        username.setError("Username can't contain any special characters ");
                         return;
                     }
                     if(isNumeric(contact.getText().toString())==false){
@@ -339,7 +357,12 @@ public class company_profile extends AppCompatActivity {
                         contact.setError("Contact No. should be of 10 digits");
                         return;
                     }
-                    String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
+                    if(!(password.getText().toString().equals(password2.getText().toString())))
+                    {
+                        password2.setError("Re-enter correct password");
+                        return;
+                    }
+                    String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+[\\.+[a-z]+]+";
                     if(!email.getText().toString().matches(emailPattern))
                     {
                         email.setError("Email format is incorrect");
@@ -362,14 +385,26 @@ public class company_profile extends AppCompatActivity {
                                         Toast.makeText(company_profile.this, "Username already exists, choose another", Toast.LENGTH_LONG).show();
                                     }
                                     else {
-                                        company c = new company(name.getText().toString(), "1", sector.getText().toString(), contact.getText().toString(), email.getText().toString(), hq.getText().toString(), username.getText().toString(), encryption.encryptOrNull(password.getText().toString()), "Pending");
+                                        company c = new company(name.getText().toString().trim(), "1", sector.getText().toString().trim(), contact.getText().toString().trim(), email.getText().toString().trim(), hq.getText().toString().trim(), username.getText().toString().trim(), encryption.encryptOrNull(password.getText().toString().trim()), "Pending");
                                         c.setCompany_id(username.getText().toString());
                                         valid.child(c.getCompany_id()).setValue(c);
+                                        valid.child("Max_entry").setValue(String.valueOf(max_id+1));
                                         Toast.makeText(company_profile.this, "Your request has been sent to the admin for approval.", Toast.LENGTH_LONG).show();
                                         Intent company_login = new Intent(company_profile.this, company_login.class);
                                         finish();
                                         startActivity(company_login);
                                     }
+                                }
+                                else
+                                {
+                                    company c = new company(name.getText().toString().trim(), "1", sector.getText().toString().trim(), contact.getText().toString().trim(), email.getText().toString().trim(), hq.getText().toString().trim(), username.getText().toString().trim(), encryption.encryptOrNull(password.getText().toString().trim()), "Pending");
+                                    c.setCompany_id(username.getText().toString());
+                                    valid.child(c.getCompany_id()).setValue(c);
+                                    valid.child("Max_entry").setValue("1");
+                                    Toast.makeText(company_profile.this, "Your request has been sent to the admin for approval.", Toast.LENGTH_LONG).show();
+                                    Intent company_login = new Intent(company_profile.this, company_login.class);
+                                    finish();
+                                    startActivity(company_login);
                                 }
                             }
 
