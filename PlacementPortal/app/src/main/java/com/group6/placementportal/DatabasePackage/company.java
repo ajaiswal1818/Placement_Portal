@@ -6,15 +6,24 @@ import java.util.ArrayList;
 
 public class company implements Serializable {
     private String company_name;
-    private String compnany_id;
+    private String company_id;
     private String sector;
     private String contact_no;
     private String email_address;
     private String headoffice;
     private String username;
     private String password;
-    private ArrayList<job> jobs;
+    private String approved;
+
     public company() {
+    }
+
+    public String getApproved() {
+        return approved;
+    }
+
+    public void setApproved(String approved) {
+        this.approved = approved;
     }
 
     public String getUsername() {
@@ -43,12 +52,12 @@ public class company implements Serializable {
         this.company_name = company_name;
     }
 
-    public String getCompnany_id() {
-        return compnany_id;
+    public String getCompany_id() {
+        return company_id;
     }
 
-    public void setCompnany_id(String compnany_id) {
-        this.compnany_id = compnany_id;
+    public void setCompany_id(String company_id) {
+        this.company_id = company_id;
     }
 
     public String getSector() {
@@ -83,23 +92,17 @@ public class company implements Serializable {
         this.headoffice = headoffice;
     }
 
-    public ArrayList<job> getJobs() {
-        return jobs;
-    }
 
-    public void setJobs(ArrayList<job> jobs) {
-        this.jobs = jobs;
-    }
-
-    public company(String company_name, String compnany_id, String sector, String contact_no, String email_address, String headoffice, ArrayList<job> jobs,String username,String password) {
+    public company(String company_name, String company_id, String sector, String contact_no, String email_address, String headoffice,String username,String password,String approved) {
         this.company_name = company_name;
-        this.compnany_id = compnany_id;
+        this.company_id = company_id;
         this.sector = sector;
         this.contact_no = contact_no;
         this.email_address = email_address;
         this.headoffice = headoffice;
-        this.jobs = jobs;
+        //this.jobs = jobs;
         this.username=username;
         this.password=password;
+        this.approved=approved;
     }
 }

@@ -13,7 +13,8 @@ import com.group6.placementportal.DatabasePackage.JRF_applications;
 
 import java.util.ArrayList;
 
-public class Adapter_JRF_Admin extends RecyclerView.Adapter<Adapter_JRF_Admin.MyViewHolder> {
+public class
+Adapter_JRF_Admin extends RecyclerView.Adapter<Adapter_JRF_Admin.MyViewHolder> {
 
     Context context;
     ArrayList<JRF_applications> profiles;
@@ -64,4 +65,6 @@ public class Adapter_JRF_Admin extends RecyclerView.Adapter<Adapter_JRF_Admin.My
             parentlayout = itemView.findViewById(R.id.cardview_jrf);
         }
     }
+
+
 }
