@@ -1,13 +1,16 @@
 package com.group6.placementportal;
 
 import android.content.ContentResolver;
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
+import android.os.Bundle;
 import android.os.Handler;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.Button;
@@ -50,6 +53,11 @@ public class NoticeFromCompany extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notice_from_company);
 
+        if(isNetworkAvailable()==false){
+            Toast.makeText(NoticeFromCompany.this,"NO INTERNET CONNECTION", Toast.LENGTH_LONG).show();
+            return;
+        }
+
         image= (ImageView)findViewById(R.id.imageView);
         Choose= (Button)findViewById(R.id.Upload_Pic);
         Load= (Button)findViewById(R.id.Load);
@@ -84,6 +92,13 @@ public class NoticeFromCompany extends AppCompatActivity {
                 Upload_file();
             }
         });
+    }
+
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 
     @Override

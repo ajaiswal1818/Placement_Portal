@@ -1,7 +1,10 @@
 package com.group6.placementportal;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -10,7 +13,6 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.DialogTitle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -48,6 +50,11 @@ public class GivePreference extends AppCompatActivity
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        if(isNetworkAvailable()==false){
+            Toast.makeText(GivePreference.this,"NO INTERNET CONNECTION", Toast.LENGTH_LONG).show();
+            return;
+        }
+
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -61,7 +68,7 @@ public class GivePreference extends AppCompatActivity
         user = (Student) getIntent().getSerializableExtra("user");
 
         boolean userApp = checkUserApplication();
-        if(!userApp){
+        if(userApp){
             AlertDialog.Builder mBuilder = new AlertDialog.Builder(GivePreference.this);
             mBuilder.setTitle("You Already Set your preferences");
             mBuilder.setCancelable(false);
@@ -90,6 +97,13 @@ public class GivePreference extends AppCompatActivity
         }
         AllowUsertogivePreferences();
         }
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+    }
+
 
         public void  AllowUsertogivePreferences(){
             recyclerView = findViewById(R.id.recycle_give_preferences_selected);
@@ -102,15 +116,28 @@ public class GivePreference extends AppCompatActivity
                 public void onClick(View v) {
                     Toast.makeText(GivePreference.this,"Hey",Toast.LENGTH_LONG).show();
                     String list_of_applied_companies="";
-                    for(Jobs j: list){
-                        String job_id = j.getJob_id();
-                        if(list_of_applied_companies.equals("")){
-                            list_of_applied_companies+=job_id;
+                    if(list!=null) {
+                        for (Jobs j : list) {
+                            String job_id = j.getJob_id();
+                            if (list_of_applied_companies.equals("")) {
+                                list_of_applied_companies += job_id;
+                            } else {
+                                list_of_applied_companies += ",";
+                                list_of_applied_companies += job_id;
+                            }
                         }
-                        else{
-                            list_of_applied_companies+=",";
-                            list_of_applied_companies+=job_id;
-                        }
+                    }else{
+                        AlertDialog.Builder mBuilder = new AlertDialog.Builder(GivePreference.this);
+                        mBuilder.setTitle("You haven't applied for any jobs yet");
+                        mBuilder.setCancelable(false);
+                        mBuilder.setNeutralButton("Ok", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                            }
+                        });
+                        AlertDialog mDialog = mBuilder.create();
+                        mDialog.show();
                     }
                     CAllDatabase(list_of_applied_companies);
                 }
@@ -125,26 +152,28 @@ public class GivePreference extends AppCompatActivity
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
                     String applied = dataSnapshot.child("preferences").getValue(String.class);
-                    final String[] list_applied = applied.split("\\,");
+                    if(applied!=null && !applied.equals("")) {
+                        final String[] list_applied = applied.split("\\,");
 
-                    reference.child("Jobs").addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            list = new ArrayList<>();
+                        reference.child("Jobs").addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                list = new ArrayList<>();
 
-                            for (String jobId : list_applied) {
-                                Jobs p = dataSnapshot.child(jobId).getValue(Jobs.class);
-                                list.add(p);
+                                for (String jobId : list_applied) {
+                                    Jobs p = dataSnapshot.child(jobId).getValue(Jobs.class);
+                                    list.add(p);
+                                }
+                                adapter = new Adapter_Selected_Preferences(GivePreference.this, list, user);
+                                recyclerView.setAdapter(adapter);
                             }
-                            adapter = new Adapter_Selected_Preferences(GivePreference.this, list, user);
-                            recyclerView.setAdapter(adapter);
-                        }
 
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError databaseError) {
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
 
-                        }
-                    });
+                            }
+                        });
+                    }
                 }
                 @Override
                 public void onCancelled (@NonNull DatabaseError databaseError){

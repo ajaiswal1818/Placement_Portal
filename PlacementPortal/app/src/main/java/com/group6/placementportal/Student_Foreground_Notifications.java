@@ -57,24 +57,25 @@ public class Student_Foreground_Notifications extends IntentService {
             @Override
             public void onDataChange(@NonNull final DataSnapshot dataSnapshot) {
                 String Notif = dataSnapshot.getValue(String.class);
-                String[] split_IDs = Notif.split("\\,");
+                if(Notif!=null && !Notif.equals("")) {
+                    String[] split_IDs = Notif.split("\\,");
 
-                Log.d("User", "Currently Logged In ");
+                    Log.d("User", "Currently Logged In ");
 
-                final String index_Notif = split_IDs[split_IDs.length-1];
-                reference.child("Notifications").addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot1) {
-                        my_Notif = dataSnapshot1.child(index_Notif).getValue(Notifications.class);
-                        showNotif(my_Notif);
-                    }
+                    final String index_Notif = split_IDs[split_IDs.length - 1];
+                    reference.child("Notifications").addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot1) {
+                            my_Notif = dataSnapshot1.child(index_Notif).getValue(Notifications.class);
+                            showNotif(my_Notif);
+                        }
 
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
 
-                    }
-                });
-
+                        }
+                    });
+                }
             }
 
             @Override
