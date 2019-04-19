@@ -39,40 +39,75 @@ public class admin_enrollment_adapter extends RecyclerView.Adapter<admin_enrollm
     ArrayList<Student> students;
     String job;
     int which;
+    String cv;
+    boolean is_job;
     public DatabaseReference reference;
     public void set_color(final int pos, final CardView ref){
-        reference = FirebaseDatabase.getInstance().getReference().child("Jobs");
-        reference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                if(dataSnapshot.child(job).child("Applied Students").child(students.get(pos).getWebmailID()).child("Approval").getValue().equals("Yes")){
-                    //    int colorId = 7;
-                    //  int color = holder.parentlayout.getContext().getResources().getColor(colorId);
+        if(is_job){
+            reference = FirebaseDatabase.getInstance().getReference().child("Jobs");
+            reference.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                    ref.setCardBackgroundColor(0xff2ecc71);
-                    Log.w("Approval in set color","Yess");
+                    if(dataSnapshot.child(job).child("Applied Students").child(students.get(pos).getWebmailID()).child("Approval").getValue().equals("Yes")){
+                        //    int colorId = 7;
+                        //  int color = holder.parentlayout.getContext().getResources().getColor(colorId);
+
+                        ref.setCardBackgroundColor(0xff2ecc71);
+                        Log.w("Approval in set color","Yess");
+                    }
+                    else if(dataSnapshot.child(job).child("Applied Students").child(students.get(pos).getWebmailID()).child("Approval").getValue().equals("Rejected")){
+
+                        ref.setCardBackgroundColor(0xffff0000);
+                        Log.w("Approval in set color","Reject");
+
+                    }
                 }
-                else if(dataSnapshot.child(job).child("Applied Students").child(students.get(pos).getWebmailID()).child("Approval").getValue().equals("Rejected")){
 
-                    ref.setCardBackgroundColor(0xffff0000);
-                    Log.w("Approval in set color","Reject");
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
 
                 }
-            }
+            });
+        }
+        else{
+            reference = FirebaseDatabase.getInstance().getReference().child("Interns");
+            reference.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
+                    if(dataSnapshot.child(job).child("Applied Students").child(students.get(pos).getWebmailID()).child("Approval").exists() && dataSnapshot.child(job).child("Applied Students").child(students.get(pos).getWebmailID()).child("Approval").getValue().equals("Yes")){
+                        //    int colorId = 7;
+                        //  int color = holder.parentlayout.getContext().getResources().getColor(colorId);
 
-            }
-        });
+                        ref.setCardBackgroundColor(0xff2ecc71);
+                        Log.w("Approval in set color","Yess");
+                    }
+                    else if(dataSnapshot.child(job).child("Applied Students").child(students.get(pos).getWebmailID()).child("Approval").exists() && dataSnapshot.child(job).child("Applied Students").child(students.get(pos).getWebmailID()).child("Approval").getValue().equals("Rejected")){
+
+                        ref.setCardBackgroundColor(0xffff0000);
+                        Log.w("Approval in set color","Reject");
+
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+        }
+
     }
-    public admin_enrollment_adapter(Activity c , ArrayList<Student> p,String job_id,int pos)
+    public admin_enrollment_adapter(Activity c , ArrayList<Student> p,String job_id,int pos,String link,boolean job_or_not)
     {
         context = c;
         students = p;
         job=job_id;
         which=pos;
+        cv=link;
+        is_job=job_or_not;
     }
 
     @NonNull
@@ -87,8 +122,11 @@ public class admin_enrollment_adapter extends RecyclerView.Adapter<admin_enrollm
         holder.job_profile.setText(students.get(position).getProfile());
         holder.job_location.setText(students.get(position).getLocation());*/
         holder.student_name.setText(students.get(position).getFullName());
-        reference = FirebaseDatabase.getInstance().getReference().child("Jobs");
-        Log.w("reference adpater",reference.getRef().toString());
+        holder.student_rno.setText(students.get(position).getRollNo());
+        holder.CV.setText(cv);
+        Log.w("adapter admin",Integer.toString(position)+" "+students.get(position).getWebmailID());
+       // reference = FirebaseDatabase.getInstance().getReference().child("Jobs");
+//        Log.w("reference adpater",reference.getRef().toString());
         Log.w("calling","calling set color");
         set_color(position,holder.parentlayout);
 
@@ -100,7 +138,7 @@ public class admin_enrollment_adapter extends RecyclerView.Adapter<admin_enrollm
                 context.startActivity(intent); */
                 // Log.d("Messgae","tag");
 
-                single_dialog_companyenrollments_0 menu=new single_dialog_companyenrollments_0(students.get(position).getWebmailID(),job,which,1);
+                single_dialog_companyenrollments_0 menu=new single_dialog_companyenrollments_0(students.get(position).getWebmailID(),job,which,1,is_job);
                 //FragmentManager f=context.getPackageManager();
                 // menu.getWindow().setType(WindowManager.LayoutParams.TYPE_SYSTEM_ALERT);
                 FragmentActivity f=(FragmentActivity) context;
@@ -126,7 +164,7 @@ public class admin_enrollment_adapter extends RecyclerView.Adapter<admin_enrollm
         // public View parentlayout;
         /* TextView company_name,job_profile,job_location;*/
         CardView parentlayout;
-        TextView student_name;
+        TextView student_name,student_rno,CV;
         public MyViewHolder(View itemView) {
             super(itemView);
            /* company_name = itemView.findViewById(R.id.txt_company_name);
@@ -134,7 +172,8 @@ public class admin_enrollment_adapter extends RecyclerView.Adapter<admin_enrollm
             job_location = itemView.findViewById(R.id.txt_job_location);*/
             parentlayout = itemView.findViewById(R.id.cardview_enrollments);
             student_name=itemView.findViewById(R.id.txt_student_name);
-
+            student_rno=itemView.findViewById(R.id.txt_student_rollno);
+            CV=itemView.findViewById(R.id.txt_student_cv);
 
         }
     }

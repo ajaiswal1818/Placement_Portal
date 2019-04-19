@@ -2,7 +2,6 @@ package com.group6.placementportal.DatabasePackage;
 
 import android.Manifest;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -17,7 +16,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,7 +28,6 @@ import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.group6.placementportal.R;
-import com.group6.placementportal.Student_JRF;
 import com.microsoft.identity.client.PublicClientApplication;
 
 import static android.app.Activity.RESULT_OK;
@@ -58,9 +55,8 @@ public class RA extends Fragment {
     private DatabaseReference mDatabaseReference;
     private TextView file_name_photo;
     private TextView file_name_sign;
-    private EditText application,programmingLanguage,year,project,post;
-    private String mapplication,mprogrammingLanguage,myear,mproject,mpost;
-    private RadioButton yesBtn,noBtn;
+    private EditText name_org,designation,from_duration,to_duration,type_of_job;
+    private String mnameorg,mdesignation,mfrom_duration,mto_duration,mtype_of_job;
 
     public RA() {
     }
@@ -75,13 +71,11 @@ public class RA extends Fragment {
         apply = getView().findViewById(R.id.btn_apply);
         file_name_photo = getView().findViewById(R.id.txt_uploadphoto);
         file_name_sign = getView().findViewById(R.id.txt_uploadsign);
-        application =  getView().findViewById(R.id.editApplication);
-        programmingLanguage = getView().findViewById(R.id.editProgLang);
-        year = getView().findViewById(R.id.editYear);
-        project = getView().findViewById(R.id.editapplyproject);
-        post = getView().findViewById(R.id.editapplypost);
-        yesBtn = getView().findViewById(R.id.rbtnyes);
-        noBtn = getView().findViewById(R.id.rbtnno);
+        name_org = getView().findViewById(R.id.txt_name_of_org);
+        designation = getView().findViewById(R.id.txt_designation);
+        from_duration = getView().findViewById(R.id.txt_from);
+        to_duration = getView().findViewById(R.id.txt_to);
+        type_of_job = getView().findViewById(R.id.txt_nature_of_work);
 
 
         uploadphoto.setOnClickListener(new View.OnClickListener() {
@@ -101,25 +95,25 @@ public class RA extends Fragment {
         apply.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mapplication = application.getText().toString();
-                mprogrammingLanguage = programmingLanguage.getText().toString();
-                myear = year.getText().toString();
-                mproject = project.getText().toString();
-                mpost = post.getText().toString();
+                mnameorg = name_org.getText().toString();
+                mdesignation = designation.getText().toString();
+                mfrom_duration = from_duration.getText().toString();
+                mto_duration = to_duration.getText().toString();
+                mtype_of_job = type_of_job.getText().toString();
 
-                if(mapplication==null){
+                if(mnameorg==null){
                     return;
                 }
-                if(mprogrammingLanguage==null){
+                if(mdesignation==null){
                     return;
                 }
-                if(myear==null){
+                if(mfrom_duration==null){
                     return;
                 }
-                if(mproject==null){
+                if(mto_duration==null){
                     return;
                 }
-                if(mpost==null){
+                if(mtype_of_job==null){
                     return;
                 }
 
@@ -196,7 +190,7 @@ public class RA extends Fragment {
         }
         else if(requestCode==87 && resultCode==RESULT_OK && data!=null){
             pdfUriphoto = data.getData();
-            file_name_sign.setText(data.getData().getLastPathSegment());
+            file_name_photo.setText(data.getData().getLastPathSegment());
         }
         else{
             Toast.makeText(getActivity().getApplicationContext(),"Select a file",Toast.LENGTH_SHORT).show();
@@ -261,11 +255,11 @@ public class RA extends Fragment {
                                 String upload = uri.toString();
                                 mDatabaseReference.child("RA").child(user.getWebmailID()).child("Photo").setValue(upload);
                                 mDatabaseReference.child("RA").child(user.getWebmailID()).child("Student_Name").setValue(user.getFullName());
-                                mDatabaseReference.child("RA").child(user.getWebmailID()).child("Application_No").setValue(mapplication);
-                                mDatabaseReference.child("RA").child(user.getWebmailID()).child("ProgrammingLanguages").setValue(mprogrammingLanguage);
-                                mDatabaseReference.child("RA").child(user.getWebmailID()).child("YearandType").setValue(myear);
-                                mDatabaseReference.child("RA").child(user.getWebmailID()).child("AppliedProject").setValue(mproject);
-                                mDatabaseReference.child("RA").child(user.getWebmailID()).child("Qualified").setValue("yes");
+                                mDatabaseReference.child("RA").child(user.getWebmailID()).child("Name_of_Org").setValue(mnameorg);
+                                mDatabaseReference.child("RA").child(user.getWebmailID()).child("Designation").setValue(mdesignation);
+                                mDatabaseReference.child("RA").child(user.getWebmailID()).child("From_Duration").setValue(mfrom_duration);
+                                mDatabaseReference.child("RA").child(user.getWebmailID()).child("To_Duration").setValue(mto_duration);
+                                mDatabaseReference.child("RA").child(user.getWebmailID()).child("Type_of_Job").setValue(mtype_of_job);
                                 mDatabaseReference.child("RA").child(user.getWebmailID()).child("Webmail").setValue(user.getWebmailID());
                                 Toast.makeText(getActivity().getApplicationContext(),"File Upload Successful",Toast.LENGTH_SHORT).show();
                             }

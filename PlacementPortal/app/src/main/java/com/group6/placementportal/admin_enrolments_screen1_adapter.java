@@ -24,6 +24,7 @@ public class admin_enrolments_screen1_adapter extends RecyclerView.Adapter<admin
     Context context;
     ArrayList<Jobs> profiles;
     private static DatabaseReference reference;
+    public String cv;
 
     public admin_enrolments_screen1_adapter(Context c , ArrayList<Jobs> p)
     {
@@ -41,14 +42,16 @@ public class admin_enrolments_screen1_adapter extends RecyclerView.Adapter<admin
     public void onBindViewHolder(@NonNull MyViewHolder holder, final int position) {
         // holder.company_name.setText(profiles.get(position).getCompany_name());
         holder.job_profile.setText(profiles.get(position).getProfile());
+        holder.job_id.setText(profiles.get(position).getJob_id());
+        holder.company.setText(profiles.get(position).getCompany_name());
         // holder.job_location.setText(profiles.get(position).getLocation());
         holder.parentlayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final String job_id=Integer.toString(position);
+                final String job_id=profiles.get(position).getJob_id();
                 //intent.putExtra("job_profile", profiles.get(position));
                // final String job_id=Integer.toString(position);
-                reference = FirebaseDatabase.getInstance().getReference().child("Jobs").child(job_id).child("Applied Students");
+                reference = FirebaseDatabase.getInstance().getReference().child("Jobs").child(profiles.get(position).getJob_id()).child("Applied Students");
                 reference.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -56,10 +59,14 @@ public class admin_enrolments_screen1_adapter extends RecyclerView.Adapter<admin
                         for(DataSnapshot dataSnapshot1:dataSnapshot.getChildren()){
                             String s_id=dataSnapshot1.getKey();
                             slist.add(s_id);
+                            cv=(String) dataSnapshot.child("CV").getValue();
+
                         }
                         Intent intent = new Intent(context, company_enrollments.class);
                         intent.putExtra("MyClass",slist);
                         intent.putExtra("Job",job_id);
+                        intent.putExtra("cv",cv);
+                        intent.putExtra("is_job",true);
                         intent.putExtra("Screen",1);
                         context.startActivity(intent);
                     }
@@ -82,13 +89,16 @@ public class admin_enrolments_screen1_adapter extends RecyclerView.Adapter<admin
 
     class MyViewHolder extends RecyclerView.ViewHolder
     {
-        TextView company_name,job_profile,job_location;
+        TextView company_name,job_profile,job_id,company;
         CardView parentlayout;
         public MyViewHolder(View itemView) {
             super(itemView);
             //  company_name = itemView.findViewById(R.id.txt_company_name);
             job_profile = itemView.findViewById(R.id.txt_job_profile);
             //job_location = itemView.findViewById(R.id.txt_job_location);
+            job_id=itemView.findViewById(R.id.txt_job_id);
+            company=itemView.findViewById(R.id.txt_company_names);
+
 
             parentlayout = itemView.findViewById(R.id.cardview_enrolments_job);
         }

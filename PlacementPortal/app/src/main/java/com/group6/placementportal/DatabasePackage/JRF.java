@@ -38,7 +38,6 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.group6.placementportal.GivePreference;
 import com.group6.placementportal.R;
-import com.group6.placementportal.Student_JRF;
 import com.microsoft.identity.client.PublicClientApplication;
 
 import java.io.File;

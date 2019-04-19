@@ -17,7 +17,23 @@
         android:id="@+id/nav_approve_company"
         android:title="Approve Company" />
     <item
+        android:id="@+id/nav_list_notifications"
+        android:title="Notifications" />
+    <item
+        android:id="@+id/nav_emails"
+        android:title="Send Email" />
+    <item
+        android:id="@+id/nav_manage_enroll"
+        android:title="Manage Enrollments" />
+    <item
+        android:id="@+id/nav_notice_to_company"
+        android:title="Company Notices" />
+    <item
+        android:id="@+id/nav_checkout"
+        android:title="Checkout" />
+    <item
         android:id="@+id/nav_signout"
         android:title="Sign Out" />
+
 
 </menu>

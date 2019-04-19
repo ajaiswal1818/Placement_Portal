@@ -158,6 +158,7 @@ public class LoginPage extends AppCompatActivity {
 
                 dialog.show();
                 rollNo = Webmail.getText().toString();
+                password = Password.getText().toString();
                 Login_Details= FirebaseDatabase.getInstance().getReference();
                 Login_Details = Login_Details.child("Student").child(rollNo);
 

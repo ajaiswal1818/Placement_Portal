@@ -194,13 +194,14 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/btn_uploadphoto" />
+
             <Button
                 android:id="@+id/btn_apply"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="0dp"
-                android:text="Upload Photo"
                 android:background="@drawable/roundbtn"
+                android:text="Apply"
                 android:textColor="#ffffff"
                 android:textSize="18dp"
                 app:layout_constraintEnd_toEndOf="parent"

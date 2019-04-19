@@ -1,17 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/cardview_enrollments"
     android:layout_width="match_parent"
-    android:layout_height="100dp">
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="10dp"
+    app:cardElevation="10dp"
+    app:cardCornerRadius="10dp"
+    android:layout_marginTop="2dp"
+    app:cardBackgroundColor="@color/colorCard"
+    >
 
-    <TextView
-        android:id="@+id/txt_student_name"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:text="sdgfsdgsgdfg" />
+        android:orientation="vertical"
+        android:gravity="center"
+        android:paddingVertical="20dp">
+        <TextView
+            android:id="@+id/txt_student_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:text="sdgfsdgsgdfg"
+            android:textSize="24dp"
+            android:textColor="@color/colorAccent"/>
+        <TextView
+            android:id="@+id/txt_student_rollno"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:text="sdgfsdgsgdfg" />
+        <TextView
+            android:id="@+id/txt_student_cv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:text="CV URL"
+            android:textSize="16dp"/>
+
+
+
+    </LinearLayout>
+
+
+
 
 
 </android.support.v7.widget.CardView>

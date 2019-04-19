@@ -77,6 +77,7 @@ public class Admin_DashBoard extends AppCompatActivity
         if (id == R.id.nav_jrf_application_requests) {
             Intent i = new Intent(getApplicationContext(), JRF_Application_Requests.class);
             startActivity(i);
+
         } else if (id == R.id.nav_approve_notice) {
             Intent i = new Intent(getApplicationContext(), Admin_ApproveNotice.class);
             startActivity(i);
@@ -89,6 +90,31 @@ public class Admin_DashBoard extends AppCompatActivity
             startActivity(i);
             Admin_DashBoard.this.finish();
         }
+        else if (id== R.id.nav_approve_company){
+            Intent i = new Intent(getApplicationContext(), approve_company.class);
+            startActivity(i);
+        }
+        else if (id== R.id.nav_manage_enroll){
+            Intent i = new Intent(getApplicationContext(), admin_enrollments_screen1.class);
+            startActivity(i);
+        }
+        else if (id== R.id.nav_notice_to_company){
+            Intent i = new Intent(getApplicationContext(), admin_notices.class);
+            startActivity(i);
+        }
+        else if (id== R.id.nav_checkout){
+            Intent i = new Intent(getApplicationContext(), admin_checkout_the_portal.class);
+            startActivity(i);
+        }
+        else if (id== R.id.nav_list_notifications){
+            Intent i = new Intent(getApplicationContext(), list_notification.class);
+            startActivity(i);
+        }
+        else if (id== R.id.nav_emails){
+            Intent i = new Intent(getApplicationContext(), sending_emails.class);
+            startActivity(i);
+        }
+
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

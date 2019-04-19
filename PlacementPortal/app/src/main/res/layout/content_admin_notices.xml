@@ -76,7 +76,7 @@
                 app:layout_constraintHorizontal_bias="0.495"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/upload" />
-        
+
             <Button
                 android:id="@+id/send_button"
                 android:layout_width="220dp"
@@ -92,7 +92,7 @@
                 app:layout_constraintHorizontal_bias="0.497"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/show_company" />
-        
+
             <Button
                 android:id="@+id/select_file"
                 android:layout_width="134dp"
@@ -110,7 +110,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/description"
                 app:layout_constraintVertical_bias="0.826" />
-        
+
             <Button
                 android:id="@+id/upload"
                 android:layout_width="220dp"
@@ -157,7 +157,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/description" />
-                
+
             <TextView
                 android:id="@+id/status"
                 android:layout_width="wrap_content"
@@ -173,5 +173,5 @@
 
 
 
-    
+
 </android.support.constraint.ConstraintLayout>

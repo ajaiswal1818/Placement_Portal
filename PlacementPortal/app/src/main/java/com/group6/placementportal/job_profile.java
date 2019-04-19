@@ -140,7 +140,7 @@ public class job_profile extends AppCompatActivity {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     if (dataSnapshot.exists()) {
-                        job_det = (Jobs) dataSnapshot.child(id).getValue();
+                        job_det = dataSnapshot.child(id).getValue(Jobs.class);
                         allot();
                     }
                 }
@@ -248,7 +248,7 @@ public class job_profile extends AppCompatActivity {
             submit.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if(cpi.getText().toString().matches("\\d*\\.?\\d+")==false || isNumeric(cpi.getText().toString())==false){
+                    if(cpi.getText().toString().matches("\\d+\\.?\\d+")==false ){
                         cpi.setError("Invalid CPI");
                         return;
                     }
@@ -257,7 +257,7 @@ public class job_profile extends AppCompatActivity {
                         cpi.setError("Invalid CPI");
                         return;
                     }
-                    if(ctc.getText().toString().matches("\\d*\\.?\\d+")==false || isNumeric(ctc.getText().toString())==false){
+                    if(ctc.getText().toString().matches("\\d+\\.?\\d+")==false ){
                         ctc.setError("CTC can only be decimal number");
                         return;
                     }
@@ -533,13 +533,26 @@ public class job_profile extends AppCompatActivity {
 
         status.setText(job_det.getBrochure());
 //getBrochure!=" " check
-        status.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Uri uri = Uri.parse(job_det.getBrochure()); // missing 'http://' will cause crashed
-                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-                startActivity(intent);
-            }
-        });
+        if(!(status.getText().toString().equals("")))
+        {
+            upload.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    /* // missing 'http://' will cause crashed
+                    Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                    startActivity(intent);*/
+                   // Uri uri = Uri.parse(job_det.getBrochure());
+                    Intent view_pdf = new Intent(job_profile.this, view_pdf.class);
+                    view_pdf.putExtra("url",job_det.getBranches());
+                    startActivity(view_pdf);
+                }
+
+            });
+        }
+        else
+        {
+
+        }
+
     }
 }

@@ -78,7 +78,7 @@ public class company_dashboard extends AppCompatActivity {
             enrollments.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent company_enrollments_screen1=new Intent(company_dashboard.this,company_enrolments_screen1.class);
+                    Intent company_enrollments_screen1=new Intent(company_dashboard.this,job_or_intern.class);
                     company_enrollments_screen1.putExtra("MyClass",c);
                     startActivity(company_enrollments_screen1);
                 }

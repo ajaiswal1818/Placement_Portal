@@ -175,11 +175,11 @@ public class Student_Dashboard extends AppCompatActivity
             Intent i = new Intent(getApplicationContext(), Student_Application_Forms.class);
             i.putExtra("user",user);
             startActivity(i);
-        } else if (id == R.id.nav_inst_profile) {
+        } else if (id == R.id.nav_help) {
             Intent i = new Intent(getApplicationContext(), Student_Application_Forms.class);
             i.putExtra("user",user);
             startActivity(i);
-        } else if (id == R.id.nav_help) {
+        } else if (id == R.id.nav_inst_profile) {
             Intent i = new Intent(getApplicationContext(), Help_Students.class);
             i.putExtra("user",user);
             startActivity(i);
