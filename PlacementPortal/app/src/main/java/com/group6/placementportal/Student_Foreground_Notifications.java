@@ -49,7 +49,7 @@ public class Student_Foreground_Notifications extends IntentService {
             Log.d("User", "Currently Not Logged In ");
         }
         else {
-            user = intent.getStringExtra("user_credentials");
+            user = intent.getStringExtra("user");
             Log.d("User", "Currently Logged In ");
         }
 

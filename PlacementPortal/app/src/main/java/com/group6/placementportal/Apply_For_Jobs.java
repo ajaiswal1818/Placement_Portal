@@ -94,7 +94,9 @@ public class Apply_For_Jobs extends AppCompatActivity {
         mDatabaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                list=dataSnapshot.child("Student").child(user.getWebmailID()).child("preferences").getValue(String.class);
+                if(dataSnapshot.child("Jobs").child(jobs.getJob_id()).child("Applied Students").hasChild(user.getWebmailID())){
+                    btn_apply.setEnabled(false);
+                }
             }
 
             @Override
@@ -102,18 +104,6 @@ public class Apply_For_Jobs extends AppCompatActivity {
 
             }
         });
-        if(list!=null && !list.equals("")) {
-            String[] split_list = list.split("\\,");
-            boolean flag = false;
-            for (int i = 0; i < split_list.length; i++) {
-                if (split_list[i].equals(jobs.getJob_id())) {
-                    flag = true;
-                }
-            }
-            if (flag == true) {
-                btn_apply.setEnabled(false);
-            }
-        }
 
         Log.d("TAG",jobs.getCompany_id()+" ");
         mDatabaseReference.child("Company").child(jobs.getCompany_id()).addListenerForSingleValueEvent(new ValueEventListener() {
