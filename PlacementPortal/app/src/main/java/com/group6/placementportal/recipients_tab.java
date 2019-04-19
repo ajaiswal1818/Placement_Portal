@@ -1,3 +1,4 @@
+/*
 package com.group6.placementportal;
 
 import android.os.Bundle;
@@ -86,3 +87,4 @@ public class recipients_tab extends AppCompatActivity {
 
 
 }
+*/

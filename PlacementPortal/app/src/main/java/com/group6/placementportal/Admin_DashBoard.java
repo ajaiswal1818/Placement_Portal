@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -15,7 +16,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class Admin_DashBoard extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -85,8 +90,42 @@ public class Admin_DashBoard extends AppCompatActivity
             startActivity(i);
         }
         else if (id== R.id.nav_approve_company){
-            Intent i = new Intent(getApplicationContext(), approve_company.class);
-            startActivity(i);
+            reference= FirebaseDatabase.getInstance().getReference("Company");
+            reference.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    if(dataSnapshot.exists())
+                    {
+                        flag=0;
+                        Iterable<DataSnapshot> all_children = dataSnapshot.getChildren();
+                        for(DataSnapshot dataSnapshot1: all_children)
+                        {
+                            if(dataSnapshot1.child("approved").exists() && dataSnapshot1.child("approved").getValue().toString().equals("Pending"))
+                            {
+                                flag=1;
+                                break;
+                            }
+                        }
+                        if(flag==0)
+                        {
+                            Toast.makeText(Admin_DashBoard.this, "No company with pending request", Toast.LENGTH_LONG).show();
+                        }
+                        else
+                        {
+                            Intent i = new Intent(getApplicationContext(), approve_company.class);
+                            startActivity(i);
+                        }
+
+                    }
+
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                    // Toast.makeText(approve_company.this, "Oops ... something is wrong", Toast.LENGTH_SHORT).show();
+                }
+            });
+
         }
         else if (id== R.id.nav_manage_enroll){
             Intent i = new Intent(getApplicationContext(), admin_enrollments_screen1.class);

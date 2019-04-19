@@ -111,6 +111,11 @@ public class approve_company_adapter extends RecyclerView.Adapter<approve_compan
                 }
             });
         }
+        else
+        {
+            Intent next = new Intent(context,Admin_DashBoard.class);
+            context.startActivity(next);
+        }
     }
 
     @Override

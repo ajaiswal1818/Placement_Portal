@@ -18,6 +18,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.graphics.Paint;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
@@ -215,6 +216,7 @@ public class intern_profile extends AppCompatActivity {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             String str = "";
+                            dep="";
                             int i;
                             if(selected_branches.size()>=1)
                             {
@@ -308,6 +310,12 @@ public class intern_profile extends AppCompatActivity {
 
                     if (profile.getText().toString().trim().equals("") || ctc.getText().toString().trim().equals("") || location.getText().toString().trim().equals("")||cpi.getText().toString().equals("") || dep.equals("") || intern_requirements.getText().toString().equals("")) {
                         Toast.makeText(intern_profile.this, "Can't leave any field empty", Toast.LENGTH_LONG).show();
+                        return;
+                    }
+                    if(file.equals(""))
+                    {
+                        Toast.makeText(intern_profile.this, "Please upload a pdf file", Toast.LENGTH_LONG).show();
+                        return;
                     }
                     else {
 
@@ -334,6 +342,14 @@ public class intern_profile extends AppCompatActivity {
                                     Interns new_intern=new Interns(id + "_" +  j1.getIntern_id(),j1.getProfile(),j1.getCtc(),j1.getLocation(),j1.getBrochure(),id,comp_name,j1.getDepartments(),j1.getCpi(),j1.getIntern_requirements());
                                     add_comp1.child(id + "_" + j1.getIntern_id()).setValue(new_intern);
                                     Toast.makeText(intern_profile.this, "Submitted", Toast.LENGTH_LONG).show();
+
+
+
+
+                                    Intent intern_list = new Intent(intern_profile.this, intern_list.class);
+                                    intern_list.putExtra("id",id);
+                                    finish();
+                                    startActivity(intern_list);
                                 }
                             }
 
@@ -343,13 +359,6 @@ public class intern_profile extends AppCompatActivity {
                             }
                         });
 
-
-
-
-                        Intent intern_list = new Intent(intern_profile.this, intern_list.class);
-                        intern_list.putExtra("id",id);
-                        finish();
-                        startActivity(intern_list);
                     }
 
                 }
@@ -392,7 +401,7 @@ public class intern_profile extends AppCompatActivity {
                         uploadFile(pdfUri);
 
                     } else {
-                        Toast.makeText(intern_profile.this, "Select a file", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(intern_profile.this, "Select a pdf file", Toast.LENGTH_SHORT).show();
                     }
                 }
             });
@@ -525,7 +534,7 @@ public class intern_profile extends AppCompatActivity {
             pdfUri = data.getData(); //The uri with the location of the file
             status.setText("File Selected : " + data.getData().getLastPathSegment());
         } else {
-            Toast.makeText(intern_profile.this, "Please select a file", Toast.LENGTH_SHORT).show();
+            Toast.makeText(intern_profile.this, "Please select a pdf file", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -566,23 +575,26 @@ public class intern_profile extends AppCompatActivity {
 
         branch_button.setVisibility(View.INVISIBLE);
         submit.setVisibility(View.INVISIBLE);
-        upload.setText("View Selected File");
+        upload.setVisibility(View.INVISIBLE);
+        //upload.setText("View Selected File");
         select.setVisibility(View.INVISIBLE);
 
         status.setText(intern_det.getBrochure());
+        status.setTextColor(Color.BLUE);
+        status.setPaintFlags(status.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
 //getBrochure!=" " check
         if(!(status.getText().toString().equals("")))
         {
-            upload.setOnClickListener(new View.OnClickListener() {
+            status.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     /* // missing 'http://' will cause crashed
                     Intent intent = new Intent(Intent.ACTION_VIEW, uri);
                     startActivity(intent);*/
                     // Uri uri = Uri.parse(intern_det.getBrochure());
-                    Intent view_pdf = new Intent(intern_profile.this, view_pdf.class);
-                    view_pdf.putExtra("url",intern_det.getBranches());
-                    startActivity(view_pdf);
+                    Intent intent = new Intent(Intent.ACTION_VIEW);
+                    intent.setData(Uri.parse(intern_det.getBrochure()));
+                    startActivity(intent);
                 }
 
             });

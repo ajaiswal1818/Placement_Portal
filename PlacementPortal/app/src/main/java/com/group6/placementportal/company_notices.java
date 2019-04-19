@@ -1,12 +1,16 @@
 package com.group6.placementportal;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -16,14 +20,19 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.group6.placementportal.DatabasePackage.company;
+import com.group6.placementportal.DatabasePackage.job;
 import com.group6.placementportal.DatabasePackage.notices2company;
+
+import java.util.ArrayList;
 
 
 public class company_notices extends AppCompatActivity {
-    private CardArrayAdapter cardArrayAdapter;
-    private ListView listView;
-    private DatabaseReference db;
+    private DatabaseReference reference;
+    private RecyclerView recyclerView;
+    private CardArrayAdapter adapter;
+    private ArrayList<Card> list;
     private company c;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,44 +44,38 @@ public class company_notices extends AppCompatActivity {
         }
 
         c =(company) getIntent().getSerializableExtra("MyClass");
-        listView = (ListView) findViewById(R.id.card_listView);
 
-        listView.addHeaderView(new View(this));
-        listView.addFooterView(new View(this));
+        recyclerView =findViewById(R.id.card_approve_company);
+        recyclerView.setLayoutManager( new LinearLayoutManager(this));
 
-        cardArrayAdapter = new CardArrayAdapter(getApplicationContext(), R.layout.list_item_card);
-
-        listView.setAdapter(cardArrayAdapter);
-        db=FirebaseDatabase.getInstance().getReference("Company").child(c.getCompany_id());
-        db.addListenerForSingleValueEvent(new ValueEventListener() {
+        reference = FirebaseDatabase.getInstance().getReference().child("Company").child(c.getCompany_id()).child("notices");
+        reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if(dataSnapshot.exists()){
-                    if(dataSnapshot.hasChild("notices"))
+                list = new ArrayList<Card>();
+                if(dataSnapshot.exists())
+                {
+                    for(DataSnapshot dataSnapshot1: dataSnapshot.getChildren())
                     {
-                        for(DataSnapshot dataSnapshot1:dataSnapshot.child("notices").getChildren())
-                        {
-                            notices2company nc=dataSnapshot.getValue(notices2company.class);
-                            Card card_new = new Card(nc.getTitle(), nc.getDescription(),nc.getFile());
-                            cardArrayAdapter.add(card_new);
-                        }
+                        notices2company new_notice = dataSnapshot1.getValue(notices2company.class);
+                        Card p =new Card(new_notice.getTitle(),new_notice.getDescription(),new_notice.getFile());
+                        list.add(p);
                     }
-                    ListView listview=findViewById(R.id.card_listView);
-                    listview.addHeaderView(new View(company_notices.this));
-                    listview.addHeaderView(new View(company_notices.this));
-                    listview.setAdapter(cardArrayAdapter);
+                    adapter = new CardArrayAdapter(company_notices.this,list);
+                    recyclerView.setAdapter(adapter);
                 }
+
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-
+                Toast.makeText(company_notices.this, "Oops ... something is wrong", Toast.LENGTH_LONG).show();
             }
         });
+            adapter = new CardArrayAdapter(company_notices.this,list);
+            recyclerView.setAdapter(adapter);
+        }
 
-
-
-    }
     private boolean isNetworkAvailable() {
         ConnectivityManager connectivityManager
                 = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -81,3 +84,5 @@ public class company_notices extends AppCompatActivity {
     }
 
 }
+
+

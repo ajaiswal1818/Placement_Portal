@@ -111,6 +111,7 @@ public class admin_notices extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         String str = "";
+                        selected_companies_id.clear();
                         int i;
                         for (i = 0; i < selected_companies.size(); i++) {
                             str = available_companies[selected_companies.get(i)];
@@ -188,6 +189,8 @@ public class admin_notices extends AppCompatActivity {
                         company_list = company_list.substring(0, company_list.length() - 1);
                     }
                     add_to_company();
+                    Intent next = new Intent(admin_notices.this,Admin_DashBoard.class);
+                    startActivity(next);
                 }
 
             }
