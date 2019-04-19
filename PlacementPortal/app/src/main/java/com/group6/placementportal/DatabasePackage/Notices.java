@@ -18,10 +18,10 @@ public class Notices {
 
     }
 
-    public Notices(String topic,String content){
+    public Notices(String topics,String contents){
 
-        this.topic = topic;
-        this.content = content;
+        this.topic = topics;
+        this.content = contents;
     }
 
     public String getTopic(){return topic;}

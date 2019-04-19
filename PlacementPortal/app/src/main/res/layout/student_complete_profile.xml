@@ -78,7 +78,7 @@
                             android:paddingBottom="5dp"
                             android:singleLine="true"
                             android:paddingRight="5dp"
-                            />
+                            android:inputType="numberDecimal" />
                     </LinearLayout>
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -106,7 +106,7 @@
                             android:paddingBottom="5dp"
                             android:singleLine="true"
                             android:paddingRight="5dp"
-                            />
+                            android:inputType="number" />
                     </LinearLayout>
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -134,7 +134,7 @@
                             android:paddingBottom="5dp"
                             android:singleLine="true"
                             android:paddingRight="5dp"
-                            android:inputType="date"
+                            android:inputType="text"
                             />
                     </LinearLayout>
 
@@ -172,6 +172,7 @@
                             android:paddingBottom="5dp"
                             android:singleLine="true"
                             android:paddingRight="5dp"
+                            android:inputType="numberDecimal"
                             />
                     </LinearLayout>
                     <LinearLayout
@@ -200,7 +201,7 @@
                             android:paddingBottom="5dp"
                             android:singleLine="true"
                             android:paddingRight="5dp"
-                            />
+                            android:inputType="number" />
                     </LinearLayout>
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -228,7 +229,7 @@
                             android:paddingBottom="5dp"
                             android:singleLine="true"
                             android:paddingRight="5dp"
-                            android:inputType="date"
+                            android:inputType="text"
                             />
                     </LinearLayout>
 
@@ -266,7 +267,7 @@
                             android:paddingBottom="5dp"
                             android:singleLine="true"
                             android:paddingRight="5dp"
-                            />
+                            android:inputType="text" />
                     </LinearLayout>
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -294,7 +295,7 @@
                             android:paddingBottom="5dp"
                             android:singleLine="true"
                             android:paddingRight="5dp"
-                            />
+                            android:inputType="text" />
                     </LinearLayout>
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -328,8 +329,7 @@
                                 android:paddingBottom="5dp"
                                 android:singleLine="true"
                                 android:paddingRight="5dp"
-
-                                />
+                                android:inputType="numberDecimal" />
                         </LinearLayout>
                         <LinearLayout
                             android:layout_width="154dp"
@@ -357,7 +357,7 @@
                                 android:paddingBottom="5dp"
                                 android:singleLine="true"
                                 android:paddingRight="5dp"
-                                android:inputType="date"
+                                android:inputType="number"
                                 />
                         </LinearLayout>
 
@@ -383,7 +383,8 @@
                                 android:paddingLeft="10dp"
                                 android:paddingTop="5dp"
                                 android:layout_marginTop="2dp"
-                                android:paddingBottom="5dp"/>
+                                android:paddingBottom="5dp"
+                                />
 
                             <EditText
                                 android:id="@+id/txt_g_cpi2"
@@ -394,7 +395,7 @@
                                 android:paddingBottom="5dp"
                                 android:singleLine="true"
                                 android:paddingRight="5dp"
-
+                                android:inputType="numberDecimal"
                                 />
                         </LinearLayout>
                         <LinearLayout
@@ -423,7 +424,7 @@
                                 android:paddingBottom="5dp"
                                 android:singleLine="true"
                                 android:paddingRight="5dp"
-                                android:inputType="date"
+                                android:inputType="number"
                                 />
                         </LinearLayout>
 
@@ -460,7 +461,7 @@
                                 android:paddingBottom="5dp"
                                 android:singleLine="true"
                                 android:paddingRight="5dp"
-
+                                android:inputType="numberDecimal"
                                 />
                         </LinearLayout>
                         <LinearLayout
@@ -489,7 +490,7 @@
                                 android:paddingBottom="5dp"
                                 android:singleLine="true"
                                 android:paddingRight="5dp"
-                                android:inputType="date"
+                                android:inputType="number"
                                 />
                         </LinearLayout>
 
@@ -526,7 +527,7 @@
                                 android:paddingBottom="5dp"
                                 android:singleLine="true"
                                 android:paddingRight="5dp"
-
+                                android:inputType="numberDecimal"
                                 />
                         </LinearLayout>
                         <LinearLayout
@@ -551,7 +552,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_marginHorizontal="15dp"
-                                android:inputType="date"
+                                android:inputType="number"
                                 android:paddingTop="5dp"
                                 android:paddingRight="5dp"
                                 android:paddingBottom="5dp"
@@ -591,7 +592,7 @@
                                 android:paddingBottom="5dp"
                                 android:singleLine="true"
                                 android:paddingRight="5dp"
-
+                                android:inputType="numberDecimal"
                                 />
                         </LinearLayout>
                         <LinearLayout
@@ -620,7 +621,7 @@
                                 android:paddingBottom="5dp"
                                 android:singleLine="true"
                                 android:paddingRight="5dp"
-                                android:inputType="date"
+                                android:inputType="number"
                                 />
                         </LinearLayout>
 
@@ -657,7 +658,7 @@
                                 android:paddingBottom="5dp"
                                 android:singleLine="true"
                                 android:paddingRight="5dp"
-
+                                android:inputType="numberDecimal"
                                 />
                         </LinearLayout>
                         <LinearLayout
@@ -686,7 +687,7 @@
                                 android:paddingBottom="5dp"
                                 android:singleLine="true"
                                 android:paddingRight="5dp"
-                                android:inputType="date"
+                                android:inputType="number"
                                 />
                         </LinearLayout>
 
@@ -723,7 +724,7 @@
                                 android:paddingBottom="5dp"
                                 android:singleLine="true"
                                 android:paddingRight="5dp"
-
+                                android:inputType="numberDecimal"
                                 />
                         </LinearLayout>
                         <LinearLayout
@@ -752,7 +753,7 @@
                                 android:paddingBottom="5dp"
                                 android:singleLine="true"
                                 android:paddingRight="5dp"
-                                android:inputType="date"
+                                android:inputType="number"
                                 />
                         </LinearLayout>
 
@@ -789,7 +790,7 @@
                                 android:paddingBottom="5dp"
                                 android:singleLine="true"
                                 android:paddingRight="5dp"
-
+                                android:inputType="numberDecimal"
                                 />
                         </LinearLayout>
                         <LinearLayout
@@ -818,7 +819,7 @@
                                 android:paddingBottom="5dp"
                                 android:singleLine="true"
                                 android:paddingRight="5dp"
-                                android:inputType="date"
+                                android:inputType="number"
                                 />
                         </LinearLayout>
 
@@ -870,7 +871,7 @@
                             android:layout_marginTop="2dp"
                             android:paddingBottom="5dp"/>
 
-                        <EditText
+                        <TextView
                             android:id="@+id/txt_name"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
@@ -879,6 +880,7 @@
                             android:paddingBottom="5dp"
                             android:singleLine="true"
                             android:paddingRight="5dp"
+                            android:inputType="textPersonName"
                             />
                     </LinearLayout>
                     <LinearLayout
@@ -907,6 +909,7 @@
                             android:paddingBottom="5dp"
                             android:singleLine="true"
                             android:paddingRight="5dp"
+                            android:inputType="textPersonName"
                             />
                     </LinearLayout>
                     <LinearLayout
@@ -955,7 +958,7 @@
                             android:layout_marginTop="2dp"
                             android:paddingBottom="5dp"/>
 
-                        <EditText
+                        <TextView
                             android:id="@+id/txt_gender"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
@@ -964,7 +967,7 @@
                             android:paddingBottom="5dp"
                             android:singleLine="true"
                             android:paddingRight="5dp"
-                            />
+                            android:inputType="text" />
                     </LinearLayout>
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -992,7 +995,7 @@
                             android:paddingBottom="5dp"
                             android:singleLine="true"
                             android:paddingRight="5dp"
-                            />
+                            android:inputType="text" />
                     </LinearLayout>
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -1020,7 +1023,7 @@
                             android:paddingBottom="5dp"
                             android:singleLine="true"
                             android:paddingRight="5dp"
-                            />
+                            android:inputType="text" />
                     </LinearLayout>
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -1048,7 +1051,7 @@
                             android:paddingBottom="5dp"
                             android:singleLine="true"
                             android:paddingRight="5dp"
-                            />
+                            android:inputType="text" />
                     </LinearLayout>
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -1076,7 +1079,7 @@
                             android:paddingBottom="5dp"
                             android:singleLine="true"
                             android:paddingRight="5dp"
-                            />
+                            android:inputType="text" />
                     </LinearLayout>
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -1095,7 +1098,7 @@
                             android:layout_marginTop="2dp"
                             android:paddingBottom="5dp"/>
 
-                        <EditText
+                        <TextView
                             android:id="@+id/txt_mobile"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
@@ -1104,7 +1107,7 @@
                             android:paddingBottom="5dp"
                             android:singleLine="true"
                             android:paddingRight="5dp"
-                            />
+                            android:inputType="textPhonetic" />
                     </LinearLayout>
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -1117,13 +1120,13 @@
                             android:layout_height="match_parent"
                             android:id="@+id/lbl_phone"
                             android:textSize="18sp"
-                            android:text="Phone Number"
+                            android:text="Department"
                             android:paddingLeft="10dp"
                             android:paddingTop="5dp"
                             android:layout_marginTop="2dp"
                             android:paddingBottom="5dp"/>
 
-                        <EditText
+                        <TextView
                             android:id="@+id/txt_phone"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
@@ -1132,7 +1135,7 @@
                             android:paddingBottom="5dp"
                             android:singleLine="true"
                             android:paddingRight="5dp"
-                            />
+                            android:inputType="text" />
                     </LinearLayout>
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -1160,7 +1163,7 @@
                             android:paddingBottom="5dp"
                             android:singleLine="true"
                             android:paddingRight="5dp"
-                            />
+                            android:inputType="textEmailAddress" />
                     </LinearLayout>
                 </LinearLayout>
 
@@ -1174,14 +1177,14 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:gravity="center"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintStart_toStartOf="parent">
 
 
         <Button

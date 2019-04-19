@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
+import android.widget.TextView;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -37,7 +38,8 @@ public class Student_Complete_Profile extends AppCompatActivity {
     private EditText sem7cpi,sem7yr;
     private EditText sem8cpi,sem8yr;
 
-    private EditText name,father,dob,gender,category,religion,state,address,mobile,phone,email;
+    private TextView name,gender,mobile,phone,email;
+    private EditText father,dob,category,religion,state,address;
     private Button save,back;
 
 
@@ -197,6 +199,247 @@ public class Student_Complete_Profile extends AppCompatActivity {
         if(Ssec_year.equals("")){
             sec_year.setError("Empty Fields not allowed");
         }
+
+        if(Shighsec_board.equals("")){
+            highsec_board.setError("Empty Field not allowed");
+        }
+        if(Shighsec_per.equals("")){
+            highsec_per.setError("Empty Field not Allowed");
+        }
+        if(Shighsec_year.equals("")){
+            highsec_year.setError("Empty Fields not allowed");
+        }
+
+        if(Suniv_board.equals("")){
+            univ_board.setError("Empty Field not Allowed");
+        }
+        if(Scourse.equals("")){
+            course.setError("Empty Field not Allowed");
+        }
+
+        if(Ssem1cpi.equals("")){
+            sem1cpi.setError("Empty Field not Allowed");
+        }
+        if(Ssem2cpi.equals("")){
+            sem2cpi.setError("Empty Field not Allowed");
+        }
+        if(Ssem3cpi.equals("")){
+            sem3cpi.setError("Empty Field not Allowed");
+        }
+        if(Ssem4cpi.equals("")){
+            sem4cpi.setError("Empty Field not Allowed");
+        }
+
+        if(!Ssem1cpi.equals("")){
+            float cpi= Float.parseFloat(Ssem1cpi);
+            if(cpi > 10.00){
+                sem1cpi.setError("spi cannot be greater than 10");
+            }
+        }
+        if(!Ssem2cpi.equals("")){
+            float cpi= Float.parseFloat(Ssem2cpi);
+            if(cpi > 10.00){
+                sem2cpi.setError("spi cannot be greater than 10");
+            }
+        }
+        if(!Ssem3cpi.equals("")){
+            float cpi= Float.parseFloat(Ssem3cpi);
+            if(cpi > 10.00){
+                sem3cpi.setError("spi cannot be greater than 10");
+            }
+        }
+        if(!Ssem4cpi.equals("")){
+            float cpi= Float.parseFloat(Ssem4cpi);
+            if(cpi > 10.00){
+                sem4cpi.setError("spi cannot be greater than 10");
+            }
+        }
+
+        if(Ssem1yr.equals("")){
+            sem1yr.setError("Empty Field not Allowed");
+        }
+        if(Ssem2yr.equals("")){
+            sem2yr.setError("Empty Field not Allowed");
+        }
+        if(Ssem3yr.equals("")){
+            sem3yr.setError("Empty Field not Allowed");
+        }
+        if(Ssem4yr.equals("")){
+            sem4yr.setError("Empty Field not Allowed");
+        }
+
+        if(!Ssem1yr.equals("")){
+            long year = Long.parseLong(Ssem1yr);
+            if(year > 2050 || year < 2010)
+            sem1yr.setError("Invalid Year");
+        }
+        if(!Ssem2yr.equals("")){
+            long year = Long.parseLong(Ssem2yr);
+            if(year > 2050 || year < 2010)
+                sem2yr.setError("Invalid Year");
+        }
+        if(!Ssem3yr.equals("")){
+            long year = Long.parseLong(Ssem3yr);
+            if(year > 2050 || year < 2010)
+                sem3yr.setError("Invalid Year");
+        }
+        if(!Ssem4yr.equals("")){
+            long year = Long.parseLong(Ssem4yr);
+            if(year > 2050 || year < 2010)
+                sem5yr.setError("Invalid Year");
+        }
+
+        if(Ssem5cpi.equals("") && (!Ssem6cpi.equals("") || !Ssem7cpi.equals("") || !Ssem8cpi.equals("") || !Ssem5yr.equals("") || !Ssem6yr.equals("") || !Ssem7yr.equals("") || !Ssem8yr.equals(""))){
+            sem5cpi.setError("Cannot fill details of furthur semester without filling previous info");
+        }
+        if(Ssem6cpi.equals("") && (Ssem7cpi.equals("") || !Ssem8cpi.equals("") || !Ssem6yr.equals("") || !Ssem7yr.equals("") || !Ssem8yr.equals(""))){
+            sem6cpi.setError("Cannot fill details of furthur semester without filling previous info");
+        }
+        if(Ssem7cpi.equals("") && (!Ssem8cpi.equals("") || !Ssem7yr.equals("") || !Ssem8yr.equals(""))){
+            sem7cpi.setError("Cannot fill details of furthur semester without filling previous info");
+        }
+        if(Ssem8cpi.equals("") && (!Ssem8yr.equals(""))){
+            sem8cpi.setError("Cannot fill details of this semester");
+        }
+
+        if(!Ssem5cpi.equals("")){
+            float cpi= Float.parseFloat(Ssem5cpi);
+            if(cpi > 10.00){
+                sem5cpi.setError("spi cannot be greater than 10");
+            }
+        }
+        if(!Ssem6cpi.equals("")){
+            float cpi= Float.parseFloat(Ssem6cpi);
+            if(cpi > 10.00){
+                sem6cpi.setError("spi cannot be greater than 10");
+            }
+        }
+        if(!Ssem7cpi.equals("")){
+            float cpi= Float.parseFloat(Ssem7cpi);
+            if(cpi > 10.00){
+                sem7cpi.setError("spi cannot be greater than 10");
+            }
+        }
+        if(!Ssem8cpi.equals("")){
+            float cpi= Float.parseFloat(Ssem8cpi);
+            if(cpi > 10.00){
+                sem8cpi.setError("spi cannot be greater than 10");
+            }
+        }
+
+        if(Ssem5yr.equals("") && (!Ssem6yr.equals("") || !Ssem7yr.equals("") || !Ssem8yr.equals("") || !Ssem5cpi.equals("") || !Ssem6cpi.equals("") || !Ssem7cpi.equals("") || !Ssem8cpi.equals(""))){
+            sem5yr.setText("Cannot fill details of furthur semester without filling previous info");
+        }
+        if(Ssem6yr.equals("") && (Ssem7yr.equals("") || !Ssem8yr.equals("") || !Ssem6cpi.equals("") || !Ssem7cpi.equals("") || !Ssem8cpi.equals(""))){
+            sem6yr.setText("Cannot fill details of furthur semester without filling previous info");
+        }
+        if(Ssem7yr.equals("") && (!Ssem8yr.equals("") || !Ssem7cpi.equals("") || !Ssem8cpi.equals(""))){
+            sem7yr.setText("Cannot fill details of furthur semester without filling previous info");
+        }
+        if(Ssem8yr.equals("") && (!Ssem8cpi.equals(""))){
+            sem8yr.setText("Cannot fill details of this semester");
+        }
+
+        if(!Ssem5yr.equals("")){
+            long year = Long.parseLong(Ssem1yr);
+            if(year > 2050 || year < 2010)
+                sem5yr.setError("Invalid Year");
+        }
+        if(!Ssem6yr.equals("")){
+            long year = Long.parseLong(Ssem2yr);
+            if(year > 2050 || year < 2010)
+                sem6yr.setError("Invalid Year");
+        }
+        if(!Ssem7yr.equals("")){
+            long year = Long.parseLong(Ssem3yr);
+            if(year > 2050 || year < 2010)
+                sem7yr.setError("Invalid Year");
+        }
+        if(!Ssem8yr.equals("")){
+            long year = Long.parseLong(Ssem4yr);
+            if(year > 2050 || year < 2010)
+                sem8yr.setError("Invalid Year");
+        }
+
+        if(Sname.equals("")){
+            name.setError("Required Field");
+        }
+        if(Sfather.equals("")){
+            father.setError("Required Field");
+        }
+        if(Sdob.equals("")){
+            dob.setError("Required Field");
+        }
+        if(Sgender.equals("")){
+            gender.setError("Required Field");
+        }
+        if(Scategory.equals("")){
+            category.setError("Required Field");
+        }
+        if(Sreligion.equals("")){
+            religion.setError("Required Field");
+        }
+        if(Sstate.equals("")){
+            state.setError("Required Field");
+        }
+        if(Saddress.equals("")){
+            address.setError("Required Field");
+        }
+        if(Smobile.equals("")){
+            mobile.setError("Required Field");
+        }
+        if(Sphone.equals("")){
+            phone.setError("Required Field");
+        }
+        if(Semail.equals("")){
+            email.setError("Required Field");
+        }
+
+        if(!Sdob.equals("")){
+            String[] date_components = Sdob.split("\\/");
+            if(date_components.length!=3){
+                dob.setError("Incorrect Date");
+            }
+            else{
+                long date = Integer.parseInt(date_components[0]);
+                long month = Long.parseLong(date_components[1]);
+                long year = Long.parseLong(date_components[2]);
+
+                if(date<1 || date>31){
+                    dob.setError("Incorrect Date");
+                }
+                if(month<1 || month>12){
+                    dob.setError("Incorrect Date");
+                }
+                if(year<1995 || year>2018){
+                    dob.setError("Incorrect Date");
+                }
+            }
+        }
+
+        if(!Semail.equals("")){
+            String[] emailId = Semail.split("\\@");
+            if(emailId.length!=2){
+                email.setError("Incorrect Email");
+            }
+            else{
+                String[] domain = emailId[1].split("\\.");
+                if(!(domain.length==2 || domain.length==3)){
+                    email.setError("Incorrect Email");
+                }
+            }
+        }
+
+        if(!Smobile.equals("")){
+            if(Smobile.length()!=10){
+                mobile.setError("Incorrect Mobile number");
+            }
+            long mob_num = Long.parseLong(Smobile);
+            if(mob_num < 1000000000){
+                mobile.setError("Incorrect Mobile Number");
+            }
+        }
+
     }
 
     public void setTextBoxes(){
@@ -317,17 +560,17 @@ public class Student_Complete_Profile extends AppCompatActivity {
         }
 
         if(personalDetails==null){
-            name.setText("");
+            name.setText(user.getFullName());
             father.setText("");
             dob.setText("");
-            gender.setText("");
+            gender.setText(user.getGender());
             category.setText("");
             religion.setText("");
             state.setText("");
             address.setText("");
-            mobile.setText("");
+            mobile.setText(user.getContact());
             phone.setText("");
-            email.setText("");
+            email.setText(user.getWebmailID()+"@iitg.ac.in");
         }
         else{
             name.setText(personalDetails.getName());
@@ -365,7 +608,7 @@ public class Student_Complete_Profile extends AppCompatActivity {
                     }
                 }
                 else{
-                    status[0]=true;
+                    status[0]=false;
                 }
             }
 

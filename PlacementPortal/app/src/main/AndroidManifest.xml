@@ -6,6 +6,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
 
     <application
         android:allowBackup="true"
@@ -17,9 +18,33 @@
         android:theme="@style/AppTheme"
         android:windowSoftInputMode="adjustPan">
         <activity
+            android:name=".Help_Students"
+            android:label="@string/title_activity_help__students"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".Company_Slots_Admin_second" />
+        <activity android:name=".Company_Slots_Admin" />
+        <activity android:name=".student_RA" />
+        <activity
+            android:name=".admin_checkout_the_portal"
+            android:label="@string/title_activity_admin_checkout_the_portal"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".admin_enrollments_screen1"
+            android:label="@string/title_activity_admin_enrollments_screen1"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".company_enrolments_screen1"
+            android:label="@string/title_activity_company_enrolments_screen1"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".LoginPage" />
+        <activity
+            android:name=".Student_Application_Forms"
+            android:label="@string/title_activity_student__application__forms"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
             android:name=".GivePreference"
             android:label="@string/title_activity_give_preference"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".JRF_Approval_Profile"
             android:label="@string/title_activity_jrf__approval__profile"
@@ -42,6 +67,15 @@
             android:name=".Apply_For_Jobs"
             android:label="@string/title_activity_apply__for__jobs"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".sending_emails" />
+        <activity android:name=".open_notification" />
+        <activity android:name=".list_notification" />
+        <activity android:name=".admin_send_notification" />
+        <activity android:name=".Sending_Notifications" />
+        <activity
+            android:name=".Apply_For_Interns"
+            android:label="@string/title_activity_apply__for__interns"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".JRF_Application_Requests"
             android:label="@string/title_activity_jrf__application__requests"
@@ -55,11 +89,17 @@
             android:name=".Student_JRF"
             android:label="Student_JRF"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".job_list" />
+        <activity
+            android:name=".job_list"
+            android:label=".job_list"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".intern_list" />
         <activity
             android:name=".company_enrollments"
             android:label="@string/title_activity_company_enrollments"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".approve_company" />
+        <activity android:name=".company_change_password" />
         <activity
             android:name=".recipients_tab"
             android:label="@string/title_activity_recipients_tab"
@@ -86,10 +126,11 @@
         <activity
             android:name=".Student_ChangePassword"
             android:label="@string/title_activity_student__change_password"
-            android:theme="@style/AppTheme.NoActionBar" /> <!-- <activity -->
-        <!-- android:name=".Apply_For_Jobs" -->
-        <!-- android:label="@string/title_activity_apply__for__jobs" -->
-        <!-- android:theme="@style/AppTheme.NoActionBar" /> -->
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Apply_For_Jobs"
+            android:label="@string/title_activity_apply__for__jobs"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Student_Notifications"
             android:label="@string/title_activity_student__notifications"
@@ -97,7 +138,11 @@
         <activity
             android:name=".View_Jobs"
             android:label="@string/title_activity_view__jobs"
-            android:theme="@style/AppTheme.NoActionBar" /> <!-- //<activity android:name=".Student_ChangePass" /> -->
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".View_Interns"
+            android:label="@string/title_activity_view__interns"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Student_Profile"
             android:label="@string/title_activity_student__profile"
@@ -106,9 +151,6 @@
             android:name=".Student_Dashboard"
             android:label="@string/title_activity_student__dashboard"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".LoginPage"
-            android:windowSoftInputMode="adjustPan" />
         <activity android:name="com.microsoft.identity.client.BrowserTabActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
