@@ -40,7 +40,7 @@ import java.util.List;
 public class RA_Approval_Profile extends AppCompatActivity {
 
     private ExpandableListView listView, listView2, listView3;
-    private ExpandableListAdapter listAdapter;
+    private ExpandableList_ViewProfile listAdapter;
     private List<String> listDataHeader;
     private Data data;
     private AcademicDetails acads;
@@ -362,7 +362,7 @@ public class RA_Approval_Profile extends AppCompatActivity {
 
 
                 listHashMap.put(listDataHeader.get(0), PersonalDetails);
-                listAdapter = new com.group6.placementportal.ExpandableListAdapter(getApplicationContext(), listDataHeader, listHashMap);
+                listAdapter = new com.group6.placementportal.ExpandableList_ViewProfile(getApplicationContext(), listDataHeader, listHashMap);
                 listView2.setAdapter(listAdapter);
             }
 
@@ -453,7 +453,7 @@ public class RA_Approval_Profile extends AppCompatActivity {
                 listHashMap.put(listDataHeader.get(0), Secondary);
                 listHashMap.put(listDataHeader.get(1), HigherSecondary);
                 listHashMap.put(listDataHeader.get(2), Graduation);
-                listAdapter = new com.group6.placementportal.ExpandableListAdapter(getApplicationContext(), listDataHeader, listHashMap);
+                listAdapter = new com.group6.placementportal.ExpandableList_ViewProfile(getApplicationContext(), listDataHeader, listHashMap);
                 listView.setAdapter(listAdapter);
             }
 
@@ -490,7 +490,7 @@ public class RA_Approval_Profile extends AppCompatActivity {
 
                 listHashMap.put(listDataHeader.get(0), RegRDetails);
 
-                listAdapter = new com.group6.placementportal.ExpandableListAdapter(getApplicationContext(), listDataHeader, listHashMap);
+                listAdapter = new com.group6.placementportal.ExpandableList_ViewProfile(getApplicationContext(), listDataHeader, listHashMap);
                 listView3.setAdapter(listAdapter);
             }
 
