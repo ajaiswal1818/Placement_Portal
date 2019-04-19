@@ -157,7 +157,7 @@ public class Student_Dashboard extends AppCompatActivity
             startActivity(i);
 
         } else if (id == R.id.nav_my_profile) {
-            Intent i = new Intent(getApplicationContext(), Student_Complete_Profile.class);
+            Intent i = new Intent(getApplicationContext(), Student_View_Profile.class);
             i.putExtra("user",user);
             startActivity(i);
 

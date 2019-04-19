@@ -17,11 +17,15 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:windowSoftInputMode="adjustPan">
-        <activity android:name=".Student_Register"></activity>
+        <activity
+            android:name=".Student_View_Profile"
+            android:label="@string/title_activity_student__view__profile"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".Student_Register" />
         <activity
             android:name=".admin_job_or_intern"
             android:label="@string/title_activity_admin_job_or_intern"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".job_or_intern"
             android:label="@string/title_activity_job_or_intern"
@@ -77,10 +81,7 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".sending_emails" />
         <activity android:name=".list_notification" />
-
-        <activity android:name=".Sending_Notifications">
-
-        </activity>
+        <activity android:name=".Sending_Notifications"></activity>
         <activity
             android:name=".Apply_For_Interns"
             android:label="@string/title_activity_apply__for__interns"
@@ -170,9 +171,9 @@
         <activity android:name=".company_dashboard" />
         <activity android:name=".job_profile" />
         <activity android:name=".intern_profile" />
-        <activity android:name=".Company_Application_Slots"/>
+        <activity android:name=".Company_Application_Slots" />
         <activity android:name=".company_login" />
-        <activity android:name=".view_pdf"/>
+        <activity android:name=".view_pdf" />
     </application>
 
 </manifest>
