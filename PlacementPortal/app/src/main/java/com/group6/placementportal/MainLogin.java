@@ -13,6 +13,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.group6.placementportal.DatabasePackage.Admin;
 import com.group6.placementportal.DatabasePackage.company;
 
 import java.util.ArrayList;
@@ -34,7 +35,7 @@ public class MainLogin extends AppCompatActivity {
         admin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent company_login=new Intent(MainLogin.this, approve_company.class);
+                Intent company_login=new Intent(MainLogin.this, Admin_DashBoard.class);
                 startActivity(company_login);
             }
         });

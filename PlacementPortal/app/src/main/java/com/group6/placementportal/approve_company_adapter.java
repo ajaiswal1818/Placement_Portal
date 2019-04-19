@@ -89,7 +89,7 @@ public class approve_company_adapter extends RecyclerView.Adapter<approve_compan
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             reference.child(company_array.get(position).getCompany_id()).child("approved").setValue("Approved");
-                            reference.child("Max_entry").setValue(String.valueOf(Long.parseLong(max_id)+1));
+                            //reference.child("Max_entry").setValue(String.valueOf(Long.parseLong(max_id)+1));
                             dialog.dismiss();
                         }
                     });

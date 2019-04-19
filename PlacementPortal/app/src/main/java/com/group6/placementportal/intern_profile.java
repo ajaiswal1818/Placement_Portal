@@ -176,7 +176,7 @@ public class intern_profile extends AppCompatActivity {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     if (dataSnapshot.exists()) {
-                        intern_det = (Interns) dataSnapshot.child(id).getValue();
+                        intern_det = dataSnapshot.child(id).getValue(Interns.class);
                         allot();
                     }
                 }

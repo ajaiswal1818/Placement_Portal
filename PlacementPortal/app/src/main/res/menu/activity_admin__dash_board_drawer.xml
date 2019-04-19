@@ -20,5 +20,18 @@
         android:id="@+id/nav_approve_company"
         android:icon="@drawable/ic_menu_camera"
         android:title="Approve Company" />
+    <item
+        android:id="@+id/nav_manage_enroll"
+        android:icon="@drawable/ic_menu_camera"
+        android:title="Manage Enrollments" />
+    <item
+        android:id="@+id/nav_notice_to_company"
+        android:icon="@drawable/ic_menu_camera"
+        android:title="Company Notices" />
+    <item
+        android:id="@+id/nav_checkout"
+        android:icon="@drawable/ic_menu_camera"
+        android:title="Checkout" />
+
 
 </menu>

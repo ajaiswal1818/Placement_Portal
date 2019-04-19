@@ -97,7 +97,10 @@ public class admin_notices extends AppCompatActivity {
                   {
                       for(DataSnapshot dataSnapshot1:dataSnapshot.child("Company").getChildren())
                       {
-                          available_companies_arraylist.add(dataSnapshot1.child("username").getValue().toString() + ":" + dataSnapshot1.child("company_name"));
+                          if(dataSnapshot1.hasChild("username") && dataSnapshot1.hasChild("company_name"))
+                          {
+                              available_companies_arraylist.add(dataSnapshot1.child("username").getValue().toString() + ":" + dataSnapshot1.child("company_name").getValue().toString());
+                          }
                       }
                       convert_to_array();
                   }
@@ -165,7 +168,7 @@ public class admin_notices extends AppCompatActivity {
                 mBuilder.setNeutralButton("Select all", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        for (int i = 0; i < checked_companies.length; i++) {
+                        for (int i = 0; i < available_companies.length; i++) {
                             checked_companies[i] = true;
                             if (!selected_companies.contains(which)) {
                                 selected_companies.add(which);
