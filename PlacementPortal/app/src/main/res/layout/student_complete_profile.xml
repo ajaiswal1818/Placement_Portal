@@ -871,7 +871,7 @@
                             android:layout_marginTop="2dp"
                             android:paddingBottom="5dp"/>
 
-                        <EditText
+                        <TextView
                             android:id="@+id/txt_name"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
@@ -958,7 +958,7 @@
                             android:layout_marginTop="2dp"
                             android:paddingBottom="5dp"/>
 
-                        <EditText
+                        <TextView
                             android:id="@+id/txt_gender"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
@@ -1098,7 +1098,7 @@
                             android:layout_marginTop="2dp"
                             android:paddingBottom="5dp"/>
 
-                        <EditText
+                        <TextView
                             android:id="@+id/txt_mobile"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
@@ -1120,13 +1120,13 @@
                             android:layout_height="match_parent"
                             android:id="@+id/lbl_phone"
                             android:textSize="18sp"
-                            android:text="Phone Number"
+                            android:text="Department"
                             android:paddingLeft="10dp"
                             android:paddingTop="5dp"
                             android:layout_marginTop="2dp"
                             android:paddingBottom="5dp"/>
 
-                        <EditText
+                        <TextView
                             android:id="@+id/txt_phone"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"

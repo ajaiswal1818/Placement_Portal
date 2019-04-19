@@ -24,6 +24,13 @@ import com.group6.placementportal.DatabasePackage.AcademicDetails;
 import com.group6.placementportal.DatabasePackage.Data;
 import com.group6.placementportal.DatabasePackage.Notifications;
 import com.group6.placementportal.DatabasePackage.PersonalDetails;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.group6.placementportal.DatabasePackage.Notifications;
+import com.group6.placementportal.DatabasePackage.RegistrationDetails;
 import com.group6.placementportal.DatabasePackage.Student;
 
 import java.util.ArrayList;
@@ -38,6 +45,7 @@ public class JRF_Approval_Profile extends AppCompatActivity{
     private Data data;
     private AcademicDetails acads;
     private PersonalDetails pers;
+    private RegistrationDetails registrationDetails;
     private DatabaseReference reference;
     private HashMap<String,List<Data>> listHashMap;
     private DatabaseReference mDatabaseReference;
@@ -52,7 +60,7 @@ public class JRF_Approval_Profile extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_jrf__approval__profile);
+        setContentView(R.layout.content_jrf__approval__profile);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -74,6 +82,8 @@ public class JRF_Approval_Profile extends AppCompatActivity{
             }
         });
 
+        user = (Student)getIntent().getSerializableExtra("user");
+        reference = FirebaseDatabase.getInstance().getReference();
         mDatabaseReference = FirebaseDatabase.getInstance().getReference();
         mDatabaseReference2 = FirebaseDatabase.getInstance().getReference();
         listView = findViewById(R.id.lv2Exp);
@@ -190,7 +200,7 @@ public class JRF_Approval_Profile extends AppCompatActivity{
         listDataHeader = new ArrayList<>();
         listHashMap = new HashMap<>();
 
-        reference.child("vakul170101076").addListenerForSingleValueEvent(new ValueEventListener() {
+        reference.child("JRF").child(user.getWebmailID()).child("PersonalDetails").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 boolean check = dataSnapshot.hasChild("PersonalDetails");
@@ -244,7 +254,7 @@ public class JRF_Approval_Profile extends AppCompatActivity{
         listDataHeader = new ArrayList<>();
         listHashMap = new HashMap<>();
 
-        reference.child("vakul170101076").addListenerForSingleValueEvent(new ValueEventListener() {
+        reference.child("JRF").child(user.getWebmailID()).child("AcademicDetails").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 boolean check = dataSnapshot.hasChild("AcademicDetails");
@@ -331,16 +341,29 @@ public class JRF_Approval_Profile extends AppCompatActivity{
         listHashMap = new HashMap<>();
         listDataHeader.add("Registration Details");
         List<Data> RegRDetails = new ArrayList<>();
-        data = new Data("Application No.","Application No.");
+        reference.child("JRF").child(user.getWebmailID()).child("RegistrationDetails").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                registrationDetails = dataSnapshot.getValue(RegistrationDetails.class);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        data = new Data("Application No.",registrationDetails.getApplicationNo());
         RegRDetails.add(data);
-        data = new Data("Programming Languages","Programming Languages");
+        data = new Data("Programming Languages",registrationDetails.getProgrammingLanguage());
         RegRDetails.add(data);
-        data = new Data("Year and Type of Experiences","Year and Type of Experiences");
+        data = new Data("Year and Type of Experiences",registrationDetails.getYearAndExperience());
         RegRDetails.add(data);
-        data = new Data("Applied For Project","Applied For Project");
+        data = new Data("Applied For Project",registrationDetails.getProject());
         RegRDetails.add(data);
-        data = new Data("Applied For Post","Applied For Post");
+        data = new Data("Applied For Post",registrationDetails.getPost());
         RegRDetails.add(data);
+
         listHashMap.put(listDataHeader.get(0),RegRDetails);
     }
 
