@@ -499,11 +499,12 @@ public class single_dialog_companyenrollments_0 extends DialogFragment {
 
                           if(is_job){
                               reference = FirebaseDatabase.getInstance().getReference().child("Jobs").child(job_id).child("Applied Students").child(student).child("Approval").setValue("Yes");
+                              Log.w("Changed approval","yea");
 
                           }
                           else{
                               reference = FirebaseDatabase.getInstance().getReference().child("Interns").child(job_id).child("Applied Students").child(student).child("Approval").setValue("Yes");
-
+                              Log.w("Changed approval","nahh");
                           }
                           DatabaseReference reference3=FirebaseDatabase.getInstance().getReference().child("Student").child(student);
                           reference3.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -760,7 +761,14 @@ public class single_dialog_companyenrollments_0 extends DialogFragment {
                               }
                           });
                           Log.w("notifications before adding",Integer.toString(notifications_count));*/
+                              if(is_job){
+                                  reference = FirebaseDatabase.getInstance().getReference().child("Jobs").child(job_id).child("Applied Students").child(student).child("Approval").setValue("Yes");
 
+                              }
+                              else{
+                                  reference = FirebaseDatabase.getInstance().getReference().child("Interns").child(job_id).child("Applied Students").child(student).child("Approval").setValue("Yes");
+
+                              }
                               // add selection into student
                               DatabaseReference reference3 = FirebaseDatabase.getInstance().getReference().child("Student").child(student);
                               reference3.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -792,7 +800,14 @@ public class single_dialog_companyenrollments_0 extends DialogFragment {
 
                           } else if (option_number == 1) {
                               // reference = FirebaseDatabase.getInstance().getReference().child("Interns").child(job_id).child("Applied Students").child(student).child("Approval").setValue("Rejected");
+                              if(is_job){
+                                  reference = FirebaseDatabase.getInstance().getReference().child("Jobs").child(job_id).child("Applied Students").child(student).child("Approval").setValue("Rejected");
 
+                              }
+                              else{
+                                  reference = FirebaseDatabase.getInstance().getReference().child("Interns").child(job_id).child("Applied Students").child(student).child("Approval").setValue("Rejected");
+
+                              }
                           }
                       } else if (which_items == 3) {
                           if (option_number == 0) {
