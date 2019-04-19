@@ -49,13 +49,15 @@ public class Company_Slots_Admin extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for(DataSnapshot dataSnapshot1: dataSnapshot.getChildren())
                 {
-                    String companyName= dataSnapshot1.child("company_name").getValue(String.class);
-                    String company_id = dataSnapshot1.child("company_id").getValue(String.class);
+                    if (dataSnapshot1.hasChild("Application_Slots")) {
+                        String companyName = dataSnapshot1.child("company_name").getValue(String.class);
+                        String company_id = dataSnapshot1.child("company_id").getValue(String.class);
 
-                    new_class=new Company_Slots_customclass(companyName,company_id);
+                        new_class = new Company_Slots_customclass(companyName, company_id);
 
-                    main_list.add(new_class);
-                    Call_Adapter(main_list);
+                        main_list.add(new_class);
+                        Call_Adapter(main_list);
+                    }
                 }
             }
 

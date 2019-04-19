@@ -23,7 +23,6 @@
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity android:name=".Company_Slots_Admin_second" />
         <activity android:name=".Company_Slots_Admin" />
-        <activity android:name=".student_RA" />
         <activity
             android:name=".admin_checkout_the_portal"
             android:label="@string/title_activity_admin_checkout_the_portal"
@@ -85,10 +84,6 @@
             android:label="@string/title_activity_admin__dash_board"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Login_Page_Admin" /> <!-- <activity android:name=".LoginPage" /> -->
-        <activity
-            android:name=".Student_JRF"
-            android:label="Student_JRF"
-            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".job_list"
             android:label=".job_list"
