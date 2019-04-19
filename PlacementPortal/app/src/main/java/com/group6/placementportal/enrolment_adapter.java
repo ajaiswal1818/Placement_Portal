@@ -3,6 +3,7 @@ package com.group6.placementportal;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
@@ -14,6 +15,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -36,10 +38,10 @@ public class enrolment_adapter extends RecyclerView.Adapter<enrolment_adapter.My
     ArrayList<Student> students;
     String job;
     int which;
-    String cv;
+    ArrayList <String> cv;
     private static DatabaseReference reference;
     boolean is_job;
-    public enrolment_adapter(Activity c , ArrayList<Student> p,String job_id,int pos,String link,boolean job_or_not)
+    public enrolment_adapter(Activity c , ArrayList<Student> p,String job_id,int pos,ArrayList <String> link,boolean job_or_not)
     {
         context = c;
         students = p;
@@ -48,7 +50,9 @@ public class enrolment_adapter extends RecyclerView.Adapter<enrolment_adapter.My
         cv=link;
         is_job=job_or_not;
     }
+    public void cv_click(View v){
 
+    }
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -63,7 +67,18 @@ public class enrolment_adapter extends RecyclerView.Adapter<enrolment_adapter.My
         holder.student_name.setText(students.get(position).getFullName());
         Log.w("adapter final", Integer.toString(position)+" "+students.get(position).getFullName());
         holder.student_rno.setText(students.get(position).getRollNo());
-        holder.CV.setText(cv);
+
+        holder.CV.setText("Click to View CV");
+       // holder.CV.setText(cv.get(position));
+       holder.CV.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse(cv.get(position)));
+                context.startActivity(intent);
+            }
+        });
 
 
         holder.parentlayout.setOnClickListener(new View.OnClickListener() {
@@ -84,6 +99,8 @@ public class enrolment_adapter extends RecyclerView.Adapter<enrolment_adapter.My
 
             }
         });
+
+
     }
 
     @Override
@@ -98,7 +115,8 @@ public class enrolment_adapter extends RecyclerView.Adapter<enrolment_adapter.My
         // public View parentlayout;
         /* TextView company_name,job_profile,job_location;*/
        CardView parentlayout;
-        TextView student_name,student_rno,CV;
+        TextView student_name,student_rno;
+                Button CV;
         public MyViewHolder(View itemView) {
             super(itemView);
            /* company_name = itemView.findViewById(R.id.txt_company_name);

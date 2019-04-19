@@ -56,26 +56,31 @@ public class company_enrollments extends AppCompatActivity {
         if(is_job){
             screen=getIntent().getIntExtra("Screen",0);
             if(screen==0){
-                String cv=getIntent().getStringExtra("cv");
+                ArrayList <String> cv=getIntent().getStringArrayListExtra("cv");
                 boolean is_job=getIntent().getBooleanExtra("is_job",true);
                 // adapter = new enrolment_adapter(company_enrollments.this,list,job_id,position,cv,is_job);
                 Log.d("adapter","changed");
                 recyclerView=findViewById(R.id.enrolments_recycler);
                 adapter=new enrolment_adapter(company_enrollments.this,list,job_id,position,cv,is_job);
 
+                if(recyclerView!=null){
+                    recyclerView.clearDisappearingChildren();
                     recyclerView.setLayoutManager((new LinearLayoutManager(company_enrollments.this)));
                     recyclerView.setAdapter(adapter);
+                }
 
             }
             else if(screen==1){
-                String cv=getIntent().getStringExtra("cv");
+                ArrayList <String> cv=getIntent().getStringArrayListExtra("cv");
                 boolean is_job=getIntent().getBooleanExtra("is_job",true);
 
                 adapter1=new admin_enrollment_adapter(company_enrollments.this,list,job_id,position,cv,is_job);
                 recyclerView=findViewById(R.id.enrolments_recycler);
-
+                if(recyclerView!=null){
+                    recyclerView.clearDisappearingChildren();
                     recyclerView.setLayoutManager((new LinearLayoutManager(company_enrollments.this)));
                     recyclerView.setAdapter(adapter1);
+                }
 
 
             }
@@ -83,25 +88,33 @@ public class company_enrollments extends AppCompatActivity {
         else{
             screen=getIntent().getIntExtra("Screen",0);
             if(screen==0){
-                String cv=getIntent().getStringExtra("cv");
+                ArrayList <String> cv=getIntent().getStringArrayListExtra("cv");
                 boolean is_job=getIntent().getBooleanExtra("is_job",true);
                 // adapter = new enrolment_adapter(company_enrollments.this,list,job_id,position,cv,is_job);
                 Log.d("adapter","changed");
                 recyclerView=findViewById(R.id.enrolments_recycler);
                 adapter=new enrolment_adapter(company_enrollments.this,list,job_id,position,cv,is_job);
-
+                if(recyclerView!=null){
+                    recyclerView.clearDisappearingChildren();
                     recyclerView.setLayoutManager((new LinearLayoutManager(company_enrollments.this)));
                     recyclerView.setAdapter(adapter);
+                }
+
 
             }
             else if(screen==1){
-                String cv=getIntent().getStringExtra("cv");
+                ArrayList <String> cv=getIntent().getStringArrayListExtra("cv");
                 boolean is_job=getIntent().getBooleanExtra("is_job",true);
 
                 adapter1=new admin_enrollment_adapter(company_enrollments.this,list,job_id,position,cv,is_job);
                 recyclerView=findViewById(R.id.enrolments_recycler);
+                if(recyclerView!=null){
+                    recyclerView.clearDisappearingChildren();
+
                     recyclerView.setLayoutManager((new LinearLayoutManager(company_enrollments.this)));
                     recyclerView.setAdapter(adapter1);
+                }
+
 
 
             }
@@ -110,40 +123,79 @@ public class company_enrollments extends AppCompatActivity {
     }
 
     public void check_if_to_be_shown(final Student p,String job_id,final int position){
-        ref_jobs=FirebaseDatabase.getInstance().getReference().child("Interns").child(job_id).child("Applied Students").child(p.getWebmailID());
-        Log.d("jobI-d",job_id);
-        to_show=false;
-        ref_jobs.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot2) {
-                // Student p_copy=p;
+        if(is_job){
+            ref_jobs=FirebaseDatabase.getInstance().getReference().child("Jobs").child(job_id).child("Applied Students").child(p.getWebmailID());
+            Log.d("jobI-d",job_id);
+            to_show=false;
+            ref_jobs.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot2) {
+                    // Student p_copy=p;
 
 
-                String pos_db="";
-                pos_db = (String) dataSnapshot2.child("Status").getValue();
-                String approval_status="";
-                approval_status = (String) dataSnapshot2.child("Approval").getValue();
-                Log.d("pos_db and position",pos_db+"   "+Integer.toString(position));
-                screen=getIntent().getIntExtra("Screen",0);
-                if(pos_db!=null && approval_status!=null && pos_db.equals(Integer.toString(position) ) && ( (screen==0 && approval_status.equals("Yes") ) || screen==1 ) ){
+                    String pos_db="";
+                    pos_db = (String) dataSnapshot2.child("Status").getValue();
+                    String approval_status="";
+                    approval_status = (String) dataSnapshot2.child("Approval").getValue();
+                    Log.d("pos_db and position",pos_db+"   "+Integer.toString(position));
+                    screen=getIntent().getIntExtra("Screen",0);
+                    if(pos_db!=null && approval_status!=null && pos_db.equals(Integer.toString(position) ) && ( (screen==0 && approval_status.equals("Yes") ) || screen==1 ) ){
 
-                    to_show=true;
+                        to_show=true;
 
-                    list.add(p);
-                    Log.w("lev2 check if to be shown",p.getWebmailID());
-                    String job_id1=getIntent().getStringExtra("Job");
-                    set_adapter(job_id1,position);
-                    //recyclerView.onFinishTemporaryDetach();
+                        list.add(p);
+                        Log.w("lev2 check if to be shown",p.getWebmailID());
+                        String job_id1=getIntent().getStringExtra("Job");
+                        set_adapter(job_id1,position);
+                        //recyclerView.onFinishTemporaryDetach();
 
+
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
 
                 }
-            }
+            });
+        }
+        else{
+            ref_jobs=FirebaseDatabase.getInstance().getReference().child("Interns").child(job_id).child("Applied Students").child(p.getWebmailID());
+            Log.d("jobI-d",job_id);
+            to_show=false;
+            ref_jobs.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot2) {
+                    // Student p_copy=p;
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
 
-            }
-        });
+                    String pos_db="";
+                    pos_db = (String) dataSnapshot2.child("Status").getValue();
+                    String approval_status="";
+                    approval_status = (String) dataSnapshot2.child("Approval").getValue();
+                    Log.d("pos_db and position",pos_db+"   "+Integer.toString(position));
+                    screen=getIntent().getIntExtra("Screen",0);
+                    if(pos_db!=null && approval_status!=null && pos_db.equals(Integer.toString(position) ) && ( (screen==0 && approval_status.equals("Yes") ) || screen==1 ) ){
+
+                        to_show=true;
+
+                        list.add(p);
+                        Log.w("lev2 check if to be shown",p.getWebmailID());
+                        String job_id1=getIntent().getStringExtra("Job");
+                        set_adapter(job_id1,position);
+                        //recyclerView.onFinishTemporaryDetach();
+
+
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+        }
+
         set_adapter(job_id,position);
 
     }
@@ -152,14 +204,25 @@ public class company_enrollments extends AppCompatActivity {
         super.onBackPressed();
         screen=getIntent().getIntExtra("Screen",0);
         if(screen==0){
-            Intent act=new Intent(this,company_dashboard.class);
-            finish();
-            startActivity(act);
+
+                Intent act=new Intent(this,company_enrolments_screen1.class);
+                act.putExtra("is_job",is_job);
+                startActivity(act);
+                company_enrollments.this.finish();
+
+
+
+
         }
         else{
           //  Intent act=new Intent(this,company_dashboard.class);
             //finish();
             //startActivity(act);
+            Intent act=new Intent(this,admin_enrollments_screen1.class);
+            act.putExtra("is_job",is_job);
+
+            startActivity(act);
+            company_enrollments.this.finish();
         }
 
     }
@@ -198,6 +261,7 @@ public class company_enrollments extends AppCompatActivity {
                         .replace(R.id.container, PlaceholderFragment.newInstance(position + 1))
                         .commit();
                 is_job=getIntent().getBooleanExtra("is_job",true);
+                screen=getIntent().getIntExtra("Screen",0);
 
                 if(is_job){
                     recyclerView=findViewById(R.id.enrolments_recycler);
@@ -215,7 +279,7 @@ public class company_enrollments extends AppCompatActivity {
 
                                 p = dataSnapshot1.getValue(Student.class);
                                 if(s_list.contains(p.getWebmailID())){
-                                    Log.w("added a student lev1",p.getWebmailID());
+                                    Log.w("added a student lev1 in jobs",p.getWebmailID());
                                     check_if_to_be_shown(p,job_id,position);
 
 
