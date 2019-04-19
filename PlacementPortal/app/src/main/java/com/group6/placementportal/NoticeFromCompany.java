@@ -44,6 +44,7 @@ public class NoticeFromCompany extends AppCompatActivity {
     private StorageReference mstorage;
     DatabaseReference database;
     private  static final int PICK_IMAGE=100;
+    private String downURL;
 
     ArrayList<Notices> noti;
 
@@ -132,15 +133,15 @@ public class NoticeFromCompany extends AppCompatActivity {
                                 }
                             }, 500);
                             Toast.makeText(NoticeFromCompany.this, "UplaodSuccessfull", Toast.LENGTH_SHORT).show();
-                            final Notices new_notice = new Notices();
-                            new_notice.setTopic(t1.getText().toString());
                             filereference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                                 @Override
                                 public void onSuccess(Uri uri) {
-                                    new_notice.setImageURL(uri.toString());
+                                    downURL = uri.toString();
                                 }
                             });
-
+                            final Notices new_notice = new Notices();
+                            new_notice.setTopic(t1.getText().toString());
+                            new_notice.setImageURL(downURL);
                             new_notice.setContent(t2.getText().toString());
 
                             database = FirebaseDatabase.getInstance().getReference("Notices");
