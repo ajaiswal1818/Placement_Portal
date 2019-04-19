@@ -25,8 +25,6 @@ import com.group6.placementportal.DatabasePackage.job;
 
 import java.util.ArrayList;
 
-import static com.group6.placementportal.Student_Profile.isNumeric;
-
 public class company_profile extends AppCompatActivity {
 
     private String came_from;
@@ -494,6 +492,15 @@ public class company_profile extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });*/
+    }
+
+    public static boolean isNumeric(String str)
+    {
+        for (char c : str.toCharArray())
+        {
+            if (!Character.isDigit(c)) return false;
+        }
+        return true;
     }
 
     private boolean isNetworkAvailable() {

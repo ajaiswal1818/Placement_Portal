@@ -16,7 +16,7 @@ import android.widget.Toast;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class Student_Profile<Student> extends AppCompatActivity {
+public class Student_Register extends AppCompatActivity {
 
     private DatabaseReference ref;
     private com.group6.placementportal.DatabasePackage.Student user;
@@ -56,11 +56,11 @@ public class Student_Profile<Student> extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_student__profile);
+        setContentView(R.layout.activity_student__register);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         if(isNetworkAvailable()==false){
-            Toast.makeText(Student_Profile.this,"NO INTERNET CONNECTION", Toast.LENGTH_LONG).show();
+            Toast.makeText(Student_Register.this,"NO INTERNET CONNECTION", Toast.LENGTH_LONG).show();
             return;
         }
 
@@ -205,7 +205,7 @@ public class Student_Profile<Student> extends AppCompatActivity {
                 ref=FirebaseDatabase.getInstance().getReference("Student");
                 ref.child(webmail).setValue(user);
                 //NEW ACTIVITY
-                Intent I = new Intent(Student_Profile.this, Student_Dashboard.class);
+                Intent I = new Intent(Student_Register.this, Student_Dashboard.class);
                 I.putExtra("user",user);
                 startActivity(I);
             }

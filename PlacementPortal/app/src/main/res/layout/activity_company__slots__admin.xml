@@ -19,7 +19,8 @@
     <android.support.v7.widget.RecyclerView
         android:paddingHorizontal="10dp"
         android:id="@+id/recycler"
-
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
         android:background="@drawable/input"
         android:textAlignment="center"
         android:textColorHint="#202020"

@@ -6,16 +6,26 @@ public class RegistrationDetails {
     private String YearAndExperience;
     private String Post;
     private String Project;
+    private String Qualified;
 
     public RegistrationDetails() {
     }
 
-    public RegistrationDetails(String applicationNo, String programmingLanguage, String yearAndExperience, String post, String project) {
+    public RegistrationDetails(String applicationNo, String programmingLanguage, String yearAndExperience, String post, String project, String qualified) {
         ApplicationNo = applicationNo;
         ProgrammingLanguage = programmingLanguage;
         YearAndExperience = yearAndExperience;
         Post = post;
         Project = project;
+        Qualified = qualified;
+    }
+
+    public String getQualified() {
+        return Qualified;
+    }
+
+    public void setQualified(String qualified) {
+        Qualified = qualified;
     }
 
     public String getApplicationNo() {

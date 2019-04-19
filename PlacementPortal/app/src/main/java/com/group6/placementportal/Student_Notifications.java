@@ -86,7 +86,7 @@ public class Student_Notifications extends AppCompatActivity
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                list = new ArrayList<Notifications>();
+                list = new ArrayList<>();
                 for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
                     Notifications p = dataSnapshot1.getValue(Notifications.class);
                     String ID = p.getNotification_ID();

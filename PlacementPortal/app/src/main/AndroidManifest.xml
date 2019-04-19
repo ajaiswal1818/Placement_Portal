@@ -17,6 +17,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:windowSoftInputMode="adjustPan">
+        <activity android:name=".Student_Register"></activity>
         <activity
             android:name=".admin_job_or_intern"
             android:label="@string/title_activity_admin_job_or_intern"
@@ -75,13 +76,10 @@
             android:label="@string/title_activity_apply__for__jobs"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".sending_emails" />
-        <activity android:name=".open_notification" />
-        <activity android:name=".list_notification">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+        <activity android:name=".list_notification" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+        <activity android:name=".Sending_Notifications">
+
         </activity>
         <activity android:name=".admin_send_notification">
 
@@ -147,10 +145,6 @@
         <activity
             android:name=".View_Interns"
             android:label="@string/title_activity_view__interns"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".Student_Profile"
-            android:label="@string/title_activity_student__profile"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Student_Dashboard"

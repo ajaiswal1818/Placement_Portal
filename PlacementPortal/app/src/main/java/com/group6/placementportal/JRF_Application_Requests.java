@@ -59,16 +59,17 @@ public class JRF_Application_Requests extends AppCompatActivity
         recyclerView.setLayoutManager( new LinearLayoutManager(this));
 
 
-        reference = FirebaseDatabase.getInstance().getReference().child("JRF_Application");
-        reference.addValueEventListener(new ValueEventListener() {
+        reference = FirebaseDatabase.getInstance().getReference();
+        reference.child("JRF").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                list = new ArrayList<JRF_applications>();
+                list = new ArrayList<>();
                 for(DataSnapshot dataSnapshot1: dataSnapshot.getChildren())
                 {
                     JRF_applications p = dataSnapshot1.getValue(JRF_applications.class);
-                    list.add(p);
-
+                    if(!dataSnapshot1.hasChild("isChecked")){
+                        list.add(p);
+                    }
                 }
                 adapter = new Adapter_JRF_Admin(JRF_Application_Requests.this,list);
                 recyclerView.setAdapter(adapter);

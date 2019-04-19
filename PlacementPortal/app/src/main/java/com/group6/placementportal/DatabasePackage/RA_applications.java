@@ -9,7 +9,6 @@ public class RA_applications implements Serializable {
     private String Designation;
     private String From_Duration;
     private String To_Duration;
-
     private String Type_of_Job;
     private String Student_Name;
     private String Interview_Date;

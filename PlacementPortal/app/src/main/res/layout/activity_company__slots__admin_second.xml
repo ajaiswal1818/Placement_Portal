@@ -6,12 +6,16 @@
     android:layout_height="match_parent"
     tools:context=".Company_Slots_Admin_second">
 
+
+
     <TextView
-        android:layout_width="match_parent"
+        android:layout_width="390dp"
         android:layout_height="50dp"
         android:layout_alignParentTop="true"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="8dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
         android:background="@drawable/input"
         android:text="Select The Round"
         android:textAlignment="center"
@@ -28,7 +32,7 @@
 
         <Spinner
             android:id="@+id/spinner2"
-            android:layout_width="400dp"
+            android:layout_width="300dp"
             android:layout_height="50dp"
             android:textAlignment="center"
             android:textColorHint="#202020"
@@ -51,19 +55,21 @@
             android:layout_height="400dp"
             android:background="@drawable/input"
             android:gravity="center"
+            android:layout_marginRight="5dp"
+            android:layout_marginLeft="5dp"
             android:orientation="vertical"
             android:textAlignment="center"
             android:textColorHint="#202020"
-            android:textSize="30sp">
+            android:textSize="20sp">
 
             <TextView
                 android:background="@drawable/input"
                 android:textColorHint="#202020"
                 android:id="@+id/Company_id"
-                android:layout_width="300dp"
+                android:layout_width="350dp"
                 android:textSize="20sp"
                 android:layout_height="35dp"
-                android:text="          Company ID        :" />
+                android:text="     Company ID        :" />
 
             <TextView
                 android:textSize="20sp"
@@ -71,10 +77,10 @@
                 android:textColorHint="#202020"
 
                 android:id="@+id/Company_name"
-                android:layout_width="300dp"
+                android:layout_width="350dp"
                 android:layout_height="35dp"
                 android:layout_marginTop="20dp"
-                android:text="          Company Name :" />
+                android:text="     Company Name :" />
 
             <TextView
                 android:textSize="20sp"
@@ -82,10 +88,10 @@
                 android:textColorHint="#202020"
 
                 android:id="@+id/Place"
-                android:layout_width="300dp"
+                android:layout_width="350dp"
                 android:layout_height="35dp"
                 android:layout_marginTop="20dp"
-                android:text="          Allocated Place :" />
+                android:text="     Allocated Place :" />
 
             <TextView
                 android:textSize="20sp"
@@ -93,10 +99,10 @@
                 android:textColorHint="#202020"
 
                 android:id="@+id/Date"
-                android:layout_width="300dp"
+                android:layout_width="350dp"
                 android:layout_height="35dp"
                 android:layout_marginTop="20dp"
-                android:text="          Date Of Event    :" />
+                android:text="     Date Of Event    :" />
 
             <TextView
                 android:textSize="20sp"
@@ -104,10 +110,10 @@
                 android:textColorHint="#202020"
 
                 android:id="@+id/Timeslot"
-                android:layout_width="300dp"
+                android:layout_width="350dp"
                 android:layout_height="35dp"
                 android:layout_marginTop="20dp"
-                android:text="          Time Slot           :" />
+                android:text="     Time Slot           :" />
 
             <TextView
                 android:textSize="20sp"
@@ -115,10 +121,10 @@
                 android:textColorHint="#202020"
 
                 android:id="@+id/Type"
-                android:layout_width="300dp"
+                android:layout_width="350dp"
                 android:layout_height="35dp"
                 android:layout_marginTop="20dp"
-                android:text="          Type Of Event   :" />
+                android:text="     Type Of Event   :" />
         </LinearLayout>
 
     </LinearLayout>

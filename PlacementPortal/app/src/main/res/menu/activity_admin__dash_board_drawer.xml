@@ -6,32 +6,34 @@
 
     <item
         android:id="@+id/nav_jrf_application_requests"
-        android:icon="@drawable/ic_menu_camera"
         android:title="JRF Applications" />
     <item
         android:id="@+id/nav_approve_notice"
-        android:icon="@drawable/ic_menu_camera"
         android:title="Company Notices" />
     <item
         android:id="@+id/Company_slots"
-        android:icon="@drawable/ic_menu_camera"
         android:title="Company_Slots" />
     <item
         android:id="@+id/nav_approve_company"
-        android:icon="@drawable/ic_menu_camera"
         android:title="Approve Company" />
     <item
+        android:id="@+id/nav_list_notifications"
+        android:title="Notifications" />
+    <item
+        android:id="@+id/nav_emails"
+        android:title="Send Email" />
+    <item
         android:id="@+id/nav_manage_enroll"
-        android:icon="@drawable/ic_menu_camera"
         android:title="Manage Enrollments" />
     <item
         android:id="@+id/nav_notice_to_company"
-        android:icon="@drawable/ic_menu_camera"
         android:title="Company Notices" />
     <item
         android:id="@+id/nav_checkout"
-        android:icon="@drawable/ic_menu_camera"
         android:title="Checkout" />
+    <item
+        android:id="@+id/nav_signout"
+        android:title="Sign Out" />
 
 
 </menu>
