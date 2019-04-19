@@ -25,8 +25,11 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.group6.placementportal.DatabasePackage.Interns;
 import com.group6.placementportal.DatabasePackage.Student;
+import com.microsoft.identity.client.IAccount;
+import com.microsoft.identity.client.PublicClientApplication;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class View_Interns extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -36,6 +39,10 @@ public class View_Interns extends AppCompatActivity
     private ArrayList<Interns> list;
     private MyAdapter_intern adapter;
     private Student user;
+    private PublicClientApplication sampleApp;
+    private int flag;
+
+    private static final String TAG = Student_Dashboard.class.getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +69,13 @@ public class View_Interns extends AppCompatActivity
 
         recyclerView =findViewById(R.id.recycler_view_jobs);
         recyclerView.setLayoutManager( new LinearLayoutManager(this));
+
+        sampleApp = null;
+        if (sampleApp == null) {
+            sampleApp = new PublicClientApplication(
+                    this.getApplicationContext(),
+                    R.raw.auth_config);
+        }
 
 
         reference = FirebaseDatabase.getInstance().getReference().child("Interns");
@@ -143,6 +157,9 @@ public class View_Interns extends AppCompatActivity
             startActivity(i);
 
         } else if (id == R.id.nav_prefr) {
+            Intent i = new Intent(getApplicationContext(), GivePreference.class);
+            i.putExtra("user",user);
+            startActivity(i);
 
         } else if (id == R.id.nav_jobs) {
             Intent i = new Intent(getApplicationContext(), View_Jobs.class);
@@ -154,11 +171,13 @@ public class View_Interns extends AppCompatActivity
             i.putExtra("user",user);
             startActivity(i);
 
-
         } else if (id == R.id.nav_my_profile) {
+            Intent i = new Intent(getApplicationContext(), Student_Complete_Profile.class);
+            i.putExtra("user",user);
+            startActivity(i);
 
         } else if (id == R.id.nav_edit_profile) {
-            Intent i = new Intent(getApplicationContext(), Student_Profile.class);
+            Intent i = new Intent(getApplicationContext(), Student_Complete_Profile.class);
             i.putExtra("user",user);
             startActivity(i);
 
@@ -167,13 +186,69 @@ public class View_Interns extends AppCompatActivity
             i.putExtra("user",user);
             startActivity(i);
 
+        } else if (id == R.id.nav_applications) {
+            Intent i = new Intent(getApplicationContext(), Student_Application_Forms.class);
+            i.putExtra("user",user);
+            startActivity(i);
+        } else if (id == R.id.nav_inst_profile) {
+            Intent i = new Intent(getApplicationContext(), Student_Application_Forms.class);
+            i.putExtra("user",user);
+            startActivity(i);
         } else if (id == R.id.nav_help) {
-
+            Intent i = new Intent(getApplicationContext(), Help_Students.class);
+            i.putExtra("user",user);
+            startActivity(i);
+        } else if(id == R.id.nav_signout){
+            onSignOutClicked();
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    /* Clears an account's tokens from the cache.
+     * Logically similar to "sign out" but only signs out of this app.
+     */
+    private void onSignOutClicked() {
+
+        /* Attempt to get a account and remove their cookies from cache */
+        List<IAccount> accounts = null;
+
+        try {
+            accounts = sampleApp.getAccounts();
+
+            if (accounts == null) {
+                /* We have no accounts */
+                updateSignedOutUI();
+
+            } else if (accounts.size() == 1) {
+                /* We have 1 account */
+                /* Remove from token cache */
+                sampleApp.removeAccount(accounts.get(0));
+                updateSignedOutUI();
+
+            }
+            else {
+                /* We have multiple accounts */
+                for (int i = 0; i < accounts.size(); i++) {
+                    sampleApp.removeAccount(accounts.get(i));
+                }
+                updateSignedOutUI();
+            }
+
+            Toast.makeText(getBaseContext(), "Signed Out!", Toast.LENGTH_SHORT).show();
+
+        } catch (IndexOutOfBoundsException e) {
+            Log.d(TAG, "User at this position does not exist: " + e.toString());
+        }
+    }
+
+    private void updateSignedOutUI() {
+        flag=1;
+        Intent intent = new Intent(View_Interns.this,LoginPage.class);
+        intent.putExtra("flag",flag);
+        startActivity(intent);
     }
 }
 
