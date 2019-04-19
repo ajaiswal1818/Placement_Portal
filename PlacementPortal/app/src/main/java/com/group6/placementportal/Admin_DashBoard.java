@@ -77,6 +77,7 @@ public class Admin_DashBoard extends AppCompatActivity
         if (id == R.id.nav_jrf_application_requests) {
             Intent i = new Intent(getApplicationContext(), JRF_Application_Requests.class);
             startActivity(i);
+
         } else if (id == R.id.nav_approve_notice) {
             Intent i = new Intent(getApplicationContext(), Admin_ApproveNotice.class);
             startActivity(i);
@@ -105,7 +106,15 @@ public class Admin_DashBoard extends AppCompatActivity
             Intent i = new Intent(getApplicationContext(), admin_checkout_the_portal.class);
             startActivity(i);
         }
-//        } else if (id == R.id.nav_slideshow) {
+        else if (id== R.id.nav_list_notifications){
+            Intent i = new Intent(getApplicationContext(), list_notification.class);
+            startActivity(i);
+        }
+        else if (id== R.id.nav_emails){
+            Intent i = new Intent(getApplicationContext(), sending_emails.class);
+            startActivity(i);
+        }
+
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
