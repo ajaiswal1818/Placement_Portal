@@ -38,6 +38,7 @@ public class Admin_ApproveNotice extends AppCompatActivity
     private RecyclerView recyclerView;
     private ArrayList<Notices> list;
     private MyAdapter_Notices_FromCompany adapter;
+    private long children;
 
     private static final String TAG = Admin_ApproveNotice.class.getSimpleName();
 
@@ -115,9 +116,6 @@ public class Admin_ApproveNotice extends AppCompatActivity
 
                         final Notices check = list.get(position);
 
-                        String uploadId = refnoticetocompany.push().getKey();
-
-                        refnoticetocompany.child(uploadId).setValue(check);
 
 
                         DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
@@ -127,16 +125,23 @@ public class Admin_ApproveNotice extends AppCompatActivity
                         a.addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                children=dataSnapshot.getChildrenCount();
+                                children+=1;
                                 for (DataSnapshot snapshot: dataSnapshot.getChildren()) {
                                     if(snapshot.child("Topic").getValue() == check)snapshot.getRef().removeValue();
                                 }
                             }
+
 
                             @Override
                             public void onCancelled(@NonNull DatabaseError databaseError) {
                                 Log.e(TAG, "onCancelled", databaseError.toException());
                             }
                         });
+                        String uploadId=Long.toString(children);
+
+                        refnoticetocompany.child(uploadId).setValue(check);
+
 
 
 
