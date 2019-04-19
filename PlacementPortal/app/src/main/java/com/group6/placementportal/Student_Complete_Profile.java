@@ -478,7 +478,7 @@ public class Student_Complete_Profile extends AppCompatActivity {
                     }
                 }
                 else{
-                    status[0]=true;
+                    status[0]=false;
                 }
             }
 
