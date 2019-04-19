@@ -1,5 +1,8 @@
 package com.group6.placementportal;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -38,6 +41,11 @@ public class Student_Requests extends AppCompatActivity
         setContentView(R.layout.activity_student__requests);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        if(isNetworkAvailable()==false){
+            Toast.makeText(Student_Requests.this,"NO INTERNET CONNECTION", Toast.LENGTH_LONG).show();
+            return;
+        }
+
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -74,6 +82,13 @@ public class Student_Requests extends AppCompatActivity
             }
         });
     }
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+    }
+
 
 
 

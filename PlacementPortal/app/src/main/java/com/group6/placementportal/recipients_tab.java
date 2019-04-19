@@ -1,11 +1,11 @@
 package com.group6.placementportal;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
@@ -16,7 +16,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.group6.placementportal.DatabasePackage.notices2company;
 
 public class recipients_tab extends AppCompatActivity {
     private CardArrayAdapter cardArrayAdapter;
@@ -72,6 +71,11 @@ public class recipients_tab extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipients_tab);
 
+        if(isNetworkAvailable()==false){
+            Toast.makeText(recipients_tab.this,"NO INTERNET CONNECTION", Toast.LENGTH_LONG).show();
+            return;
+        }
+
         listView = (ListView) findViewById(R.id.card_listView);
 
         listView.addHeaderView(new View(this));
@@ -82,7 +86,11 @@ public class recipients_tab extends AppCompatActivity {
 
         listView.setAdapter(cardArrayAdapter);
     }
-
-
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+    }
 
 }

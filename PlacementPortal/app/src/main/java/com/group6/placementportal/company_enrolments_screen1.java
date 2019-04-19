@@ -1,5 +1,8 @@
 package com.group6.placementportal;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -29,6 +32,12 @@ public class company_enrolments_screen1 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_company_enrolments_screen1);
+
+        if(isNetworkAvailable()==false){
+            Toast.makeText(company_enrolments_screen1.this,"NO INTERNET CONNECTION", Toast.LENGTH_LONG).show();
+            return;
+        }
+
         this.c=(company) getIntent().getSerializableExtra("MyClass");
         recyclerView =findViewById(R.id.recycler_view_jobs_enrolments);
         recyclerView.setLayoutManager( new LinearLayoutManager(this));
@@ -68,6 +77,12 @@ public class company_enrolments_screen1 extends AppCompatActivity {
             }
         });
 
+    }
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 
 }

@@ -1,7 +1,10 @@
 package com.group6.placementportal;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -35,6 +38,10 @@ public class Login_Page_Admin extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login__page__admin);
 
+        if(isNetworkAvailable()==false){
+            Toast.makeText(Login_Page_Admin.this,"NO INTERNET CONNECTION", Toast.LENGTH_LONG).show();
+            return;
+        }
         Login_Details = FirebaseDatabase.getInstance().getReference();
         //Taking Views From the screen
         Webmail = findViewById(R.id.webmail_text);
@@ -89,5 +96,12 @@ public class Login_Page_Admin extends AppCompatActivity {
         });
 
 
+    }
+
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 }
