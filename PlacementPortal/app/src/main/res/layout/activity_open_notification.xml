@@ -4,7 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".open_notification">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
     <EditText
         android:id="@+id/sub"
@@ -12,8 +21,10 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="94dp"
-        android:layout_marginTop="102dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="92dp"
+        android:layout_marginTop="200dp"
+        android:layout_marginEnd="109dp"
         android:ems="10"
         android:inputType="textPersonName" />
 
@@ -23,18 +34,31 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
         android:layout_marginStart="92dp"
-        android:layout_marginTop="208dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="109dp"
         android:ems="10"
         android:inputType="textPersonName" />
 
     <Button
         android:id="@+id/pdf_download"
-        android:layout_width="182dp"
+        android:layout_width="210dp"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/des"
         android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="107dp"
-        android:layout_marginBottom="282dp"
-        android:text="Download PDF" />
+        android:layout_gravity="center"
+        android:layout_marginStart="98dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginEnd="109dp"
+        android:layout_marginBottom="301dp"
+        android:background="@drawable/roundbtn"
+        android:text="Download PDF"
+        android:textColor="@android:color/white"
+        android:textSize="16sp" />
+    </LinearLayout>
+    </ScrollView>
+
 </RelativeLayout>

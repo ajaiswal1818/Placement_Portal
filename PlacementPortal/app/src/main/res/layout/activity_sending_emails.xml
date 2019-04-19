@@ -12,11 +12,13 @@
 
     <Button
         android:id="@+id/select"
+        android:textColor="@android:color/white"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
-        tools:text="Select Students"
-        android:textColor="@color/colorPrimaryDark"/>
+        android:layout_marginTop="50dp"
+        android:background="@drawable/roundbtn"
+        android:text="SELECT STUDENTS"/>
+
 
     <EditText
         android:id="@+id/email"
@@ -51,7 +53,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
-        android:textColor="@color/colorPrimaryDark"
+        android:textColor="@android:color/white"
+        android:background="@drawable/roundbtn"
         android:text="SEND THE MAILS" />
 
 </LinearLayout>

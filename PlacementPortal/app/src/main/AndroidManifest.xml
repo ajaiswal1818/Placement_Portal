@@ -76,7 +76,13 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".sending_emails" />
         <activity android:name=".open_notification" />
-        <activity android:name=".list_notification" />
+        <activity android:name=".list_notification">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".admin_send_notification">
 
         </activity>
@@ -124,11 +130,7 @@
             android:label="@string/title_activity_company_profile"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".MainLogin">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".Student_ChangePassword"
