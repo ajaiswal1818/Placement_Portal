@@ -197,6 +197,109 @@ public class Student_Complete_Profile extends AppCompatActivity {
         if(Ssec_year.equals("")){
             sec_year.setError("Empty Fields not allowed");
         }
+
+        if(Shighsec_board.equals("")){
+            highsec_board.setError("Empty Field not allowed");
+        }
+        if(Shighsec_per.equals("")){
+            highsec_per.setError("Empty Field not Allowed");
+        }
+        if(Shighsec_year.equals("")){
+            highsec_year.setError("Empty Fields not allowed");
+        }
+
+        if(Suniv_board.equals("")){
+            univ_board.setError("Empty Field not Allowed");
+        }
+        if(Scourse.equals("")){
+            course.setError("Empty Field not Allowed");
+        }
+
+        if(Ssem1cpi.equals("")){
+            sem1cpi.setError("Empty Field not Allowed");
+        }
+        if(Ssem2cpi.equals("")){
+            sem2cpi.setError("Empty Field not Allowed");
+        }
+        if(Ssem3cpi.equals("")){
+            sem3cpi.setError("Empty Field not Allowed");
+        }
+        if(Ssem4cpi.equals("")){
+            sem4cpi.setError("Empty Field not Allowed");
+        }
+
+        if(Ssem1yr.equals("")){
+            sem1yr.setError("Empty Field not Allowed");
+        }
+        if(Ssem2yr.equals("")){
+            sem2yr.setError("Empty Field not Allowed");
+        }
+        if(Ssem3yr.equals("")){
+            sem3yr.setError("Empty Field not Allowed");
+        }if(Ssem4yr.equals("")){
+            sem4yr.setError("Empty Field not Allowed");
+        }
+
+        if(Ssem5cpi.equals("") && (!Ssem6cpi.equals("") || !Ssem7cpi.equals("") || !Ssem8cpi.equals("") || !Ssem5yr.equals("") || !Ssem6yr.equals("") || !Ssem7yr.equals("") || !Ssem8yr.equals(""))){
+            sem5cpi.setError("Cannot fill details of furthur semester without filling previous info");
+        }
+        if(Ssem6cpi.equals("") && (Ssem7cpi.equals("") || !Ssem8cpi.equals("") || !Ssem6yr.equals("") || !Ssem7yr.equals("") || !Ssem8yr.equals(""))){
+            sem6cpi.setError("Cannot fill details of furthur semester without filling previous info");
+        }
+        if(Ssem7cpi.equals("") && (!Ssem8cpi.equals("") || !Ssem7yr.equals("") || !Ssem8yr.equals(""))){
+            sem7cpi.setError("Cannot fill details of furthur semester without filling previous info");
+        }
+        if(Ssem8cpi.equals("") && (!Ssem8yr.equals(""))){
+            sem8cpi.setError("Cannot fill details of this semester");
+        }
+
+        if(Ssem5yr.equals("") && (!Ssem6yr.equals("") || !Ssem7yr.equals("") || !Ssem8yr.equals("") || !Ssem5cpi.equals("") || !Ssem6cpi.equals("") || !Ssem7cpi.equals("") || !Ssem8cpi.equals(""))){
+            sem5yr.setText("Cannot fill details of furthur semester without filling previous info");
+        }
+        if(Ssem6yr.equals("") && (Ssem7yr.equals("") || !Ssem8yr.equals("") || !Ssem6cpi.equals("") || !Ssem7cpi.equals("") || !Ssem8cpi.equals(""))){
+            sem6yr.setText("Cannot fill details of furthur semester without filling previous info");
+        }
+        if(Ssem7yr.equals("") && (!Ssem8yr.equals("") || !Ssem7cpi.equals("") || !Ssem8cpi.equals(""))){
+            sem7yr.setText("Cannot fill details of furthur semester without filling previous info");
+        }
+        if(Ssem8yr.equals("") && (!Ssem8cpi.equals(""))){
+            sem8yr.setText("Cannot fill details of this semester");
+        }
+
+        if(Sname.equals("")){
+            name.setError("Required Field");
+        }
+        if(Sfather.equals("")){
+            father.setError("Required Field");
+        }
+        if(Sdob.equals("")){
+            dob.setError("Required Field");
+        }
+        if(Sgender.equals("")){
+            gender.setError("Required Field");
+        }
+        if(Scategory.equals("")){
+            category.setError("Required Field");
+        }
+        if(Sreligion.equals("")){
+            religion.setError("Required Field");
+        }
+        if(Sstate.equals("")){
+            state.setError("Required Field");
+        }
+        if(Saddress.equals("")){
+            address.setError("Required Field");
+        }
+        if(Smobile.equals("")){
+            mobile.setError("Required Field");
+        }
+        if(Sphone.equals("")){
+            phone.setError("Required Field");
+        }
+        if(Semail.equals("")){
+            email.setError("Required Field");
+        }
+
     }
 
     public void setTextBoxes(){

@@ -19,7 +19,7 @@
         <activity
             android:name=".GivePreference"
             android:label="@string/title_activity_give_preference"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".JRF_Approval_Profile"
             android:label="@string/title_activity_jrf__approval__profile"
