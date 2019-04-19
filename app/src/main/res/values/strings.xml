@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">project2</string>
+
+    <string name="linktoapp">
+        <a href = "https://nitish6174.github.io/resume-generator/">CLICK HERE TO GO TO CV GENERATOR</a>
+    </string>
+</resources>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".procedure">
+
+    <TextView
+        android:id="@+id/textView13"
+        android:layout_width="388dp"
+        android:layout_height="473dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="A student who has applied for a company is required to attend all events/stages of the company's process. Failure to do so may result in disciplinary action against the student. Students are free to attend multiple processes as per their will and convenience during a particular slot if he/she have not yet been given an offer by a company. During a placement slot having slot offer system, students may attend interviews of all companies he/she is shortlisted for and the offers are given by companies at the end of the slot. The preference order declaration submitted by students before the beginning of slot is considererd to decide the final offer. For slots with spot-on offer system, company can give offer to the student at any point during the allocated interview slot. In case a student gets selected in some company/organization, then he/she will be excluded from the procedure of any other company whose process is running in parallel with immediate effect"
+        android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView12"
+        app:layout_constraintVertical_bias="0.131" />
+
+    <TextView
+        android:id="@+id/textView12"
+        android:layout_width="388dp"
+        android:layout_height="47dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="552dp"
+        android:text="Placement process"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView5"
+        app:layout_constraintVertical_bias="0.076" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="405dp"
+        android:layout_height="79dp"
+        android:text="PROCEDURE"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.009" />
+</android.support.constraint.ConstraintLayout>
