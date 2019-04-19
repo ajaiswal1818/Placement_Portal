@@ -22,8 +22,12 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
@@ -40,6 +44,7 @@ public class Sending_Notifications extends AppCompatActivity {
     private TextView fileName;
     private ProgressDialog progressDialog;
     private Button send;
+    int size ;
 //    private Button select;
 //    private Button upload;
 
@@ -76,23 +81,30 @@ public class Sending_Notifications extends AppCompatActivity {
             }
         });
 
-        findViewById(R.id.buttonUploadFIle).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(pdfUri!=null) {
-                    uploadFile(pdfUri);
-                }
-                else{
-                    Toast.makeText(Sending_Notifications.this,"Select a File",Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
+//        findViewById(R.id.buttonUploadFIle).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if(pdfUri!=null) {
+//                    Toast.makeText(Sending_Notifications.this,"Uploading Started...",Toast.LENGTH_LONG).show();
+//                    uploadFile(pdfUri);
+//                }
+//                else{
+//                    Toast.makeText(Sending_Notifications.this,"Select a File",Toast.LENGTH_SHORT).show();
+//                }
+//            }
+//        });
 
 
         send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                newNotification();
+                if(pdfUri!=null) {
+                    Toast.makeText(Sending_Notifications.this,"Uploading Started...",Toast.LENGTH_LONG).show();
+                    uploadFile(pdfUri);
+                }
+                else{
+                    Toast.makeText(Sending_Notifications.this,"Select a File",Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
@@ -138,6 +150,7 @@ public class Sending_Notifications extends AppCompatActivity {
             if (data.getData() != null) {
                 //uploading the file
                 pdfUri = data.getData();
+                Toast.makeText(Sending_Notifications.this,"File has been Selected",Toast.LENGTH_SHORT).show();
             }else{
                 Toast.makeText(this, "No file chosen", Toast.LENGTH_SHORT).show();
             }
@@ -166,8 +179,9 @@ public class Sending_Notifications extends AppCompatActivity {
                             public void onSuccess(Uri uri) {
                                 progressDialog.hide();
                                 String upload = uri.toString();
-                                mDatabaseReference.child("Upload").setValue(upload);
-                                Toast.makeText(Sending_Notifications.this,"File Upload Successful",Toast.LENGTH_SHORT).show();
+//                                mDatabaseReference.child("Notifications").setValue(upload);
+                                newNotification(upload);
+                                Toast.makeText(Sending_Notifications.this,"File Upload & Saving Successful",Toast.LENGTH_LONG).show();
                             }
                         });
                     }
@@ -188,18 +202,32 @@ public class Sending_Notifications extends AppCompatActivity {
     }
 
 
-    private void newNotification(){
+    private void newNotification(String upload){
 
         String newSubject = subject.getText().toString().trim();
         String newDescription = description.getText().toString().trim();
 
         if(!TextUtils.isEmpty(newSubject) || !TextUtils.isEmpty(newDescription)){
-            String id = mDatabaseReference.push().getKey();
+            mDatabaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    size = (int) dataSnapshot.getChildrenCount() + 1;
+                }
 
-            Notifications_Admin notification = new Notifications_Admin(newSubject,newDescription,"link",id);
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+
+            String id = Integer.toString(size);
+
+            Notifications_Admin notification = new Notifications_Admin(newSubject,newDescription,upload,id);
 
 
             mDatabaseReference.child(id).setValue(notification);
+            Toast.makeText(this,"Saving data Successful",Toast.LENGTH_SHORT).show();
+
         }else{
             Toast.makeText(this,"Write Subject & Description ",Toast.LENGTH_LONG).show();
         }
