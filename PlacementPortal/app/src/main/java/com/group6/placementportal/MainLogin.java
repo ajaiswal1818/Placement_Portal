@@ -34,7 +34,7 @@ public class MainLogin extends AppCompatActivity {
         admin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent company_login=new Intent(MainLogin.this, approve_company.class);
+                Intent company_login=new Intent(MainLogin.this, admin_enrollments_screen1.class);
                 startActivity(company_login);
             }
         });

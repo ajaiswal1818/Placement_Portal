@@ -28,11 +28,11 @@
                     android:layout_height="230dp"
                     android:orientation="vertical"
                     android:gravity="center"
-                    android:background="@drawable/download">
+                    android:background="@mipmap/download">
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="100dp"
-                        android:background="@drawable/logo1"
+                        android:background="@mipmap/logo1"
                         android:paddingTop="10dp"/>
                     <TextView
                         android:layout_width="wrap_content"
@@ -70,7 +70,7 @@
                                     android:layout_width="90dp"
                                     android:id="@+id/image1"
                                     android:layout_height="50dp"
-                                    android:background="@drawable/iitg"
+                                    android:background="@mipmap/iitg"
                                     android:layout_centerInParent="true"/>
                                 <TextView
                                     android:layout_width="wrap_content"
@@ -106,7 +106,7 @@
                                     android:id="@+id/image2"
                                     android:layout_height="50dp"
 
-                                    android:background="@drawable/enrollment"
+                                    android:background="@mipmap/enrollment"
                                     android:layout_centerInParent="true"/>
                                 <TextView
                                     android:layout_width="wrap_content"
@@ -147,7 +147,7 @@
                                     android:layout_width="90dp"
                                     android:id="@+id/image3"
                                     android:layout_height="50dp"
-                                    android:background="@drawable/placement"
+                                    android:background="@mipmap/placement"
                                     android:layout_centerInParent="true"/>
                                 <TextView
                                     android:layout_width="wrap_content"
@@ -183,7 +183,7 @@
                                     android:id="@+id/image4"
                                     android:layout_height="50dp"
 
-                                    android:background="@drawable/map"
+                                    android:background="@mipmap/map"
                                     android:layout_centerInParent="true"/>
                                 <TextView
                                     android:layout_width="wrap_content"
@@ -224,7 +224,7 @@
                                     android:layout_width="90dp"
                                     android:id="@+id/image5"
                                     android:layout_height="50dp"
-                                    android:background="@drawable/governors"
+                                    android:background="@mipmap/governors"
                                     android:layout_centerInParent="true"/>
                                 <TextView
                                     android:layout_width="wrap_content"
@@ -260,7 +260,7 @@
                                     android:id="@+id/image6"
                                     android:layout_height="50dp"
 
-                                    android:background="@drawable/finace"
+                                    android:background="@mipmap/finace"
                                     android:layout_centerInParent="true"/>
                                 <TextView
                                     android:layout_width="wrap_content"

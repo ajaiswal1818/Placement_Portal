@@ -41,16 +41,18 @@ public class company_enrolments_screen1 extends AppCompatActivity {
                 {
                     Jobs p = dataSnapshot1.getValue(Jobs.class);
 
-                   String company_name=p.getCompany_name().toString();
+                   String company_name=p.getCompany_id().toString();
+
                    /* if(user!=null){
                         if(user.getCompnany_id().equals(company_id)){
                             list.add(p);
                         }
                     }*/
-                    list.add(p);
-                   if(c.getCompany_name().equals(company_name)){
+                   if(c.getCompany_id().equals(company_name)){
                       // list.add(p);
                        Log.d("enrolments1",dataSnapshot1.getRef().toString());
+                       list.add(p);
+
                    }
 
 
