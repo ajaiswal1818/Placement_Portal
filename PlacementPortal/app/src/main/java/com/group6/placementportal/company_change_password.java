@@ -59,6 +59,11 @@ public class company_change_password extends AppCompatActivity {
                     Toast.makeText(company_change_password.this,"Re-enter new password correctly",Toast.LENGTH_LONG).show();
                     return;
                 }
+                if(new1.getText().toString().contains(" "))
+                {
+                    new1.setError("Password can't contain any spaces");
+                    return;
+                }
                 else
                 {
                     valid= FirebaseDatabase.getInstance().getReference("Company");
