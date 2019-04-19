@@ -6,46 +6,71 @@
     android:layout_height="match_parent"
     tools:context=".Company_Application_Slots">
 
+    <Button
+        android:id="@+id/booked_slots"
+        android:layout_width="171dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="Booked Slots"
+        android:textColorHint="#202020"
+        android:background="@drawable/input"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.973"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.013" />
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="500dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/input"
+        android:gravity="center"
         android:orientation="vertical"
-        android:gravity="center">
+        android:paddingTop="10dp"
+        android:textAlignment="center"
+        android:textColorHint="#202020"
+        app:layout_constraintTop_toBottomOf="@+id/booked_slots"
+        tools:layout_editor_absoluteX="0dp">
+
         <EditText
-            android:padding="20dp"
             android:id="@+id/Round"
             android:layout_width="320dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
+            android:layout_marginTop="50dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
-            android:textAlignment="center"
-            android:textColorHint="#202020"
-            android:textSize="20sp"
-            tools:layout_editor_absoluteX="70dp"
-            tools:layout_editor_absoluteY="33dp"
-            android:layout_marginTop="40dp"
             android:ems="10"
             android:hint="Round"
             android:inputType="textPersonName"
+            android:padding="20dp"
+            android:textAlignment="center"
+            android:textColorHint="#202020"
+            android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.257"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.089" />
+            app:layout_constraintVertical_bias="0.089"
+            tools:layout_editor_absoluteX="70dp"
+            tools:layout_editor_absoluteY="33dp" />
 
         <Spinner
             android:id="@+id/type"
             android:layout_width="320dp"
-            android:layout_height="50dp"
+            android:layout_height="60dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="38dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
-            android:paddingTop="20dp"
             android:paddingBottom="20dp"
-            android:padding="20dp"
             android:spinnerMode="dropdown"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -57,14 +82,13 @@
         <Spinner
             android:id="@+id/slots"
             android:layout_width="320dp"
-            android:layout_height="50dp"
+            android:layout_height="60dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
+
             android:spinnerMode="dropdown"
-            android:paddingTop="20dp"
-            android:paddingBottom="20dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.352"
@@ -75,7 +99,7 @@
         <Spinner
             android:id="@+id/date"
             android:layout_width="320dp"
-            android:layout_height="50dp"
+            android:layout_height="60dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
@@ -91,18 +115,18 @@
         <Button
             android:id="@+id/Load"
             android:layout_width="323dp"
-            android:layout_height="77dp"
+            android:layout_height="60dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="100dp"
+            android:layout_marginTop="50dp"
             android:layout_marginEnd="8dp"
-            android:layout_marginBottom="96dp"
-            android:text="Load"
-            android:textSize="20dp"
+            android:layout_marginBottom="36dp"
+            android:background="@drawable/input"
             android:paddingTop="20dp"
             android:paddingBottom="20dp"
-            android:background="@drawable/input"
+            android:text="Load"
             android:textAlignment="center"
             android:textColorHint="#202020"
+            android:textSize="18dp"
 
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -112,4 +136,5 @@
             app:layout_constraintVertical_bias="0.525" />
 
     </LinearLayout>
+
 </android.support.constraint.ConstraintLayout>

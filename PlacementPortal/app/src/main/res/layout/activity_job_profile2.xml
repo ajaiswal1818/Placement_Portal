@@ -16,18 +16,17 @@
             android:orientation="vertical">
 
             <EditText
-                android:id="@+id/cpi"
                 android:layout_width="360dp"
                 android:layout_height="46dp"
-                android:layout_gravity="center"
                 android:layout_marginTop="90dp"
+                android:textSize="16sp"
+                android:paddingStart="10dp"
                 android:background="@drawable/input"
                 android:ems="10"
                 android:hint="CPI Cutoff"
+                android:layout_gravity="center"
                 android:inputType="numberDecimal"
-                android:paddingStart="10dp"
                 android:textColorHint="@color/colorTextHint"
-                android:textSize="16sp"
                 tools:layout_editor_absoluteX="25dp"
                 tools:layout_editor_absoluteY="66dp" />
 
@@ -119,21 +118,6 @@
                 android:textColorHint="@color/colorTextHint"
                 tools:layout_editor_absoluteX="25dp"
                 tools:layout_editor_absoluteY="332dp" />
-                
-             <EditText
-                android:id="@+id/job_requirements"
-                android:layout_width="342dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:ems="10"
-                android:hint="Job Requirements"
-                android:inputType="text"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/remove" />
-
 
             <ScrollView
                 android:layout_width="match_parent"
@@ -229,7 +213,6 @@
                 tools:layout_editor_absoluteY="525dp" />
 
 
-
             <Button
                 android:id="@+id/add"
                 android:layout_width="241dp"
@@ -260,7 +243,5 @@
 
         </LinearLayout>
     </ScrollView>
-
-   
 
 </android.support.constraint.ConstraintLayout>
