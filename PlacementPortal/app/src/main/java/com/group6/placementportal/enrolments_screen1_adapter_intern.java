@@ -15,18 +15,19 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.group6.placementportal.DatabasePackage.Interns;
 import com.group6.placementportal.DatabasePackage.Jobs;
 
 import java.util.ArrayList;
 
-public class admin_enrolments_screen1_adapter extends RecyclerView.Adapter<admin_enrolments_screen1_adapter.MyViewHolder> {
+public class enrolments_screen1_adapter_intern extends RecyclerView.Adapter<enrolments_screen1_adapter_intern.MyViewHolder> {
 
     Context context;
-    ArrayList<Jobs> profiles;
+    ArrayList<Interns> profiles;
     private static DatabaseReference reference;
     public String cv;
 
-    public admin_enrolments_screen1_adapter(Context c , ArrayList<Jobs> p)
+    public enrolments_screen1_adapter_intern(Context c , ArrayList<Interns> p)
     {
         context = c;
         profiles = p;
@@ -42,16 +43,16 @@ public class admin_enrolments_screen1_adapter extends RecyclerView.Adapter<admin
     public void onBindViewHolder(@NonNull MyViewHolder holder, final int position) {
         // holder.company_name.setText(profiles.get(position).getCompany_name());
         holder.job_profile.setText(profiles.get(position).getProfile());
-        holder.job_id.setText(profiles.get(position).getJob_id());
+        holder.job_id.setText(profiles.get(position).getIntern_id());
         holder.company.setText(profiles.get(position).getCompany_name());
         // holder.job_location.setText(profiles.get(position).getLocation());
         holder.parentlayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final String job_id=profiles.get(position).getJob_id();
+                final String job_id=profiles.get(position).getIntern_id();
                 //intent.putExtra("job_profile", profiles.get(position));
-               // final String job_id=Integer.toString(position);
-                reference = FirebaseDatabase.getInstance().getReference().child("Jobs").child(profiles.get(position).getJob_id()).child("Applied Students");
+                // final String job_id=Integer.toString(position);
+                reference = FirebaseDatabase.getInstance().getReference().child("Interns").child(profiles.get(position).getIntern_id()).child("Applied Students");
                 reference.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -66,8 +67,8 @@ public class admin_enrolments_screen1_adapter extends RecyclerView.Adapter<admin
                         intent.putExtra("MyClass",slist);
                         intent.putExtra("Job",job_id);
                         intent.putExtra("cv",cv);
-                        intent.putExtra("is_job",true);
-                        intent.putExtra("Screen",1);
+                        intent.putExtra("is_job",false);
+                        intent.putExtra("Screen",0);
                         context.startActivity(intent);
                     }
 

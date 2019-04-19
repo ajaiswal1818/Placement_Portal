@@ -16,6 +16,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.group6.placementportal.DatabasePackage.Interns;
 import com.group6.placementportal.DatabasePackage.Jobs;
 import com.group6.placementportal.DatabasePackage.company;
 
@@ -26,7 +27,9 @@ public class company_enrolments_screen1 extends AppCompatActivity {
     private RecyclerView recyclerView;
     private ArrayList<Jobs> list;
     private enrolments_screen1_adpater adapter;
+    private  ArrayList<Interns> list_i;
     private company c;
+    private enrolments_screen1_adapter_intern adapter_i;
 //    public company user=company_login.getUser();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,41 +44,86 @@ public class company_enrolments_screen1 extends AppCompatActivity {
         this.c=(company) getIntent().getSerializableExtra("MyClass");
         recyclerView =findViewById(R.id.recycler_view_jobs_enrolments);
         recyclerView.setLayoutManager( new LinearLayoutManager(this));
-        reference = FirebaseDatabase.getInstance().getReference().child("Jobs");
-        reference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                list = new ArrayList<Jobs>();
-                for(DataSnapshot dataSnapshot1: dataSnapshot.getChildren())
-                {
-                    Jobs p = dataSnapshot1.getValue(Jobs.class);
+        boolean is_job=getIntent().getBooleanExtra("is_job",true);
+        if(is_job){
+            reference = FirebaseDatabase.getInstance().getReference().child("Jobs");
+            reference.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    list = new ArrayList<Jobs>();
+                    for(DataSnapshot dataSnapshot1: dataSnapshot.getChildren())
+                    {
+                        Jobs p = dataSnapshot1.getValue(Jobs.class);
 
-                   String company_name=p.getCompany_name().toString();
+                        String company_name=p.getCompany_id().toString();
+
                    /* if(user!=null){
                         if(user.getCompnany_id().equals(company_id)){
                             list.add(p);
                         }
                     }*/
-                    list.add(p);
-                   if(c.getCompany_name().equals(company_name)){
-                      // list.add(p);
-                       Log.d("enrolments1",dataSnapshot1.getRef().toString());
-                   }
+                        if(c.getCompany_id().equals(company_name)){
+                            // list.add(p);
+                            Log.d("enrolments1",dataSnapshot1.getRef().toString());
+                            list.add(p);
+
+                        }
 
 
 
 
 
+                    }
+                    adapter = new enrolments_screen1_adpater(company_enrolments_screen1.this,list);
+                    recyclerView.setAdapter(adapter);
                 }
-                adapter = new enrolments_screen1_adpater(company_enrolments_screen1.this,list);
-                recyclerView.setAdapter(adapter);
-            }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                Toast.makeText(company_enrolments_screen1.this, "Opsss.... Something is wrong", Toast.LENGTH_SHORT).show();
-            }
-        });
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                    Toast.makeText(company_enrolments_screen1.this, "Opsss.... Something is wrong", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
+        else{
+            reference = FirebaseDatabase.getInstance().getReference().child("Interns");
+            reference.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    list_i = new ArrayList<Interns>();
+                    for(DataSnapshot dataSnapshot1: dataSnapshot.getChildren())
+                    {
+                        Interns p = dataSnapshot1.getValue(Interns.class);
+
+                        String company_name=p.getCompany_id().toString();
+
+                   /* if(user!=null){
+                        if(user.getCompnany_id().equals(company_id)){
+                            list.add(p);
+                        }
+                    }*/
+                        if(c.getCompany_id().equals(company_name)){
+                            // list.add(p);
+                            Log.d("enrolments1",dataSnapshot1.getRef().toString());
+                            list_i.add(p);
+
+                        }
+
+
+
+
+
+                    }
+                    adapter_i = new enrolments_screen1_adapter_intern(company_enrolments_screen1.this,list_i);
+                    recyclerView.setAdapter(adapter_i);
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                    Toast.makeText(company_enrolments_screen1.this, "Opsss.... Something is wrong", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
+
 
     }
     private boolean isNetworkAvailable() {
