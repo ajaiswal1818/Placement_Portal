@@ -1,12 +1,15 @@
 package com.group6.placementportal;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
+import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -32,6 +35,7 @@ public class single_dialog_companyenrollments_0 extends DialogFragment {
     public int notifications_count;
     public String list="";
     public boolean res=true;
+    public Activity f;
     public single_dialog_companyenrollments_0(String s_id,String job,int pos,int screen){
         student=s_id;
         job_id=job;
@@ -64,11 +68,11 @@ public class single_dialog_companyenrollments_0 extends DialogFragment {
 
             }
             else if(which_items==2){
-                items=new CharSequence[]{"Approve changes(A notification will be sent)"};
+                items=new CharSequence[]{"Approve changes(A notification will be sent)","Reject"};
 
             }
             else if(which_items==3){
-                items=new CharSequence[]{"Approve changes"};
+                items=new CharSequence[]{};
 
             }
         }
@@ -153,7 +157,7 @@ public class single_dialog_companyenrollments_0 extends DialogFragment {
         DatabaseReference ref=FirebaseDatabase.getInstance().getReference().child("Jobs").child(job_id).child("Applied Students").child(student);
         ref.child("is_notified").setValue("Yes");
     }
-    public boolean check_if_already_notified(final int count, final int which){
+    public boolean check_if_already_notified(final int count, final int which, final boolean to_approve){
 
         DatabaseReference ref=FirebaseDatabase.getInstance().getReference().child("Jobs").child(job_id).child("Applied Students").child(student);
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -161,12 +165,33 @@ public class single_dialog_companyenrollments_0 extends DialogFragment {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if(dataSnapshot.hasChild("is_notified")){
                     res=true;
-                    
+                    if(f!=null){
+                        Toast.makeText(f, "No changes can be made now", Toast.LENGTH_SHORT).show();
+
+                    }
+                    else{
+                        Log.w("f is","Null");
+                    }
+
+
                 }
                 else{
                     mark_notified();
                     res=false;
-                    send_notification(count,which);
+                    if(to_approve){
+                        send_notification(count,which);
+                        Toast.makeText(f, "Approving the application request. Notification sent to the student", Toast.LENGTH_SHORT).show();
+                        reference = FirebaseDatabase.getInstance().getReference().child("Jobs").child(job_id).child("Applied Students").child(student).child("Approval").setValue("Yes");
+
+                    }
+                    else{
+                        Toast.makeText(f, "Rejecting the application request", Toast.LENGTH_SHORT).show();
+                        reference = FirebaseDatabase.getInstance().getReference().child("Jobs").child(job_id).child("Applied Students").child(student).child("Approval").setValue("Rejected");
+
+
+                    }
+
+
                 }
             }
 
@@ -179,6 +204,14 @@ public class single_dialog_companyenrollments_0 extends DialogFragment {
     }
 
     public int option_number=100;
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
+        if (context instanceof Activity){
+            f =(Activity) context;
+        }
+    }
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
@@ -276,15 +309,14 @@ public class single_dialog_companyenrollments_0 extends DialogFragment {
                   if(which_items==0){
                       if(option_number==0){
                           //approve
-                          Toast.makeText(getActivity(), "Approving the application request", Toast.LENGTH_SHORT).show();
-                          reference = FirebaseDatabase.getInstance().getReference().child("Jobs").child(job_id).child("Applied Students").child(student).child("Approval").setValue("Yes");
+                       //   reference = FirebaseDatabase.getInstance().getReference().child("Jobs").child(job_id).child("Applied Students").child(student).child("Approval").setValue("Yes");
                           reference1=FirebaseDatabase.getInstance().getReference().child("Notifications");
                           reference1.addListenerForSingleValueEvent(new ValueEventListener() {
                               @Override
                               public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                   notifications_count= (int) dataSnapshot.getChildrenCount();
                                   Log.w("notifications",Integer.toString(notifications_count));
-                                  check_if_already_notified(notifications_count,which_items);
+                                  check_if_already_notified(notifications_count,which_items,true);
 
 
                               }
@@ -299,8 +331,9 @@ public class single_dialog_companyenrollments_0 extends DialogFragment {
                       }
                       else if(option_number==1){
                           //reject --> remove student and notify him
-                          Toast.makeText(getActivity(), "Rejecting the application - A notification will also be sent to the student about this", Toast.LENGTH_SHORT).show();
-                          reference = FirebaseDatabase.getInstance().getReference().child("Jobs").child(job_id).child("Applied Students").child(student).child("Approval").setValue("Rejected");
+                         // Toast.makeText(getActivity(), "Rejecting the application ", Toast.LENGTH_SHORT).show();
+                        //  reference = FirebaseDatabase.getInstance().getReference().child("Jobs").child(job_id).child("Applied Students").child(student).child("Approval").setValue("Rejected");
+                          check_if_already_notified(notifications_count,which_items,false);
 
                       }
                   }
@@ -309,7 +342,7 @@ public class single_dialog_companyenrollments_0 extends DialogFragment {
                       if(option_number==0){
                           // notify
                           reference1=FirebaseDatabase.getInstance().getReference().child("Notifications");
-                          reference = FirebaseDatabase.getInstance().getReference().child("Jobs").child(job_id).child("Applied Students").child(student).child("Approval").setValue("Yes");
+                        //  reference = FirebaseDatabase.getInstance().getReference().child("Jobs").child(job_id).child("Applied Students").child(student).child("Approval").setValue("Yes");
 
                           reference1.addListenerForSingleValueEvent(new ValueEventListener() {
                               @Override
@@ -317,7 +350,7 @@ public class single_dialog_companyenrollments_0 extends DialogFragment {
                                   notifications_count= (int) dataSnapshot.getChildrenCount();
                                   Log.w("notifications",Integer.toString(notifications_count));
 
-                                  check_if_already_notified(notifications_count,which_items);
+                                  check_if_already_notified(notifications_count,which_items,true);
 
                               }
 
@@ -335,7 +368,8 @@ public class single_dialog_companyenrollments_0 extends DialogFragment {
 
                       }
                       else if(option_number==1){
-                          reference = FirebaseDatabase.getInstance().getReference().child("Jobs").child(job_id).child("Applied Students").child(student).child("Approval").setValue("Rejected");
+                      //    reference = FirebaseDatabase.getInstance().getReference().child("Jobs").child(job_id).child("Applied Students").child(student).child("Approval").setValue("Rejected");
+                          check_if_already_notified(notifications_count,which_items,false);
 
                       }
                   }
@@ -397,7 +431,7 @@ public class single_dialog_companyenrollments_0 extends DialogFragment {
 
                       }
                       else if(option_number==1){
-                          reference = FirebaseDatabase.getInstance().getReference().child("Jobs").child(job_id).child("Applied Students").child(student).child("Approval").setValue("Rejected");
+                         // reference = FirebaseDatabase.getInstance().getReference().child("Jobs").child(job_id).child("Applied Students").child(student).child("Approval").setValue("Rejected");
 
                       }
                   }
@@ -427,7 +461,7 @@ public class single_dialog_companyenrollments_0 extends DialogFragment {
 
                               }
                           });*/
-                          Log.w("notifications before adding",Integer.toString(notifications_count));
+                         // Log.w("notifications before adding",Integer.toString(notifications_count));
 
 
 
@@ -452,4 +486,6 @@ public class single_dialog_companyenrollments_0 extends DialogFragment {
         return builder.create();
        // return super.onCreateDialog(savedInstanceState);
     }
+
+
 }
