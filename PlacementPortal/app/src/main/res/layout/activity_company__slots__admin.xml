@@ -3,12 +3,29 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:gravity="center"
     android:layout_height="match_parent"
     tools:context=".Company_Slots_Admin">
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycler"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/input"
+        android:textAlignment="center"
+        android:textColorHint="#202020"
+        android:textSize="30sp"
+        android:text="List Of Companies Applied"
+        android:layout_alignParentTop="true" />
+    <android.support.v7.widget.RecyclerView
+        android:paddingHorizontal="10dp"
+        android:id="@+id/recycler"
+
+        android:background="@drawable/input"
+        android:textAlignment="center"
+        android:textColorHint="#202020"
+        android:paddingBottom="50dp"
+        android:layout_width="match_parent"
+        android:layout_height="550dp"
+        android:layout_marginTop="80dp">
     </android.support.v7.widget.RecyclerView>
 </RelativeLayout>
