@@ -1,176 +1,213 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".DatabasePackage.RA">
 
-    <EditText
-        android:id="@+id/editApplication"
-        android:layout_width="342dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="40dp"
-        android:ems="10"
-        android:hint="Application No."
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.461"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="135dp"
+        >
 
-    <Button
-        android:id="@+id/btn_uploadsign"
-        android:layout_width="344dp"
-        android:layout_height="45dp"
-        android:layout_marginTop="8dp"
-        android:text="Upload Sign"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.507"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rbtngrp_check" />
-
-    <Button
-        android:id="@+id/btn_uploadphoto"
-        android:layout_width="342dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:text="Upload Photo"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.55"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_uploadsign" />
-
-    <Button
-        android:id="@+id/btn_apply"
-        android:layout_width="342dp"
-        android:layout_height="49dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
-        android:text="Apply"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.55"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_uploadphoto"
-        app:layout_constraintVertical_bias="0.8" />
-
-    <EditText
-        android:id="@+id/editProgLang"
-        android:layout_width="340dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:ems="10"
-        android:hint="Programming Languages"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.507"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editApplication" />
-
-    <EditText
-        android:id="@+id/editYear"
-        android:layout_width="337dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:ems="10"
-        android:hint="Year and Type of Experiences"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editProgLang" />
-
-    <EditText
-        android:id="@+id/editapplyproject"
-        android:layout_width="336dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:ems="10"
-        android:hint="Applied For Project"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editYear" />
-
-    <EditText
-        android:id="@+id/editapplypost"
-        android:layout_width="335dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:ems="10"
-        android:hint="Applied For Post"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editapplyproject" />
-
-
-    <RadioGroup
-        android:id="@+id/rbtngrp_check"
-        android:layout_width="68dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="32dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editapplypost">
-
-        <RadioButton
-            android:id="@+id/rbtnno"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="No"
-            tools:layout_editor_absoluteX="269dp"
-            tools:layout_editor_absoluteY="268dp" />
+            android:orientation="vertical"
+            android:layout_marginHorizontal="50dp"
+            android:layout_gravity="center">
 
-        <RadioButton
-            android:id="@+id/rbtnyes"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Yes"
-            tools:layout_editor_absoluteX="195dp"
-            tools:layout_editor_absoluteY="269dp" />
-    </RadioGroup>
+            <EditText
+                android:id="@+id/txt_name_of_org"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
 
-    <TextView
-        android:id="@+id/txtQualify"
-        android:layout_width="wrap_content"
-        android:layout_height="52dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="16dp"
-        android:text="Qualified Gate"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editapplypost" />
+                android:background="@drawable/input"
+                android:hint="Name of the Organization"
+                android:inputType="textPersonName"
 
-    <TextView
-        android:id="@+id/txt_uploadsign"
-        android:layout_width="wrap_content"
-        android:layout_height="17dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:text="NO FILE SELECTED"
-        app:layout_constraintBottom_toTopOf="@+id/btn_uploadphoto"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_uploadsign" />
+                android:textColorHint="@color/colorTextHint"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/txt_uploadphoto"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:text="NO FILE SELECTED"
-        app:layout_constraintBottom_toTopOf="@+id/btn_apply"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_uploadphoto" />
+            <EditText
+                android:id="@+id/txt_designation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+
+                android:layout_marginTop="20dp"
+
+                android:background="@drawable/input"
+                android:ems="10"
+                android:gravity="center"
+                android:hint="Designation"
+                android:inputType="textPersonName"
+                android:paddingHorizontal="30dp"
+
+                android:textColorHint="@color/colorTextHint"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <LinearLayout
+                android:id="@+id/period_ll"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="vertical"
+                android:layout_marginTop="20dp"
+                >
+
+                <TextView
+                    android:id="@+id/period_header"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="Period"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="25sp" />
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="10dp"
+                    >
+
+                    <EditText
+                        android:id="@+id/txt_from"
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="center"
+
+                        android:layout_marginEnd="8dp"
+                        android:background="@drawable/input"
+                        android:ems="10"
+                        android:gravity="center"
+                        android:hint="From"
+                        android:inputType="text|date"
+                        android:paddingHorizontal="30dp"
+                        android:textColorHint="@color/colorTextHint"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <EditText
+                        android:id="@+id/txt_to"
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="center"
+
+                        android:layout_marginEnd="8dp"
+                        android:background="@drawable/input"
+                        android:ems="10"
+                        android:gravity="center"
+                        android:hint="To"
+                        android:inputType="text|date"
+                        android:paddingHorizontal="30dp"
+                        android:textColorHint="@color/colorTextHint"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" /></LinearLayout>
+            </LinearLayout>
+
+            <EditText
+                android:id="@+id/txt_nature_of_work"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+
+                android:layout_marginTop="20dp"
+
+                android:background="@drawable/input"
+                android:ems="10"
+                android:gravity="center"
+                android:hint="Nature of Work"
+                android:inputType="textPersonName"
+                android:paddingHorizontal="30dp"
+
+                android:textColorHint="@color/colorTextHint"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/btn_uploadsign"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Upload Sign"
+                android:background="@drawable/roundbtn"
+                android:textColor="#ffffff"
+                android:textSize="18dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txt_nature_of_work" />
+
+            <TextView
+                android:id="@+id/txt_uploadsign"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:text="NO FILE SELECTED"
+                app:layout_constraintBottom_toTopOf="@+id/btn_uploadphoto"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btn_uploadsign" />
+
+
+            <Button
+                android:id="@+id/btn_uploadphoto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="0dp"
+                android:text="Upload Photo"
+                android:background="@drawable/roundbtn"
+                android:textColor="#ffffff"
+                android:textSize="18dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txt_uploadsign"/>
+
+            <TextView
+                android:id="@+id/txt_uploadphoto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:text="NO FILE SELECTED"
+                app:layout_constraintBottom_toTopOf="@+id/btn_apply"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btn_uploadphoto" />
+            <Button
+                android:id="@+id/btn_apply"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="0dp"
+                android:text="Upload Photo"
+                android:background="@drawable/roundbtn"
+                android:textColor="#ffffff"
+                android:textSize="18dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txt_uploadsign" />
+        </LinearLayout>
+    </ScrollView>
+
 
 </android.support.constraint.ConstraintLayout>
