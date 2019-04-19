@@ -101,14 +101,19 @@ public class Student_ChangePassword extends AppCompatActivity
                     if(NPass2.equals(NPass)){
                         user.setPassword(NPass);
                         mDatabase.child("Student").child(Username).child("password").setValue(NPass);
+                        NewPass.setText("");
+                        NewPass2.setText("");
+                        CurrPass.setText("");
                     }
                     else{
-                        Toast.makeText(getApplicationContext(), "Passwords do not match", Toast.LENGTH_SHORT).show();
+                        NewPass2.setError("Passwords do not match");
+                        //Toast.makeText(getApplicationContext(), "Passwords do not match", Toast.LENGTH_SHORT).show();
 
                     }
                 }
                 else{
-                    Toast.makeText(getApplicationContext(), "Incorrect Password", Toast.LENGTH_SHORT).show();
+                    CurrPass.setError("Incorrect Password");
+                    //Toast.makeText(getApplicationContext(), "Incorrect Password", Toast.LENGTH_SHORT).show();
                 }
             }
         });

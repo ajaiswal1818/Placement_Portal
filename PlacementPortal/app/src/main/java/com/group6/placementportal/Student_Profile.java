@@ -115,18 +115,23 @@ public class Student_Profile<Student> extends AppCompatActivity {
                     full_name_V.setError("Enter your Full Name");
                     return;
                 }
-
+                //PROGRAMME CHECK
+                if (prog.isEmpty()) {
+                    prog_V.setError("Enter your Programme");
+                    return;
+                }
+                //CONTACT CHECK
+                if (contact.isEmpty()) {
+                    contact_V.setError("Enter your Contact No");
+                    return;
+                }
                 //DEPT CHECK
                 if (dept.isEmpty()) {
                     dept_V.setError("Enter your Department");
                     return;
                 }
 
-                //PROGRAMME CHECK
-                if (prog.isEmpty()) {
-                    prog_V.setError("Enter your Programme");
-                    return;
-                }
+
 
                 //ROLL NO CHECK
                 if (roll_no.isEmpty()) {
@@ -152,11 +157,7 @@ public class Student_Profile<Student> extends AppCompatActivity {
                     return;
                 }
 
-                //CONTACT CHECK
-                if (contact.isEmpty()) {
-                    contact_V.setError("Enter your Contact No");
-                    return;
-                }
+
                 if(isNumeric(contact)==false){
                     contact_V.setError("Contact No. can contain only digits");
                     return;
@@ -165,11 +166,7 @@ public class Student_Profile<Student> extends AppCompatActivity {
                     contact_V.setError("Contact No. should be of 10 digits");
                     return;
                 }
-                //PASSWORD CHECK
-                if (password.isEmpty()) {
-                    password_V.setError("Enter your Password");
-                    return;
-                }
+
 
                 //CPI CHECKS
                 if (cpi.isEmpty()) {
@@ -183,6 +180,11 @@ public class Student_Profile<Student> extends AppCompatActivity {
                 double cpi_double=Double.parseDouble(cpi);
                 if(cpi_double>10 || cpi_double<0){
                     cpi_V.setError("Invalid CPI");
+                    return;
+                }
+                //PASSWORD CHECK
+                if (password.isEmpty()) {
+                    password_V.setError("Enter your Password");
                     return;
                 }
                 //CONVERT YEAR TO INT

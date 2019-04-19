@@ -30,7 +30,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class JRF_Approval_Profile extends AppCompatActivity {
+public class JRF_Approval_Profile extends AppCompatActivity{
 
     private ExpandableListView listView,listView2,listView3;
     private ExpandableListAdapter listAdapter;
@@ -56,10 +56,13 @@ public class JRF_Approval_Profile extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        if(isNetworkAvailable()==false){
-            Toast.makeText(JRF_Approval_Profile.this,"NO INTERNET CONNECTION", Toast.LENGTH_LONG).show();
+
+        if(isNetworkAvailable()==false) {
+            Toast.makeText(JRF_Approval_Profile.this, "NO INTERNET CONNECTION", Toast.LENGTH_LONG).show();
             return;
         }
+//        DatePickerDialog datePickerDialog = new DatePickerDialog(
+//                context, JRF_Approval_Profile.this, startYear, starthMonth, startDay);
 
 
         FloatingActionButton fab = findViewById(R.id.fab);

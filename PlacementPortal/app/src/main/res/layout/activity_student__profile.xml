@@ -169,20 +169,20 @@
             android:id="@+id/password_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_marginStart="8dp"
             android:layout_marginTop="12dp"
             android:layout_marginEnd="8dp"
+            android:background="@drawable/input"
             android:ems="10"
-            android:layout_gravity="center"
             android:hint="Password"
-            android:inputType="textPersonName"
+            android:inputType="textPassword"
             android:paddingLeft="10dp"
             android:textColor="@color/colorText"
-            tools:textColorHint="@color/colorTextHint"
-            android:background="@drawable/input"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cpi_text" />
+            app:layout_constraintTop_toBottomOf="@+id/cpi_text"
+            tools:textColorHint="@color/colorTextHint" />
 
         <LinearLayout
             android:layout_width="wrap_content"
