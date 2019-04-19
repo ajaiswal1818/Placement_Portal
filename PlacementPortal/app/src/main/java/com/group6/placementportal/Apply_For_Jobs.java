@@ -62,11 +62,9 @@ public class Apply_For_Jobs extends AppCompatActivity {
             Toast.makeText(Apply_For_Jobs.this,"NO INTERNET CONNECTION", Toast.LENGTH_LONG).show();
             return;
         }
-
-        btn_apply.setEnabled(false);
+        btn_apply=findViewById(R.id.buttonUploadFIle);
         jobs = (Jobs) getIntent().getSerializableExtra("job_profile");
         user = (Student) getIntent().getSerializableExtra("user");
-        btn_apply=findViewById(R.id.buttonUploadFIle);
 
         job_profile = findViewById(R.id.job_profile);
         job_requirements = findViewById(R.id.job_requirements);
@@ -104,15 +102,17 @@ public class Apply_For_Jobs extends AppCompatActivity {
 
             }
         });
-        String[] split_list =list.split("\\,");
-        boolean flag=false;
-        for(int i=0;i<split_list.length;i++){
-            if(split_list[i].equals(jobs.getJob_id())){
-                flag=true;
+        if(list!=null && !list.equals("")) {
+            String[] split_list = list.split("\\,");
+            boolean flag = false;
+            for (int i = 0; i < split_list.length; i++) {
+                if (split_list[i].equals(jobs.getJob_id())) {
+                    flag = true;
+                }
             }
-        }
-        if(flag==true){
-            btn_apply.setEnabled(false);
+            if (flag == true) {
+                btn_apply.setEnabled(false);
+            }
         }
 
         Log.d("TAG",jobs.getCompany_id()+" ");

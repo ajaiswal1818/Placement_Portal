@@ -109,7 +109,7 @@ public class GivePreference extends AppCompatActivity
             AlertDialog mDialog = mBuilder.create();
             mDialog.show();
         }
-        AllowUsertogivePreferences();
+            AllowUsertogivePreferences();
         }
     private boolean isNetworkAvailable() {
         ConnectivityManager connectivityManager
@@ -128,7 +128,6 @@ public class GivePreference extends AppCompatActivity
             setPref.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(GivePreference.this,"Hey",Toast.LENGTH_LONG).show();
                     String list_of_applied_companies="";
                     if(list!=null) {
                         for (Jobs j : list) {
@@ -203,18 +202,18 @@ public class GivePreference extends AppCompatActivity
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     boolean checkChild = dataSnapshot.hasChild("has_given_preferences");
                     userApplied[0] = checkChild;
+                    Log.d("TAG",checkChild+"");
                 }
 
                 @Override
                 public void onCancelled(@NonNull DatabaseError databaseError) {
-                    userApplied[0] = false;
+                    userApplied[0] = true;
                 }
             });
             return userApplied[0];
         }
 
         public void CAllDatabase(final String list_companies){
-            Toast.makeText(GivePreference.this,"Hey Yo",Toast.LENGTH_LONG).show();
             reference.child("Student").child(user.getWebmailID()).child("preferences").setValue(list_companies);
             reference.child("Student").child(user.getWebmailID()).child("has_given_preferences").setValue("Completed");
         }

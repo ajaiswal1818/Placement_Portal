@@ -3,8 +3,10 @@ package com.group6.placementportal.DatabasePackage;
 import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -12,10 +14,12 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CursorAdapter;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.TextView;
@@ -23,15 +27,21 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.group6.placementportal.GivePreference;
 import com.group6.placementportal.R;
 import com.group6.placementportal.Student_JRF;
 import com.microsoft.identity.client.PublicClientApplication;
+
+import java.io.File;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -59,8 +69,9 @@ public class JRF extends Fragment {
     private TextView file_name_photo;
     private TextView file_name_sign;
     private EditText application,programmingLanguage,year,project,post;
-    private String mapplication,mprogrammingLanguage,myear,mproject,mpost;
+    private String mapplication,mprogrammingLanguage,myear,mproject,mpost,mqualifies;
     private RadioButton yesBtn,noBtn;
+    private boolean has_applied=false;
 
     public JRF() {
     }
@@ -101,29 +112,75 @@ public class JRF extends Fragment {
         apply.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mapplication = application.getText().toString();
-                mprogrammingLanguage = programmingLanguage.getText().toString();
-                myear = year.getText().toString();
-                mproject = project.getText().toString();
-                mpost = post.getText().toString();
+                mDatabaseReference.child("JRF").addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        has_applied= dataSnapshot.hasChild(user.getWebmailID());
+                        if(has_applied){
+                            AlertDialog.Builder mBuilder = new AlertDialog.Builder(getActivity());
+                            mBuilder.setTitle("You have already applied");
+                            mBuilder.setCancelable(false);
+                            mBuilder.setNeutralButton("Ok", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
 
-                if(mapplication==null){
-                    return;
-                }
-                if(mprogrammingLanguage==null){
-                    return;
-                }
-                if(myear==null){
-                    return;
-                }
-                if(mproject==null){
-                    return;
-                }
-                if(mpost==null){
-                    return;
-                }
+                                }
+                            });
+                            AlertDialog mDialog = mBuilder.create();
+                            mDialog.show();
+                        }
+                        else {
 
+                            mapplication = application.getText().toString();
+                            mprogrammingLanguage = programmingLanguage.getText().toString();
+                            myear = year.getText().toString();
+                            mproject = project.getText().toString();
+                            mpost = post.getText().toString();
+                            if (yesBtn.isChecked()) {
+                                mqualifies = "yes";
+                            } else if (noBtn.isChecked()) {
+                                mqualifies = "no";
+                            }
 
+                            if (mapplication.equals("")) {
+                                application.setError("Required");
+                                return;
+                            }
+                            if (mprogrammingLanguage.equals("")) {
+                                programmingLanguage.setError("Required");
+                                return;
+                            }
+                            if (myear.equals("")) {
+                                year.setError("Required");
+                                return;
+                            }
+                            if (mproject.equals("")) {
+                                project.setError("Required");
+                                return;
+                            }
+                            if (mpost.equals("")) {
+                                post.setError("Required");
+                                return;
+                            }
+                            if (mqualifies == null) {
+                                Toast.makeText(getActivity(), "Choose either yes or no", Toast.LENGTH_SHORT).show();
+                                return;
+                            }
+
+                            if (pdfUrisign != null && pdfUriphoto != null) {
+                                uploadFilesign(pdfUrisign);
+                                uploadFilephoto(pdfUriphoto);
+                            } else {
+                                Toast.makeText(getContext(), "Select File", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
             }
         });
 
@@ -196,7 +253,7 @@ public class JRF extends Fragment {
         }
         else if(requestCode==87 && resultCode==RESULT_OK && data!=null){
             pdfUriphoto = data.getData();
-            file_name_sign.setText(data.getData().getLastPathSegment());
+            file_name_photo.setText(data.getData().getLastPathSegment());
         }
         else{
             Toast.makeText(getActivity().getApplicationContext(),"Select a file",Toast.LENGTH_SHORT).show();
@@ -208,10 +265,6 @@ public class JRF extends Fragment {
     //the code is same as the previous tutorial
     //so we are not explaining it
     private void uploadFilesign(Uri data) {
-        progressDialog = new ProgressDialog(getActivity().getApplicationContext());
-        progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-        progressDialog.setTitle("Requesting Process");
-        progressDialog.show();
 
         final StorageReference ref = mStorageReference.child("Uploads").child("JRF").child(user.getWebmailID()).child("Sign");
         ref.putFile(data)
@@ -221,18 +274,18 @@ public class JRF extends Fragment {
                         ref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                             @Override
                             public void onSuccess(Uri uri) {
-                                progressDialog.hide();
+
                                 String upload = uri.toString();
                                 mDatabaseReference.child("JRF").child(user.getWebmailID()).child("Sign").setValue(upload);
-                                Toast.makeText(getActivity().getApplicationContext(),"File Upload Successful",Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getActivity(),"File Upload Successful",Toast.LENGTH_SHORT).show();
+
                             }
                         });
                     }
                 }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                progressDialog.hide();
-                Toast.makeText(getActivity().getApplicationContext(), "File Upload Failed", Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(), "File Upload Failed", Toast.LENGTH_LONG).show();
             }
         }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
             @Override
@@ -244,10 +297,12 @@ public class JRF extends Fragment {
     }
 
     private void uploadFilephoto(Uri data) {
-        progressDialog = new ProgressDialog(getActivity().getApplicationContext());
+        progressDialog = new ProgressDialog(getActivity());
         progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         progressDialog.setTitle("Please Wait");
         progressDialog.show();
+
+        final JRF_applications jrf_applications = new JRF_applications(mapplication,mprogrammingLanguage,myear,mproject,mpost,mqualifies,user.getFullName(),"","",user.getWebmailID());
 
         final StorageReference ref = mStorageReference.child("Uploads").child("JRF").child(user.getWebmailID()).child("Photo");
         ref.putFile(data)
@@ -260,14 +315,8 @@ public class JRF extends Fragment {
                                 progressDialog.hide();
                                 String upload = uri.toString();
                                 mDatabaseReference.child("JRF").child(user.getWebmailID()).child("Photo").setValue(upload);
-                                mDatabaseReference.child("JRF").child(user.getWebmailID()).child("Student_Name").setValue(user.getFullName());
-                                mDatabaseReference.child("JRF").child(user.getWebmailID()).child("Application_No").setValue(mapplication);
-                                mDatabaseReference.child("JRF").child(user.getWebmailID()).child("ProgrammingLanguages").setValue(mprogrammingLanguage);
-                                mDatabaseReference.child("JRF").child(user.getWebmailID()).child("YearandType").setValue(myear);
-                                mDatabaseReference.child("JRF").child(user.getWebmailID()).child("AppliedProject").setValue(mproject);
-                                mDatabaseReference.child("JRF").child(user.getWebmailID()).child("Qualified").setValue("yes");
-                                mDatabaseReference.child("JRF").child(user.getWebmailID()).child("Webmail").setValue(user.getWebmailID());
-                                Toast.makeText(getActivity().getApplicationContext(),"File Upload Successful",Toast.LENGTH_SHORT).show();
+                                mDatabaseReference.child("JRF").child(user.getWebmailID()).setValue(jrf_applications);
+                                Toast.makeText(getActivity(),"File Upload Successful",Toast.LENGTH_SHORT).show();
                             }
                         });
                     }
@@ -275,7 +324,7 @@ public class JRF extends Fragment {
             @Override
             public void onFailure(@NonNull Exception e) {
                 progressDialog.hide();
-                Toast.makeText(getActivity().getApplicationContext(), "File Upload Failed", Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(), "File Upload Failed", Toast.LENGTH_LONG).show();
             }
         }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
             @Override

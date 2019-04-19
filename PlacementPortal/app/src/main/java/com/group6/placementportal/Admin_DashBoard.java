@@ -75,7 +75,8 @@ public class Admin_DashBoard extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_jrf_application_requests) {
-            // Handle the camera action
+            Intent i = new Intent(getApplicationContext(), JRF_Application_Requests.class);
+            startActivity(i);
         } else if (id == R.id.nav_approve_notice) {
             Intent i = new Intent(getApplicationContext(), Admin_ApproveNotice.class);
             startActivity(i);
@@ -83,14 +84,11 @@ public class Admin_DashBoard extends AppCompatActivity
         else if (id== R.id.Company_slots){
             Intent i = new Intent(getApplicationContext(), Company_Slots_Admin.class);
             startActivity(i);
+        }else if(id==R.id.nav_signout){
+            Intent i = new Intent(getApplicationContext(), Login_Page_Admin.class);
+            startActivity(i);
+            Admin_DashBoard.this.finish();
         }
-//        } else if (id == R.id.nav_slideshow) {
-//
-//        } else if (id == R.id.nav_share) {
-//
-//        } else if (id == R.id.nav_send) {
-//
-//        }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

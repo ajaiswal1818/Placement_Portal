@@ -1,6 +1,7 @@
 package com.group6.placementportal;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -40,9 +41,9 @@ Adapter_JRF_Admin extends RecyclerView.Adapter<Adapter_JRF_Admin.MyViewHolder> {
         holder.parentlayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Intent intent = new Intent(context, Apply_For_Jobs.class);
-//                intent.putExtra("job_profile", profiles.get(position));
-//                context.startActivity(intent);
+                Intent intent = new Intent(context, JRF_Approval_Profile.class);
+                intent.putExtra("job_profile", profiles.get(position));
+                context.startActivity(intent);
             }
         });
     }
