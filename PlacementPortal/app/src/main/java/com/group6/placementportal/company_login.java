@@ -1,5 +1,6 @@
 package com.group6.placementportal;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
@@ -29,6 +30,7 @@ public class company_login extends AppCompatActivity {
     private DatabaseReference valid;
     private boolean flag=true;
     public company c=null;
+    private ProgressDialog dialog1;
     Encryption encryption = Encryption.getDefault("Key", "Salt", new byte[16]);
 
     public company getUser(){
@@ -65,6 +67,10 @@ public class company_login extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                dialog1 = new ProgressDialog(company_login.this);
+                dialog1.setMessage("Please Wait");
+                dialog1.setCancelable(false);
+                dialog1.show();
                 valid.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -79,23 +85,33 @@ public class company_login extends AppCompatActivity {
                                     //company_dashboard.putExtra("PrevActivity","company_login");
                                     finish();
                                     startActivity(company_dashboard);
+                                    dialog1.setCancelable(true);
+                                    dialog1.hide();
                                 }
                                 else
                                 {
                                     Toast.makeText(company_login.this,"Incorrect Login Credentials",Toast.LENGTH_LONG).show();
+                                    dialog1.setCancelable(true);
+                                    dialog1.hide();
                                 }
                             }
                             else if(dataSnapshot.child(username.getText().toString()).child("approved").getValue().toString().equals("Rejected"))
                             {
                                 Toast.makeText(company_login.this,"Sorry, your request has been rejected by the admin.\nPlease contact admin for more details.",Toast.LENGTH_LONG).show();
+                                dialog1.setCancelable(true);
+                                dialog1.hide();
                             }
                             else {
                                 Toast.makeText(company_login.this,"Your request to admin is pending for approval, can't login now.",Toast.LENGTH_LONG).show();
+                                dialog1.setCancelable(true);
+                                dialog1.hide();
                             }
                         }
                         else
                         {
                             Toast.makeText(company_login.this,"Incorrect Login Credentials",Toast.LENGTH_LONG).show();
+                            dialog1.setCancelable(true);
+                            dialog1.hide();
                         }
                     }
 

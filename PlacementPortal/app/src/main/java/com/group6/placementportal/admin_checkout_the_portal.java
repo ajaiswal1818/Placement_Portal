@@ -99,8 +99,9 @@ public class admin_checkout_the_portal extends AppCompatActivity {
         reference=FirebaseDatabase.getInstance().getReference().child("checked_out");
         reference.setValue("Yes");
         reference= FirebaseDatabase.getInstance().getReference().child("Student");
+        Log.w("companies selected","called");
 
-        
+
 
 
 
@@ -122,7 +123,7 @@ public class admin_checkout_the_portal extends AppCompatActivity {
                            else{
                                 if(dataSnapshot1.child("selected_for_intern_ids").exists()){
                                     companies_selected = (String) dataSnapshot1.child("selected_for_intern_ids").getValue();
-
+                                    Log.w("companies selected",companies_selected);
                                 }
                                 else{
                                     companies_selected="";

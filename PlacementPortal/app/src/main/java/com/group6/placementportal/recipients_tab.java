@@ -1,3 +1,4 @@
+/*
 package com.group6.placementportal;
 
 import android.content.Context;
@@ -94,3 +95,4 @@ public class recipients_tab extends AppCompatActivity {
     }
 
 }
+*/

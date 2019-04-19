@@ -1,39 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/card_company_notice"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingLeft="15dp"
-    android:paddingRight="15dp"
-    android:descendantFocusability="beforeDescendants">
+    app:cardBackgroundColor="@color/colorCard"
+    app:cardPreventCornerOverlap="true"
+    app:cardCornerRadius="10dp"
+    app:cardElevation="10dp"
+    android:layout_marginLeft="10dp"
+    android:layout_marginStart="10dp"
+    android:layout_marginEnd="10dp"
+    android:layout_marginTop="10dp"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintLeft_toLeftOf="parent"
+    app:layout_constraintRight_toRightOf="parent">
 
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingLeft="15dp"
-        android:paddingTop="15dp"
-        android:paddingBottom="15dp"
-        android:paddingRight="15dp"
-        android:gravity="center"
-        android:background="@drawable/card_background_selector"
-        android:descendantFocusability="afterDescendants">
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:orientation="vertical">
 
         <TextView
-            android:id="@+id/line1"
-            android:textColor="@color/colorAccent"
-            android:textSize="20dp"
-            android:textStyle="bold"
+            android:id="@+id/notice_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Text line 1"/>
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:focusable="auto"
+            android:text="Nothing to show"
+            android:textAlignment="center"
+            android:textColor="@color/common_google_signin_btn_text_dark_focused"
+            android:textColorLink="@color/common_google_signin_btn_text_dark_focused"
+            android:textSize="30sp" />
 
         <TextView
-            android:id="@+id/line2"
+            android:id="@+id/notice_description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Text line 2"
-            android:textSize="15dp"/>
+            android:layout_gravity="center"
+            android:layout_marginBottom="10dp"
+            android:focusable="auto"
+            android:text="Nothing to show"
+            android:textAlignment="center"
+            android:textColor="@color/common_google_signin_btn_text_dark_focused"
+            android:textColorLink="@color/common_google_signin_btn_text_dark_focused"
+            android:textSize="30sp" />
+
+        <TextView
+            android:id="@+id/notice_pdf"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="10dp"
+            android:focusable="auto"
+            android:text="Nothing to show"
+            android:textAlignment="center"
+            android:textColor="@android:color/holo_blue_light"
+            android:textColorLink="@color/common_google_signin_btn_text_dark_focused"
+            android:textSize="30dp" />
 
     </LinearLayout>
-</FrameLayout>
+
+</android.support.v7.widget.CardView>

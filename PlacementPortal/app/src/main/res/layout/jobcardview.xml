@@ -8,13 +8,21 @@
     app:cardPreventCornerOverlap="true"
     app:cardCornerRadius="10dp"
     app:cardElevation="10dp"
+    app:layout_constraintLeft_toLeftOf="parent"
+    app:layout_constraintRight_toRightOf="parent"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constrainedWidth="true"
+    app:layout_constraintEnd_toStartOf="parent"
     android:layout_marginTop="2dp"
     android:layout_marginHorizontal="0dp">
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="386dp"
         android:layout_height="match_parent"
+        android:layout_marginStart="0dp"
+        android:layout_marginEnd="0dp"
         android:gravity="center">
+
         <TextView
             android:id="@+id/job"
             android:layout_width="wrap_content"
@@ -27,7 +35,5 @@
             android:textColorLink="@color/common_google_signin_btn_text_dark_focused"
             android:textSize="20sp" />
     </LinearLayout>
-
-
 
 </android.support.v7.widget.CardView>

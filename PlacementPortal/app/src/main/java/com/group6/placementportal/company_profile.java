@@ -369,6 +369,12 @@ public class company_profile extends AppCompatActivity {
                     if(name.getText().toString().trim().equals("")||sector.getText().toString().trim().equals("")||contact.getText().toString().trim().equals("")||email.getText().toString().trim().equals("")||hq.getText().toString().trim().equals("")||username.getText().toString().trim().equals("")||password.getText().toString().trim().equals(""))
                     {
                         Toast.makeText(company_profile.this,"Can't leave any field empty",Toast.LENGTH_LONG).show();
+                        return;
+                    }
+                    if(password.getText().toString().contains(" "))
+                    {
+                        password.setError("Password can't contain any spaces");
+                        return;
                     }
                     else {
                         valid= FirebaseDatabase.getInstance().getReference("Company");

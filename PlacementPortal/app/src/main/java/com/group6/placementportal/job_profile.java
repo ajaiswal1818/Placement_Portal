@@ -8,6 +8,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.graphics.Paint;
 import android.graphics.drawable.ColorDrawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -179,14 +180,23 @@ public class job_profile extends AppCompatActivity {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             String str = "";
+                            dep="";
                             int i;
-                            for (i = 0; i < selected_branches.size() - 1; i++) {
-                                dep += available_branches[selected_branches.get(i)] + ".";
-                                str += available_branches[selected_branches.get(i)] + "\n";
+                            if(selected_branches.size()>=1)
+                            {
+                                for (i = 0; i < selected_branches.size() - 1; i++) {
+                                    dep += available_branches[selected_branches.get(i)] + ".";
+                                    str += available_branches[selected_branches.get(i)] + "\n";
+                                }
+                                dep += available_branches[selected_branches.get(i)];
+                                str += available_branches[selected_branches.get(i)];
+                                branch.setText(str);
                             }
-                            dep += available_branches[selected_branches.get(i)];
-                            str += available_branches[selected_branches.get(i)];
-                            branch.setText(str);
+                            else
+                            {
+                                dep="";
+                                str="";
+                            }
                         }
                     });
                     mBuilder.setNegativeButton("Dismiss", new DialogInterface.OnClickListener() {
@@ -248,7 +258,7 @@ public class job_profile extends AppCompatActivity {
             submit.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if(cpi.getText().toString().matches("\\d+\\.?\\d+")==false ){
+                    if((cpi.getText().toString().matches("\\d+\\.?\\d+") ==false && cpi.getText().toString().matches("\\d")==false)){
                         cpi.setError("Invalid CPI");
                         return;
                     }
@@ -257,13 +267,19 @@ public class job_profile extends AppCompatActivity {
                         cpi.setError("Invalid CPI");
                         return;
                     }
-                    if(ctc.getText().toString().matches("\\d+\\.?\\d+")==false ){
+                    if((ctc.getText().toString().matches("\\d+\\.?\\d+") ==false && ctc.getText().toString().matches("\\d")==false)){
                         ctc.setError("CTC can only be decimal number");
                         return;
                     }
 
                     if (profile.getText().toString().trim().equals("") || ctc.getText().toString().trim().equals("") || location.getText().toString().trim().equals("")||cpi.getText().toString().equals("") || dep.equals("") || job_requirements.getText().toString().equals("")) {
                         Toast.makeText(job_profile.this, "Can't leave any field empty", Toast.LENGTH_LONG).show();
+                        return;
+                    }
+                    if(file.equals(""))
+                    {
+                        Toast.makeText(job_profile.this, "Please upload a pdf file", Toast.LENGTH_LONG).show();
+                        return;
                     }
                     else {
 
@@ -289,6 +305,15 @@ public class job_profile extends AppCompatActivity {
                                     add_comp1=FirebaseDatabase.getInstance().getReference("Jobs");
                                     Jobs new_job=new Jobs(id + "_" +  j1.getJob_id(),j1.getProfile(),j1.getCtc(),j1.getLocation(),j1.getBrochure(),id,comp_name,j1.getDepartments(),j1.getCpi(),j1.getJob_requirements());
                                     add_comp1.child(id + "_" + j1.getJob_id()).setValue(new_job);
+                                    Toast.makeText(job_profile.this, "Submitted", Toast.LENGTH_LONG).show();
+
+
+
+
+                                    Intent job_list = new Intent(job_profile.this, job_list.class);
+                                    job_list.putExtra("id",id);
+                                    finish();
+                                    startActivity(job_list);
                                 }
                             }
 
@@ -301,10 +326,7 @@ public class job_profile extends AppCompatActivity {
 
 
 
-                        Intent job_list = new Intent(job_profile.this, job_list.class);
-                        job_list.putExtra("id",id);
-                        finish();
-                        startActivity(job_list);
+
                     }
 
                 }
@@ -347,7 +369,7 @@ public class job_profile extends AppCompatActivity {
                         uploadFile(pdfUri);
 
                     } else {
-                        Toast.makeText(job_profile.this, "Select a file", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(job_profile.this, "Select a pdf file", Toast.LENGTH_SHORT).show();
                     }
                 }
             });
@@ -456,7 +478,7 @@ public class job_profile extends AppCompatActivity {
                 progressDialog.setProgress(currentProgress);
                 if (currentProgress == 100) {
                     progressDialog.hide();
-                    Toast.makeText(job_profile.this, "Successfully Uploaded", Toast.LENGTH_LONG).show();
+                   // Toast.makeText(job_profile.this, "Successfully Uploaded", Toast.LENGTH_LONG).show();
                     // remove.setVisibility(View.VISIBLE);
                 }
             }
@@ -487,7 +509,7 @@ public class job_profile extends AppCompatActivity {
             pdfUri = data.getData(); //The uri with the location of the file
             status.setText("File Selected : " + data.getData().getLastPathSegment());
         } else {
-            Toast.makeText(job_profile.this, "Please select a file", Toast.LENGTH_SHORT).show();
+            Toast.makeText(job_profile.this, "Please select a pdf file", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -519,32 +541,36 @@ public class job_profile extends AppCompatActivity {
         branch.setEnabled(false);
         job_requirements.setEnabled(false);
 
-        cpi.setText(String.valueOf(job_det.getCutoff_cpi()));
-        profile.setText(job_det.getProfile());
-        ctc.setText(String.valueOf(job_det.getCtc()));
-        location.setText(job_det.getLocation());
-        branch.setText(job_det.getBranches());
-        job_requirements.setText(job_det.getJob_requirements());
+        cpi.setText("CPI : " + String.valueOf(job_det.getCutoff_cpi()));
+        profile.setText("Profile : " + job_det.getProfile());
+        ctc.setText("CTC : " + String.valueOf(job_det.getCtc()));
+        location.setText("Location : " + job_det.getLocation());
+        branch.setText("Branches : " + job_det.getBranches());
+        job_requirements.setText("Job Requirements : " + job_det.getJob_requirements());
 
         branch_button.setVisibility(View.INVISIBLE);
         submit.setVisibility(View.INVISIBLE);
-        upload.setText("View Selected File");
+        upload.setVisibility(View.INVISIBLE);
+        //upload.setText("View File");
         select.setVisibility(View.INVISIBLE);
 
         status.setText(job_det.getBrochure());
+        status.setTextColor(Color.BLUE);
+        status.setPaintFlags(status.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
 //getBrochure!=" " check
-        if(!(status.getText().toString().equals("")))
+        if(!(job_det.getBrochure().equals("")))
         {
-            upload.setOnClickListener(new View.OnClickListener() {
+            status.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    /* // missing 'http://' will cause crashed
-                    Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-                    startActivity(intent);*/
+                     // missing 'http://' will cause crashed
+                    Intent intent = new Intent(Intent.ACTION_VIEW);
+                    intent.setData(Uri.parse(job_det.getBrochure()));
+                    startActivity(intent);
                    // Uri uri = Uri.parse(job_det.getBrochure());
-                    Intent view_pdf = new Intent(job_profile.this, view_pdf.class);
+                   /* Intent view_pdf = new Intent(job_profile.this, view_pdf.class);
                     view_pdf.putExtra("url",job_det.getBranches());
-                    startActivity(view_pdf);
+                    startActivity(view_pdf);*/
                 }
 
             });

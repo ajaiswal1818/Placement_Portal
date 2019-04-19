@@ -6,14 +6,21 @@ import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.group6.placementportal.DatabasePackage.company;
+import com.group6.placementportal.DatabasePackage.job;
+
+import java.util.ArrayList;
 
 import static com.group6.placementportal.R.id.send_notification;
 
@@ -22,7 +29,7 @@ public class company_dashboard extends AppCompatActivity {
 
     private company c;
         private Activity activity;
-
+        private DatabaseReference reference;
         private DatabaseReference database;
         public void onAttach(Activity activity) {
                 this.activity = activity;
@@ -72,9 +79,33 @@ public class company_dashboard extends AppCompatActivity {
             notices.setOnClickListener(new View.OnClickListener(){
                 @Override
                 public void onClick(View v){
-                    Intent company_notices=new Intent(company_dashboard.this, company_notices.class);
-                    company_notices.putExtra("MyClass",c);
-                    startActivity(company_notices);
+                    reference = FirebaseDatabase.getInstance().getReference().child("Company").child(c.getCompany_id());
+                    reference.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            if(dataSnapshot.exists())
+                            {
+                                if(dataSnapshot.hasChild("notices"))
+                                {
+                                    Intent company_notices=new Intent(company_dashboard.this, company_notices.class);
+                                    company_notices.putExtra("MyClass",c);
+                                    startActivity(company_notices);
+                                }
+                                else
+                                {
+                                    Toast.makeText(company_dashboard.this, "No notice to show", Toast.LENGTH_SHORT).show();
+                                    return;
+                                }
+                            }
+
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+                            Toast.makeText(company_dashboard.this, "Oops ... something is wrong", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+
                 }
             });
 

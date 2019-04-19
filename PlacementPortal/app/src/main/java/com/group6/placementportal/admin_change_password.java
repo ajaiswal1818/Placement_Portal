@@ -19,28 +19,24 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.group6.placementportal.DatabasePackage.company;
 
-public class company_change_password extends AppCompatActivity {
+public class admin_change_password extends AppCompatActivity {
     private Button submit;
     private EditText old;
     private EditText new1;
     private EditText new2;
-    private String c_id;
-    private company c1;
     private DatabaseReference valid;
     Encryption encryption = Encryption.getDefault("Key", "Salt", new byte[16]);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_company_change_password);
+        setContentView(R.layout.activity_admin_change_password);
 
         if(isNetworkAvailable()==false){
-            Toast.makeText(company_change_password.this,"NO INTERNET CONNECTION", Toast.LENGTH_LONG).show();
+            Toast.makeText(admin_change_password.this,"NO INTERNET CONNECTION", Toast.LENGTH_LONG).show();
             return;
         }
 
-        c_id = (String) getIntent().getSerializableExtra("MyClassID");
-        c1= (company) getIntent().getSerializableExtra("Class");
         submit=findViewById(R.id.submit);
         old=findViewById(R.id.old);
         new1=findViewById(R.id.new1);
@@ -51,48 +47,37 @@ public class company_change_password extends AppCompatActivity {
             public void onClick(View v) {
                 if(old.getText().toString().equals("")||new1.getText().toString().equals("")||new2.getText().toString().equals(""))
                 {
-                    Toast.makeText(company_change_password.this,"No field can be empty",Toast.LENGTH_LONG).show();
+                    Toast.makeText(admin_change_password.this,"No field can be empty",Toast.LENGTH_LONG).show();
                     return;
                 }
                 if(!new1.getText().toString().equals(new2.getText().toString()))
                 {
-                    Toast.makeText(company_change_password.this,"Re-enter new password correctly",Toast.LENGTH_LONG).show();
-                    return;
-                }
-                if(new1.getText().toString().contains(" "))
-                {
-                    new1.setError("Password can't contain any spaces");
+                    Toast.makeText(admin_change_password.this,"Re-enter new password correctly",Toast.LENGTH_LONG).show();
                     return;
                 }
                 else
                 {
-                    valid= FirebaseDatabase.getInstance().getReference("Company");
+                    valid= FirebaseDatabase.getInstance().getReference("Admin");
                     valid.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange (@NonNull DataSnapshot dataSnapshot) {
                             if(dataSnapshot.exists())
                             {
-                                if(dataSnapshot.child(c_id).exists() && dataSnapshot.child(c_id).child("password").exists())
-                                {
-                                    if (encryption.encryptOrNull(old.getText().toString()).equals(dataSnapshot.child(c_id).child("password").getValue().toString()))
+                                    if (old.getText().toString().equals(dataSnapshot.child("password").getValue().toString()))
                                     {
-                                        valid.child(c_id).child("password").setValue(encryption.encryptOrNull(new1.getText().toString()));
-                                        Toast.makeText(company_change_password.this,"Password changed successfully",Toast.LENGTH_LONG).show();
+                                        valid.child("password").setValue(new1.getText().toString());
+                                        Toast.makeText(admin_change_password.this,"Password changed successfully",Toast.LENGTH_LONG).show();
                                         old.setText("");
                                         new1.setText("");
                                         new2.setText("");
-                                        Intent company_profile=new Intent(company_change_password.this, company_profile.class);
-                                        company_profile.putExtra("MyClass",c1);
-                                        company_profile.putExtra("coming_from","dashboard");
-                                        //finish();
-                                        startActivity(company_profile);
+                                        Intent main_login=new Intent(admin_change_password.this, MainLogin.class);
+                                        startActivity(main_login);
                                     }
                                     else
                                     {
-                                        Toast.makeText(company_change_password.this,"Incorrect Current password",Toast.LENGTH_LONG).show();
+                                        Toast.makeText(admin_change_password.this,"Incorrect Current password",Toast.LENGTH_LONG).show();
                                         return;
                                     }
-                                }
                             }
                         }
 

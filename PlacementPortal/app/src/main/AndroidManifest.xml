@@ -81,12 +81,6 @@
         <activity android:name=".Sending_Notifications">
 
         </activity>
-        <activity android:name=".admin_send_notification">
-
-        </activity>
-        <activity android:name=".Sending_Notifications">
-
-        </activity>
         <activity
             android:name=".Apply_For_Interns"
             android:label="@string/title_activity_apply__for__interns"
@@ -112,10 +106,6 @@
         <activity android:name=".approve_company" />
         <activity android:name=".company_change_password" />
         <activity
-            android:name=".recipients_tab"
-            android:label="@string/title_activity_recipients_tab"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
             android:name=".admin_notices"
             android:label="@string/title_activity_admin_notices"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -128,6 +118,11 @@
             android:label="@string/title_activity_company_profile"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".MainLogin">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
 
         </activity>
         <activity
