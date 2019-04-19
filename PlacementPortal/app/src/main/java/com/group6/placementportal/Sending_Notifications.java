@@ -2,14 +2,17 @@ package com.group6.placementportal;
 
 import android.Manifest;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -19,15 +22,12 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
-import com.group6.placementportal.DatabasePackage.Jobs;
-import com.group6.placementportal.DatabasePackage.Notifications;
 import com.group6.placementportal.DatabasePackage.Notifications_Admin;
 
 public class Sending_Notifications extends AppCompatActivity {
@@ -47,6 +47,11 @@ public class Sending_Notifications extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sending__notifications);
+
+        if(isNetworkAvailable()==false){
+            Toast.makeText(Sending_Notifications.this,"NO INTERNET CONNECTION", Toast.LENGTH_LONG).show();
+            return;
+        }
 
         subject= findViewById(R.id.subject);
         description=findViewById(R.id.description);
@@ -92,6 +97,12 @@ public class Sending_Notifications extends AppCompatActivity {
         });
 
 
+    }
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 
 //    private void getPDF() {

@@ -1,5 +1,8 @@
 package com.group6.placementportal;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
@@ -10,6 +13,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -18,17 +22,11 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.group6.placementportal.DatabasePackage.AcademicDetails;
 import com.group6.placementportal.DatabasePackage.Data;
-import com.group6.placementportal.DatabasePackage.PersonalDetails;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.group6.placementportal.DatabasePackage.Notifications;
+import com.group6.placementportal.DatabasePackage.PersonalDetails;
 import com.group6.placementportal.DatabasePackage.Student;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -57,6 +55,12 @@ public class JRF_Approval_Profile extends AppCompatActivity {
         setContentView(R.layout.activity_jrf__approval__profile);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        if(isNetworkAvailable()==false){
+            Toast.makeText(JRF_Approval_Profile.this,"NO INTERNET CONNECTION", Toast.LENGTH_LONG).show();
+            return;
+        }
+
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -169,6 +173,13 @@ public class JRF_Approval_Profile extends AppCompatActivity {
         });
 
     }
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+    }
+
 
     private void initData2() {
 
