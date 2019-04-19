@@ -111,7 +111,8 @@ public class NoticeFromCompany extends AppCompatActivity {
                             Toast.makeText(NoticeFromCompany.this, "UplaodSuccessfull", Toast.LENGTH_SHORT).show();
                             Notices new_notice = new Notices();
                             new_notice.setTopic(t1.getText().toString());
-                            new_notice.setImageURL(taskSnapshot.getUploadSessionUri().toString());//check this
+                            new_notice.setImageURL(taskSnapshot.getMetadata().getReference().getDownloadUrl().toString());
+
                             new_notice.setContent(t2.getText().toString());
 
                             database = FirebaseDatabase.getInstance().getReference("Notices");

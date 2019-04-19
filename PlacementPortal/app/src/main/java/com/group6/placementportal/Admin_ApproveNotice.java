@@ -1,6 +1,9 @@
 package com.group6.placementportal;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
@@ -42,6 +45,10 @@ public class Admin_ApproveNotice extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin__approve_notice);
+        if(isNetworkAvailable()==false){
+            Toast.makeText(Admin_ApproveNotice.this,"NO INTERNET CONNECTION", Toast.LENGTH_LONG).show();
+            return;
+        }
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -78,27 +85,26 @@ public class Admin_ApproveNotice extends AppCompatActivity
                     @Override
                     public void rejectnotice(int position) {
 
-                        Notices check = list.get(position);
+                        final Notices check = list.get(position);
 
                         DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
-                        Query a = ref.child("Notices").orderByChild("Topic").equalTo(check.getTopic());
-                        Query b = ref.child("Notices").orderByChild("Content").equalTo(check.getContent());
+                        Query a = ref.child("Notices");
 
-                        if(a == b){
-                            a.addListenerForSingleValueEvent(new ValueEventListener() {
-                                @Override
-                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                    for (DataSnapshot snapshot: dataSnapshot.getChildren()) {
-                                        snapshot.getRef().removeValue();
-                                    }
-                                }
 
-                                @Override
-                                public void onCancelled(@NonNull DatabaseError databaseError) {
-                                    Log.e(TAG, "onCancelled", databaseError.toException());
+                        a.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                for (DataSnapshot snapshot: dataSnapshot.getChildren()) {
+                                    if(snapshot.child("Topic").getValue() == check)snapshot.getRef().removeValue();
                                 }
-                            });
-                        }
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
+                                Log.e(TAG, "onCancelled", databaseError.toException());
+                            }
+                        });
+
 
                         list.remove(position);
 
@@ -107,7 +113,7 @@ public class Admin_ApproveNotice extends AppCompatActivity
                     @Override
                     public void approvenotice(int position){
 
-                        Notices check = list.get(position);
+                        final Notices check = list.get(position);
 
                         String uploadId = refnoticetocompany.push().getKey();
 
@@ -115,24 +121,23 @@ public class Admin_ApproveNotice extends AppCompatActivity
 
 
                         DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
-                        Query a = ref.child("Notices").orderByChild("Topic").equalTo(check.getTopic());
-                        Query b = ref.child("Notices").orderByChild("Content").equalTo(check.getContent());
+                        Query a = ref.child("Notices");
 
-                        if(a == b){
-                            a.addListenerForSingleValueEvent(new ValueEventListener() {
-                                @Override
-                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                    for (DataSnapshot snapshot: dataSnapshot.getChildren()) {
-                                        snapshot.getRef().removeValue();
-                                    }
-                                }
 
-                                @Override
-                                public void onCancelled(@NonNull DatabaseError databaseError) {
-                                    Log.e(TAG, "onCancelled", databaseError.toException());
+                        a.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                for (DataSnapshot snapshot: dataSnapshot.getChildren()) {
+                                    if(snapshot.child("Topic").getValue() == check)snapshot.getRef().removeValue();
                                 }
-                            });
-                        }
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
+                                Log.e(TAG, "onCancelled", databaseError.toException());
+                            }
+                        });
+
 
 
 
@@ -147,6 +152,13 @@ public class Admin_ApproveNotice extends AppCompatActivity
                 Toast.makeText(Admin_ApproveNotice.this, "Opsss.... Something is wrong", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 
     @Override

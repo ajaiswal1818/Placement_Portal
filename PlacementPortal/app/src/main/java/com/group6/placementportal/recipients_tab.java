@@ -38,14 +38,14 @@ public class recipients_tab extends AppCompatActivity {
                         if(!c.getKey().equals("Max_entry")){
                             Log.d("check check", c.getRef().toString());
                             String company_name = c.child("company_name").getValue().toString();
-                            String company_id = c.child("compnany_id").getValue().toString();
-                            Card card_new = new Card("Name: " + company_name, "ID: " + company_id);
+                            String company_id = c.child("company_id").getValue().toString();
+                           // Card card_new = new Card("Name: " + company_name, "ID: " + company_id);
 
-                            cardArrayAdapter.add(card_new);
+                           // cardArrayAdapter.add(card_new);
                         }
                       //  Log.d("check check", c.getRef().toString());
                        // String company_name = c.child("company_name").getValue().toString();
-                        //String company_id = c.child("compnany_id").getValue().toString();
+                        //String company_id = c.child("company_id").getValue().toString();
                         //Card card_new = new Card("Name" + company_name, "ID" + company_id);
                         //cardArrayAdapter.add(card_new);
                         // Log.d(nc.getTitle().toString(),nc.getDescription().toString());
