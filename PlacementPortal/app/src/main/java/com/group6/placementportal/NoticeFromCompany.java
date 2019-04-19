@@ -81,6 +81,14 @@ public class NoticeFromCompany extends AppCompatActivity {
         Load.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(t1.getText().toString().equals("")){
+                    t1.setError("Field Required");
+                    return;
+                }
+                if(t2.getText().toString().equals("")){
+                    t2.setError("Field Required");
+                    return;
+                }
                 Upload_file();
             }
         });
@@ -98,7 +106,7 @@ public class NoticeFromCompany extends AppCompatActivity {
         super.onActivityResult(requestCode,resultCode,data);
         if(resultCode==RESULT_OK && requestCode == PICK_IMAGE && data!= null && data.getData() !=null ){
             imageUri=data.getData();
-            Picasso.get().load(imageUri).into(image);
+            if(imageUri!=null)Picasso.get().load(imageUri).into(image);
 
         }
     }
@@ -111,11 +119,11 @@ public class NoticeFromCompany extends AppCompatActivity {
 
     private  void Upload_file(){
         if (imageUri!=null){
-            StorageReference filereference = mstorage.child("Upload_CompanyNotices").child(System.currentTimeMillis()+"."+getFileExtension(imageUri));
+            final StorageReference filereference = mstorage.child("Upload_CompanyNotices").child(System.currentTimeMillis()+"."+getFileExtension(imageUri));
             filereference.putFile(imageUri)
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
-                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                        public void onSuccess(final UploadTask.TaskSnapshot taskSnapshot) {
                             Handler handler = new Handler();
                             handler.postDelayed(new Runnable() {
                                 @Override
@@ -124,9 +132,14 @@ public class NoticeFromCompany extends AppCompatActivity {
                                 }
                             }, 500);
                             Toast.makeText(NoticeFromCompany.this, "UplaodSuccessfull", Toast.LENGTH_SHORT).show();
-                            Notices new_notice = new Notices();
+                            final Notices new_notice = new Notices();
                             new_notice.setTopic(t1.getText().toString());
-                            new_notice.setImageURL(taskSnapshot.getMetadata().getReference().getDownloadUrl().toString());
+                            filereference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                @Override
+                                public void onSuccess(Uri uri) {
+                                    new_notice.setImageURL(uri.toString());
+                                }
+                            });
 
                             new_notice.setContent(t2.getText().toString());
 
