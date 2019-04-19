@@ -45,4 +45,7 @@
     <string name="action_settings">Settings</string>
     <string name="section_format">Hello World from section: %1$d</string>
     <string name="title_activity_company_enrolments_screen1">company_enrolments_screen1</string>
+    <string name="title_activity_admin_enrollments_screen1">admin_enrollments_screen1</string>
+    <string name="title_activity_admin_enrollments">admin_enrollments</string>
+    <string name="title_activity_admin_checkout_the_portal">admin_checkout_the_portal</string>
 </resources>

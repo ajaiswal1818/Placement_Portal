@@ -41,5 +41,16 @@ public class MainLogin extends AppCompatActivity {
                 startActivity(company_login);
             }
         });
+
+        admin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Intent admin_enrollments_screen1=new Intent(MainLogin.this, com.group6.placementportal.admin_enrollments_screen1.class);
+                //startActivity(admin_enrollments_screen1);
+                Intent admin_checkout=new Intent(MainLogin.this,admin_checkout_the_portal.class);
+                startActivity(admin_checkout);
+
+            }
+        });
     }
 }

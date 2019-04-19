@@ -19,13 +19,13 @@ import com.group6.placementportal.DatabasePackage.Jobs;
 
 import java.util.ArrayList;
 
-public class enrolments_screen1_adpater extends RecyclerView.Adapter<enrolments_screen1_adpater.MyViewHolder> {
+public class admin_enrolments_screen1_adapter extends RecyclerView.Adapter<admin_enrolments_screen1_adapter.MyViewHolder> {
 
     Context context;
     ArrayList<Jobs> profiles;
     private static DatabaseReference reference;
 
-    public enrolments_screen1_adpater(Context c , ArrayList<Jobs> p)
+    public admin_enrolments_screen1_adapter(Context c , ArrayList<Jobs> p)
     {
         context = c;
         profiles = p;
@@ -39,15 +39,15 @@ public class enrolments_screen1_adpater extends RecyclerView.Adapter<enrolments_
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, final int position) {
-       // holder.company_name.setText(profiles.get(position).getCompany_name());
+        // holder.company_name.setText(profiles.get(position).getCompany_name());
         holder.job_profile.setText(profiles.get(position).getProfile());
-       // holder.job_location.setText(profiles.get(position).getLocation());
+        // holder.job_location.setText(profiles.get(position).getLocation());
         holder.parentlayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                //intent.putExtra("job_profile", profiles.get(position));
                 final String job_id=Integer.toString(position);
+                //intent.putExtra("job_profile", profiles.get(position));
+               // final String job_id=Integer.toString(position);
                 reference = FirebaseDatabase.getInstance().getReference().child("Jobs").child(job_id).child("Applied Students");
                 reference.addValueEventListener(new ValueEventListener() {
                     @Override
@@ -60,8 +60,7 @@ public class enrolments_screen1_adpater extends RecyclerView.Adapter<enrolments_
                         Intent intent = new Intent(context, company_enrollments.class);
                         intent.putExtra("MyClass",slist);
                         intent.putExtra("Job",job_id);
-                        intent.putExtra("Screen",0);
-
+                        intent.putExtra("Screen",1);
                         context.startActivity(intent);
                     }
 
@@ -87,10 +86,10 @@ public class enrolments_screen1_adpater extends RecyclerView.Adapter<enrolments_
         CardView parentlayout;
         public MyViewHolder(View itemView) {
             super(itemView);
-          //  company_name = itemView.findViewById(R.id.txt_company_name);
-           job_profile = itemView.findViewById(R.id.txt_job_profile);
+            //  company_name = itemView.findViewById(R.id.txt_company_name);
+            job_profile = itemView.findViewById(R.id.txt_job_profile);
             //job_location = itemView.findViewById(R.id.txt_job_location);
-            
+
             parentlayout = itemView.findViewById(R.id.cardview_enrolments_job);
         }
     }

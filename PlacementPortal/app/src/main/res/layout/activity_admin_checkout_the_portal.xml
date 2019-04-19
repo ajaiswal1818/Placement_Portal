@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".admin_checkout_the_portal">
+
+
+    <Button
+        android:id="@+id/check_out_button_pp"
+        android:layout_width="329dp"
+        android:layout_height="216dp"
+        android:onClick="the_checkout"
+        android:text="Checkout_the_Placement_Portal" />
+</android.support.design.widget.CoordinatorLayout>
