@@ -73,7 +73,7 @@ public class approve_company_adapter extends RecyclerView.Adapter<approve_compan
                 }
             });
 
-            holder.company_details.setText(company_array.get(position).getCompany_id() + "\n"+ company_array.get(position).getCompany_name() + "\n" + company_array.get(position).getContact_no() + "\n" + company_array.get(position).getEmail_address() + "\n"+company_array.get(position).getHeadoffice()); //
+            holder.company_details.setText("Company id : " + company_array.get(position).getCompany_id() + "\n"+ "Company Name : "+company_array.get(position).getCompany_name() + "\n" + "Contact : " + company_array.get(position).getContact_no() + "\n" + "Email : "+ company_array.get(position).getEmail_address() + "\n"+ "HeadOffice : " + company_array.get(position).getHeadoffice()); //
             holder.parentlayout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

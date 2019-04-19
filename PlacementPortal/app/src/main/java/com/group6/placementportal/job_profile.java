@@ -216,13 +216,21 @@ public class job_profile extends AppCompatActivity {
                         public void onClick(DialogInterface dialog, int which) {
                             String str = "";
                             int i;
-                            for (i = 0; i < selected_branches.size() - 1; i++) {
-                                dep += available_branches[selected_branches.get(i)] + ".";
-                                str += available_branches[selected_branches.get(i)] + "\n";
+                            if(selected_branches.size()>=1)
+                            {
+                                for (i = 0; i < selected_branches.size() - 1; i++) {
+                                    dep += available_branches[selected_branches.get(i)] + ".";
+                                    str += available_branches[selected_branches.get(i)] + "\n";
+                                }
+                                dep += available_branches[selected_branches.get(i)];
+                                str += available_branches[selected_branches.get(i)];
+                                branch.setText(str);
                             }
-                            dep += available_branches[selected_branches.get(i)];
-                            str += available_branches[selected_branches.get(i)];
-                            branch.setText(str);
+                            else
+                            {
+                                dep="";
+                                str="";
+                            }
                         }
                     });
                     mBuilder.setNegativeButton("Dismiss", new DialogInterface.OnClickListener() {
@@ -284,7 +292,7 @@ public class job_profile extends AppCompatActivity {
             submit.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if(cpi.getText().toString().matches("\\d+\\.?\\d+")==false ){
+                    if((cpi.getText().toString().matches("\\d+\\.?\\d+") ==false && cpi.getText().toString().matches("\\d")==false)){
                         cpi.setError("Invalid CPI");
                         return;
                     }
@@ -293,7 +301,7 @@ public class job_profile extends AppCompatActivity {
                         cpi.setError("Invalid CPI");
                         return;
                     }
-                    if(ctc.getText().toString().matches("\\d+\\.?\\d+")==false ){
+                    if((ctc.getText().toString().matches("\\d+\\.?\\d+") ==false && ctc.getText().toString().matches("\\d")==false)){
                         ctc.setError("CTC can only be decimal number");
                         return;
                     }
@@ -325,6 +333,7 @@ public class job_profile extends AppCompatActivity {
                                     add_comp1=FirebaseDatabase.getInstance().getReference("Jobs");
                                     Jobs new_job=new Jobs(id + "_" +  j1.getJob_id(),j1.getProfile(),j1.getCtc(),j1.getLocation(),j1.getBrochure(),id,comp_name,j1.getDepartments(),j1.getCpi(),j1.getJob_requirements());
                                     add_comp1.child(id + "_" + j1.getJob_id()).setValue(new_job);
+                                    Toast.makeText(job_profile.this, "Submitted", Toast.LENGTH_LONG).show();
                                 }
                             }
 
@@ -485,7 +494,7 @@ public class job_profile extends AppCompatActivity {
                 progressDialog.setProgress(currentProgress);
                 if (currentProgress == 100) {
                     progressDialog.hide();
-                    Toast.makeText(job_profile.this, "Successfully Uploaded", Toast.LENGTH_LONG).show();
+                   // Toast.makeText(job_profile.this, "Successfully Uploaded", Toast.LENGTH_LONG).show();
                     // remove.setVisibility(View.VISIBLE);
                 }
             }
@@ -548,21 +557,21 @@ public class job_profile extends AppCompatActivity {
         branch.setEnabled(false);
         job_requirements.setEnabled(false);
 
-        cpi.setText(String.valueOf(job_det.getCutoff_cpi()));
-        profile.setText(job_det.getProfile());
-        ctc.setText(String.valueOf(job_det.getCtc()));
-        location.setText(job_det.getLocation());
-        branch.setText(job_det.getBranches());
-        job_requirements.setText(job_det.getJob_requirements());
+        cpi.setText("CPI : " + String.valueOf(job_det.getCutoff_cpi()));
+        profile.setText("Profile : " + job_det.getProfile());
+        ctc.setText("CTC : " + String.valueOf(job_det.getCtc()));
+        location.setText("Location : " + job_det.getLocation());
+        branch.setText("Branches : " + job_det.getBranches());
+        job_requirements.setText("Job Requirements : " + job_det.getJob_requirements());
 
         branch_button.setVisibility(View.INVISIBLE);
         submit.setVisibility(View.INVISIBLE);
-        upload.setText("View Selected File");
+        upload.setText("View File");
         select.setVisibility(View.INVISIBLE);
 
         status.setText(job_det.getBrochure());
 //getBrochure!=" " check
-        if(!(status.getText().toString().equals("")))
+        if(!(job_det.getBrochure().equals("")))
         {
             upload.setOnClickListener(new View.OnClickListener() {
                 @Override

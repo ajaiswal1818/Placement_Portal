@@ -64,7 +64,7 @@ public class admin_notices extends AppCompatActivity {
     private ArrayList<String> selected_companies_id =new ArrayList<>();
     private ArrayList<String> available_companies_arraylist = new ArrayList<>();
     private boolean[] checked_companies;
-
+    private ProgressDialog dialog1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,49 +75,21 @@ public class admin_notices extends AppCompatActivity {
             return;
         }
 
+
+        title=findViewById(R.id.title);
+        description=findViewById(R.id.description);
         send=findViewById(R.id.send_button);
         select=findViewById(R.id.select_file);
         upload=findViewById(R.id.upload);
         select_recepients=findViewById(R.id.show_company);
-
-        db=FirebaseDatabase.getInstance().getReference();
-
-        db.addListenerForSingleValueEvent(new ValueEventListener() {
-          @Override
-          public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-              if(dataSnapshot.exists()){
-                  if(dataSnapshot.hasChild("notices2company"))
-                  {
-                      if(dataSnapshot.hasChild("total_count")){
-                          count=dataSnapshot.child("total_count").getValue().toString();
-                          Log.d("total_count",count);
-                      }
-                  }
-                  if(dataSnapshot.hasChild("Company"))
-                  {
-                      for(DataSnapshot dataSnapshot1:dataSnapshot.child("Company").getChildren())
-                      {
-                          if(dataSnapshot1.hasChild("username") && dataSnapshot1.hasChild("company_name"))
-                          {
-                              available_companies_arraylist.add(dataSnapshot1.child("username").getValue().toString() + ":" + dataSnapshot1.child("company_name").getValue().toString());
-                          }
-                      }
-                      convert_to_array();
-                  }
-              }
-          }
-
-          @Override
-          public void onCancelled(@NonNull DatabaseError databaseError) {
-
-          }
-      });
+        status=findViewById(R.id.status);
+        f0();
         select_recepients.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder mBuilder = new AlertDialog.Builder(admin_notices.this);
                 mBuilder.setTitle("Select Companies");
-                mBuilder.setCancelable(false);
+               // mBuilder.setCancelable(false);
                 mBuilder.setMultiChoiceItems(available_companies, checked_companies, new DialogInterface.OnMultiChoiceClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which, boolean isChecked) {
@@ -148,13 +120,13 @@ public class admin_notices extends AppCompatActivity {
                         }
                     }
                 });
-                mBuilder.setNegativeButton("Dismiss", new DialogInterface.OnClickListener() {
+            /*    mBuilder.setNegativeButton("Dismiss", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
                     }
-                });
-                mBuilder.setNeutralButton("Clear all", new DialogInterface.OnClickListener() {
+                });*/
+                mBuilder.setNegativeButton("Clear all", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         for (int i = 0; i < checked_companies.length; i++) {
@@ -170,10 +142,12 @@ public class admin_notices extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         for (int i = 0; i < available_companies.length; i++) {
                             checked_companies[i] = true;
-                            if (!selected_companies.contains(which)) {
-                                selected_companies.add(which);
+                            if (!selected_companies.contains(i)) {
+                                selected_companies.add(i);
                             }
                         }
+                        Log.d("c_id_size",String.valueOf(selected_companies.size()));
+                        selected_companies_id.clear();
                         for (int i = 0; i < selected_companies.size(); i++) {
                             String str = available_companies[selected_companies.get(i)];
                             String[] split_IDs = str.split("\\:");
@@ -213,10 +187,6 @@ public class admin_notices extends AppCompatActivity {
                     if (company_list != null && company_list.length() > 0 && company_list.charAt(company_list.length() - 1) == 'x') {
                         company_list = company_list.substring(0, company_list.length() - 1);
                     }
-
-                    add_comp=FirebaseDatabase.getInstance().getReference("notices2company");
-                    add_comp.child("total_count").setValue(String.valueOf(Long.parseLong(count)+1));
-                    new_notice=new notices2company(String.valueOf(Long.parseLong(count)+1),title.getText().toString(),description.getText().toString(),company_list,file);
                     add_to_company();
                 }
 
@@ -377,14 +347,87 @@ public class admin_notices extends AppCompatActivity {
             available_companies[j] = available_companies_arraylist.get(j);
         }
         checked_companies = new boolean[available_companies.length];
+        dialog1.setCancelable(true);
+        dialog1.hide();
     }
     public void add_to_company()
     {
+        add_comp=FirebaseDatabase.getInstance().getReference("notices2company");
+        //add_comp.child("total_count").setValue(String.valueOf(Long.parseLong(count)+1));
+        String key = add_comp.push().getKey();
+        new_notice=new notices2company(key,title.getText().toString(),description.getText().toString(),company_list,file);
+        add_comp.child(key).setValue(new_notice);
+
         db=FirebaseDatabase.getInstance().getReference("Company");
         for(String id : selected_companies_id)
         {
-            db.child(id).child("notices").child(String.valueOf(Long.parseLong(count)+1)).setValue(new_notice);
+            db.child(id).child("notices").child(key).setValue(new_notice);
         }
+
+    }
+    public void f1()
+    {
+
+        //f2();
+    }
+    public void f2()
+    {
+        db=FirebaseDatabase.getInstance().getReference();
+
+        db.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot.exists()){
+                    if(dataSnapshot.hasChild("Company"))
+                    {
+                        for(DataSnapshot dataSnapshot1:dataSnapshot.child("Company").getChildren())
+                        {
+                            if(dataSnapshot1.hasChild("username") && dataSnapshot1.hasChild("company_name") && dataSnapshot1.hasChild("approved") && dataSnapshot1.child("approved").getValue().toString().equals("Approved"))
+                            {
+                                available_companies_arraylist.add(dataSnapshot1.child("username").getValue().toString() + ":" + dataSnapshot1.child("company_name").getValue().toString());
+                            }
+                        }
+                        convert_to_array();
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+    }
+    public void f0()
+    {
+        dialog1 = new ProgressDialog(admin_notices.this);
+        dialog1.setMessage("Please Wait");
+        dialog1.setCancelable(false);
+        dialog1.show();
+        f2();
+        /*db=FirebaseDatabase.getInstance().getReference();
+
+        db.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot.exists()){
+                    if(dataSnapshot.hasChild("notices2company"))
+                    {
+                        if(dataSnapshot.hasChild("total_count")){
+                            count=dataSnapshot.child("total_count").getValue().toString();
+                            Log.w("total_count",count);
+                            f2();
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });*/
 
     }
 }

@@ -216,13 +216,21 @@ public class intern_profile extends AppCompatActivity {
                         public void onClick(DialogInterface dialog, int which) {
                             String str = "";
                             int i;
-                            for (i = 0; i < selected_branches.size() - 1; i++) {
-                                dep += available_branches[selected_branches.get(i)] + ".";
-                                str += available_branches[selected_branches.get(i)] + "\n";
+                            if(selected_branches.size()>=1)
+                            {
+                                for (i = 0; i < selected_branches.size() - 1; i++) {
+                                    dep += available_branches[selected_branches.get(i)] + ".";
+                                    str += available_branches[selected_branches.get(i)] + "\n";
+                                }
+                                dep += available_branches[selected_branches.get(i)];
+                                str += available_branches[selected_branches.get(i)];
+                                branch.setText(str);
                             }
-                            dep += available_branches[selected_branches.get(i)];
-                            str += available_branches[selected_branches.get(i)];
-                            branch.setText(str);
+                            else
+                            {
+                                dep="";
+                                str="";
+                            }
                         }
                     });
                     mBuilder.setNegativeButton("Dismiss", new DialogInterface.OnClickListener() {
@@ -278,14 +286,13 @@ public class intern_profile extends AppCompatActivity {
                     Toast.makeText(intern_profile.this, "Can't leave any field empty", Toast.LENGTH_LONG).show();
                 } else {
                     add_intern();
-
                 }
             }
         });*/
             submit.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if(cpi.getText().toString().matches("\\d*\\.?\\d+")==false || isNumeric(cpi.getText().toString())==false){
+                    if((cpi.getText().toString().matches("\\d+\\.?\\d+") ==false && cpi.getText().toString().matches("\\d")==false)){
                         cpi.setError("Invalid CPI");
                         return;
                     }
@@ -294,7 +301,7 @@ public class intern_profile extends AppCompatActivity {
                         cpi.setError("Invalid CPI");
                         return;
                     }
-                    if(ctc.getText().toString().matches("\\d*\\.?\\d+")==false || isNumeric(ctc.getText().toString())==false){
+                    if((ctc.getText().toString().matches("\\d+\\.?\\d+") ==false && ctc.getText().toString().matches("\\d")==false)){
                         ctc.setError("CTC can only be decimal number");
                         return;
                     }
@@ -326,6 +333,7 @@ public class intern_profile extends AppCompatActivity {
                                     add_comp1=FirebaseDatabase.getInstance().getReference("Interns");
                                     Interns new_intern=new Interns(id + "_" +  j1.getIntern_id(),j1.getProfile(),j1.getCtc(),j1.getLocation(),j1.getBrochure(),id,comp_name,j1.getDepartments(),j1.getCpi(),j1.getIntern_requirements());
                                     add_comp1.child(id + "_" + j1.getIntern_id()).setValue(new_intern);
+                                    Toast.makeText(intern_profile.this, "Submitted", Toast.LENGTH_LONG).show();
                                 }
                             }
 
@@ -486,7 +494,7 @@ public class intern_profile extends AppCompatActivity {
                 progressDialog.setProgress(currentProgress);
                 if (currentProgress == 100) {
                     progressDialog.hide();
-                    Toast.makeText(intern_profile.this, "Successfully Uploaded", Toast.LENGTH_LONG).show();
+                    // Toast.makeText(intern_profile.this, "Successfully Uploaded", Toast.LENGTH_LONG).show();
                     // remove.setVisibility(View.VISIBLE);
                 }
             }
@@ -549,12 +557,12 @@ public class intern_profile extends AppCompatActivity {
         branch.setEnabled(false);
         intern_requirements.setEnabled(false);
 
-        cpi.setText(String.valueOf(intern_det.getCutoff_cpi()));
-        profile.setText(intern_det.getProfile());
-        ctc.setText(String.valueOf(intern_det.getCtc()));
-        location.setText(intern_det.getLocation());
-        branch.setText(intern_det.getBranches());
-        intern_requirements.setText(intern_det.getIntern_requirements());
+        cpi.setText("CPI : " + String.valueOf(intern_det.getCutoff_cpi()));
+        profile.setText("Profile : " + intern_det.getProfile());
+        ctc.setText("Stipend : " + String.valueOf(intern_det.getCtc()));
+        location.setText("Location : " + intern_det.getLocation());
+        branch.setText("Branches : " + intern_det.getBranches());
+        intern_requirements.setText("Job Requirements : " + intern_det.getIntern_requirements());
 
         branch_button.setVisibility(View.INVISIBLE);
         submit.setVisibility(View.INVISIBLE);
@@ -563,13 +571,26 @@ public class intern_profile extends AppCompatActivity {
 
         status.setText(intern_det.getBrochure());
 //getBrochure!=" " check
-        status.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Uri uri = Uri.parse(intern_det.getBrochure()); // missing 'http://' will cause crashed
-                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-                startActivity(intent);
-            }
-        });
+        if(!(status.getText().toString().equals("")))
+        {
+            upload.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    /* // missing 'http://' will cause crashed
+                    Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                    startActivity(intent);*/
+                    // Uri uri = Uri.parse(intern_det.getBrochure());
+                    Intent view_pdf = new Intent(intern_profile.this, view_pdf.class);
+                    view_pdf.putExtra("url",intern_det.getBranches());
+                    startActivity(view_pdf);
+                }
+
+            });
+        }
+        else
+        {
+
+        }
+
     }
 }
