@@ -159,8 +159,6 @@ public class LoginPage extends AppCompatActivity {
                 dialog.show();
                 rollNo = Webmail.getText().toString();
                 password = Password.getText().toString();
-
-
                 Login_Details= FirebaseDatabase.getInstance().getReference();
                 Login_Details = Login_Details.child("Student").child(rollNo);
 
@@ -376,7 +374,7 @@ public class LoginPage extends AppCompatActivity {
             I = new Intent(getApplicationContext(),Student_Dashboard.class);
             I.putExtra("user",user);
         }else{
-            I = new Intent(getApplicationContext(),Student_Profile.class);
+            I = new Intent(getApplicationContext(),Student_Register.class);
             I.putExtra("fullName",FullName);
             I.putExtra("Webmail",WebmailID);
             I.putExtra("rollNo",RollNo);

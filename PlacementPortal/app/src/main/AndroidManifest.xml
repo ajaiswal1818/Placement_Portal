@@ -17,6 +17,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:windowSoftInputMode="adjustPan">
+        <activity android:name=".Student_Register"></activity>
         <activity
             android:name=".admin_job_or_intern"
             android:label="@string/title_activity_admin_job_or_intern"
@@ -142,10 +143,6 @@
         <activity
             android:name=".View_Interns"
             android:label="@string/title_activity_view__interns"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".Student_Profile"
-            android:label="@string/title_activity_student__profile"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Student_Dashboard"

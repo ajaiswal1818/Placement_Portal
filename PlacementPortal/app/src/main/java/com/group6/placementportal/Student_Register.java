@@ -1,9 +1,6 @@
 package com.group6.placementportal;
 
-import android.content.Context;
 import android.content.Intent;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -11,12 +8,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class Student_Profile<Student> extends AppCompatActivity {
+public class Student_Register extends AppCompatActivity {
 
     private DatabaseReference ref;
     private com.group6.placementportal.DatabasePackage.Student user;
@@ -56,14 +52,9 @@ public class Student_Profile<Student> extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_student__profile);
+        setContentView(R.layout.activity_student__register);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        if(isNetworkAvailable()==false){
-            Toast.makeText(Student_Profile.this,"NO INTERNET CONNECTION", Toast.LENGTH_LONG).show();
-            return;
-        }
-
 
         //Taking Views From the screen
 
@@ -115,23 +106,18 @@ public class Student_Profile<Student> extends AppCompatActivity {
                     full_name_V.setError("Enter your Full Name");
                     return;
                 }
-                //PROGRAMME CHECK
-                if (prog.isEmpty()) {
-                    prog_V.setError("Enter your Programme");
-                    return;
-                }
-                //CONTACT CHECK
-                if (contact.isEmpty()) {
-                    contact_V.setError("Enter your Contact No");
-                    return;
-                }
+
                 //DEPT CHECK
                 if (dept.isEmpty()) {
                     dept_V.setError("Enter your Department");
                     return;
                 }
 
-
+                //PROGRAMME CHECK
+                if (prog.isEmpty()) {
+                    prog_V.setError("Enter your Programme");
+                    return;
+                }
 
                 //ROLL NO CHECK
                 if (roll_no.isEmpty()) {
@@ -157,7 +143,11 @@ public class Student_Profile<Student> extends AppCompatActivity {
                     return;
                 }
 
-
+                //CONTACT CHECK
+                if (contact.isEmpty()) {
+                    contact_V.setError("Enter your Contact No");
+                    return;
+                }
                 if(isNumeric(contact)==false){
                     contact_V.setError("Contact No. can contain only digits");
                     return;
@@ -166,7 +156,11 @@ public class Student_Profile<Student> extends AppCompatActivity {
                     contact_V.setError("Contact No. should be of 10 digits");
                     return;
                 }
-
+                //PASSWORD CHECK
+                if (password.isEmpty()) {
+                    password_V.setError("Enter your Password");
+                    return;
+                }
 
                 //CPI CHECKS
                 if (cpi.isEmpty()) {
@@ -180,11 +174,6 @@ public class Student_Profile<Student> extends AppCompatActivity {
                 double cpi_double=Double.parseDouble(cpi);
                 if(cpi_double>10 || cpi_double<0){
                     cpi_V.setError("Invalid CPI");
-                    return;
-                }
-                //PASSWORD CHECK
-                if (password.isEmpty()) {
-                    password_V.setError("Enter your Password");
                     return;
                 }
                 //CONVERT YEAR TO INT
@@ -205,18 +194,11 @@ public class Student_Profile<Student> extends AppCompatActivity {
                 ref=FirebaseDatabase.getInstance().getReference("Student");
                 ref.child(webmail).setValue(user);
                 //NEW ACTIVITY
-                Intent I = new Intent(Student_Profile.this, Student_Dashboard.class);
+                Intent I = new Intent(Student_Register.this, Student_Dashboard.class);
                 I.putExtra("user",user);
                 startActivity(I);
             }
         });
 
     }
-    private boolean isNetworkAvailable() {
-        ConnectivityManager connectivityManager
-                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
-        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
-    }
-
 }
