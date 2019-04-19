@@ -205,7 +205,7 @@ public class Apply_For_Jobs extends AppCompatActivity {
     //this method is uploading the file
     //the code is same as the previous tutorial
     //so we are not explaining it
-    private void uploadFile(Uri data) {
+    private void uploadFile(final Uri data) {
         progressDialog = new ProgressDialog(this);
         progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
         progressDialog.setTitle("Uploading...");
@@ -216,9 +216,76 @@ public class Apply_For_Jobs extends AppCompatActivity {
         mDatabaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                list=dataSnapshot.child("Student").child(user.getWebmailID()).child("preferences").getValue(String.class);
-                list+=",";
-                list+=(jobs.getJob_id());
+                if(dataSnapshot.child("Student").child(user.getWebmailID()).hasChild("preferences")) {
+                    list = dataSnapshot.child("Student").child(user.getWebmailID()).child("preferences").getValue(String.class);
+                    list += ",";
+                    list += (jobs.getJob_id());
+                    ref.putFile(data)
+                            .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                                @Override
+                                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                    ref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                        @Override
+                                        public void onSuccess(Uri uri) {
+                                            progressDialog.hide();
+                                            String upload = uri.toString();
+                                            mDatabaseReference.child("Jobs").child(jobs.getJob_id()).child("Applied Students").child(user.getWebmailID()).child("CV").setValue(upload);
+                                            mDatabaseReference.child("Jobs").child(jobs.getJob_id()).child("Applied Students").child(user.getWebmailID()).child("Status").setValue("0");
+                                            mDatabaseReference.child("Jobs").child(jobs.getJob_id()).child("Applied Students").child(user.getWebmailID()).child("Approval").setValue("No");
+                                            mDatabaseReference.child("Student").child(user.getWebmailID()).child("preferences").setValue(list);
+                                            Toast.makeText(Apply_For_Jobs.this,"File Upload Successful",Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            progressDialog.hide();
+                            Toast.makeText(getApplicationContext(), "File Upload Failed", Toast.LENGTH_LONG).show();
+                        }
+                    }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
+
+                            int progress = (int) (100*taskSnapshot.getBytesTransferred()/taskSnapshot.getTotalByteCount());
+                            progressDialog.setProgress(progress);
+                        }
+                    });
+                }else{
+                    list="";
+                    list+=jobs.getJob_id();
+                    ref.putFile(data)
+                            .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                                @Override
+                                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                    ref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                        @Override
+                                        public void onSuccess(Uri uri) {
+                                            progressDialog.hide();
+                                            String upload = uri.toString();
+                                            mDatabaseReference.child("Jobs").child(jobs.getJob_id()).child("Applied Students").child(user.getWebmailID()).child("CV").setValue(upload);
+                                            mDatabaseReference.child("Jobs").child(jobs.getJob_id()).child("Applied Students").child(user.getWebmailID()).child("Status").setValue("0");
+                                            mDatabaseReference.child("Jobs").child(jobs.getJob_id()).child("Applied Students").child(user.getWebmailID()).child("Approval").setValue("No");
+                                            mDatabaseReference.child("Student").child(user.getWebmailID()).child("preferences").setValue(list);
+                                            Toast.makeText(Apply_For_Jobs.this,"File Upload Successful",Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            progressDialog.hide();
+                            Toast.makeText(getApplicationContext(), "File Upload Failed", Toast.LENGTH_LONG).show();
+                        }
+                    }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
+
+                            int progress = (int) (100*taskSnapshot.getBytesTransferred()/taskSnapshot.getTotalByteCount());
+                            progressDialog.setProgress(progress);
+                        }
+                    });
+                }
             }
 
             @Override
@@ -226,36 +293,6 @@ public class Apply_For_Jobs extends AppCompatActivity {
 
             }
         });
-        ref.putFile(data)
-                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                    @Override
-                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                        ref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                            @Override
-                            public void onSuccess(Uri uri) {
-                                progressDialog.hide();
-                                String upload = uri.toString();
-                                mDatabaseReference.child("Jobs").child(jobs.getJob_id()).child("Applied Students").child(user.getWebmailID()).child("CV").setValue(upload);
-                                mDatabaseReference.child("Jobs").child(jobs.getJob_id()).child("Applied Students").child(user.getWebmailID()).child("Status").setValue("0");
-                                mDatabaseReference.child("Jobs").child(jobs.getJob_id()).child("Applied Students").child(user.getWebmailID()).child("Approval").setValue("No");
-                                mDatabaseReference.child("Student").child(user.getWebmailID()).child("preferences").setValue(list);
-                                Toast.makeText(Apply_For_Jobs.this,"File Upload Successful",Toast.LENGTH_SHORT).show();
-                            }
-                        });
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                progressDialog.hide();
-                Toast.makeText(getApplicationContext(), "File Upload Failed", Toast.LENGTH_LONG).show();
-            }
-        }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
 
-                int progress = (int) (100*taskSnapshot.getBytesTransferred()/taskSnapshot.getTotalByteCount());
-                progressDialog.setProgress(progress);
-            }
-        });
     }
 }

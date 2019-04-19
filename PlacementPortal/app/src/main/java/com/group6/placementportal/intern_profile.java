@@ -40,7 +40,7 @@ import com.group6.placementportal.DatabasePackage.intern;
 
 import java.util.ArrayList;
 
-import static com.group6.placementportal.Student_Profile.isNumeric;
+import static com.group6.placementportal.company_profile.isNumeric;
 
 
 public class intern_profile extends AppCompatActivity {

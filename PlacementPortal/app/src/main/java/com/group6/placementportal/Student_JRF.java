@@ -366,12 +366,8 @@ public class Student_JRF extends AppCompatActivity
 
         } else if (id == R.id.nav_my_profile) {
 
-        } else if (id == R.id.nav_edit_profile) {
-            Intent i = new Intent(getApplicationContext(), Student_Profile.class);
-            i.putExtra("user",user);
-            startActivity(i);
-
-        } else if (id == R.id.nav_change_pass) {
+        }
+        else if (id == R.id.nav_change_pass) {
             Intent i = new Intent(getApplicationContext(), Student_ChangePassword.class);
             i.putExtra("user",user);
             startActivity(i);

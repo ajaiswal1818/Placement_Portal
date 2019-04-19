@@ -17,10 +17,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:windowSoftInputMode="adjustPan">
+        <activity android:name=".Student_Register"></activity>
         <activity
             android:name=".Help_Students"
             android:label="@string/title_activity_help__students"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Company_Slots_Admin_second" />
         <activity android:name=".Company_Slots_Admin" />
         <activity android:name=".student_RA" />
@@ -40,11 +41,11 @@
         <activity
             android:name=".Student_Application_Forms"
             android:label="@string/title_activity_student__application__forms"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".GivePreference"
             android:label="@string/title_activity_give_preference"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".JRF_Approval_Profile"
             android:label="@string/title_activity_jrf__approval__profile"
@@ -142,10 +143,6 @@
         <activity
             android:name=".View_Interns"
             android:label="@string/title_activity_view__interns"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".Student_Profile"
-            android:label="@string/title_activity_student__profile"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Student_Dashboard"
