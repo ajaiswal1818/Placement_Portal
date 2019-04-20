@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -139,6 +140,7 @@ public class Student_Complete_Profile extends AppCompatActivity {
                         AlertDialog mDialog = mBuilder.create();
                         mDialog.show();
                         save.setVisibility(View.INVISIBLE);
+                        back.setVisibility(View.INVISIBLE);
                         setTextBoxes();
                     }
                     else{
@@ -167,8 +169,15 @@ public class Student_Complete_Profile extends AppCompatActivity {
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 getData();
-                checkData();
+
+            }
+        });
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Student_Complete_Profile.this.finish();
             }
         });
     }
@@ -221,6 +230,7 @@ public class Student_Complete_Profile extends AppCompatActivity {
         Smobile=mobile.getText().toString();
         Sphone=phone.getText().toString();
         Semail=email.getText().toString();
+        checkData();
     }
 
     public void checkData(){
@@ -278,32 +288,33 @@ public class Student_Complete_Profile extends AppCompatActivity {
 
         if(!Ssem1cpi.equals("")){
             float cpi= Float.parseFloat(Ssem1cpi);
-            if(cpi > 10.00){
+            if(cpi > 10){
                 sem1cpi.setError("spi cannot be greater than 10");
                 return;
             }
         }
         if(!Ssem2cpi.equals("")){
             float cpi= Float.parseFloat(Ssem2cpi);
-            if(cpi > 10.00){
+            if(cpi > 10){
                 sem2cpi.setError("spi cannot be greater than 10");
                 return;
             }
         }
         if(!Ssem3cpi.equals("")){
             float cpi= Float.parseFloat(Ssem3cpi);
-            if(cpi > 10.00){
+            if(cpi > 10){
                 sem3cpi.setError("spi cannot be greater than 10");
                 return;
             }
         }
         if(!Ssem4cpi.equals("")){
             float cpi= Float.parseFloat(Ssem4cpi);
-            if(cpi > 10.00){
+            if(cpi > 10){
                 sem4cpi.setError("spi cannot be greater than 10");
                 return;
             }
         }
+
 
         if(Ssem1yr.equals("")){
             sem1yr.setError("Empty Field not Allowed");
@@ -331,28 +342,32 @@ public class Student_Complete_Profile extends AppCompatActivity {
         }
         if(!Ssem2yr.equals("")){
             long year = Long.parseLong(Ssem2yr);
-            if(year > 2050 || year < 2010)
+            if(year > 2050 || year < 2010) {
                 sem2yr.setError("Invalid Year");
-            return;
+                return;
+            }
         }
         if(!Ssem3yr.equals("")){
             long year = Long.parseLong(Ssem3yr);
-            if(year > 2050 || year < 2010)
+            if(year > 2050 || year < 2010) {
                 sem3yr.setError("Invalid Year");
-            return;
+                return;
+            }
         }
         if(!Ssem4yr.equals("")){
             long year = Long.parseLong(Ssem4yr);
-            if(year > 2050 || year < 2010)
+            if(year > 2050 || year < 2010) {
                 sem5yr.setError("Invalid Year");
-            return;
+                return;
+            }
         }
+
 
         if(Ssem5cpi.equals("") && (!Ssem6cpi.equals("") || !Ssem7cpi.equals("") || !Ssem8cpi.equals("") || !Ssem5yr.equals("") || !Ssem6yr.equals("") || !Ssem7yr.equals("") || !Ssem8yr.equals(""))){
             sem5cpi.setError("Cannot fill details of furthur semester without filling previous info");
             return;
         }
-        if(Ssem6cpi.equals("") && (Ssem7cpi.equals("") || !Ssem8cpi.equals("") || !Ssem6yr.equals("") || !Ssem7yr.equals("") || !Ssem8yr.equals(""))){
+        if(Ssem6cpi.equals("") && (!Ssem7cpi.equals("") || !Ssem8cpi.equals("") || !Ssem6yr.equals("") || !Ssem7yr.equals("") || !Ssem8yr.equals(""))){
             sem6cpi.setError("Cannot fill details of furthur semester without filling previous info");
             return;
         }
@@ -364,6 +379,7 @@ public class Student_Complete_Profile extends AppCompatActivity {
             sem8cpi.setError("Cannot fill details of this semester");
             return;
         }
+
 
         if(!Ssem5cpi.equals("")){
             float cpi= Float.parseFloat(Ssem5cpi);
@@ -395,19 +411,19 @@ public class Student_Complete_Profile extends AppCompatActivity {
         }
 
         if(Ssem5yr.equals("") && (!Ssem6yr.equals("") || !Ssem7yr.equals("") || !Ssem8yr.equals("") || !Ssem5cpi.equals("") || !Ssem6cpi.equals("") || !Ssem7cpi.equals("") || !Ssem8cpi.equals(""))){
-            sem5yr.setText("Cannot fill details of furthur semester without filling previous info");
+            sem5yr.setError("Cannot fill details of furthur semester without filling previous info");
             return;
         }
-        if(Ssem6yr.equals("") && (Ssem7yr.equals("") || !Ssem8yr.equals("") || !Ssem6cpi.equals("") || !Ssem7cpi.equals("") || !Ssem8cpi.equals(""))){
-            sem6yr.setText("Cannot fill details of furthur semester without filling previous info");
+        if(Ssem6yr.equals("") && (!Ssem7yr.equals("") || !Ssem8yr.equals("") || !Ssem6cpi.equals("") || !Ssem7cpi.equals("") || !Ssem8cpi.equals(""))){
+            sem6yr.setError("Cannot fill details of furthur semester without filling previous info");
             return;
         }
         if(Ssem7yr.equals("") && (!Ssem8yr.equals("") || !Ssem7cpi.equals("") || !Ssem8cpi.equals(""))){
-            sem7yr.setText("Cannot fill details of furthur semester without filling previous info");
+            sem7yr.setError("Cannot fill details of furthur semester without filling previous info");
             return;
         }
         if(Ssem8yr.equals("") && (!Ssem8cpi.equals(""))){
-            sem8yr.setText("Cannot fill details of this semester");
+            sem8yr.setError("Cannot fill details of this semester");
             return;
         }
 
@@ -439,7 +455,6 @@ public class Student_Complete_Profile extends AppCompatActivity {
                 return;
             }
         }
-
         if(Sname.equals("")){
             name.setError("Required Field");
             return;
@@ -516,6 +531,7 @@ public class Student_Complete_Profile extends AppCompatActivity {
     }
 
     public void InsertIntoDatabase(){
+        academicDetails = new AcademicDetails();
         academicDetails.setSec_perc(Ssec_per);
         academicDetails.setSec_board(Ssec_board);
         academicDetails.setSec_year(Ssec_year);
@@ -546,7 +562,7 @@ public class Student_Complete_Profile extends AppCompatActivity {
         academicDetails.setSem7date(Ssem7yr);
         academicDetails.setSem8date(Ssem8yr);
 
-
+        personalDetails = new PersonalDetails();
         personalDetails.setName(Sname);
         personalDetails.setFather_Name(Sfather);
         personalDetails.setDOB(Sdob);
@@ -558,9 +574,12 @@ public class Student_Complete_Profile extends AppCompatActivity {
         personalDetails.setMobile(Smobile);
         personalDetails.setPhone(Sphone);
         personalDetails.setEmail(Semail);
+        databaseReference.child("Approve_Students").child(user.getWebmailID()).child("AcademicDetails_Admin").setValue(academicDetails);
+        databaseReference.child("Approve_Students").child(user.getWebmailID()).child("PersonalDetails_Admin").setValue(personalDetails);
+        databaseReference.child("Student").child(user.getWebmailID()).child("ProfilePending").setValue("Pending");
+        save.setEnabled(false);
+        databaseReference.child("Approve_Students").child(user.getWebmailID()).child("Student").setValue(user);
 
-        databaseReference.child("AcademicDetails_Admin").child(user.getWebmailID()).setValue(academicDetails);
-        databaseReference.child("PersonalDetails_Admin").child(user.getWebmailID()).setValue(personalDetails);
     }
 
     public void setTextBoxes(){

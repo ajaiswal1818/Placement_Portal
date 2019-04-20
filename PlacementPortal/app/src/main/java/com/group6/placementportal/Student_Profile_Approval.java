@@ -1,12 +1,18 @@
 package com.group6.placementportal;
 
+import android.app.DatePickerDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -22,18 +28,20 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.group6.placementportal.DatabasePackage.AcademicDetails;
 import com.group6.placementportal.DatabasePackage.Data;
+import com.group6.placementportal.DatabasePackage.JRF_applications;
 import com.group6.placementportal.DatabasePackage.Notifications;
 import com.group6.placementportal.DatabasePackage.PersonalDetails;
 import com.group6.placementportal.DatabasePackage.Student;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 
 public class Student_Profile_Approval extends AppCompatActivity {
 
-    private ExpandableListView listView,listView2,listView3;
-    private ExpandableListAdapter listAdapter;
+    private ExpandableListView listView,listView2;
+    private ExpandableList_ViewProfile listAdapter;
     private List<String> listDataHeader;
     private Data data;
     private AcademicDetails acads;
@@ -49,14 +57,14 @@ public class Student_Profile_Approval extends AppCompatActivity {
     private Student user;
     private String list_of_notif;
     private long children;
-
+    private String ID;
 
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_student__profile__approval);
+        setContentView(R.layout.content_student__profile__approval);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         if(isNetworkAvailable()==false){
@@ -66,32 +74,28 @@ public class Student_Profile_Approval extends AppCompatActivity {
 
         user = (Student) getIntent().getSerializableExtra("user");
 
-
+        reference = FirebaseDatabase.getInstance().getReference();
         mDatabaseReference = FirebaseDatabase.getInstance().getReference();
         mDatabaseReference2 = FirebaseDatabase.getInstance().getReference();
         mDatabaseReference3 = FirebaseDatabase.getInstance().getReference();
-        listView = findViewById(R.id.lv2Exp);
-        listView2 = findViewById(R.id.lvExp);
-        disapprove=findViewById(R.id.btn_Disapprove);
-        approve=findViewById(R.id.btn_Approve);
+        listView = findViewById(R.id.eduex);
+        listView2 = findViewById(R.id.pdex);
+        disapprove=findViewById(R.id.btn_disapprove1);
+        approve=findViewById(R.id.btn_approve1);
 
         initData();
-        listAdapter = new com.group6.placementportal.ExpandableListAdapter(this,listDataHeader,listHashMap);
-        listView.setAdapter(listAdapter);
         initData2();
-        listAdapter = new com.group6.placementportal.ExpandableListAdapter(this,listDataHeader,listHashMap);
-        listView2.setAdapter(listAdapter);
-
 
         disapprove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-
                 mDatabaseReference.child("Notifications").addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         children = dataSnapshot.getChildrenCount();
+                        children += 1;
+                        ID = Long.toString(children);
                     }
 
                     @Override
@@ -99,14 +103,61 @@ public class Student_Profile_Approval extends AppCompatActivity {
 
                     }
                 });
-                children+=1;
-                mDatabaseReference2 = mDatabaseReference2.child("Student").child("vakul170101076");
+
+
+                mDatabaseReference2 = reference.child("Student").child(user.getWebmailID());
                 mDatabaseReference2.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        list_of_notif = dataSnapshot.child("List_of_Notification_IDs").getValue(String.class);
-                        list_of_notif+=",";
-                        list_of_notif+=(Long.toString(children));
+                        if (dataSnapshot.hasChild("List_of_Notification_IDs")) {
+                            list_of_notif = dataSnapshot.child("List_of_Notification_IDs").getValue(String.class);
+                            list_of_notif += ",";
+                            list_of_notif += (ID);
+                            mDatabaseReference2.child("List_of_Notification_IDs").setValue(list_of_notif);
+                            notif = new Notifications();
+                            notif.setDescription("Your PROFILE has been REJECTED");
+                            notif.setNotification_ID(ID);
+                            notif.setRead(false);
+                            notif.setSubject("STUDENT PROFILE REQUEST");
+                            reference.child("Notifications").child(ID).setValue(notif);
+                            reference.child("Approve_Students").child(user.getWebmailID()).child("Action_Taken").setValue(true);
+                            AlertDialog.Builder mBuilder = new AlertDialog.Builder(Student_Profile_Approval.this);
+                            mBuilder.setTitle("Student has been disapproved");
+                            mBuilder.setCancelable(false);
+                            mBuilder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    Intent company_login = new Intent(Student_Profile_Approval.this, Student_Requests.class);
+                                    startActivity(company_login);
+                                }
+                            });
+                            AlertDialog mDialog = mBuilder.create();
+                            mDialog.show();
+                        } else {
+                            list_of_notif = "";
+                            list_of_notif += ID;
+                            mDatabaseReference2.child("List_of_Notification_IDs").setValue(list_of_notif);
+                            notif = new Notifications();
+                            notif.setDescription("Your PROFILE has been REJECTED");
+                            notif.setNotification_ID(ID);
+                            notif.setRead(false);
+                            notif.setSubject("STUDENT PROFILE REQUEST");
+                            reference.child("Notifications").child(ID).setValue(notif);
+                            reference.child("Approve_Students").child(user.getWebmailID()).child("Action_Taken").setValue(true);
+                            AlertDialog.Builder mBuilder = new AlertDialog.Builder(Student_Profile_Approval.this);
+                            mBuilder.setTitle("Student has been disapproved");
+                            mBuilder.setCancelable(false);
+                            mBuilder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    Intent company_login=new Intent(Student_Profile_Approval.this, Student_Requests.class);
+                                    startActivity(company_login);
+                                }
+                            });
+                            AlertDialog mDialog = mBuilder.create();
+                            mDialog.show();
+                        }
+
                     }
 
                     @Override
@@ -114,27 +165,22 @@ public class Student_Profile_Approval extends AppCompatActivity {
 
                     }
                 });
-                mDatabaseReference2.child("List_of_Notification_IDs").setValue(list_of_notif);
-
-                mDatabaseReference.child("Notifications").child(Long.toString(children)).child("Description").setValue("You have not been approved by the admin");
-                mDatabaseReference.child("Notifications").child(Long.toString(children)).child("Read").setValue("False");
-                mDatabaseReference.child("Notifications").child(Long.toString(children)).child("Subject").setValue("STUDENT APPROVAL/DISAPPROVAL");
-                mDatabaseReference.child("Notifications").child(Long.toString(children)).child("notification_ID").setValue(Long.toString(children));
-
             }
         });
+
+
+
 
         approve.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-
                 mDatabaseReference.child("Notifications").addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         children = dataSnapshot.getChildrenCount();
-                        acads=dataSnapshot.child("AcademicDetails_Temp").child("vakul170101076").getValue(AcademicDetails.class);
-                        pers=dataSnapshot.child("PersonalDetails_Temp").child("vakul170101076").getValue(PersonalDetails.class);
+                        children += 1;
+                        ID = Long.toString(children);
                     }
 
                     @Override
@@ -142,14 +188,74 @@ public class Student_Profile_Approval extends AppCompatActivity {
 
                     }
                 });
-                children+=1;
-                mDatabaseReference2 = mDatabaseReference2.child("Student").child("vakul170101076");
+                mDatabaseReference2 = reference.child("Student").child(user.getWebmailID());
                 mDatabaseReference2.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        list_of_notif = dataSnapshot.child("List_of_Notification_IDs").getValue(String.class);
-                        list_of_notif+=",";
-                        list_of_notif+=(Long.toString(children));
+                        if (dataSnapshot.hasChild("List_of_Notification_IDs")) {
+                            list_of_notif = dataSnapshot.child("List_of_Notification_IDs").getValue(String.class);
+                            list_of_notif += ",";
+                            list_of_notif += (ID);
+                            final AlertDialog.Builder mBuilder = new AlertDialog.Builder(Student_Profile_Approval.this);
+                            mBuilder.setTitle("Allocate the Interview dates");
+                            mBuilder.setCancelable(false);
+                            mBuilder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    mDatabaseReference2.child("List_of_Notification_IDs").setValue(list_of_notif);
+                                    notif = new Notifications();
+                                    notif.setDescription("Your profile request has been accepted");
+                                    notif.setNotification_ID(ID);
+                                    notif.setRead(false);
+                                    notif.setSubject("STUDENT PROFILE REQUEST");
+                                    reference.child("Notifications").child(ID).setValue(notif);
+                                    mDatabaseReference.child("Student").child("AcademicDetails").setValue(acads);
+                                    mDatabaseReference.child("Student").child("PersonalDetails").setValue(pers);
+                                    reference.child("Approve_Students").child(user.getWebmailID()).child("Action_Taken").setValue(true);
+                                }
+                            });
+                            mBuilder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+
+                                }
+                            });
+                            AlertDialog mDialog = mBuilder.create();
+                            mDialog.show();
+
+
+                        } else {
+                            list_of_notif = "";
+                            list_of_notif += ID;
+                            final AlertDialog.Builder mBuilder = new AlertDialog.Builder(Student_Profile_Approval.this);
+                            mBuilder.setTitle("Allocate the Interview dates");
+                            mBuilder.setCancelable(false);
+                            mBuilder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    mDatabaseReference2.child("List_of_Notification_IDs").setValue(list_of_notif);
+                                    notif = new Notifications();
+                                    notif.setDescription("Your profile request has been accepted");
+                                    notif.setNotification_ID(ID);
+                                    notif.setRead(false);
+                                    notif.setSubject("STUDENT PROFILE REQUEST");
+                                    reference.child("Notifications").child(ID).setValue(notif);
+                                    mDatabaseReference.child("Student").child("AcademicDetails").setValue(acads);
+                                    mDatabaseReference.child("Student").child("PersonalDetails").setValue(pers);
+                                    reference.child("Approve_Students").child(user.getWebmailID()).child("Action_Taken").setValue(true);
+                                }
+                            });
+                            mBuilder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+
+                                }
+                            });
+                            AlertDialog mDialog = mBuilder.create();
+                            mDialog.show();
+
+                        }
+
                     }
 
                     @Override
@@ -157,17 +263,11 @@ public class Student_Profile_Approval extends AppCompatActivity {
 
                     }
                 });
-                mDatabaseReference2.child("List_of_Notification_IDs").setValue(list_of_notif);
 
-                mDatabaseReference.child("Notifications").child(Long.toString(children)).child("Description").setValue("You have been approved by the admin");
-                mDatabaseReference.child("Notifications").child(Long.toString(children)).child("Read").setValue("False");
-                mDatabaseReference.child("Notifications").child(Long.toString(children)).child("Subject").setValue("STUDENT APPROVAL/DISAPPROVAL");
-                mDatabaseReference.child("Notifications").child(Long.toString(children)).child("notification_ID").setValue(Long.toString(children));
 
-                mDatabaseReference.child("AcademicDetails").child("vakul170101076").setValue(acads);
-                mDatabaseReference.child("PersonalDetails").child("vakul170101076").setValue(pers);
             }
         });
+
     }
     private boolean isNetworkAvailable() {
         ConnectivityManager connectivityManager
@@ -179,17 +279,50 @@ public class Student_Profile_Approval extends AppCompatActivity {
 
     private void initData2() {
 
-
-        listDataHeader = new ArrayList<>();
-        listHashMap = new HashMap<>();
-
-        reference.child("vakul170101076").addListenerForSingleValueEvent(new ValueEventListener() {
+        reference.child("Approve_Students").child(user.getWebmailID()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                boolean check = dataSnapshot.hasChild("PersonalDetails");
-                if(check){
-                    pers = dataSnapshot.getValue(PersonalDetails.class);
+                listDataHeader = new ArrayList<>();
+                listHashMap = new HashMap<>();
+                boolean check = dataSnapshot.hasChild("PersonalDetails_Admin");
+                if(check) {
+                    pers = dataSnapshot.child("PersonalDetails_Admin").getValue(PersonalDetails.class);
                 }
+                    if(pers==null){
+                        pers = new PersonalDetails("","","","","","","","","","","");
+                    }
+
+                    listDataHeader.add("Personal Details");
+
+                    List<Data> PersonalDetails = new ArrayList<>();
+
+                    data = new Data("Name",pers.getName());
+                    PersonalDetails.add(data);
+                    data = new Data("Father's Name",pers.getFather_Name());
+                    PersonalDetails.add(data);
+                    data = new Data("Date of Birth",pers.getDOB());
+                    PersonalDetails.add(data);
+                    data = new Data("Gender",pers.getGender());
+                    PersonalDetails.add(data);
+                    data = new Data("Category",pers.getCategory());
+                    PersonalDetails.add(data);
+                    data = new Data("Religion",pers.getReligion());
+                    PersonalDetails.add(data);
+                    data = new Data("State belongs to",pers.getState());
+                    PersonalDetails.add(data);
+                    data = new Data("Address",pers.getAddress());
+                    PersonalDetails.add(data);
+                    data = new Data("Mobile Number",pers.getMobile());
+                    PersonalDetails.add(data);
+                    data = new Data("Phone Number",pers.getPhone());
+                    PersonalDetails.add(data);
+                    data = new Data("Email Id",pers.getEmail());
+                    PersonalDetails.add(data);
+
+
+                    listHashMap.put(listDataHeader.get(0),PersonalDetails);
+                    listAdapter = new com.group6.placementportal.ExpandableList_ViewProfile(getApplicationContext(),listDataHeader,listHashMap);
+                    listView2.setAdapter(listAdapter);
             }
 
             @Override
@@ -197,53 +330,90 @@ public class Student_Profile_Approval extends AppCompatActivity {
 
             }
         });
-        if(pers==null){
-            pers = new PersonalDetails("","","","","","","","","","","");
-        }
 
-        listDataHeader.add("Personal Details");
-
-        List<Data> PersonalDetails = new ArrayList<>();
-
-        data = new Data("Name",pers.getName());
-        PersonalDetails.add(data);
-        data = new Data("Father's Name",pers.getFather_Name());
-        PersonalDetails.add(data);
-        data = new Data("Date of Birth",pers.getDOB());
-        PersonalDetails.add(data);
-        data = new Data("Gender",pers.getGender());
-        PersonalDetails.add(data);
-        data = new Data("Category",pers.getCategory());
-        PersonalDetails.add(data);
-        data = new Data("Religion",pers.getReligion());
-        PersonalDetails.add(data);
-        data = new Data("State belongs to",pers.getState());
-        PersonalDetails.add(data);
-        data = new Data("Address",pers.getAddress());
-        PersonalDetails.add(data);
-        data = new Data("Mobile Number",pers.getMobile());
-        PersonalDetails.add(data);
-        data = new Data("Phone Number",pers.getPhone());
-        PersonalDetails.add(data);
-        data = new Data("Email Id",pers.getEmail());
-        PersonalDetails.add(data);
-
-
-        listHashMap.put(listDataHeader.get(0),PersonalDetails);
 
     }
 
     private void initData() {
-        listDataHeader = new ArrayList<>();
-        listHashMap = new HashMap<>();
 
-        reference.child("vakul170101076").addListenerForSingleValueEvent(new ValueEventListener() {
+
+        reference.child("Approve_Students").child(user.getWebmailID()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                boolean check = dataSnapshot.hasChild("AcademicDetails");
-                if(check){
-                    acads = dataSnapshot.getValue(AcademicDetails.class);
+                listDataHeader = new ArrayList<>();
+                listHashMap = new HashMap<>();
+                boolean check = dataSnapshot.hasChild("AcademicDetails_Admin");
+                if(check) {
+                    acads = dataSnapshot.child("AcademicDetails_Admin").getValue(AcademicDetails.class);
                 }
+                    if(acads==null){
+                        acads = new AcademicDetails("","","","","","","","","","","","","","","","","","","","","","","","");
+                    }
+
+                    listDataHeader.add("Secondary");
+                    listDataHeader.add("Higher Secondary");
+                    listDataHeader.add("Graduation");
+
+                    List<Data> Secondary = new ArrayList<>();
+                    data = new Data("Percentage",acads.getSec_perc());
+                    Secondary.add(data);
+                    data = new Data("Year of Passing",acads.getSec_year());
+                    Secondary.add(data);
+                    data = new Data("Board",acads.getSec_board());
+                    Secondary.add(data);
+
+                    List<Data> HigherSecondary = new ArrayList<>();
+                    data = new Data("Percentage",acads.getHighsec_perc());
+                    HigherSecondary.add(data);
+                    data = new Data("Year of Passing",acads.getHighsec_year());
+                    HigherSecondary.add(data);
+                    data = new Data("Board",acads.getHighsec_board());
+                    HigherSecondary.add(data);
+
+                    List<Data> Graduation = new ArrayList<>();
+                    data = new Data("Course Name",acads.getCourse());
+                    Graduation.add(data);
+                    data = new Data("University Board",acads.getUniv_board());
+                    Graduation.add(data);
+                    data = new Data("Semester 1 CPI",acads.getSem1cpi());
+                    Graduation.add(data);
+                    data = new Data("Date of Passing",acads.getSem1date());
+                    Graduation.add(data);
+                    data = new Data("Semester 2 CPI",acads.getSem2cpi());
+                    Graduation.add(data);
+                    data = new Data("Date of Passing",acads.getSem2date());
+                    Graduation.add(data);
+                    data = new Data("Semester 3 CPI",acads.getSem3cpi());
+                    Graduation.add(data);
+                    data = new Data("Date of Passing",acads.getSem3date());
+                    Graduation.add(data);
+                    data = new Data("Semester 4 CPI",acads.getSem4cpi());
+                    Graduation.add(data);
+                    data = new Data("Date of Passing",acads.getSem4date());
+                    Graduation.add(data);
+                    data = new Data("Semester 5 CPI",acads.getSem5cpi());
+                    Graduation.add(data);
+                    data = new Data("Date of Passing",acads.getSem5date());
+                    Graduation.add(data);
+                    data = new Data("Semester 6 CPI",acads.getSem6cpi());
+                    Graduation.add(data);
+                    data = new Data("Date of Passing",acads.getSem6date());
+                    Graduation.add(data);
+                    data = new Data("Semester 7 CPI",acads.getSem7cpi());
+                    Graduation.add(data);
+                    data = new Data("Date of Passing",acads.getSem7date());
+                    Graduation.add(data);
+                    data = new Data("Semester 8 CPI",acads.getSem8cpi());
+                    Graduation.add(data);
+                    data = new Data("Date of Passing",acads.getSem8date());
+                    Graduation.add(data);
+
+
+                    listHashMap.put(listDataHeader.get(0),Secondary);
+                    listHashMap.put(listDataHeader.get(1),HigherSecondary);
+                    listHashMap.put(listDataHeader.get(2),Graduation);
+                    listAdapter = new com.group6.placementportal.ExpandableList_ViewProfile(getApplicationContext(),listDataHeader,listHashMap);
+                    listView.setAdapter(listAdapter);
             }
 
             @Override
@@ -251,72 +421,7 @@ public class Student_Profile_Approval extends AppCompatActivity {
 
             }
         });
-        if(acads==null){
-            acads = new AcademicDetails("","","","","","","","","","","","","","","","","","","","","","","","");
-        }
 
-        listDataHeader.add("Secondary");
-        listDataHeader.add("Higher Secondary");
-        listDataHeader.add("Graduation");
-
-        List<Data> Secondary = new ArrayList<>();
-        data = new Data("Percentage",acads.getSec_perc());
-        Secondary.add(data);
-        data = new Data("Year of Passing",acads.getSec_year());
-        Secondary.add(data);
-        data = new Data("Board",acads.getSec_board());
-        Secondary.add(data);
-
-        List<Data> HigherSecondary = new ArrayList<>();
-        data = new Data("Percentage",acads.getHighsec_perc());
-        HigherSecondary.add(data);
-        data = new Data("Year of Passing",acads.getHighsec_year());
-        HigherSecondary.add(data);
-        data = new Data("Board",acads.getHighsec_board());
-        HigherSecondary.add(data);
-
-        List<Data> Graduation = new ArrayList<>();
-        data = new Data("Course Name",acads.getCourse());
-        Graduation.add(data);
-        data = new Data("University Board",acads.getUniv_board());
-        Graduation.add(data);
-        data = new Data("Semester 1 CPI",acads.getSem1cpi());
-        Graduation.add(data);
-        data = new Data("Date of Passing",acads.getSem1date());
-        Graduation.add(data);
-        data = new Data("Semester 2 CPI",acads.getSem2cpi());
-        Graduation.add(data);
-        data = new Data("Date of Passing",acads.getSem2date());
-        Graduation.add(data);
-        data = new Data("Semester 3 CPI",acads.getSem3cpi());
-        Graduation.add(data);
-        data = new Data("Date of Passing",acads.getSem3date());
-        Graduation.add(data);
-        data = new Data("Semester 4 CPI",acads.getSem4cpi());
-        Graduation.add(data);
-        data = new Data("Date of Passing",acads.getSem4date());
-        Graduation.add(data);
-        data = new Data("Semester 5 CPI",acads.getSem5cpi());
-        Graduation.add(data);
-        data = new Data("Date of Passing",acads.getSem5date());
-        Graduation.add(data);
-        data = new Data("Semester 6 CPI",acads.getSem6cpi());
-        Graduation.add(data);
-        data = new Data("Date of Passing",acads.getSem6date());
-        Graduation.add(data);
-        data = new Data("Semester 7 CPI",acads.getSem7cpi());
-        Graduation.add(data);
-        data = new Data("Date of Passing",acads.getSem7date());
-        Graduation.add(data);
-        data = new Data("Semester 8 CPI",acads.getSem8cpi());
-        Graduation.add(data);
-        data = new Data("Date of Passing",acads.getSem8date());
-        Graduation.add(data);
-
-
-        listHashMap.put(listDataHeader.get(0),Secondary);
-        listHashMap.put(listDataHeader.get(1),HigherSecondary);
-        listHashMap.put(listDataHeader.get(2),Graduation);
     }
 
 }

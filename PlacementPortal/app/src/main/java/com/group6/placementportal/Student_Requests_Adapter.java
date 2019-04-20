@@ -18,13 +18,11 @@ public class Student_Requests_Adapter extends RecyclerView.Adapter<Student_Reque
 
     Context context;
     ArrayList<Student> profiles;
-    Student user;
 
-    public Student_Requests_Adapter(Context c , ArrayList<Student> p, Student student)
+    public Student_Requests_Adapter(Context c , ArrayList<Student> p)
     {
         context = c;
         profiles = p;
-        user = student;
     }
 
     @NonNull
@@ -45,7 +43,7 @@ public class Student_Requests_Adapter extends RecyclerView.Adapter<Student_Reque
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, Student_Profile_Approval.class);
-                intent.putExtra("user", user);
+                intent.putExtra("user",profiles.get(position));
                 context.startActivity(intent);
             }
         });

@@ -62,17 +62,21 @@ public class Student_Requests extends AppCompatActivity
         recyclerView.setLayoutManager( new LinearLayoutManager(this));
 
 
-        reference = FirebaseDatabase.getInstance().getReference().child("Student");
-        reference.addValueEventListener(new ValueEventListener() {
+        reference = FirebaseDatabase.getInstance().getReference();
+        reference.child("Approve_Students").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 list = new ArrayList<Student>();
                 for(DataSnapshot dataSnapshot1: dataSnapshot.getChildren())
                 {
-                    Student p = dataSnapshot1.getValue(Student.class);
-                    list.add(p);
+                    if(!dataSnapshot1.hasChild("Action_Taken")){
+                        Student p = dataSnapshot1.child("Student").getValue(Student.class);
+                        list.add(p);
+                    }
+
                 }
-                adapter = new Student_Requests_Adapter(Student_Requests.this,list,user);
+                Toast.makeText(getApplicationContext(),(list==null)+"",Toast.LENGTH_SHORT).show();
+                adapter = new Student_Requests_Adapter(Student_Requests.this,list);
                 recyclerView.setAdapter(adapter);
             }
 

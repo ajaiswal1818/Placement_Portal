@@ -151,7 +151,7 @@ public class Admin_DashBoard extends AppCompatActivity
             startActivity(i);
 
         } else if (id== R.id.nav_approve_student){
-            Intent i = new Intent(getApplicationContext(), Student_Profile_Approval.class);
+            Intent i = new Intent(getApplicationContext(), Student_Requests.class);
             startActivity(i);
 
         } else if (id== R.id.nav_ra_application_requests){
