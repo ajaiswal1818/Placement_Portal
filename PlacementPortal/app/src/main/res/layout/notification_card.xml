@@ -8,7 +8,8 @@
     <RelativeLayout
         android:layout_width="400dp"
         android:layout_height="180dp"
-        android:layout_margin="4dp">
+        android:layout_margin="4dp"
+        android:background="@color/colorPrimary">
 
         <TextView
             android:id="@+id/subject"
@@ -16,7 +17,9 @@
             android:layout_height="30dp"
             android:text="Subject goes here"
             android:textSize="20sp"
-            android:textStyle="bold"/>
+            android:textStyle="bold"
+            android:textAlignment="center"
+            android:textColor="@color/colorWhite"/>
 
         <TextView
             android:id="@+id/description"
@@ -24,18 +27,23 @@
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:layout_marginTop="45dp"
+            android:layout_marginStart="125dp"
+            android:layout_marginTop="48dp"
             android:text="Description goes here"
+            android:textAlignment="center"
+            android:textColor="@color/colorWhite"
             android:textSize="15sp" />
+
         <TextView
+            android:id="@+id/pdflink"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="pdf link comes here"
-            android:textColor="@color/colorPrimaryDark"
             android:layout_marginTop="120dp"
+            android:text="pdf link comes here"
+            android:textAlignment="center"
+            android:textColor="@color/colorWhite"
             android:textSize="15sp"
-            android:id="@+id/pdflink"
-            android:textStyle="italic"/>
+            android:textStyle="italic" />
 
 
     </RelativeLayout>
