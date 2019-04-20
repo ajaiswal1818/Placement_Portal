@@ -43,7 +43,9 @@
             android:textAlignment="center"
             android:textColor="@color/colorWhite"
             android:textSize="15sp"
-            android:textStyle="italic" />
+            android:textStyle="italic"
+            android:clickable="true"
+            />
 
 
     </RelativeLayout>

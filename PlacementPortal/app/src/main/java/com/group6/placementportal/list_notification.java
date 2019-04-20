@@ -62,7 +62,6 @@ public class list_notification extends AppCompatActivity {
 
                     mAdapter = new notification_layout(list_notification.this,cardList);
                     mrecyclerView.setAdapter(mAdapter);
-
                 }
 
             }
@@ -72,6 +71,7 @@ public class list_notification extends AppCompatActivity {
                 Toast.makeText(list_notification.this,"Something went Wrong",Toast.LENGTH_LONG).show();
             }
         });
+
 
     }
 
