@@ -268,6 +268,16 @@
         <activity
             android:name=".help"
             android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".Procedure"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Details"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Contacts"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>
