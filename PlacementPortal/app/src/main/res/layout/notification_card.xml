@@ -31,6 +31,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="pdf link comes here"
+            android:textColor="@color/colorPrimaryDark"
             android:layout_marginTop="120dp"
             android:textSize="15sp"
             android:id="@+id/pdflink"
