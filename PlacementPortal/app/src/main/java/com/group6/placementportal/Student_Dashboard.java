@@ -16,6 +16,8 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
@@ -56,6 +58,8 @@ public class Student_Dashboard extends AppCompatActivity
         }
 
 
+
+
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -77,6 +81,12 @@ public class Student_Dashboard extends AppCompatActivity
         intent.putExtra("user",user.getWebmailID());
         intent.putExtra("flag",0);
         startService(intent);
+
+
+
+        View header = navigationView.getHeaderView(0);
+        TextView name = header.findViewById(R.id.Name_of_user);
+        name.setText(user.getFullName());
 
         sampleApp = null;
         if (sampleApp == null) {
