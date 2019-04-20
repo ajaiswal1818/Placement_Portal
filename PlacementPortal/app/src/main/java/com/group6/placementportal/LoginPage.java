@@ -381,6 +381,7 @@ public class LoginPage extends AppCompatActivity {
             I.putExtra("programme",Programme);
         }
         startActivity(I);
+        LoginPage.this.finish();
 
     }
 
