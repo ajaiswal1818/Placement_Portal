@@ -58,6 +58,7 @@ public class Apply_For_Jobs extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.content_apply__for__jobs);
 
+
         if(isNetworkAvailable()==false){
             Toast.makeText(Apply_For_Jobs.this,"NO INTERNET CONNECTION", Toast.LENGTH_LONG).show();
             return;
@@ -94,7 +95,7 @@ public class Apply_For_Jobs extends AppCompatActivity {
         mDatabaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if(dataSnapshot.child("Jobs").child(jobs.getJob_id()).child("Applied Students").hasChild(user.getWebmailID())){
+                if(dataSnapshot.child("Jobs").child(jobs.getJob_id()).child("Applied Students").hasChild(user.getWebmailID()) || dataSnapshot.child("Student").child(user.getWebmailID()).hasChild("has_given_preferences")){
                     btn_apply.setEnabled(false);
                 }
             }

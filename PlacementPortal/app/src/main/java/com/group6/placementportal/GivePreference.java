@@ -23,6 +23,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -81,36 +82,47 @@ public class GivePreference extends AppCompatActivity
                     R.raw.auth_config);
         }
 
-        boolean userApp = checkUserApplication();
-        if(userApp){
-            AlertDialog.Builder mBuilder = new AlertDialog.Builder(GivePreference.this);
-            mBuilder.setTitle("You Already Set your preferences");
-            mBuilder.setCancelable(false);
-            mBuilder.setNeutralButton("Ok", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
+        reference.child("Student").child(user.getWebmailID()).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot.hasChild("has_given_preferences")){
+                    AlertDialog.Builder mBuilder = new AlertDialog.Builder(GivePreference.this);
+                    mBuilder.setTitle("You Already Set your preferences");
+                    mBuilder.setCancelable(false);
+                    mBuilder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
 
+                        }
+                    });
+                    AlertDialog mDialog = mBuilder.create();
+                    mDialog.show();
+                    setPref.setVisibility(View.INVISIBLE);
+                    AllowUsertogivePreferences();
                 }
-            });
-            AlertDialog mDialog = mBuilder.create();
-            mDialog.show();
-            setPref.setVisibility(View.INVISIBLE);
-        }
-        else {
-            AlertDialog.Builder mBuilder = new AlertDialog.Builder(GivePreference.this);
-            mBuilder.setTitle("You Can only Set Your preferences once");
-            mBuilder.setCancelable(false);
-            mBuilder.setNeutralButton("Ok", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
+                else {
+                    AlertDialog.Builder mBuilder = new AlertDialog.Builder(GivePreference.this);
+                    mBuilder.setTitle("You Can only Set Your preferences once");
+                    mBuilder.setCancelable(false);
+                    mBuilder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
 
+                        }
+                    });
+                    AlertDialog mDialog = mBuilder.create();
+                    mDialog.show();
+                    AllowUsertogivePreferences();
                 }
-            });
-            AlertDialog mDialog = mBuilder.create();
-            mDialog.show();
-        }
-            AllowUsertogivePreferences();
-        }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
     private boolean isNetworkAvailable() {
         ConnectivityManager connectivityManager
                 = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -128,31 +140,50 @@ public class GivePreference extends AppCompatActivity
             setPref.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    String list_of_applied_companies="";
-                    if(list!=null) {
-                        for (Jobs j : list) {
-                            String job_id = j.getJob_id();
-                            if (list_of_applied_companies.equals("")) {
-                                list_of_applied_companies += job_id;
-                            } else {
-                                list_of_applied_companies += ",";
-                                list_of_applied_companies += job_id;
-                            }
-                        }
-                    }else{
-                        AlertDialog.Builder mBuilder = new AlertDialog.Builder(GivePreference.this);
-                        mBuilder.setTitle("You haven't applied for any jobs yet");
-                        mBuilder.setCancelable(false);
-                        mBuilder.setNeutralButton("Ok", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
+                    AlertDialog.Builder mBuilder = new AlertDialog.Builder(GivePreference.this);
+                    mBuilder.setTitle("You Can only Set Your preferences once");
+                    mBuilder.setCancelable(false);
+                    mBuilder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            String list_of_applied_companies="";
+                            if(list!=null) {
+                                for (Jobs j : list) {
+                                    String job_id = j.getJob_id();
+                                    if (list_of_applied_companies.equals("")) {
+                                        list_of_applied_companies += job_id;
+                                    } else {
+                                        list_of_applied_companies += ",";
+                                        list_of_applied_companies += job_id;
+                                    }
+                                }
+                            }else{
+                                AlertDialog.Builder mBuilder1 = new AlertDialog.Builder(GivePreference.this);
+                                mBuilder1.setTitle("You haven't applied for any jobs yet");
+                                mBuilder1.setCancelable(false);
+                                mBuilder1.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
 
+                                    }
+                                });
+                                AlertDialog mDialog = mBuilder1.create();
+                                mDialog.show();
                             }
-                        });
-                        AlertDialog mDialog = mBuilder.create();
-                        mDialog.show();
-                    }
-                    CAllDatabase(list_of_applied_companies);
+                            setPref.setVisibility(View.INVISIBLE);
+                            CAllDatabase(list_of_applied_companies);
+                        }
+                    });
+                    mBuilder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                        }
+                    });
+                    AlertDialog mDialog = mBuilder.create();
+                    mDialog.show();
+
+
                 }
             });
 
@@ -174,6 +205,7 @@ public class GivePreference extends AppCompatActivity
                                 list = new ArrayList<>();
 
                                 for (String jobId : list_applied) {
+                                    Log.d(TAG, jobId);
                                     Jobs p = dataSnapshot.child(jobId).getValue(Jobs.class);
                                     list.add(p);
                                 }
@@ -193,24 +225,6 @@ public class GivePreference extends AppCompatActivity
                     Toast.makeText(GivePreference.this, "Opsss.... Something is wrong", Toast.LENGTH_SHORT).show();
                 }
             });
-        }
-
-        public boolean checkUserApplication(){
-            final boolean[] userApplied = new boolean[1];
-            reference.child("Student").child(user.getWebmailID()).addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    boolean checkChild = dataSnapshot.hasChild("has_given_preferences");
-                    userApplied[0] = checkChild;
-                    Log.d("TAG",checkChild+"");
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
-                    userApplied[0] = true;
-                }
-            });
-            return userApplied[0];
         }
 
         public void CAllDatabase(final String list_companies){
