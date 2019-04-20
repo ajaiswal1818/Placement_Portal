@@ -1,5 +1,6 @@
 package com.group6.placementportal;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
@@ -27,7 +28,18 @@ public class company_change_password extends AppCompatActivity {
     private String c_id;
     private company c1;
     private DatabaseReference valid;
+    private ProgressDialog dialog1;
     Encryption encryption = Encryption.getDefault("Key", "Salt", new byte[16]);
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent company_profile=new Intent(company_change_password.this, company_profile.class);
+        company_profile.putExtra("MyClass",c1);
+        company_profile.putExtra("coming_from","dashboard");
+        startActivity(company_profile);
+        company_change_password.this.finish();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,19 +61,29 @@ public class company_change_password extends AppCompatActivity {
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                dialog1 = new ProgressDialog(company_change_password.this);
+                dialog1.setMessage("Please Wait");
+                dialog1.setCancelable(false);
+                dialog1.show();
                 if(old.getText().toString().equals("")||new1.getText().toString().equals("")||new2.getText().toString().equals(""))
                 {
                     Toast.makeText(company_change_password.this,"No field can be empty",Toast.LENGTH_LONG).show();
+                    dialog1.setCancelable(true);
+                    dialog1.hide();
                     return;
                 }
                 if(!new1.getText().toString().equals(new2.getText().toString()))
                 {
                     Toast.makeText(company_change_password.this,"Re-enter new password correctly",Toast.LENGTH_LONG).show();
+                    dialog1.setCancelable(true);
+                    dialog1.hide();
                     return;
                 }
                 if(new1.getText().toString().contains(" "))
                 {
                     new1.setError("Password can't contain any spaces");
+                    dialog1.setCancelable(true);
+                    dialog1.hide();
                     return;
                 }
                 else
@@ -85,20 +107,36 @@ public class company_change_password extends AppCompatActivity {
                                         company_profile.putExtra("MyClass",c1);
                                         company_profile.putExtra("coming_from","dashboard");
                                         //finish();
+                                        dialog1.setCancelable(true);
+                                        dialog1.hide();
                                         startActivity(company_profile);
+                                        company_change_password.this.finish();
                                     }
                                     else
                                     {
                                         Toast.makeText(company_change_password.this,"Incorrect Current password",Toast.LENGTH_LONG).show();
+                                        dialog1.setCancelable(true);
+                                        dialog1.hide();
                                         return;
                                     }
                                 }
+                                else
+                                {
+                                    dialog1.setCancelable(true);
+                                    dialog1.hide();
+                                }
+                            }
+                            else
+                            {
+                                dialog1.setCancelable(true);
+                                dialog1.hide();
                             }
                         }
 
                         @Override
                         public void onCancelled(@NonNull DatabaseError databaseError) {
-
+                            dialog1.setCancelable(true);
+                            dialog1.hide();
                         }
                     });
 

@@ -34,6 +34,12 @@ public class company_notices extends AppCompatActivity {
     private company c;
 
     @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        company_notices.this.finish();
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_company_notices);
@@ -49,7 +55,7 @@ public class company_notices extends AppCompatActivity {
         recyclerView.setLayoutManager( new LinearLayoutManager(this));
 
         reference = FirebaseDatabase.getInstance().getReference().child("Company").child(c.getCompany_id()).child("notices");
-        reference.addValueEventListener(new ValueEventListener() {
+        reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 list = new ArrayList<Card>();

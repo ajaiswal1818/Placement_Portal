@@ -36,6 +36,13 @@ public class company_login extends AppCompatActivity {
     public company getUser(){
         return c;
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        company_login.this.finish();
+    }
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_company_login2);
@@ -67,6 +74,11 @@ public class company_login extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                if(username.getText().toString().equals("")||password.getText().toString().equals(""))
+                {
+                    Toast.makeText(company_login.this,"Username and password can't be empty", Toast.LENGTH_LONG).show();
+                    return;
+                }
                 dialog1 = new ProgressDialog(company_login.this);
                 dialog1.setMessage("Please Wait");
                 dialog1.setCancelable(false);
@@ -83,8 +95,9 @@ public class company_login extends AppCompatActivity {
                                     Intent company_dashboard = new Intent(company_login.this, company_dashboard.class);
                                     company_dashboard.putExtra("MyClass", c);
                                     //company_dashboard.putExtra("PrevActivity","company_login");
-                                    finish();
+
                                     startActivity(company_dashboard);
+                                    company_login.this.finish();
                                     dialog1.setCancelable(true);
                                     dialog1.hide();
                                 }

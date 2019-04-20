@@ -81,7 +81,14 @@ public class intern_profile extends AppCompatActivity {
     private String prevActivity;
     private int check = 0;
     private String intern_id;
+    private ProgressDialog dialog1;
     public intern_profile() {
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        intern_profile.this.finish();
     }
 
     @Override
@@ -137,6 +144,10 @@ public class intern_profile extends AppCompatActivity {
 
         if(prevActivity.equals("recycleview"))
         {
+            dialog1 = new ProgressDialog(intern_profile.this);
+            dialog1.setMessage("Please Wait");
+            dialog1.setCancelable(false);
+            dialog1.show();
             add_comp = FirebaseDatabase.getInstance().getReference("Interns");
             add_comp.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
@@ -149,7 +160,9 @@ public class intern_profile extends AppCompatActivity {
 
                 @Override
                 public void onCancelled(@NonNull DatabaseError databaseError) {
-
+                    dialog1.setCancelable(true);
+                    dialog1.hide();
+                    Toast.makeText(intern_profile.this, "Oops ... network error, can't fetch details", Toast.LENGTH_LONG).show();
                 }
             });
 
@@ -261,15 +274,18 @@ public class intern_profile extends AppCompatActivity {
                 public void onClick(View v) {
                     if((cpi.getText().toString().matches("\\d+\\.?\\d+") ==false && cpi.getText().toString().matches("\\d")==false)){
                         cpi.setError("Invalid CPI");
+                        Toast.makeText(intern_profile.this, "Invalid Input!", Toast.LENGTH_LONG).show();
                         return;
                     }
                     double cpi_double=Double.parseDouble(cpi.getText().toString());
                     if(cpi_double>10 || cpi_double<0){
                         cpi.setError("Invalid CPI");
+                        Toast.makeText(intern_profile.this, "Invalid Input!", Toast.LENGTH_LONG).show();
                         return;
                     }
                     if((ctc.getText().toString().matches("\\d+\\.?\\d+") ==false && ctc.getText().toString().matches("\\d")==false)){
                         ctc.setError("CTC can only be decimal number");
+                        Toast.makeText(intern_profile.this, "Invalid Input!", Toast.LENGTH_LONG).show();
                         return;
                     }
 
@@ -313,7 +329,7 @@ public class intern_profile extends AppCompatActivity {
 
                                     Intent intern_list = new Intent(intern_profile.this, intern_list.class);
                                     intern_list.putExtra("id",id);
-                                    finish();
+                                    intern_profile.this.finish();
                                     startActivity(intern_list);
                                 }
                             }
@@ -551,11 +567,13 @@ public class intern_profile extends AppCompatActivity {
         //upload.setText("View Selected File");
         select.setVisibility(View.INVISIBLE);
 
-        status.setText(intern_det.getBrochure());
+        status.setText("Click here to download brochure");
         status.setTextColor(Color.BLUE);
         status.setPaintFlags(status.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+        dialog1.setCancelable(true);
+        dialog1.hide();
 //getBrochure!=" " check
-        if(!(status.getText().toString().equals("")))
+        if(!(intern_det.getBrochure().equals("")))
         {
             status.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -573,7 +591,12 @@ public class intern_profile extends AppCompatActivity {
         }
         else
         {
-
+            status.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(intern_profile.this, "No file ", Toast.LENGTH_SHORT).show();
+                }
+            });
         }
 
     }

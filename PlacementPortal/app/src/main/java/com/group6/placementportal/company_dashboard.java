@@ -84,7 +84,7 @@ public class company_dashboard extends AppCompatActivity {
                 @Override
                 public void onClick(View v){
                     reference = FirebaseDatabase.getInstance().getReference().child("Company").child(c.getCompany_id());
-                    reference.addValueEventListener(new ValueEventListener() {
+                    reference.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                             if(dataSnapshot.exists())
