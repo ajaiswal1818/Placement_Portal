@@ -36,10 +36,10 @@ public class enrolment_adapter extends RecyclerView.Adapter<enrolment_adapter.My
     ArrayList<Student> students;
     String job;
     int which;
-    String cv;
+    ArrayList <String> cv;
     private static DatabaseReference reference;
     boolean is_job;
-    public enrolment_adapter(Activity c , ArrayList<Student> p,String job_id,int pos,String link,boolean job_or_not)
+    public enrolment_adapter(Activity c , ArrayList<Student> p,String job_id,int pos,ArrayList <String> link,boolean job_or_not)
     {
         context = c;
         students = p;
@@ -63,7 +63,7 @@ public class enrolment_adapter extends RecyclerView.Adapter<enrolment_adapter.My
         holder.student_name.setText(students.get(position).getFullName());
         Log.w("adapter final", Integer.toString(position)+" "+students.get(position).getFullName());
         holder.student_rno.setText(students.get(position).getRollNo());
-        holder.CV.setText(cv);
+        holder.CV.setText(cv.get(position));
 
 
         holder.parentlayout.setOnClickListener(new View.OnClickListener() {

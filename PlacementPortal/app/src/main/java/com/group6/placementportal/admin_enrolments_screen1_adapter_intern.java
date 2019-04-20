@@ -26,7 +26,7 @@ public class admin_enrolments_screen1_adapter_intern extends RecyclerView.Adapte
     Context context;
     ArrayList<Interns> profiles;
     private static DatabaseReference reference;
-    public String cv;
+    ArrayList <String> cv;
 
     public admin_enrolments_screen1_adapter_intern(Context c , ArrayList<Interns> p)
     {
@@ -59,10 +59,11 @@ public class admin_enrolments_screen1_adapter_intern extends RecyclerView.Adapte
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         ArrayList<String> slist=new ArrayList<>();
+                        cv=new ArrayList<>();
                         for(DataSnapshot dataSnapshot1:dataSnapshot.getChildren()){
                             String s_id=dataSnapshot1.getKey();
                             slist.add(s_id);
-                            cv=(String) dataSnapshot.child("CV").getValue();
+                            cv.add((String) dataSnapshot1.child("CV").getValue());
 
                         }
                         Intent intent = new Intent(context, company_enrollments.class);
@@ -71,6 +72,7 @@ public class admin_enrolments_screen1_adapter_intern extends RecyclerView.Adapte
 
                         Log.w("going to final enrollments as intern",job_id);
                         intent.putExtra("Job",job_id);
+                     //   cv=(String) dataSnapshot.child("CV").getValue();
                         intent.putExtra("cv",cv);
                         intent.putExtra("is_job",false);
                         intent.putExtra("Screen",1);

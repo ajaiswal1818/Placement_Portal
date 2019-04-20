@@ -34,7 +34,7 @@ public class MainLogin extends AppCompatActivity {
         admin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent company_login=new Intent(MainLogin.this, Admin_DashBoard.class);
+                Intent company_login=new Intent(MainLogin.this, admin_job_or_intern.class);
                 startActivity(company_login);
             }
         });

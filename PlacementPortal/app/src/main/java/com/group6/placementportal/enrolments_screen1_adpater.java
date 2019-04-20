@@ -24,7 +24,7 @@ public class enrolments_screen1_adpater extends RecyclerView.Adapter<enrolments_
     Context context;
     ArrayList<Jobs> profiles;
     private static DatabaseReference reference;
-    public String cv;
+    ArrayList <String> cv;
 
     public enrolments_screen1_adpater(Context c , ArrayList<Jobs> p)
     {
@@ -56,15 +56,18 @@ public class enrolments_screen1_adpater extends RecyclerView.Adapter<enrolments_
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         ArrayList<String> slist=new ArrayList<>();
+                        cv=new ArrayList<>();
                         for(DataSnapshot dataSnapshot1:dataSnapshot.getChildren()){
                             String s_id=dataSnapshot1.getKey();
                             slist.add(s_id);
-                            cv=(String) dataSnapshot.child("CV").getValue();
+
+                            cv.add((String) dataSnapshot1.child("CV").getValue());
                         }
                         Intent intent = new Intent(context, company_enrollments.class);
                         intent.putExtra("MyClass",slist);
                         intent.putExtra("Job",job_id);
                         intent.putExtra("is_job",true);
+
                         intent.putExtra("cv",cv);
                         intent.putExtra("Screen",0);
                         intent.putExtra("is_job",true);

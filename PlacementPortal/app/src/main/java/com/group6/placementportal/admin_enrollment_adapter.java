@@ -39,7 +39,7 @@ public class admin_enrollment_adapter extends RecyclerView.Adapter<admin_enrollm
     ArrayList<Student> students;
     String job;
     int which;
-    String cv;
+    ArrayList <String> cv;
     boolean is_job;
     public DatabaseReference reference;
     public void set_color(final int pos, final CardView ref){
@@ -100,7 +100,7 @@ public class admin_enrollment_adapter extends RecyclerView.Adapter<admin_enrollm
         }
 
     }
-    public admin_enrollment_adapter(Activity c , ArrayList<Student> p,String job_id,int pos,String link,boolean job_or_not)
+    public admin_enrollment_adapter(Activity c , ArrayList<Student> p,String job_id,int pos,ArrayList <String> link,boolean job_or_not)
     {
         context = c;
         students = p;
@@ -123,7 +123,7 @@ public class admin_enrollment_adapter extends RecyclerView.Adapter<admin_enrollm
         holder.job_location.setText(students.get(position).getLocation());*/
         holder.student_name.setText(students.get(position).getFullName());
         holder.student_rno.setText(students.get(position).getRollNo());
-        holder.CV.setText(cv);
+        holder.CV.setText(cv.get(position));
         Log.w("adapter admin",Integer.toString(position)+" "+students.get(position).getWebmailID());
        // reference = FirebaseDatabase.getInstance().getReference().child("Jobs");
 //        Log.w("reference adpater",reference.getRef().toString());
