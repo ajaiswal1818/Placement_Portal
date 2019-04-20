@@ -88,6 +88,7 @@ public class Login_Page_Admin extends AppCompatActivity {
                         Intent I;
                         I = new Intent(getApplicationContext(), Student_Requests.class);
                         startActivity(I);
+                        Login_Page_Admin.this.finish();
 
                     }
                 });
