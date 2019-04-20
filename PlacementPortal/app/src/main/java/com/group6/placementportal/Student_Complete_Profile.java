@@ -121,26 +121,48 @@ public class Student_Complete_Profile extends AppCompatActivity {
 
         databaseReference = FirebaseDatabase.getInstance().getReference();
 
-        boolean status = checkUserProfileStatus();
+        databaseReference.child("Student").child(user.getWebmailID()).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot.hasChild("ProfilePending")){
+                    String profileStatus = dataSnapshot.child("ProfilePending").getValue(String.class);
+                    if(profileStatus.equals("Pending")){
+                        AlertDialog.Builder mBuilder = new AlertDialog.Builder(Student_Complete_Profile.this);
+                        mBuilder.setTitle("Your previous details are still pending to be approved");
+                        mBuilder.setCancelable(false);
+                        mBuilder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
 
-        if (status){
-            AlertDialog.Builder mBuilder = new AlertDialog.Builder(Student_Complete_Profile.this);
-            mBuilder.setTitle("Your previous details are still pending to be approved");
-            mBuilder.setCancelable(false);
-            mBuilder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-
+                            }
+                        });
+                        AlertDialog mDialog = mBuilder.create();
+                        mDialog.show();
+                        save.setVisibility(View.INVISIBLE);
+                        setTextBoxes();
+                    }
+                    else{
+                        setTextBoxes();
+                        if(dataSnapshot.hasChild("AcademaicDetails")){
+                            academicDetails = dataSnapshot.child("AcademicDetails").getValue(AcademicDetails.class);
+                        }
+                        if(dataSnapshot.hasChild("PersonalDetails")){
+                            personalDetails = dataSnapshot.child("PersonalDetails").getValue(PersonalDetails.class);
+                        }
+                    }
                 }
-            });
-            AlertDialog mDialog = mBuilder.create();
-            mDialog.show();
-            save.setVisibility(View.INVISIBLE);
-            setTextBoxes();
-        }
-        else{
-            setTextBoxes();
-        }
+                else{
+                    setTextBoxes();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+
+            }
+        });
+
 
         save.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -684,40 +706,6 @@ public class Student_Complete_Profile extends AppCompatActivity {
             phone.setText(personalDetails.getPhone());
             email.setText(personalDetails.getEmail());
         }
-    }
-
-    public boolean checkUserProfileStatus(){
-        final boolean[] status = {true};
-        databaseReference.child("Student").child(user.getWebmailID()).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if(dataSnapshot.hasChild("ProfilePending")){
-                    String profileStatus = dataSnapshot.child("ProfilePending").getValue(String.class);
-                    if(profileStatus.equals("Pending")){
-                        status[0] = true;
-                    }
-                    else{
-                        status[0]=false;
-                        if(dataSnapshot.hasChild("AcademaicDetails")){
-                            academicDetails = dataSnapshot.child("AcademicDetails").getValue(AcademicDetails.class);
-                        }
-                        if(dataSnapshot.hasChild("PersonalDetails")){
-                            personalDetails = dataSnapshot.child("PersonalDetails").getValue(PersonalDetails.class);
-                        }
-                    }
-                }
-                else{
-                    status[0]=false;
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                status[0] = true;
-            }
-        });
-
-        return status[0];
     }
 
 }

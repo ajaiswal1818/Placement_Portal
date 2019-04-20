@@ -40,7 +40,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GivePreference_Interns extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, RecycleNameTouchHelper.AnimationListener {
 
     private DatabaseReference reference;
     private RecyclerView recyclerView;
@@ -76,7 +76,7 @@ public class GivePreference_Interns extends AppCompatActivity
         }
 
         reference = FirebaseDatabase.getInstance().getReference();
-        setPref = findViewById(R.id.btnapplyAs);
+        setPref = findViewById(R.id.btnapplyAs1);
         user = (Student) getIntent().getSerializableExtra("user");
 
         sampleApp = null;
@@ -89,7 +89,7 @@ public class GivePreference_Interns extends AppCompatActivity
         reference.child("Student").child(user.getWebmailID()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if(dataSnapshot.hasChild("has_given_preferences")){
+                if(dataSnapshot.hasChild("has_given_preferences_intern")){
                     AlertDialog.Builder mBuilder = new AlertDialog.Builder(GivePreference_Interns.this);
                     mBuilder.setTitle("You Already Set your preferences");
                     mBuilder.setCancelable(false);
@@ -200,7 +200,7 @@ public class GivePreference_Interns extends AppCompatActivity
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                String applied = dataSnapshot.child("preferences").getValue(String.class);
+                String applied = dataSnapshot.child("selected_for_intern_ids").getValue(String.class);
                 if(applied!=null && !applied.equals("")) {
                     final String[] list_applied = applied.split("\\,");
 
@@ -233,8 +233,8 @@ public class GivePreference_Interns extends AppCompatActivity
     }
 
     public void CAllDatabase(final String list_companies){
-        reference.child("Student").child(user.getWebmailID()).child("preferences").setValue(list_companies);
-        reference.child("Student").child(user.getWebmailID()).child("has_given_preferences").setValue("Completed");
+        reference.child("Student").child(user.getWebmailID()).child("selected_for_intern_ids").setValue(list_companies);
+        reference.child("Student").child(user.getWebmailID()).child("has_given_preferences_intern").setValue("Completed");
     }
 
 
@@ -382,5 +382,16 @@ public class GivePreference_Interns extends AppCompatActivity
     }
     private void exit(){
         GivePreference_Interns.this.finish();
+    }
+
+    @Override
+    public void onMove(int fromPos, int toPos) {
+        list.add(toPos, list.remove(fromPos));
+        adapter.notifyItemMoved(fromPos,toPos);
+    }
+
+    @Override
+    public void onSwiped(int direction, int pos) {
+
     }
 }

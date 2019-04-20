@@ -78,8 +78,8 @@ public class View_Interns extends AppCompatActivity
         }
 
 
-        reference = FirebaseDatabase.getInstance().getReference().child("Interns");
-        reference.addValueEventListener(new ValueEventListener() {
+        reference = FirebaseDatabase.getInstance().getReference();
+        reference.child("Interns").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 list = new ArrayList<Interns>();

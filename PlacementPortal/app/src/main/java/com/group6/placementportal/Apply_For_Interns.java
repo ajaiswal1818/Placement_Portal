@@ -3,6 +3,7 @@ package com.group6.placementportal;
 import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
@@ -12,9 +13,11 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -48,7 +51,7 @@ public class Apply_For_Interns extends AppCompatActivity {
 
     //TextViews
     private TextView intern_profile,intern_requirements,salary,brochure,cutoff_cpi,intern_location,company_name,company_contact,company_email,company_headquarters;
-
+    private Button btn_apply;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,6 +62,7 @@ public class Apply_For_Interns extends AppCompatActivity {
             return;
         }
 
+        btn_apply=findViewById(R.id.buttonUploadFIle);
         interns = (Interns) getIntent().getSerializableExtra("intern_profile");
         user = (Student) getIntent().getSerializableExtra("user");
 
@@ -86,6 +90,48 @@ public class Apply_For_Interns extends AppCompatActivity {
         //getting firebase objects
         mStorageReference = FirebaseStorage.getInstance().getReference();
         mDatabaseReference = FirebaseDatabase.getInstance().getReference();
+
+        mDatabaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                if(!dataSnapshot.child("Student").child(user.getWebmailID()).hasChild("AcademicDetails")){
+                    btn_apply.setEnabled(false);
+                    AlertDialog.Builder mBuilder = new AlertDialog.Builder(Apply_For_Interns.this);
+                    mBuilder.setTitle("Please Complete Your Profile");
+                    mBuilder.setCancelable(false);
+                    mBuilder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                        }
+                    });
+                    AlertDialog mDialog = mBuilder.create();
+                    mDialog.show();
+                }
+                else {
+                    if(dataSnapshot.child("Interns").child(interns.getIntern_id()).child("Applied Students").hasChild(user.getWebmailID()) || dataSnapshot.child("Student").child(user.getWebmailID()).hasChild("has_given_preferences_intern")){
+                        AlertDialog.Builder mBuilder = new AlertDialog.Builder(Apply_For_Interns.this);
+                        mBuilder.setTitle("You have already applied for this job");
+                        mBuilder.setCancelable(false);
+                        mBuilder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                            }
+                        });
+                        AlertDialog mDialog = mBuilder.create();
+                        mDialog.show();
+                        btn_apply.setEnabled(false);
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
 
         Log.d("TAG",interns.getCompany_id()+" ");
         mDatabaseReference.child("Company").child(interns.getCompany_id()).addListenerForSingleValueEvent(new ValueEventListener() {
