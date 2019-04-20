@@ -86,8 +86,8 @@ public class Admin_DashBoard extends AppCompatActivity
             startActivity(i);
 
         } else if(id==R.id.nav_signout){
-            Intent intent = new Intent(getApplicationContext(), Admin_DashBoard.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            Intent intent = new Intent(getApplicationContext(), MainLogin.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
             Intent i = new Intent(getApplicationContext(), Login_Page_Admin.class);
             startActivity(i);

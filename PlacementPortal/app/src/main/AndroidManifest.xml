@@ -268,7 +268,9 @@
         <activity
             android:name=".help"
             android:screenOrientation="portrait" />
-
+        <activity
+            android:name=".about_iitg"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Procedure"
             android:screenOrientation="portrait" />
