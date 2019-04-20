@@ -64,6 +64,8 @@ public class Student_Profile_Approval extends AppCompatActivity {
             return;
         }
 
+        user = (Student) getIntent().getSerializableExtra("user");
+
 
         mDatabaseReference = FirebaseDatabase.getInstance().getReference();
         mDatabaseReference2 = FirebaseDatabase.getInstance().getReference();
