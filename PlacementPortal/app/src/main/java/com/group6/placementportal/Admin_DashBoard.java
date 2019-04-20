@@ -74,7 +74,7 @@ public class Admin_DashBoard extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_jrf_application_requests) {
-            Intent i = new Intent(getApplicationContext(), JRF_Application_Requests.class);
+            Intent i = new Intent(getApplicationContext(), RA_Application_Requests.class);
             startActivity(i);
 
         } else if (id == R.id.nav_approve_notice) {

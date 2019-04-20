@@ -135,54 +135,74 @@ public class Student_Dashboard extends AppCompatActivity
             Intent i = new Intent(getApplicationContext(), Student_Dashboard.class);
             i.putExtra("user",user);
             startActivity(i);
+            exit();
 
         } else if (id == R.id.nav_notifications) {
             Intent i = new Intent(getApplicationContext(), Student_Notifications.class);
             i.putExtra("user",user);
             startActivity(i);
+            exit();
 
-        } else if (id == R.id.nav_prefr) {
+        } else if (id == R.id.nav_prefr_job) {
             Intent i = new Intent(getApplicationContext(), GivePreference.class);
             i.putExtra("user",user);
             startActivity(i);
+            exit();
+
+        } else if (id == R.id.nav_prefr_internships) {
+            Intent i = new Intent(getApplicationContext(), GivePreference.class);
+            i.putExtra("user",user);
+            startActivity(i);
+            exit();
 
         } else if (id == R.id.nav_jobs) {
             Intent i = new Intent(getApplicationContext(), View_Jobs.class);
             i.putExtra("user",user);
             startActivity(i);
+            exit();
 
         } else if (id == R.id.nav_interns) {
             Intent i = new Intent(getApplicationContext(), View_Interns.class);
             i.putExtra("user",user);
             startActivity(i);
+            exit();
 
         } else if (id == R.id.nav_my_profile) {
-            Intent i = new Intent(getApplicationContext(), Student_Complete_Profile.class);
+            Intent i = new Intent(getApplicationContext(), Student_View_Profile.class);
             i.putExtra("user",user);
             startActivity(i);
+            exit();
 
         } else if (id == R.id.nav_edit_profile) {
             Intent i = new Intent(getApplicationContext(), Student_Complete_Profile.class);
             i.putExtra("user",user);
             startActivity(i);
+            exit();
 
         } else if (id == R.id.nav_change_pass) {
             Intent i = new Intent(getApplicationContext(), Student_ChangePassword.class);
             i.putExtra("user",user);
             startActivity(i);
+            exit();
 
         } else if (id == R.id.nav_applications) {
             Intent i = new Intent(getApplicationContext(), Student_Application_Forms.class);
             i.putExtra("user",user);
             startActivity(i);
+            exit();
+
         } else if (id == R.id.nav_help) {
-            Intent i = new Intent(getApplicationContext(), Student_Application_Forms.class);
+            Intent i = new Intent(getApplicationContext(), FAQ.class);
             i.putExtra("user",user);
             startActivity(i);
+            exit();
+
         } else if (id == R.id.nav_inst_profile) {
             Intent i = new Intent(getApplicationContext(), Help_Students.class);
             i.putExtra("user",user);
             startActivity(i);
+            exit();
+
         } else if(id == R.id.nav_signout){
             onSignOutClicked();
         }
@@ -234,5 +254,9 @@ public class Student_Dashboard extends AppCompatActivity
         Intent intent = new Intent(Student_Dashboard.this,LoginPage.class);
         intent.putExtra("flag",flag);
         startActivity(intent);
+        exit();
+    }
+    private void exit(){
+        Student_Dashboard.this.finish();
     }
 }

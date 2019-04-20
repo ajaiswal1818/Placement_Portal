@@ -40,7 +40,7 @@ import java.util.List;
 public class RA_Approval_Profile extends AppCompatActivity {
 
     private ExpandableListView listView, listView2, listView3;
-    private ExpandableListAdapter listAdapter;
+    private ExpandableList_ViewProfile listAdapter;
     private List<String> listDataHeader;
     private Data data;
     private AcademicDetails acads;
@@ -362,7 +362,7 @@ public class RA_Approval_Profile extends AppCompatActivity {
 
 
                 listHashMap.put(listDataHeader.get(0), PersonalDetails);
-                listAdapter = new com.group6.placementportal.ExpandableListAdapter(getApplicationContext(), listDataHeader, listHashMap);
+                listAdapter = new com.group6.placementportal.ExpandableList_ViewProfile(getApplicationContext(), listDataHeader, listHashMap);
                 listView2.setAdapter(listAdapter);
             }
 
@@ -453,7 +453,7 @@ public class RA_Approval_Profile extends AppCompatActivity {
                 listHashMap.put(listDataHeader.get(0), Secondary);
                 listHashMap.put(listDataHeader.get(1), HigherSecondary);
                 listHashMap.put(listDataHeader.get(2), Graduation);
-                listAdapter = new com.group6.placementportal.ExpandableListAdapter(getApplicationContext(), listDataHeader, listHashMap);
+                listAdapter = new com.group6.placementportal.ExpandableList_ViewProfile(getApplicationContext(), listDataHeader, listHashMap);
                 listView.setAdapter(listAdapter);
             }
 
@@ -477,20 +477,20 @@ public class RA_Approval_Profile extends AppCompatActivity {
                 List<Data> RegRDetails = new ArrayList<>();
                 registrationDetails = dataSnapshot.getValue(RA_applications.class);
 
-                data = new Data("Application No.", registrationDetails.getName_of_Org());
+                data = new Data("Name of Organisation", registrationDetails.getName_of_Org());
                 RegRDetails.add(data);
-                data = new Data("Programming Languages", registrationDetails.getDesignation());
+                data = new Data("Designation", registrationDetails.getDesignation());
                 RegRDetails.add(data);
-                data = new Data("Year and Type of Experiences", registrationDetails.getFrom_Duration());
+                data = new Data("From", registrationDetails.getFrom_Duration());
                 RegRDetails.add(data);
-                data = new Data("Applied For Project", registrationDetails.getTo_Duration());
+                data = new Data("To", registrationDetails.getTo_Duration());
                 RegRDetails.add(data);
-                data = new Data("Applied For Post", registrationDetails.getType_of_Job());
+                data = new Data("Type of Job", registrationDetails.getType_of_Job());
                 RegRDetails.add(data);
 
                 listHashMap.put(listDataHeader.get(0), RegRDetails);
 
-                listAdapter = new com.group6.placementportal.ExpandableListAdapter(getApplicationContext(), listDataHeader, listHashMap);
+                listAdapter = new com.group6.placementportal.ExpandableList_ViewProfile(getApplicationContext(), listDataHeader, listHashMap);
                 listView3.setAdapter(listAdapter);
             }
 

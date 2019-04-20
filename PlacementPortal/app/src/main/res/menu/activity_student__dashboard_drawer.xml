@@ -6,40 +6,43 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_dash"
-            android:title="Dashboard" />
-        <item
-            android:id="@+id/nav_notifications"
-            android:title="Notifications" />
-        <item
-            android:id="@+id/nav_prefr"
-            android:title="Give Preferences" />
+            android:title="NOTICES" />
         <item
             android:id="@+id/nav_jobs"
-            android:title="Jobs" />
+            android:title="JOBS" />
         <item
             android:id="@+id/nav_interns"
-            android:title="Interns" />
+            android:title="INTERNSHIPS" />
         <item
-            android:id="@+id/nav_my_profile"
-            android:title="My Profile" />
-        <item
-            android:id="@+id/nav_edit_profile"
-            android:title="Edit Profile" />
-        <item
-            android:id="@+id/nav_change_pass"
-            android:title="Change Password" />
+            android:id="@+id/nav_notifications"
+            android:title="NOTIFICATION PORTAL" />
         <item
             android:id="@+id/nav_applications"
-            android:title="Application Forms" />
+            android:title="APPLICATION PORTAL" />
+        <item
+            android:id="@+id/nav_prefr_job"
+            android:title="SET JOB PREFERENCES" />
+        <item
+            android:id="@+id/nav_prefr_internships"
+            android:title="SET INTERN PREFERENCES" />
+        <item
+            android:id="@+id/nav_my_profile"
+            android:title="MY PROFILE" />
+        <item
+            android:id="@+id/nav_edit_profile"
+            android:title="EDIT PROFILE" />
+        <item
+            android:id="@+id/nav_change_pass"
+            android:title="CHANGE PASSWORD" />
         <item
             android:id="@+id/nav_inst_profile"
-            android:title="About Us" />
+            android:title="ABOUT US" />
         <item
             android:id="@+id/nav_help"
-            android:title="Help" />
+            android:title="HELP" />
         <item
             android:id="@+id/nav_signout"
-            android:title="Sign Out" />
+            android:title="SIGN OUT" />
 
     </group>
 
