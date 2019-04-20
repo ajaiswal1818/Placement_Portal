@@ -88,4 +88,5 @@
     <string name="title_activity_job_or_intern">job_or_intern</string>
     <string name="title_activity_admin_job_or_intern">admin_job_or_intern</string>
     <string name="title_activity_student__view__profile">Student_View_Profile</string>
+    <string name="title_activity_give_preference__interns">GivePreference_Interns</string>
 </resources>
