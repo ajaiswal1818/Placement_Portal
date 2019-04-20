@@ -157,6 +157,7 @@ public class GivePreference extends AppCompatActivity
                                         list_of_applied_companies += job_id;
                                     }
                                 }
+                                CAllDatabase(list_of_applied_companies);
                             }else{
                                 AlertDialog.Builder mBuilder1 = new AlertDialog.Builder(GivePreference.this);
                                 mBuilder1.setTitle("You haven't applied for any jobs yet");
@@ -171,7 +172,7 @@ public class GivePreference extends AppCompatActivity
                                 mDialog.show();
                             }
                             setPref.setVisibility(View.INVISIBLE);
-                            CAllDatabase(list_of_applied_companies);
+
                         }
                     });
                     mBuilder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
