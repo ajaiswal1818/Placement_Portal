@@ -156,7 +156,7 @@ public class company_dashboard extends AppCompatActivity {
                     startActivity(faqs);
                 }
             });
-            faq.setOnClickListener(new View.OnClickListener() {
+            signout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(getApplicationContext(), Admin_DashBoard.class);
