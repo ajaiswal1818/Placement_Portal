@@ -179,6 +179,7 @@ public class Apply_For_Interns extends AppCompatActivity {
             public void onClick(View v) {
                 if(pdfUri!=null) {
                     uploadFile(pdfUri);
+                    findViewById(R.id.buttonUploadFIle).setEnabled(false);
                 }
                 else{
                     Toast.makeText(Apply_For_Interns.this,"Select a File",Toast.LENGTH_SHORT).show();

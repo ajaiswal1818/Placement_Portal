@@ -162,7 +162,9 @@ public class GivePreference_Interns extends AppCompatActivity
                                     list_of_applied_companies += job_id;
                                 }
                             }
-                        }else{
+                            CAllDatabase(list_of_applied_companies);
+                        }
+                        else{
                             AlertDialog.Builder mBuilder1 = new AlertDialog.Builder(GivePreference_Interns.this);
                             mBuilder1.setTitle("You haven't applied for any Interns yet");
                             mBuilder1.setCancelable(false);
@@ -176,7 +178,7 @@ public class GivePreference_Interns extends AppCompatActivity
                             mDialog.show();
                         }
                         setPref.setVisibility(View.INVISIBLE);
-                        CAllDatabase(list_of_applied_companies);
+
                     }
                 });
                 mBuilder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {

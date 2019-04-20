@@ -171,6 +171,7 @@ public class Apply_For_Jobs extends AppCompatActivity {
         findViewById(R.id.buttonSelectFile).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 getPDF();
             }
         });
@@ -179,6 +180,7 @@ public class Apply_For_Jobs extends AppCompatActivity {
             public void onClick(View v) {
                 if(pdfUri!=null) {
                     uploadFile(pdfUri);
+                    findViewById(R.id.buttonUploadFIle).setEnabled(false);
                 }
                 else{
                     Toast.makeText(Apply_For_Jobs.this,"Select a File",Toast.LENGTH_SHORT).show();
