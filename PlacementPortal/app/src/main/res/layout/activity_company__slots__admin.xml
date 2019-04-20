@@ -8,6 +8,7 @@
     tools:context=".Company_Slots_Admin">
 
     <TextView
+        android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="@drawable/input"

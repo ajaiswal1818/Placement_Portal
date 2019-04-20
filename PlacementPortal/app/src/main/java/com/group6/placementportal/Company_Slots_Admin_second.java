@@ -1,11 +1,8 @@
 package com.group6.placementportal;
 
-import android.content.Context;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
-import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -43,10 +40,6 @@ public class Company_Slots_Admin_second extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_company__slots__admin_second);
 
-        if(isNetworkAvailable()==false){
-            Toast.makeText(Company_Slots_Admin_second.this,"NO INTERNET CONNECTION", Toast.LENGTH_LONG).show();
-            return;
-        }
         s1=findViewById(R.id.spinner2);
         t1=findViewById(R.id.Company_id);
         t2=findViewById(R.id.Company_name);
@@ -86,12 +79,12 @@ public class Company_Slots_Admin_second extends AppCompatActivity {
                 String time= main_list.get(position).getSlot();
                 String type= main_list.get(position).getType();
 
-                t1.setText("          Company ID        :"+company_id);
-                t2.setText("          Company Name :"+company_name);
-                t4.setText("          Date Of Event    :"+date);
-                t3.setText("          Allocated Place :"+place);
-                t5.setText("          Time Slot           :"+time);
-                t6.setText("          Type Of Event   :"+type);
+                t1.setText("Company ID        :"+company_id);
+                t2.setText("Company Name :"+company_name);
+                t4.setText("Date Of Event    :"+date);
+                t3.setText("Allocated Place :"+place);
+                t5.setText("Time Slot           :"+time);
+                t6.setText("Type Of Event   :"+type);
 
             }
 
@@ -102,11 +95,5 @@ public class Company_Slots_Admin_second extends AppCompatActivity {
         });
 
 
-    }
-    private boolean isNetworkAvailable() {
-        ConnectivityManager connectivityManager
-                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
-        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 }

@@ -38,8 +38,8 @@ public class Admin_ApproveNotice extends AppCompatActivity
     private RecyclerView recyclerView;
     private ArrayList<Notices> list;
     private MyAdapter_Notices_FromCompany adapter;
-    private long children;
     private int flag=0;
+    private String key;
 
     private static final String TAG = Admin_ApproveNotice.class.getSimpleName();
 
@@ -75,9 +75,11 @@ public class Admin_ApproveNotice extends AppCompatActivity
                 list = new ArrayList<Notices>();
                 for(DataSnapshot dataSnapshot1: dataSnapshot.getChildren())
                 {
-                    if(dataSnapshot1.getKey().equals("dummy")) continue;
-                    Notices p = dataSnapshot1.getValue(Notices.class);
-                    list.add(p);
+                    if(dataSnapshot1.child("hasApproved").getValue().equals("null")){
+                        Notices p = dataSnapshot1.getValue(Notices.class);
+                        list.add(p);
+                    }
+
                 }
                 Collections.reverse(list);
                 adapter = new MyAdapter_Notices_FromCompany(Admin_ApproveNotice.this,list);
@@ -89,17 +91,26 @@ public class Admin_ApproveNotice extends AppCompatActivity
 
                         final Notices check = list.get(position);
 
-                        DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
-                        Query a = ref.child("Notices");
+                        final DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
+//                        Query a = ref.child("Notices");
 
 
-                        a.addListenerForSingleValueEvent(new ValueEventListener() {
+
+
+                        ref.child("Notices").addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
                                 for (DataSnapshot snapshot: dataSnapshot.getChildren()) {
-                                    if(snapshot.child("Topic").getValue() == check)snapshot.getRef().removeValue();
+                                    if(snapshot.child("topic").getValue() == check.getTopic()){
+//                                        key = snapshot.getKey();
+
+                                        ref.child("Notices").child(snapshot.getKey()).child("hasApproved").setValue("False");
+
+                                    }
                                 }
                             }
+
 
                             @Override
                             public void onCancelled(@NonNull DatabaseError databaseError) {
@@ -107,8 +118,6 @@ public class Admin_ApproveNotice extends AppCompatActivity
                             }
                         });
 
-
-                        list.remove(position);
 
                     }
 
@@ -119,17 +128,24 @@ public class Admin_ApproveNotice extends AppCompatActivity
 
 
 
-                        DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
-                        Query a = ref.child("Notices");
+                        final DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
+//                        Query a = ref.child("Notices");
 
 
-                        a.addListenerForSingleValueEvent(new ValueEventListener() {
+
+
+                        ref.child("Notices").addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                children=dataSnapshot.getChildrenCount();
-                                children+=1;
+
                                 for (DataSnapshot snapshot: dataSnapshot.getChildren()) {
-                                    if(snapshot.child("Topic").getValue() == check)snapshot.getRef().removeValue();
+                                    if(snapshot.child("topic").getValue() == check.getTopic()){
+//                                        key = snapshot.getKey();
+
+                                        ref.child("Notices").child(snapshot.getKey()).child("hasApproved").setValue("True");
+
+                                        refnoticetocompany.child(snapshot.getKey()).setValue(check);
+                                    }
                                 }
                             }
 
@@ -139,15 +155,7 @@ public class Admin_ApproveNotice extends AppCompatActivity
                                 Log.e(TAG, "onCancelled", databaseError.toException());
                             }
                         });
-                        String uploadId=Long.toString(children);
 
-                        refnoticetocompany.child(uploadId).setValue(check);
-
-
-
-
-
-                        list.remove(position);
                     }
                 });
 

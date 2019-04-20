@@ -23,8 +23,11 @@ import com.firebase.client.Firebase;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.FirebaseApp;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
@@ -136,18 +139,37 @@ public class NoticeFromCompany extends AppCompatActivity {
                             filereference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                                 @Override
                                 public void onSuccess(Uri uri) {
-                                    downURL = uri.toString();
+
+
+                                    final Notices new_notice = new Notices();
+                                    new_notice.setTopic(t1.getText().toString());
+                                    new_notice.setImageURL(uri.toString());
+                                    new_notice.setContent(t2.getText().toString());
+
+                                    database = FirebaseDatabase.getInstance().getReference();
+
+                                    database.child("Notices").addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                            long childCount = dataSnapshot.getChildrenCount();
+                                            childCount+=1;
+                                            String uploadId = childCount+"";
+
+                                            database.child("Notices").child(uploadId).setValue(new_notice);
+                                            database.child("Notices").child(uploadId).child("hasApproved").setValue("null");
+                                        }
+
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                        }
+                                    });
                                 }
                             });
-                            final Notices new_notice = new Notices();
-                            new_notice.setTopic(t1.getText().toString());
-                            new_notice.setImageURL(downURL);
-                            new_notice.setContent(t2.getText().toString());
 
-                            database = FirebaseDatabase.getInstance().getReference("Notices");
 
-                            String uploadId = database.push().getKey();
-                            database.child(uploadId).setValue(new_notice);
+
+
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {

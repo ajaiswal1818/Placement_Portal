@@ -51,7 +51,7 @@
                         android:layout_marginBottom="5dp"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
-                        android:text="1. What is Campus recruitment?"
+                        android:text="1. How well is Guwahati connected with the rest of the country?"
                         android:textSize="20dp"
                         android:textStyle="bold"
                         />
@@ -62,12 +62,7 @@
                         android:layout_marginBottom="5dp"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
-                        android:text="Campus recruitment refers to the process whereby employers
-undertake an organised program of attracting and hiring students who are
-about to graduate from colleges, and universities. (On-campus / Offcampus / Pool-campus)
-The objective of campus placement is to identify the talented and
-qualified students before they complete their education.
-"
+                        android:text="Guwahati, which is the gateway for North East India, is well connected by air, rail and road with the rest of the country. There are direct air services from/to Mumbai, New Delhi and Kolkata with connectivity to all major cities in the country and direct train services from/to all the metropolises and other major cities."
                         android:textSize="20dp"
                         />
                 </LinearLayout>
@@ -93,7 +88,7 @@ qualified students before they complete their education.
                         android:layout_marginBottom="5dp"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
-                        android:text="2. When does the campus recruitment season begin?"
+                        android:text="2. How do we reach the institute?"
                         android:textSize="20dp"
                         android:textStyle="bold"
                         />
@@ -104,7 +99,7 @@ qualified students before they complete their education.
                         android:layout_marginBottom="5dp"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
-                        android:text="Normally, the campus placement season begins at the prefinal/final semester. It commences in the month of July and goes on tillthe end of the academic year."
+                        android:text="The institute is a 45 minute drive from the airport and prepaid taxis can be availed of directly at the airport. Depending on the available transport resources the placement cell has at hand and provided the visiting company intimates the Centre for Career development about its schedule for arrival and stay on the campus, transport could be provided to the delegates from the company. The institute also has a bus service with buses plying from the institute to the city centre and back at regular intervals."
                         android:textSize="20dp"
                         />
                 </LinearLayout>
@@ -130,7 +125,7 @@ qualified students before they complete their education.
                         android:layout_marginBottom="5dp"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
-                        android:text="3. How can I register myself for a particular company’splacement process?"
+                        android:text="3. Where will we be accommodated?"
                         android:textSize="20dp"
                         android:textStyle="bold"
                         />
@@ -141,7 +136,7 @@ qualified students before they complete their education.
                         android:layout_marginBottom="5dp"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
-                        android:text="Once a recruiter’s campus plan is confirmed, all eligible andplacement registered students will receive a mail from the PlacementCell with the detailed Job description(Eligibility/company and jobprofile/Work Location /Salary Package/mandatory requirement) and therespective company willingness registration link. The respectiveinterested student must give his/her confirmation that he/she is willingto participate in the respective campus placements"
+                        android:text="Subject to availability of rooms in the institute guest house, accommodation could be arranged at a nominal rate for delegates from a company if they do intimate their requirements to us well in advance."
                         android:textSize="20dp"
                         />
                 </LinearLayout>
@@ -206,7 +201,7 @@ qualified students before they complete their education.
                         android:layout_marginBottom="5dp"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
-                        android:text="5. What are the stages of the recruitment process?"
+                        android:text="5. We are under the impression that we can recruit students only if their discipline is related our Industry. Is this so?"
                         android:textSize="20dp"
                         android:textStyle="bold"
                         />
@@ -217,15 +212,7 @@ qualified students before they complete their education.
                         android:layout_marginBottom="5dp"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
-                        android:text="The following are the typical stages of recruitment – elimination
-happens at every stage
-a. Pre-placement Talk (PPT)
-b. Aptitude Test / Technical Test (Online/Pen and Paper)
-c. Group Discussion(GD)
-d. Personal Interview (PI)
-e. Technical and HR Interview (TI)
-The above mentioned stages may vary as per each company
-recruitment pattern."
+                        android:text="No, the institute imposes no restrictions in this regard. Companies can opt to recruit students from any department or discipline."
                         android:textSize="20dp"
                         />
                 </LinearLayout>

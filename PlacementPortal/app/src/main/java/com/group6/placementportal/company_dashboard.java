@@ -42,6 +42,8 @@ public class company_dashboard extends AppCompatActivity {
     private android.support.v7.widget.CardView events;
     private android.support.v7.widget.CardView notification;
     private android.support.v7.widget.CardView addnotices;
+    private android.support.v7.widget.CardView signout;
+    private android.support.v7.widget.CardView faq;
 
 
         protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +61,8 @@ public class company_dashboard extends AppCompatActivity {
               database= FirebaseDatabase.getInstance().getReference();
               addnotices = findViewById(R.id.AddNotices);
               notification=findViewById(R.id.notification);
+              faq = findViewById(R.id.Faq);
+              signout = findViewById(R.id.Sign_out);
 
 
             this.c=(company) getIntent().getSerializableExtra("MyClass");
@@ -143,6 +147,22 @@ public class company_dashboard extends AppCompatActivity {
                         Toast.makeText(company_dashboard.this,c.getCompany_id(),Toast.LENGTH_SHORT).show();
                         startActivity(company_enrollements);
 
+                }
+            });
+            faq.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent faqs = new Intent(company_dashboard.this, faq_company.class);
+                    startActivity(faqs);
+                }
+            });
+            faq.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(getApplicationContext(), Admin_DashBoard.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(intent);
+                    company_dashboard.this.finish();
                 }
             });
 
