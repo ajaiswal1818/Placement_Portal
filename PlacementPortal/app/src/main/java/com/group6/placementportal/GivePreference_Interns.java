@@ -2,6 +2,7 @@ package com.group6.placementportal;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -32,9 +33,11 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.group6.placementportal.DatabasePackage.Interns;
 import com.group6.placementportal.DatabasePackage.Student;
+import com.microsoft.identity.client.IAccount;
 import com.microsoft.identity.client.PublicClientApplication;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class GivePreference_Interns extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -46,6 +49,9 @@ public class GivePreference_Interns extends AppCompatActivity
     private Student user;
     private Button setPref;
     private PublicClientApplication sampleApp;
+    private int flag;
+
+    private static final String TAG = GivePreference_Interns.class.getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,14 +60,6 @@ public class GivePreference_Interns extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -251,50 +249,138 @@ public class GivePreference_Interns extends AppCompatActivity
         }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.give_preference__interns, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        if (id == R.id.nav_dash) {
+            Intent i = new Intent(getApplicationContext(), Student_Dashboard.class);
+            i.putExtra("user",user);
+            startActivity(i);
+            exit();
 
-        } else if (id == R.id.nav_slideshow) {
+        } else if (id == R.id.nav_notifications) {
+            Intent i = new Intent(getApplicationContext(), Student_Notifications.class);
+            i.putExtra("user",user);
+            startActivity(i);
+            exit();
 
-        } else if (id == R.id.nav_manage) {
+        } else if (id == R.id.nav_prefr_job) {
+            Intent i = new Intent(getApplicationContext(), GivePreference.class);
+            i.putExtra("user",user);
+            startActivity(i);
+            exit();
 
-        } else if (id == R.id.nav_share) {
+        } else if (id == R.id.nav_prefr_internships) {
+            Intent i = new Intent(getApplicationContext(), GivePreference_Interns.class);
+            i.putExtra("user",user);
+            startActivity(i);
+            exit();
 
-        } else if (id == R.id.nav_send) {
+        } else if (id == R.id.nav_jobs) {
+            Intent i = new Intent(getApplicationContext(), View_Jobs.class);
+            i.putExtra("user",user);
+            startActivity(i);
+            exit();
 
+        } else if (id == R.id.nav_interns) {
+            Intent i = new Intent(getApplicationContext(), View_Interns.class);
+            i.putExtra("user",user);
+            startActivity(i);
+            exit();
+
+        } else if (id == R.id.nav_my_profile) {
+            Intent i = new Intent(getApplicationContext(), Student_View_Profile.class);
+            i.putExtra("user",user);
+            startActivity(i);
+            exit();
+
+        } else if (id == R.id.nav_edit_profile) {
+            Intent i = new Intent(getApplicationContext(), Student_Complete_Profile.class);
+            i.putExtra("user",user);
+            startActivity(i);
+            exit();
+
+        } else if (id == R.id.nav_change_pass) {
+            Intent i = new Intent(getApplicationContext(), Student_ChangePassword.class);
+            i.putExtra("user",user);
+            startActivity(i);
+            exit();
+
+        } else if (id == R.id.nav_applications) {
+            Intent i = new Intent(getApplicationContext(), Student_Application_Forms.class);
+            i.putExtra("user",user);
+            startActivity(i);
+            exit();
+
+        } else if (id == R.id.nav_help) {
+            Intent i = new Intent(getApplicationContext(), FAQ.class);
+            i.putExtra("user",user);
+            startActivity(i);
+            exit();
+
+        } else if (id == R.id.nav_inst_profile) {
+            Intent i = new Intent(getApplicationContext(), Help_Students.class);
+            i.putExtra("user",user);
+            startActivity(i);
+            exit();
+
+        } else if(id == R.id.nav_signout){
+            onSignOutClicked();
         }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    /* Clears an account's tokens from the cache.
+     * Logically similar to "sign out" but only signs out of this app.
+     */
+    private void onSignOutClicked() {
+
+        /* Attempt to get a account and remove their cookies from cache */
+        List<IAccount> accounts = null;
+
+        try {
+            accounts = sampleApp.getAccounts();
+
+            if (accounts == null) {
+                /* We have no accounts */
+                updateSignedOutUI();
+
+            } else if (accounts.size() == 1) {
+                /* We have 1 account */
+                /* Remove from token cache */
+                sampleApp.removeAccount(accounts.get(0));
+                updateSignedOutUI();
+
+            }
+            else {
+                /* We have multiple accounts */
+                for (int i = 0; i < accounts.size(); i++) {
+                    sampleApp.removeAccount(accounts.get(i));
+                }
+                updateSignedOutUI();
+            }
+
+            Toast.makeText(getBaseContext(), "Signed Out!", Toast.LENGTH_SHORT).show();
+
+        } catch (IndexOutOfBoundsException e) {
+            Log.d(TAG, "User at this position does not exist: " + e.toString());
+        }
+    }
+
+    private void updateSignedOutUI() {
+        flag=1;
+        Intent intent = new Intent(GivePreference_Interns.this,LoginPage.class);
+        intent.putExtra("flag",flag);
+        startActivity(intent);
+        exit();
+    }
+    private void exit(){
+        GivePreference_Interns.this.finish();
     }
 }

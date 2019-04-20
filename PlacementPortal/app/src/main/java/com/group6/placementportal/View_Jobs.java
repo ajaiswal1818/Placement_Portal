@@ -166,7 +166,7 @@ public class View_Jobs extends AppCompatActivity
             exit();
 
         } else if (id == R.id.nav_prefr_internships) {
-            Intent i = new Intent(getApplicationContext(), GivePreference.class);
+            Intent i = new Intent(getApplicationContext(), GivePreference_Interns.class);
             i.putExtra("user",user);
             startActivity(i);
             exit();
@@ -193,7 +193,6 @@ public class View_Jobs extends AppCompatActivity
             Intent i = new Intent(getApplicationContext(), Student_Complete_Profile.class);
             i.putExtra("user",user);
             startActivity(i);
-            exit();
 
         } else if (id == R.id.nav_change_pass) {
             Intent i = new Intent(getApplicationContext(), Student_ChangePassword.class);
@@ -205,19 +204,16 @@ public class View_Jobs extends AppCompatActivity
             Intent i = new Intent(getApplicationContext(), Student_Application_Forms.class);
             i.putExtra("user",user);
             startActivity(i);
-            exit();
 
         } else if (id == R.id.nav_help) {
             Intent i = new Intent(getApplicationContext(), FAQ.class);
             i.putExtra("user",user);
             startActivity(i);
-            exit();
 
         } else if (id == R.id.nav_inst_profile) {
             Intent i = new Intent(getApplicationContext(), Help_Students.class);
             i.putExtra("user",user);
             startActivity(i);
-            exit();
 
         } else if(id == R.id.nav_signout){
             onSignOutClicked();
