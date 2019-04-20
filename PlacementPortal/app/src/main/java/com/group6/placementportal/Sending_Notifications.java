@@ -227,7 +227,8 @@ public class Sending_Notifications extends AppCompatActivity {
 
             mDatabaseReference.child(id).setValue(notification);
             Toast.makeText(this,"Saving data Successful",Toast.LENGTH_SHORT).show();
-
+            subject.setText("");
+            description.setText("");
         }else{
             Toast.makeText(this,"Write Subject & Description ",Toast.LENGTH_LONG).show();
         }

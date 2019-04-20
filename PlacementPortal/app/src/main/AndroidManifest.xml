@@ -17,8 +17,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:windowSoftInputMode="adjustPan">
-        <activity android:name=".faq_company"></activity>
-        <activity android:name=".about_iitg"></activity>
+        <activity android:name=".MainActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".faq_company"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".GivePreference_Interns"
             android:label="@string/title_activity_give_preference__interns"
@@ -32,7 +34,8 @@
         <activity
             android:name=".Student_Register"
             android:screenOrientation="portrait" />
-        <activity android:name=".admin_change_password" />
+        <activity android:name=".admin_change_password"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".admin_job_or_intern"
             android:label="@string/title_activity_admin_job_or_intern"
@@ -256,6 +259,9 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".view_pdf"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".help"
             android:screenOrientation="portrait" />
     </application>
 

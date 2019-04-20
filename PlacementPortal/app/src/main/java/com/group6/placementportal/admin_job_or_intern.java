@@ -12,6 +12,16 @@ import android.view.View;
 import com.group6.placementportal.DatabasePackage.company;
 
 public class admin_job_or_intern extends AppCompatActivity {
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent i=new Intent(admin_job_or_intern.this,Admin_DashBoard.class);
+        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(i);
+
+    }
+
     public void admin_pressed_job(View v){
         Intent act_enrollments=new Intent(this,admin_enrollments_screen1.class);
 

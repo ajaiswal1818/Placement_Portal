@@ -332,7 +332,6 @@ public class single_dialog_companyenrollments_0 extends DialogFragment {
                                 send_notification(count,which);
                                 Toast.makeText(f, "Approving the application request. Notification sent to the student", Toast.LENGTH_SHORT).show();
                                 reference = FirebaseDatabase.getInstance().getReference().child("Jobs").child(job_id).child("Applied Students").child(student).child("Approval").setValue("Yes");
-
                             }
                             else{
                                 Toast.makeText(f, "Rejecting the application request", Toast.LENGTH_SHORT).show();

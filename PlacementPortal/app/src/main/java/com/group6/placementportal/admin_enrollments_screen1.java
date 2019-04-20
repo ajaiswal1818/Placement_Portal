@@ -32,7 +32,7 @@ public class admin_enrollments_screen1 extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Intent i=new Intent(admin_enrollments_screen1.this,Admin_DashBoard.class);
+        Intent i=new Intent(admin_enrollments_screen1.this,admin_job_or_intern.class);
 
         startActivity(i);
         admin_enrollments_screen1.this.finish();

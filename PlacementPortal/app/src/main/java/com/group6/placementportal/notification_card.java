@@ -38,4 +38,5 @@ public class notification_card {
     public void setText1(String text1) {
         this.text1 = text1;
     }
+
 }
