@@ -19,6 +19,7 @@ public class job_or_intern extends AppCompatActivity {
         act_enrollments.putExtra("MyClass",c);
         act_enrollments.putExtra("is_job",true);
         startActivity(act_enrollments);
+        job_or_intern.this.finish();
     }
 
     public void pressed_intern(View v){
@@ -35,4 +36,15 @@ public class job_or_intern extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent i=new Intent(job_or_intern.this,company_dashboard.class);
+        company c= (company) getIntent().getSerializableExtra("MyClass");
+
+        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        i.putExtra("MyClass",c);
+        startActivity(i);
+       //job_or_intern.this.finish();
+    }
 }

@@ -92,9 +92,30 @@ public class admin_checkout_the_portal extends AppCompatActivity {
     }
 
 
+    public void if_already_checked(View v){
+        DatabaseReference reference;
+        reference=FirebaseDatabase.getInstance().getReference();
+        reference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot.child("checked_out").exists()){
+                    if(dataSnapshot.child("checked_out").equals("No")){
+                      the_checkout();
+                    }
+                    else{
+                        Toast.makeText(admin_checkout_the_portal.this,"Already sent a notification", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
 
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
 
-    public void the_checkout(View v){
+            }
+        });
+    }
+
+    public void the_checkout(){
         DatabaseReference reference;
         reference=FirebaseDatabase.getInstance().getReference().child("checked_out");
         reference.setValue("Yes");

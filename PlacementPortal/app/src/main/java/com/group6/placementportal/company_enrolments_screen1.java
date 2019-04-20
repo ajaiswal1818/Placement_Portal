@@ -1,6 +1,7 @@
 package com.group6.placementportal;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -31,6 +32,18 @@ public class company_enrolments_screen1 extends AppCompatActivity {
     private company c;
     private enrolments_screen1_adapter_intern adapter_i;
 //    public company user=company_login.getUser();
+
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent i=new Intent(company_enrolments_screen1.this,job_or_intern.class);
+        this.c=(company) getIntent().getSerializableExtra("MyClass");
+        i.putExtra("MyClass",c);
+        startActivity(i);
+        company_enrolments_screen1.this.finish();
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,7 +87,8 @@ public class company_enrolments_screen1 extends AppCompatActivity {
 
 
                     }
-                    adapter = new enrolments_screen1_adpater(company_enrolments_screen1.this,list);
+                    c=(company) getIntent().getSerializableExtra("MyClass");
+                    adapter = new enrolments_screen1_adpater(company_enrolments_screen1.this,list,c);
                     recyclerView.setAdapter(adapter);
                 }
 
@@ -113,7 +127,8 @@ public class company_enrolments_screen1 extends AppCompatActivity {
 
 
                     }
-                    adapter_i = new enrolments_screen1_adapter_intern(company_enrolments_screen1.this,list_i);
+                    c=(company) getIntent().getSerializableExtra("MyClass");
+                    adapter_i = new enrolments_screen1_adapter_intern(company_enrolments_screen1.this,list_i,c);
                     recyclerView.setAdapter(adapter_i);
                 }
 

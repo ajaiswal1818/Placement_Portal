@@ -35,6 +35,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.group6.placementportal.DatabasePackage.Jobs;
 import com.group6.placementportal.DatabasePackage.Student;
+import com.group6.placementportal.DatabasePackage.company;
 
 import java.util.ArrayList;
 
@@ -52,6 +53,7 @@ public class company_enrollments extends AppCompatActivity {
     public int screen;
     public boolean is_job;
     public boolean to_show;
+    public company c;
     public void set_adapter(String job_id,int position){
         if(is_job){
             screen=getIntent().getIntExtra("Screen",0);
@@ -207,6 +209,8 @@ public class company_enrollments extends AppCompatActivity {
 
                 Intent act=new Intent(this,company_enrolments_screen1.class);
                 act.putExtra("is_job",is_job);
+                this.c=(company) getIntent().getSerializableExtra("company");
+                act.putExtra("MyClass",c);
                 startActivity(act);
                 company_enrollments.this.finish();
 
@@ -278,7 +282,7 @@ public class company_enrollments extends AppCompatActivity {
                             {
 
                                 p = dataSnapshot1.getValue(Student.class);
-                                if(s_list.contains(p.getWebmailID())){
+                                if(s_list.contains(p.getWebmailID()) && dataSnapshot1.child("preferences").exists() && dataSnapshot1.child("preferences").equals("Completed")){
                                     Log.w("added a student lev1 in jobs",p.getWebmailID());
                                     check_if_to_be_shown(p,job_id,position);
 

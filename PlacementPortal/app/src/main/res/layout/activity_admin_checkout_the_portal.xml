@@ -29,7 +29,7 @@
 
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
-        android:onClick="the_checkout"
+        android:onClick="if_already_checked"
         android:layout_height="200dp"
         android:id="@+id/check_out_button_pp"
         app:cardCornerRadius="30dp"

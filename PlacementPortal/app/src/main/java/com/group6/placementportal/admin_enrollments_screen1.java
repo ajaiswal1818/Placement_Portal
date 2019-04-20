@@ -1,6 +1,7 @@
 package com.group6.placementportal;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -28,6 +29,14 @@ public class admin_enrollments_screen1 extends AppCompatActivity {
     private  ArrayList<Interns> list_i;
     private admin_enrolments_screen1_adapter adapter;
     private admin_enrolments_screen1_adapter_intern adapter_i;
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent i=new Intent(admin_enrollments_screen1.this,Admin_DashBoard.class);
+
+        startActivity(i);
+        admin_enrollments_screen1.this.finish();
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

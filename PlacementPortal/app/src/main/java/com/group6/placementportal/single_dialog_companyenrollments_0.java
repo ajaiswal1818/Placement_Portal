@@ -410,7 +410,7 @@ public class single_dialog_companyenrollments_0 extends DialogFragment {
                             else if (option_number == 1) {
                                 Toast.makeText(getActivity(), "Rejected", Toast.LENGTH_SHORT).show();
                                 reference = FirebaseDatabase.getInstance().getReference().child("Jobs").child(job_id).child("Applied Students").child(student).child("Status").setValue("3");
-                                reference = FirebaseDatabase.getInstance().getReference().child("Jobs").child(job_id).child("Applied Students").child(student).child("Approval").setValue("No");
+                                reference = FirebaseDatabase.getInstance().getReference().child("Jobs").child(job_id).child("Applied Students").child(student).child("Approval").setValue("Yes");
                                 reference = FirebaseDatabase.getInstance().getReference().child("Jobs").child(job_id).child("Applied Students").child(student).child("is_notified").removeValue();
 
                             }
@@ -428,7 +428,7 @@ public class single_dialog_companyenrollments_0 extends DialogFragment {
                             } else if (option_number == 1) {
                                 Toast.makeText(getActivity(), "Rejected", Toast.LENGTH_SHORT).show();
                                 reference = FirebaseDatabase.getInstance().getReference().child("Jobs").child(job_id).child("Applied Students").child(student).child("Status").setValue("3");
-                                reference = FirebaseDatabase.getInstance().getReference().child("Jobs").child(job_id).child("Applied Students").child(student).child("Approval").setValue("No");
+                                reference = FirebaseDatabase.getInstance().getReference().child("Jobs").child(job_id).child("Applied Students").child(student).child("Approval").setValue("Yes");
                                 reference = FirebaseDatabase.getInstance().getReference().child("Jobs").child(job_id).child("Applied Students").child(student).child("is_notified").removeValue();
 
                             }

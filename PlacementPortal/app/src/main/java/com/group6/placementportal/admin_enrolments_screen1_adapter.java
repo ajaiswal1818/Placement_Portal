@@ -16,6 +16,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.group6.placementportal.DatabasePackage.Jobs;
+import com.group6.placementportal.DatabasePackage.company;
 
 import java.util.ArrayList;
 
@@ -25,11 +26,12 @@ public class admin_enrolments_screen1_adapter extends RecyclerView.Adapter<admin
     ArrayList<Jobs> profiles;
     private static DatabaseReference reference;
     ArrayList <String> cv;
-
+    company com;
     public admin_enrolments_screen1_adapter(Context c , ArrayList<Jobs> p)
     {
         context = c;
         profiles = p;
+
     }
 
     @NonNull
@@ -71,6 +73,7 @@ public class admin_enrolments_screen1_adapter extends RecyclerView.Adapter<admin
                         intent.putExtra("cv",cv);
                         intent.putExtra("is_job",true);
                         intent.putExtra("Screen",1);
+
                         context.startActivity(intent);
                     }
 
