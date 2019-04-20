@@ -204,7 +204,7 @@ public class Student_ChangePassword extends AppCompatActivity
             startActivity(i);
 
         } else if (id == R.id.nav_help) {
-            Intent i = new Intent(getApplicationContext(), FAQ.class);
+            Intent i = new Intent(getApplicationContext(), help.class);
             i.putExtra("user",user);
             startActivity(i);
 
