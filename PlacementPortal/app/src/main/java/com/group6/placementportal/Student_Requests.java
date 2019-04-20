@@ -75,7 +75,6 @@ public class Student_Requests extends AppCompatActivity
                     }
 
                 }
-                Toast.makeText(getApplicationContext(),(list==null)+"",Toast.LENGTH_SHORT).show();
                 adapter = new Student_Requests_Adapter(Student_Requests.this,list);
                 recyclerView.setAdapter(adapter);
             }

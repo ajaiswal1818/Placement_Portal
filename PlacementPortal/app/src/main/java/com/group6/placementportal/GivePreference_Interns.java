@@ -200,7 +200,7 @@ public class GivePreference_Interns extends AppCompatActivity
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                String applied = dataSnapshot.child("selected_for_intern_ids").getValue(String.class);
+                String applied = dataSnapshot.child("preferences_interns").getValue(String.class);
                 if(applied!=null && !applied.equals("")) {
                     final String[] list_applied = applied.split("\\,");
 
@@ -233,7 +233,7 @@ public class GivePreference_Interns extends AppCompatActivity
     }
 
     public void CAllDatabase(final String list_companies){
-        reference.child("Student").child(user.getWebmailID()).child("selected_for_intern_ids").setValue(list_companies);
+        reference.child("Student").child(user.getWebmailID()).child("preferences_interns").setValue(list_companies);
         reference.child("Student").child(user.getWebmailID()).child("has_given_preferences_intern").setValue("Completed");
     }
 
