@@ -4,10 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+<<<<<<< HEAD
+=======
+    android:layout_gravity="center"
+    android:scrollbars="vertical"
+>>>>>>> e163f38a9195dbe1e94cd8f150a6c0cb43dd67f6
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".admin_notices"
     tools:showIn="@layout/activity_admin_notices">
 
+<<<<<<< HEAD
     <EditText
         android:id="@+id/title"
         android:layout_width="wrap_content"
@@ -20,11 +26,30 @@
         android:hint="Title"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
+=======
+
+    <EditText
+        android:id="@+id/title"
+        android:layout_width="220dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/input"
+        android:contentDescription="Notice Title"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="Title"
+        android:inputType="textPersonName"
+        android:textColorHint="@color/colorTextHint"
+        android:textSize="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.519"
+>>>>>>> e163f38a9195dbe1e94cd8f150a6c0cb43dd67f6
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/description"
+<<<<<<< HEAD
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -34,10 +59,26 @@
         android:hint="Description"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
+=======
+        android:layout_width="220dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/input"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="Description"
+        android:inputType="textPersonName"
+        android:textColorHint="@color/colorTextHint"
+        android:textSize="18dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.519"
+>>>>>>> e163f38a9195dbe1e94cd8f150a6c0cb43dd67f6
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/title" />
 
     <Button
+<<<<<<< HEAD
         android:id="@+id/send_button"
         android:layout_width="148dp"
         android:layout_height="wrap_content"
@@ -56,10 +97,43 @@
     <Button
         android:id="@+id/show_company"
         android:layout_width="182dp"
+=======
+        android:id="@+id/upload"
+        android:layout_width="220dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
+        android:width="50dp"
+        android:background="@drawable/roundbtn"
+        android:text="upload file"
+        android:textColor="@color/colorText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/select_file" />
+
+    <Button
+        android:id="@+id/select_file"
+        android:layout_width="134dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="52dp"
+        android:layout_marginTop="16dp"
+        android:width="50dp"
+        android:background="@drawable/roundbtn"
+        android:text="Select file to upload"
+        android:textColor="@color/colorText"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/description" />
+
+    <Button
+        android:id="@+id/show_company"
+        android:layout_width="220dp"
+>>>>>>> e163f38a9195dbe1e94cd8f150a6c0cb43dd67f6
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+<<<<<<< HEAD
         android:layout_marginBottom="8dp"
         android:onClick="open_recipients_tab"
         android:text="Select Recipents"
@@ -68,4 +142,41 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/description" />
 
+=======
+        android:background="@drawable/roundbtn"
+        android:text="Select Recipents"
+        android:textColor="@color/colorWhite"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/upload" />
+
+    <Button
+        android:id="@+id/send_button"
+        android:layout_width="220dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:width="50dp"
+        android:background="@drawable/roundbtn"
+        android:text="Send"
+        android:textColor="@color/colorWhite"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/show_company" />
+
+    <TextView
+        android:id="@+id/status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/select_file"
+        app:layout_constraintTop_toBottomOf="@+id/description" />
+
+
+>>>>>>> e163f38a9195dbe1e94cd8f150a6c0cb43dd67f6
 </android.support.constraint.ConstraintLayout>

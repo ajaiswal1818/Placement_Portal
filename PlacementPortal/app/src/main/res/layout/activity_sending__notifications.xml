@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+<<<<<<< HEAD
     tools:context=".Sending_Notifications">
 
     <EditText
@@ -47,4 +48,78 @@
         android:layout_marginStart="34dp"
         android:layout_marginTop="227dp"
         android:text="Title" />
+=======
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".Sending_Notifications">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+
+        <EditText
+        android:id="@+id/subject"
+        android:layout_width="177dp"
+        android:layout_height="67dp"
+        android:layout_marginTop="90dp"
+        android:ems="10"
+        android:hint="Subject"
+            android:layout_gravity="center"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="295dp" />
+
+    <EditText
+        android:id="@+id/description"
+        android:layout_width="300dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginStart="8dp"
+        android:ems="10"
+        android:hint="Description"
+        android:layout_gravity="center"
+        android:inputType="textMultiLine"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="122dp" />
+
+    <Button
+        android:id="@+id/buttonSelectFile"
+        android:layout_width="216dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_gravity="center"
+        android:layout_marginTop="180dp"
+        android:background="@drawable/roundbtn"
+        android:text="SELECT FILE"
+        android:textColor="@android:color/white"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/editTextFileName"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.887" />
+
+    <Button
+        android:id="@+id/button_send"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="1dp"
+        android:layout_marginTop="50dp"
+        android:layout_gravity="center"
+        android:background="@drawable/roundbtn"
+        android:text="Upload File and Send Notifications"
+        android:textColor="@android:color/white" />
+    </LinearLayout>
+    </ScrollView>
+
+
+>>>>>>> e163f38a9195dbe1e94cd8f150a6c0cb43dd67f6
 </RelativeLayout>

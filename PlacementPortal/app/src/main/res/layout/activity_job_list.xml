@@ -7,14 +7,43 @@
     tools:context=".job_list">
 
     <android.support.v7.widget.RecyclerView
+<<<<<<< HEAD
         android:layout_width="395dp"
         android:layout_height="715dp"
+=======
+        android:id="@+id/add_job_list"
+        android:layout_width="395dp"
+        android:layout_height="531dp"
+>>>>>>> e163f38a9195dbe1e94cd8f150a6c0cb43dd67f6
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+<<<<<<< HEAD
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+=======
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/roundbtn"
+        android:text="+"
+        android:textColor="#ffffff"
+        android:textSize="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.973"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/add_job_list" />
+>>>>>>> e163f38a9195dbe1e94cd8f150a6c0cb43dd67f6
 </android.support.constraint.ConstraintLayout>

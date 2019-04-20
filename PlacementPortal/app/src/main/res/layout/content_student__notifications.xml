@@ -10,8 +10,19 @@
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_notifications"
+<<<<<<< HEAD
         android:layout_width="395dp"
         android:layout_height="659dp"
         tools:layout_editor_absoluteX="8dp"
         tools:layout_editor_absoluteY="8dp" />
+=======
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+>>>>>>> e163f38a9195dbe1e94cd8f150a6c0cb43dd67f6
 </android.support.constraint.ConstraintLayout>

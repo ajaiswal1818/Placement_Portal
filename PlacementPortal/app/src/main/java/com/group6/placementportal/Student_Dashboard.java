@@ -1,6 +1,13 @@
 package com.group6.placementportal;
 
+<<<<<<< HEAD
 import android.content.Intent;
+=======
+import android.content.Context;
+import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+>>>>>>> e163f38a9195dbe1e94cd8f150a6c0cb43dd67f6
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -12,7 +19,10 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+<<<<<<< HEAD
 import android.view.Menu;
+=======
+>>>>>>> e163f38a9195dbe1e94cd8f150a6c0cb43dd67f6
 import android.view.MenuItem;
 import android.widget.Toast;
 
@@ -39,6 +49,10 @@ public class Student_Dashboard extends AppCompatActivity
     private MyAdapter_Notices adapter;
     private PublicClientApplication sampleApp;
     private Student user;
+<<<<<<< HEAD
+=======
+    private int flag;
+>>>>>>> e163f38a9195dbe1e94cd8f150a6c0cb43dd67f6
 
     private static final String TAG = Student_Dashboard.class.getSimpleName();
 
@@ -46,6 +60,16 @@ public class Student_Dashboard extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student__notices);
+<<<<<<< HEAD
+=======
+
+        if(isNetworkAvailable()==false){
+            Toast.makeText(Student_Dashboard.this,"NO INTERNET CONNECTION", Toast.LENGTH_LONG).show();
+            return;
+        }
+
+
+>>>>>>> e163f38a9195dbe1e94cd8f150a6c0cb43dd67f6
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -64,7 +88,11 @@ public class Student_Dashboard extends AppCompatActivity
         recyclerView.setLayoutManager( new LinearLayoutManager(this));
 
         Intent intent = new Intent(this, Student_Foreground_Notifications.class);
+<<<<<<< HEAD
         intent.putExtra("user_credentials","vakul170101076");
+=======
+        intent.putExtra("user",user.getWebmailID());
+>>>>>>> e163f38a9195dbe1e94cd8f150a6c0cb43dd67f6
         startService(intent);
 
         sampleApp = null;
@@ -75,7 +103,11 @@ public class Student_Dashboard extends AppCompatActivity
         }
 
 
+<<<<<<< HEAD
         reference = FirebaseDatabase.getInstance().getReference().child("Notices");
+=======
+        reference = FirebaseDatabase.getInstance().getReference().child("noticestostudents");
+>>>>>>> e163f38a9195dbe1e94cd8f150a6c0cb43dd67f6
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -97,6 +129,16 @@ public class Student_Dashboard extends AppCompatActivity
         });
     }
 
+<<<<<<< HEAD
+=======
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+    }
+
+>>>>>>> e163f38a9195dbe1e94cd8f150a6c0cb43dd67f6
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -107,6 +149,7 @@ public class Student_Dashboard extends AppCompatActivity
         }
     }
 
+<<<<<<< HEAD
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -114,6 +157,8 @@ public class Student_Dashboard extends AppCompatActivity
         return true;
     }
 
+=======
+>>>>>>> e163f38a9195dbe1e94cd8f150a6c0cb43dd67f6
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
@@ -125,11 +170,16 @@ public class Student_Dashboard extends AppCompatActivity
             Intent i = new Intent(getApplicationContext(), Student_Dashboard.class);
             i.putExtra("user",user);
             startActivity(i);
+<<<<<<< HEAD
+=======
+            exit();
+>>>>>>> e163f38a9195dbe1e94cd8f150a6c0cb43dd67f6
 
         } else if (id == R.id.nav_notifications) {
             Intent i = new Intent(getApplicationContext(), Student_Notifications.class);
             i.putExtra("user",user);
             startActivity(i);
+<<<<<<< HEAD
 
         } else if (id == R.id.nav_prefr) {
 
@@ -144,6 +194,42 @@ public class Student_Dashboard extends AppCompatActivity
 
         } else if (id == R.id.nav_edit_profile) {
             Intent i = new Intent(getApplicationContext(), Student_Profile.class);
+=======
+            exit();
+
+        } else if (id == R.id.nav_prefr_job) {
+            Intent i = new Intent(getApplicationContext(), GivePreference.class);
+            i.putExtra("user",user);
+            startActivity(i);
+            exit();
+
+        } else if (id == R.id.nav_prefr_internships) {
+            Intent i = new Intent(getApplicationContext(), GivePreference_Interns.class);
+            i.putExtra("user",user);
+            startActivity(i);
+            exit();
+
+        } else if (id == R.id.nav_jobs) {
+            Intent i = new Intent(getApplicationContext(), View_Jobs.class);
+            i.putExtra("user",user);
+            startActivity(i);
+            exit();
+
+        } else if (id == R.id.nav_interns) {
+            Intent i = new Intent(getApplicationContext(), View_Interns.class);
+            i.putExtra("user",user);
+            startActivity(i);
+            exit();
+
+        } else if (id == R.id.nav_my_profile) {
+            Intent i = new Intent(getApplicationContext(), Student_View_Profile.class);
+            i.putExtra("user",user);
+            startActivity(i);
+            exit();
+
+        } else if (id == R.id.nav_edit_profile) {
+            Intent i = new Intent(getApplicationContext(), Student_Complete_Profile.class);
+>>>>>>> e163f38a9195dbe1e94cd8f150a6c0cb43dd67f6
             i.putExtra("user",user);
             startActivity(i);
 
@@ -151,11 +237,32 @@ public class Student_Dashboard extends AppCompatActivity
             Intent i = new Intent(getApplicationContext(), Student_ChangePassword.class);
             i.putExtra("user",user);
             startActivity(i);
+<<<<<<< HEAD
 
         } else if (id == R.id.nav_help) {
 
         }
         else if(id == R.id.nav_signout){
+=======
+            exit();
+
+        } else if (id == R.id.nav_applications) {
+            Intent i = new Intent(getApplicationContext(), Student_Application_Forms.class);
+            i.putExtra("user",user);
+            startActivity(i);
+
+        } else if (id == R.id.nav_help) {
+            Intent i = new Intent(getApplicationContext(), FAQ.class);
+            i.putExtra("user",user);
+            startActivity(i);
+
+        } else if (id == R.id.nav_inst_profile) {
+            Intent i = new Intent(getApplicationContext(), Help_Students.class);
+            i.putExtra("user",user);
+            startActivity(i);
+
+        } else if(id == R.id.nav_signout){
+>>>>>>> e163f38a9195dbe1e94cd8f150a6c0cb43dd67f6
             onSignOutClicked();
         }
 
@@ -202,7 +309,18 @@ public class Student_Dashboard extends AppCompatActivity
     }
 
     private void updateSignedOutUI() {
+<<<<<<< HEAD
         Intent intent = new Intent(Student_Dashboard.this,LoginPage.class);
         startActivity(intent);
+=======
+        flag=1;
+        Intent intent = new Intent(Student_Dashboard.this,LoginPage.class);
+        intent.putExtra("flag",flag);
+        startActivity(intent);
+        exit();
+    }
+    private void exit(){
+        Student_Dashboard.this.finish();
+>>>>>>> e163f38a9195dbe1e94cd8f150a6c0cb43dd67f6
     }
 }

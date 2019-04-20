@@ -5,13 +5,29 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class job implements Serializable {
+<<<<<<< HEAD
     private int job_id;
+=======
+    private String job_id;
+>>>>>>> e163f38a9195dbe1e94cd8f150a6c0cb43dd67f6
     private String profile;
     private float ctc;
     private String location;
     private String brochure;
     private float cpi;
     private String departments;
+<<<<<<< HEAD
+=======
+    private String job_requirements;
+
+    public String getJob_requirements() {
+        return job_requirements;
+    }
+
+    public void setJob_requirements(String job_requirements) {
+        this.job_requirements = job_requirements;
+    }
+>>>>>>> e163f38a9195dbe1e94cd8f150a6c0cb43dd67f6
 
     public float getCpi() {
         return cpi;
@@ -37,11 +53,19 @@ public class job implements Serializable {
         this.brochure = brochure;
     }
 
+<<<<<<< HEAD
     public int getJob_id() {
         return job_id;
     }
 
     public void setJob_id(int job_id) {
+=======
+    public String getJob_id() {
+        return job_id;
+    }
+
+    public void setJob_id(String job_id) {
+>>>>>>> e163f38a9195dbe1e94cd8f150a6c0cb43dd67f6
         this.job_id = job_id;
     }
 
@@ -77,7 +101,11 @@ public class job implements Serializable {
         this.brochure = brochure;
     }*/
 
+<<<<<<< HEAD
     public job(int job_id, String profile, float ctc, String location,String brochure,float cpi,String departments) {
+=======
+    public job(String job_id, String profile, float ctc, String location,String brochure,float cpi,String departments,String job_requirements) {
+>>>>>>> e163f38a9195dbe1e94cd8f150a6c0cb43dd67f6
         this.job_id = job_id;
         this.profile = profile;
         this.ctc = ctc;
@@ -85,6 +113,10 @@ public class job implements Serializable {
         this.brochure = brochure;
         this.cpi=cpi;
         this.departments=departments;
+<<<<<<< HEAD
+=======
+        this.job_requirements=job_requirements;
+>>>>>>> e163f38a9195dbe1e94cd8f150a6c0cb43dd67f6
     }
 
     public job() {

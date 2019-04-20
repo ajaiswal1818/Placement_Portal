@@ -1,5 +1,6 @@
 package com.group6.placementportal;
 
+<<<<<<< HEAD
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -11,10 +12,17 @@ import com.group6.placementportal.DatabasePackage.job;
 
 import android.Manifest;
 import android.app.ProgressDialog;
+=======
+import android.Manifest;
+import android.app.DownloadManager;
+import android.app.ProgressDialog;
+import android.content.Context;
+>>>>>>> e163f38a9195dbe1e94cd8f150a6c0cb43dd67f6
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
+<<<<<<< HEAD
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
@@ -80,10 +88,57 @@ import java.util.ArrayList;
 public class job_profile extends AppCompatActivity {
 
     private company c;
+=======
+import android.graphics.Paint;
+import android.graphics.drawable.ColorDrawable;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.net.Uri;
+import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.OnProgressListener;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+import com.group6.placementportal.DatabasePackage.Jobs;
+import com.group6.placementportal.DatabasePackage.job;
+
+import java.util.ArrayList;
+
+import static com.group6.placementportal.company_profile.isNumeric;
+
+
+public class job_profile extends AppCompatActivity {
+
+    private String id;
+    private String comp_name;
+>>>>>>> e163f38a9195dbe1e94cd8f150a6c0cb43dd67f6
     private EditText profile;
     private EditText ctc;
     private EditText location;
     private EditText cpi;
+<<<<<<< HEAD
+=======
+    private EditText job_requirements;
+    private Jobs job_det;
+>>>>>>> e163f38a9195dbe1e94cd8f150a6c0cb43dd67f6
 
     private Button add;
     private Button upload;
@@ -94,9 +149,16 @@ public class job_profile extends AppCompatActivity {
     private DatabaseReference add_comp;
     private FirebaseDatabase database;
     private FirebaseStorage storage;
+<<<<<<< HEAD
     private ProgressDialog progressDialog;
     private Uri pdfUri;
     private ArrayList<job> j1;
+=======
+    private StorageReference ref;
+    private ProgressDialog progressDialog;
+    private Uri pdfUri;
+    private job j1;
+>>>>>>> e163f38a9195dbe1e94cd8f150a6c0cb43dd67f6
     private ArrayList<Integer> selected_branches = new ArrayList<>();
     private String[] available_branches;
     private boolean[] checked_branches;
@@ -109,7 +171,11 @@ public class job_profile extends AppCompatActivity {
     private String dep;
     private String prevActivity;
     private int check = 0;
+<<<<<<< HEAD
 
+=======
+    private String job_id;
+>>>>>>> e163f38a9195dbe1e94cd8f150a6c0cb43dd67f6
     public job_profile() {
     }
 
@@ -125,6 +191,7 @@ public class job_profile extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_job_profile2);
 
+<<<<<<< HEAD
         prevActivity = (String) getIntent().getSerializableExtra("PrevActivity");
         c = (company) getIntent().getSerializableExtra("MyClass");
         file = "";
@@ -132,6 +199,18 @@ public class job_profile extends AppCompatActivity {
         j1 = c.getJobs();
         //String str1 = Integer.toString(c.getCompnany_id());
         /*Toast toast=Toast.makeText(getApplicationContext(),c.getSector(),Toast.LENGTH_SHORT);
+=======
+        if(isNetworkAvailable()==false){
+            Toast.makeText(job_profile.this,"NO INTERNET CONNECTION", Toast.LENGTH_LONG).show();
+            return;
+        }
+        prevActivity = (String) getIntent().getSerializableExtra("PrevActivity");
+        id = getIntent().getStringExtra("MyClassID");
+        file = "";
+        dep = "";
+        //String str1 = Integer.toString(id.getCompany_id());
+        /*Toast toast=Toast.makeText(getApplicationContext(),id.getSector(),Toast.LENGTH_SHORT);
+>>>>>>> e163f38a9195dbe1e94cd8f150a6c0cb43dd67f6
         toast.setMargin(50,50);
         toast.show();*/
         cpi = findViewById(R.id.cpi);
@@ -139,13 +218,22 @@ public class job_profile extends AppCompatActivity {
         ctc = findViewById(R.id.ctc);
         location = findViewById(R.id.location);
         branch = findViewById(R.id.branch);
+<<<<<<< HEAD
+=======
+        job_requirements = findViewById(R.id.job_requirements);
+
+>>>>>>> e163f38a9195dbe1e94cd8f150a6c0cb43dd67f6
         branch_button = findViewById(R.id.branch_button);
 
         available_branches = getResources().getStringArray(R.array.Department);
         checked_branches = new boolean[available_branches.length];
 
 
+<<<<<<< HEAD
         add = findViewById(R.id.add);
+=======
+        //add = findViewById(R.id.add);
+>>>>>>> e163f38a9195dbe1e94cd8f150a6c0cb43dd67f6
         upload = findViewById(R.id.upload);
         submit = findViewById(R.id.submit);
         remove = findViewById(R.id.remove);
@@ -157,6 +245,7 @@ public class job_profile extends AppCompatActivity {
         add_comp = FirebaseDatabase.getInstance().getReference("Company");
         //String str= add_comp.child("Company").push().getKey();
 
+<<<<<<< HEAD
         branch_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -219,6 +308,103 @@ public class job_profile extends AppCompatActivity {
                 if (dataSnapshot.exists()) {
                     String key = dataSnapshot.child("Max_entry").getValue().toString();
                     max_id = Integer.parseInt(key);
+=======
+
+        if(prevActivity.equals("recycleview"))
+        {
+            add_comp = FirebaseDatabase.getInstance().getReference("Jobs");
+            add_comp.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    if (dataSnapshot.exists()) {
+                        job_det = dataSnapshot.child(id).getValue(Jobs.class);
+                        allot();
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+
+        }
+        else
+        {
+            upload.setText("Upload file");
+            branch_button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    AlertDialog.Builder mBuilder = new AlertDialog.Builder(job_profile.this);
+                    mBuilder.setTitle("Departments");
+                    mBuilder.setMultiChoiceItems(available_branches, checked_branches, new DialogInterface.OnMultiChoiceClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which, boolean isChecked) {
+                            if (isChecked) {
+                                if (!selected_branches.contains(which)) {
+                                    selected_branches.add(which);
+                                }
+                            } else {
+                                if (selected_branches.contains(which)) {
+                                    selected_branches.remove(selected_branches.indexOf(which));
+                                }
+                            }
+                        }
+                    });
+                    mBuilder.setCancelable(false);
+                    mBuilder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            String str = "";
+                            dep="";
+                            int i;
+                            if(selected_branches.size()>=1)
+                            {
+                                for (i = 0; i < selected_branches.size() - 1; i++) {
+                                    dep += available_branches[selected_branches.get(i)] + ".";
+                                    str += available_branches[selected_branches.get(i)] + "\n";
+                                }
+                                dep += available_branches[selected_branches.get(i)];
+                                str += available_branches[selected_branches.get(i)];
+                                branch.setText(str);
+                            }
+                            else
+                            {
+                                dep="";
+                                str="";
+                            }
+                        }
+                    });
+                    mBuilder.setNegativeButton("Dismiss", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+                    mBuilder.setNeutralButton("Clear all", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            for (int i = 0; i < checked_branches.length; i++) {
+                                checked_branches[i] = false;
+                                dep = "";
+                            }
+                            selected_branches.clear();
+                            branch.setText("");
+                        }
+                    });
+                    AlertDialog mDialog = mBuilder.create();
+                    mDialog.show();
+                }
+            });
+
+            add_comp.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    if (dataSnapshot.exists()) {
+                        String key = dataSnapshot.child("Max_entry").getValue().toString();
+                        max_id = Integer.parseInt(key);
+
+>>>>>>> e163f38a9195dbe1e94cd8f150a6c0cb43dd67f6
                     /*Iterable<DataSnapshot> all_childs= dataSnapshot.getChildren();
                     for (DataSnapshot son : all_childs)
                     {
@@ -228,6 +414,7 @@ public class job_profile extends AppCompatActivity {
                             max_id=;
                         }
                     }*/
+<<<<<<< HEAD
                 }
             }
 
@@ -237,6 +424,17 @@ public class job_profile extends AppCompatActivity {
             }
         });
         add.setOnClickListener(new View.OnClickListener() {
+=======
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+     /*   add.setOnClickListener(new View.OnClickListener() {
+>>>>>>> e163f38a9195dbe1e94cd8f150a6c0cb43dd67f6
             @Override
             public void onClick(View v) {
                 if (profile.getText().toString().trim().equals("") || ctc.getText().toString().trim().equals("") || location.getText().toString().trim().equals("") || cpi.getText().toString().equals("") || dep.equals("")) {
@@ -245,6 +443,7 @@ public class job_profile extends AppCompatActivity {
                     add_job();
                 }
             }
+<<<<<<< HEAD
         });
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -334,6 +533,139 @@ public class job_profile extends AppCompatActivity {
     }
 
     private void uploadFile(Uri pdfUri) {
+=======
+        });*/
+            submit.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if((cpi.getText().toString().matches("\\d+\\.?\\d+") ==false && cpi.getText().toString().matches("\\d")==false)){
+                        cpi.setError("Invalid CPI");
+                        return;
+                    }
+                    double cpi_double=Double.parseDouble(cpi.getText().toString());
+                    if(cpi_double>10 || cpi_double<0){
+                        cpi.setError("Invalid CPI");
+                        return;
+                    }
+                    if((ctc.getText().toString().matches("\\d+\\.?\\d+") ==false && ctc.getText().toString().matches("\\d")==false)){
+                        ctc.setError("CTC can only be decimal number");
+                        return;
+                    }
+
+                    if (profile.getText().toString().trim().equals("") || ctc.getText().toString().trim().equals("") || location.getText().toString().trim().equals("")||cpi.getText().toString().equals("") || dep.equals("") || job_requirements.getText().toString().equals("")) {
+                        Toast.makeText(job_profile.this, "Can't leave any field empty", Toast.LENGTH_LONG).show();
+                        return;
+                    }
+                    if(file.equals(""))
+                    {
+                        Toast.makeText(job_profile.this, "Please upload a pdf file", Toast.LENGTH_LONG).show();
+                        return;
+                    }
+                    else {
+
+
+                        add_job();
+                        add_comp=FirebaseDatabase.getInstance().getReference("Company");
+                        add_comp.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                if (dataSnapshot.exists()) {
+                                    if(dataSnapshot.child(id).hasChild("jobs"))
+                                    {
+                                        job_id=String.valueOf(dataSnapshot.child(id).child("jobs").getChildrenCount());
+                                    }
+                                    else
+                                    {
+                                        job_id="0";
+                                    }
+                                    comp_name=dataSnapshot.child(id).child("company_name").getValue().toString();
+                                    j1.setJob_id(job_id);
+                                    add_comp.child(id).child("jobs").child(job_id).setValue(j1);
+                                    DatabaseReference add_comp1;
+                                    add_comp1=FirebaseDatabase.getInstance().getReference("Jobs");
+                                    Jobs new_job=new Jobs(id + "_" +  j1.getJob_id(),j1.getProfile(),j1.getCtc(),j1.getLocation(),j1.getBrochure(),id,comp_name,j1.getDepartments(),j1.getCpi(),j1.getJob_requirements());
+                                    add_comp1.child(id + "_" + j1.getJob_id()).setValue(new_job);
+                                    Toast.makeText(job_profile.this, "Submitted", Toast.LENGTH_LONG).show();
+
+
+
+
+                                    Intent job_list = new Intent(job_profile.this, job_list.class);
+                                    job_list.putExtra("id",id);
+                                    finish();
+                                    startActivity(job_list);
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                            }
+                        });
+
+
+
+
+
+                    }
+
+                }
+            });
+            select.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (ContextCompat.checkSelfPermission(job_profile.this, Manifest.permission.READ_EXTERNAL_STORAGE) ==
+                            PackageManager.PERMISSION_GRANTED) {
+                        selectPDF();
+                    } else {
+                        ActivityCompat.requestPermissions(job_profile.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 9);
+
+                    }
+                }
+            });
+            remove.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    StorageReference storageReference = storage.getReference();
+                    storageReference.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            Toast.makeText(job_profile.this, "Removed successfully", Toast.LENGTH_LONG).show();
+                            status.setText("No file selected");
+                            remove.setVisibility(View.INVISIBLE);
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(job_profile.this, "Couldn't remove, please try after some time", Toast.LENGTH_LONG).show();
+                        }
+                    });
+                }
+            });
+            upload.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (pdfUri != null) {
+                        uploadFile(pdfUri);
+
+                    } else {
+                        Toast.makeText(job_profile.this, "Select a pdf file", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+
+        }
+    }
+
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+    }
+
+    private void uploadFile(final Uri pdfUri) {
+>>>>>>> e163f38a9195dbe1e94cd8f150a6c0cb43dd67f6
         // Do cancel upload and remove uploaded file
         // Once selected to upload allow to not upload
         // Remove selected file in add_job() function
@@ -367,6 +699,7 @@ public class job_profile extends AppCompatActivity {
         progressDialog.show();
 
         //final String filename=System.currentTimeMillis() + "";
+<<<<<<< HEAD
         final StorageReference storageReference = storage.getReference();
         storageReference.child("Company").putFile(pdfUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
@@ -385,6 +718,54 @@ public class job_profile extends AppCompatActivity {
 
                     }
                 });*/
+=======
+
+
+        add_comp=FirebaseDatabase.getInstance().getReference("Company");
+        add_comp.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    if(dataSnapshot.child(id).hasChild("jobs"))
+                    {
+                        job_id=String.valueOf(dataSnapshot.child(id).child("jobs").getChildrenCount());
+                    }
+                    else
+                    {
+                        job_id="0";
+
+                    }
+                    uploadpdf(pdfUri);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+
+
+
+    }
+    public void uploadpdf(Uri pdfUri){
+        add_comp = FirebaseDatabase.getInstance().getReference();
+        ref=FirebaseStorage.getInstance().getReference();
+        final StorageReference storageReference = ref.child("Brochures_for_job").child(id).child(job_id);
+        storageReference.putFile(pdfUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                storageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                    @Override
+                    public void onSuccess(Uri uri) {
+                        progressDialog.hide();
+                        String upload = uri.toString();
+                        file=upload;
+                        Toast.makeText(job_profile.this,"File Upload Successful",Toast.LENGTH_LONG).show();
+                    }
+                });
+>>>>>>> e163f38a9195dbe1e94cd8f150a6c0cb43dd67f6
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
@@ -399,8 +780,13 @@ public class job_profile extends AppCompatActivity {
                 progressDialog.setProgress(currentProgress);
                 if (currentProgress == 100) {
                     progressDialog.hide();
+<<<<<<< HEAD
                     Toast.makeText(job_profile.this, "Successfully Uploaded", Toast.LENGTH_LONG).show();
                    // remove.setVisibility(View.VISIBLE);
+=======
+                   // Toast.makeText(job_profile.this, "Successfully Uploaded", Toast.LENGTH_LONG).show();
+                    // remove.setVisibility(View.VISIBLE);
+>>>>>>> e163f38a9195dbe1e94cd8f150a6c0cb43dd67f6
                 }
             }
         });
@@ -408,7 +794,10 @@ public class job_profile extends AppCompatActivity {
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+<<<<<<< HEAD
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+=======
+>>>>>>> e163f38a9195dbe1e94cd8f150a6c0cb43dd67f6
         if (requestCode == 9 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
             selectPDF();
         } else
@@ -431,12 +820,17 @@ public class job_profile extends AppCompatActivity {
             pdfUri = data.getData(); //The uri with the location of the file
             status.setText("File Selected : " + data.getData().getLastPathSegment());
         } else {
+<<<<<<< HEAD
             Toast.makeText(job_profile.this, "Please select a file", Toast.LENGTH_SHORT).show();
+=======
+            Toast.makeText(job_profile.this, "Please select a pdf file", Toast.LENGTH_SHORT).show();
+>>>>>>> e163f38a9195dbe1e94cd8f150a6c0cb43dd67f6
         }
     }
 
     public void add_job() {
         check = 1;
+<<<<<<< HEAD
         job j = new job(j1.size(), profile.getText().toString(), Float.parseFloat(ctc.getText().toString()), location.getText().toString(), file, Float.parseFloat(cpi.getText().toString()), dep);
         j1.add(j);
         profile.setText("");
@@ -752,3 +1146,72 @@ public class job_profile extends AppCompatActivity {
 //        StorageReference httpsReference = storage.getReferenceFromUrl(url[0]);
         }*/
 // }
+=======
+        j1 = new job("1", profile.getText().toString(), Float.parseFloat(ctc.getText().toString()), location.getText().toString(), file, Float.parseFloat(cpi.getText().toString()), dep, job_requirements.getText().toString());
+        profile.setText("");
+        ctc.setText("");
+        location.setText("");
+        cpi.setText("");
+        dep="";
+    }
+    public void downloadFiles(Context context, String Filename, String FileDestination, String url)
+    {
+        DownloadManager downloadManager = (DownloadManager) context.getSystemService(Context.DOWNLOAD_SERVICE);
+        Uri uri = Uri.parse(url);
+        DownloadManager.Request request = new DownloadManager.Request(uri);
+        request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+        request.setDestinationInExternalFilesDir(context, FileDestination, Filename);
+        downloadManager.enqueue(request);
+    }
+
+    public void allot()
+    {
+        cpi.setEnabled(false);
+        profile.setEnabled(false);
+        ctc.setEnabled(false);
+        location.setEnabled(false);
+        branch.setEnabled(false);
+        job_requirements.setEnabled(false);
+
+        cpi.setText("CPI : " + String.valueOf(job_det.getCutoff_cpi()));
+        profile.setText("Profile : " + job_det.getProfile());
+        ctc.setText("CTC : " + String.valueOf(job_det.getCtc()));
+        location.setText("Location : " + job_det.getLocation());
+        branch.setText("Branches : " + job_det.getBranches());
+        job_requirements.setText("Job Requirements : " + job_det.getJob_requirements());
+
+        branch_button.setVisibility(View.INVISIBLE);
+        submit.setVisibility(View.INVISIBLE);
+        upload.setVisibility(View.INVISIBLE);
+        //upload.setText("View File");
+        select.setVisibility(View.INVISIBLE);
+
+        status.setText(job_det.getBrochure());
+        status.setTextColor(Color.BLUE);
+        status.setPaintFlags(status.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+//getBrochure!=" " check
+        if(!(job_det.getBrochure().equals("")))
+        {
+            status.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                     // missing 'http://' will cause crashed
+                    Intent intent = new Intent(Intent.ACTION_VIEW);
+                    intent.setData(Uri.parse(job_det.getBrochure()));
+                    startActivity(intent);
+                   // Uri uri = Uri.parse(job_det.getBrochure());
+                   /* Intent view_pdf = new Intent(job_profile.this, view_pdf.class);
+                    view_pdf.putExtra("url",job_det.getBranches());
+                    startActivity(view_pdf);*/
+                }
+
+            });
+        }
+        else
+        {
+
+        }
+
+    }
+}
+>>>>>>> e163f38a9195dbe1e94cd8f150a6c0cb43dd67f6

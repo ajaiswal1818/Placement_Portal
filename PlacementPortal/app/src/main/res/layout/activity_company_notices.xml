@@ -11,6 +11,7 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+<<<<<<< HEAD
         android:background="#e2e4fe">
 
         <ListView
@@ -22,6 +23,14 @@
             android:divider="@null"
             android:dividerHeight="10dp" />
     </LinearLayout>
+=======
+        android:background="#e2e4fe"/>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/card_approve_company"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+>>>>>>> e163f38a9195dbe1e94cd8f150a6c0cb43dd67f6
 
 
 </android.support.design.widget.CoordinatorLayout>

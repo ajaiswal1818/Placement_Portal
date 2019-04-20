@@ -36,15 +36,35 @@ public class Student_Foreground_Notifications extends IntentService {
     }
 
     @Override
+<<<<<<< HEAD
     protected void onHandleIntent(Intent intent) {
         String user = intent.getStringExtra("user_credentials");
 
 
+=======
+    public int onStartCommand(Intent intent, int flags, int startID){
+        super.onStartCommand(intent,flags,startID);
+        return START_STICKY;
+    }
+
+    @Override
+    protected void onHandleIntent(Intent intent) {
+        String user;
+        if(intent == null){
+            user = "vakul170101076";
+            Log.d("User", "Currently Not Logged In ");
+        }
+        else {
+            user = intent.getStringExtra("user");
+            Log.d("User", "Currently Logged In ");
+        }
+>>>>>>> e163f38a9195dbe1e94cd8f150a6c0cb43dd67f6
 
         reference.child("Student").child(user).child("List_of_Notification_IDs").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull final DataSnapshot dataSnapshot) {
                 String Notif = dataSnapshot.getValue(String.class);
+<<<<<<< HEAD
                 String[] split_IDs = Notif.split("\\,");
 
                 Log.d("User", "Currently Logged In ");
@@ -63,6 +83,27 @@ public class Student_Foreground_Notifications extends IntentService {
                     }
                 });
 
+=======
+                if(Notif!=null && !Notif.equals("")) {
+                    String[] split_IDs = Notif.split("\\,");
+
+                    Log.d("User", "Currently Logged In ");
+
+                    final String index_Notif = split_IDs[split_IDs.length - 1];
+                    reference.child("Notifications").addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot1) {
+                            my_Notif = dataSnapshot1.child(index_Notif).getValue(Notifications.class);
+                            showNotif(my_Notif);
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                        }
+                    });
+                }
+>>>>>>> e163f38a9195dbe1e94cd8f150a6c0cb43dd67f6
             }
 
             @Override

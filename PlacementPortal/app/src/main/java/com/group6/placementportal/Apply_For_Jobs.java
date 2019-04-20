@@ -2,8 +2,16 @@ package com.group6.placementportal;
 
 import android.Manifest;
 import android.app.ProgressDialog;
+<<<<<<< HEAD
 import android.content.Intent;
 import android.content.pm.PackageManager;
+=======
+import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+>>>>>>> e163f38a9195dbe1e94cd8f150a6c0cb43dd67f6
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -12,7 +20,11 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+<<<<<<< HEAD
 import android.widget.ProgressBar;
+=======
+import android.widget.Button;
+>>>>>>> e163f38a9195dbe1e94cd8f150a6c0cb43dd67f6
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,13 +40,23 @@ import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.group6.placementportal.DatabasePackage.Jobs;
+<<<<<<< HEAD
 
 import java.security.PrivilegedAction;
+=======
+import com.group6.placementportal.DatabasePackage.Student;
+>>>>>>> e163f38a9195dbe1e94cd8f150a6c0cb43dd67f6
 
 public class Apply_For_Jobs extends AppCompatActivity {
 
     private Uri pdfUri;
     private Jobs jobs;
+<<<<<<< HEAD
+=======
+    private Student user;
+    private String list;
+    private Long children;
+>>>>>>> e163f38a9195dbe1e94cd8f150a6c0cb43dd67f6
 
     //these are the views
     private TextView fileName;
@@ -43,6 +65,10 @@ public class Apply_For_Jobs extends AppCompatActivity {
     //the firebase objects for storage and database
     private StorageReference mStorageReference;
     private DatabaseReference mDatabaseReference;
+<<<<<<< HEAD
+=======
+    private Button btn_apply;
+>>>>>>> e163f38a9195dbe1e94cd8f150a6c0cb43dd67f6
 
     //TextViews
     private TextView job_profile,job_requirements,salary,brochure,cutoff_cpi,job_location,company_name,company_contact,company_email,company_headquarters;
@@ -52,7 +78,18 @@ public class Apply_For_Jobs extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.content_apply__for__jobs);
 
+<<<<<<< HEAD
         jobs = (Jobs) getIntent().getSerializableExtra("job_profile");
+=======
+
+        if(isNetworkAvailable()==false){
+            Toast.makeText(Apply_For_Jobs.this,"NO INTERNET CONNECTION", Toast.LENGTH_LONG).show();
+            return;
+        }
+        btn_apply=findViewById(R.id.buttonUploadFIle);
+        jobs = (Jobs) getIntent().getSerializableExtra("job_profile");
+        user = (Student) getIntent().getSerializableExtra("user");
+>>>>>>> e163f38a9195dbe1e94cd8f150a6c0cb43dd67f6
 
         job_profile = findViewById(R.id.job_profile);
         job_requirements = findViewById(R.id.job_requirements);
@@ -79,6 +116,23 @@ public class Apply_For_Jobs extends AppCompatActivity {
         mStorageReference = FirebaseStorage.getInstance().getReference();
         mDatabaseReference = FirebaseDatabase.getInstance().getReference();
 
+<<<<<<< HEAD
+=======
+        mDatabaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot.child("Jobs").child(jobs.getJob_id()).child("Applied Students").hasChild(user.getWebmailID()) || dataSnapshot.child("Student").child(user.getWebmailID()).hasChild("has_given_preferences")){
+                    btn_apply.setEnabled(false);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+>>>>>>> e163f38a9195dbe1e94cd8f150a6c0cb43dd67f6
         Log.d("TAG",jobs.getCompany_id()+" ");
         mDatabaseReference.child("Company").child(jobs.getCompany_id()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -96,6 +150,10 @@ public class Apply_For_Jobs extends AppCompatActivity {
             }
         });
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> e163f38a9195dbe1e94cd8f150a6c0cb43dd67f6
         //attaching listeners to views
         fileName = findViewById(R.id.editTextFileName);
         findViewById(R.id.buttonSelectFile).setOnClickListener(new View.OnClickListener() {
@@ -117,6 +175,16 @@ public class Apply_For_Jobs extends AppCompatActivity {
         });
     }
 
+<<<<<<< HEAD
+=======
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+    }
+
+>>>>>>> e163f38a9195dbe1e94cd8f150a6c0cb43dd67f6
     //this function will get the pdf from the storage
     private void getPDF() {
         //so if the permission is not available user will go to the screen to allow storage permission
@@ -161,13 +229,18 @@ public class Apply_For_Jobs extends AppCompatActivity {
     //this method is uploading the file
     //the code is same as the previous tutorial
     //so we are not explaining it
+<<<<<<< HEAD
     private void uploadFile(Uri data) {
+=======
+    private void uploadFile(final Uri data) {
+>>>>>>> e163f38a9195dbe1e94cd8f150a6c0cb43dd67f6
         progressDialog = new ProgressDialog(this);
         progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
         progressDialog.setTitle("Uploading...");
         progressDialog.setProgress(0);
         progressDialog.show();
 
+<<<<<<< HEAD
         final StorageReference ref = mStorageReference.child("Uploads").child("1");
         ref.putFile(data)
                 .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
@@ -197,5 +270,89 @@ public class Apply_For_Jobs extends AppCompatActivity {
                 progressDialog.setProgress(progress);
             }
         });
+=======
+        final StorageReference ref = mStorageReference.child("Uploads").child(jobs.getJob_id()).child(user.getWebmailID());
+        mDatabaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot.child("Student").child(user.getWebmailID()).hasChild("preferences")) {
+                    list = dataSnapshot.child("Student").child(user.getWebmailID()).child("preferences").getValue(String.class);
+                    list += ",";
+                    list += (jobs.getJob_id());
+                    ref.putFile(data)
+                            .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                                @Override
+                                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                    ref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                        @Override
+                                        public void onSuccess(Uri uri) {
+                                            progressDialog.hide();
+                                            String upload = uri.toString();
+                                            mDatabaseReference.child("Jobs").child(jobs.getJob_id()).child("Applied Students").child(user.getWebmailID()).child("CV").setValue(upload);
+                                            mDatabaseReference.child("Jobs").child(jobs.getJob_id()).child("Applied Students").child(user.getWebmailID()).child("Status").setValue("0");
+                                            mDatabaseReference.child("Jobs").child(jobs.getJob_id()).child("Applied Students").child(user.getWebmailID()).child("Approval").setValue("No");
+                                            mDatabaseReference.child("Student").child(user.getWebmailID()).child("preferences").setValue(list);
+                                            Toast.makeText(Apply_For_Jobs.this,"File Upload Successful",Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            progressDialog.hide();
+                            Toast.makeText(getApplicationContext(), "File Upload Failed", Toast.LENGTH_LONG).show();
+                        }
+                    }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
+
+                            int progress = (int) (100*taskSnapshot.getBytesTransferred()/taskSnapshot.getTotalByteCount());
+                            progressDialog.setProgress(progress);
+                        }
+                    });
+                }else{
+                    list="";
+                    list+=jobs.getJob_id();
+                    ref.putFile(data)
+                            .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                                @Override
+                                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                    ref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                        @Override
+                                        public void onSuccess(Uri uri) {
+                                            progressDialog.hide();
+                                            String upload = uri.toString();
+                                            mDatabaseReference.child("Jobs").child(jobs.getJob_id()).child("Applied Students").child(user.getWebmailID()).child("CV").setValue(upload);
+                                            mDatabaseReference.child("Jobs").child(jobs.getJob_id()).child("Applied Students").child(user.getWebmailID()).child("Status").setValue("0");
+                                            mDatabaseReference.child("Jobs").child(jobs.getJob_id()).child("Applied Students").child(user.getWebmailID()).child("Approval").setValue("No");
+                                            mDatabaseReference.child("Student").child(user.getWebmailID()).child("preferences").setValue(list);
+                                            Toast.makeText(Apply_For_Jobs.this,"File Upload Successful",Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            progressDialog.hide();
+                            Toast.makeText(getApplicationContext(), "File Upload Failed", Toast.LENGTH_LONG).show();
+                        }
+                    }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
+
+                            int progress = (int) (100*taskSnapshot.getBytesTransferred()/taskSnapshot.getTotalByteCount());
+                            progressDialog.setProgress(progress);
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+>>>>>>> e163f38a9195dbe1e94cd8f150a6c0cb43dd67f6
     }
 }

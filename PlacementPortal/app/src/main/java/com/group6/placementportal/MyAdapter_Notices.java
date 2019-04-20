@@ -6,8 +6,15 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+<<<<<<< HEAD
 import android.widget.TextView;
 import com.group6.placementportal.DatabasePackage.Notices;
+=======
+import android.widget.ImageView;
+import android.widget.TextView;
+import com.group6.placementportal.DatabasePackage.Notices;
+import com.squareup.picasso.Picasso;
+>>>>>>> e163f38a9195dbe1e94cd8f150a6c0cb43dd67f6
 
 import java.util.ArrayList;
 
@@ -30,6 +37,11 @@ public class MyAdapter_Notices extends RecyclerView.Adapter<MyAdapter_Notices.My
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+<<<<<<< HEAD
+=======
+
+        Picasso.get().load(profiles.get(position).getImageURL()).into(holder.notice_image);
+>>>>>>> e163f38a9195dbe1e94cd8f150a6c0cb43dd67f6
         holder.notice_topic.setText(profiles.get(position).getTopic());
         holder.notice_content.setText(profiles.get(position).getContent());
     }
@@ -42,8 +54,15 @@ public class MyAdapter_Notices extends RecyclerView.Adapter<MyAdapter_Notices.My
     class MyViewHolder extends RecyclerView.ViewHolder
     {
         TextView notice_topic,notice_content;
+<<<<<<< HEAD
         public MyViewHolder(View itemView) {
             super(itemView);
+=======
+        ImageView notice_image;
+        public MyViewHolder(View itemView) {
+            super(itemView);
+            notice_image = itemView.findViewById(R.id.Notice_Image);
+>>>>>>> e163f38a9195dbe1e94cd8f150a6c0cb43dd67f6
             notice_topic =itemView.findViewById(R.id.Notice_Topic);
             notice_content =itemView.findViewById(R.id.Notice_Content);
         }

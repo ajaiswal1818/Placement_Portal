@@ -1,5 +1,6 @@
 package com.group6.placementportal;
 
+<<<<<<< HEAD
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -7,14 +8,29 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.util.Log;
 import android.view.View;
+=======
+import android.content.Context;
+import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.os.Bundle;
+import android.support.annotation.NonNull;
+>>>>>>> e163f38a9195dbe1e94cd8f150a6c0cb43dd67f6
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+<<<<<<< HEAD
 import android.view.Menu;
 import android.view.MenuItem;
+=======
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+>>>>>>> e163f38a9195dbe1e94cd8f150a6c0cb43dd67f6
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -46,6 +62,11 @@ public class Student_ChangePassword extends AppCompatActivity
     private Button Change_Button;
     private Student user;
 
+<<<<<<< HEAD
+=======
+    private int flag;
+
+>>>>>>> e163f38a9195dbe1e94cd8f150a6c0cb43dd67f6
     private DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
 
     private static final String TAG = Student_Dashboard.class.getSimpleName();
@@ -54,6 +75,15 @@ public class Student_ChangePassword extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student__change_password);
+<<<<<<< HEAD
+=======
+
+        if(isNetworkAvailable()==false){
+            Toast.makeText(Student_ChangePassword.this,"NO INTERNET CONNECTION", Toast.LENGTH_LONG).show();
+            return;
+        }
+
+>>>>>>> e163f38a9195dbe1e94cd8f150a6c0cb43dd67f6
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -94,19 +124,44 @@ public class Student_ChangePassword extends AppCompatActivity
                     if(NPass2.equals(NPass)){
                         user.setPassword(NPass);
                         mDatabase.child("Student").child(Username).child("password").setValue(NPass);
+<<<<<<< HEAD
                     }
                     else{
                         Toast.makeText(getApplicationContext(), "Passwords do not match", Toast.LENGTH_SHORT).show();
+=======
+                        NewPass.setText("");
+                        NewPass2.setText("");
+                        CurrPass.setText("");
+                    }
+                    else{
+                        NewPass2.setError("Passwords do not match");
+                        //Toast.makeText(getApplicationContext(), "Passwords do not match", Toast.LENGTH_SHORT).show();
+>>>>>>> e163f38a9195dbe1e94cd8f150a6c0cb43dd67f6
 
                     }
                 }
                 else{
+<<<<<<< HEAD
                     Toast.makeText(getApplicationContext(), "Incorrect Password", Toast.LENGTH_SHORT).show();
+=======
+                    CurrPass.setError("Incorrect Password");
+                    //Toast.makeText(getApplicationContext(), "Incorrect Password", Toast.LENGTH_SHORT).show();
+>>>>>>> e163f38a9195dbe1e94cd8f150a6c0cb43dd67f6
                 }
             }
         });
     }
 
+<<<<<<< HEAD
+=======
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+    }
+
+>>>>>>> e163f38a9195dbe1e94cd8f150a6c0cb43dd67f6
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -118,6 +173,7 @@ public class Student_ChangePassword extends AppCompatActivity
     }
 
 
+<<<<<<< HEAD
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -126,6 +182,8 @@ public class Student_ChangePassword extends AppCompatActivity
     }
 
 
+=======
+>>>>>>> e163f38a9195dbe1e94cd8f150a6c0cb43dd67f6
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -136,11 +194,16 @@ public class Student_ChangePassword extends AppCompatActivity
             Intent i = new Intent(getApplicationContext(), Student_Dashboard.class);
             i.putExtra("user",user);
             startActivity(i);
+<<<<<<< HEAD
+=======
+            exit();
+>>>>>>> e163f38a9195dbe1e94cd8f150a6c0cb43dd67f6
 
         } else if (id == R.id.nav_notifications) {
             Intent i = new Intent(getApplicationContext(), Student_Notifications.class);
             i.putExtra("user",user);
             startActivity(i);
+<<<<<<< HEAD
 
         } else if (id == R.id.nav_prefr) {
 
@@ -155,6 +218,42 @@ public class Student_ChangePassword extends AppCompatActivity
 
         } else if (id == R.id.nav_edit_profile) {
             Intent i = new Intent(getApplicationContext(), Student_Profile.class);
+=======
+            exit();
+
+        } else if (id == R.id.nav_prefr_job) {
+            Intent i = new Intent(getApplicationContext(), GivePreference.class);
+            i.putExtra("user",user);
+            startActivity(i);
+            exit();
+
+        } else if (id == R.id.nav_prefr_internships) {
+            Intent i = new Intent(getApplicationContext(), GivePreference_Interns.class);
+            i.putExtra("user",user);
+            startActivity(i);
+            exit();
+
+        } else if (id == R.id.nav_jobs) {
+            Intent i = new Intent(getApplicationContext(), View_Jobs.class);
+            i.putExtra("user",user);
+            startActivity(i);
+            exit();
+
+        } else if (id == R.id.nav_interns) {
+            Intent i = new Intent(getApplicationContext(), View_Interns.class);
+            i.putExtra("user",user);
+            startActivity(i);
+            exit();
+
+        } else if (id == R.id.nav_my_profile) {
+            Intent i = new Intent(getApplicationContext(), Student_View_Profile.class);
+            i.putExtra("user",user);
+            startActivity(i);
+            exit();
+
+        } else if (id == R.id.nav_edit_profile) {
+            Intent i = new Intent(getApplicationContext(), Student_Complete_Profile.class);
+>>>>>>> e163f38a9195dbe1e94cd8f150a6c0cb43dd67f6
             i.putExtra("user",user);
             startActivity(i);
 
@@ -162,11 +261,32 @@ public class Student_ChangePassword extends AppCompatActivity
             Intent i = new Intent(getApplicationContext(), Student_ChangePassword.class);
             i.putExtra("user",user);
             startActivity(i);
+<<<<<<< HEAD
 
         } else if (id == R.id.nav_help) {
 
         }
         else if(id == R.id.nav_signout){
+=======
+            exit();
+
+        } else if (id == R.id.nav_applications) {
+            Intent i = new Intent(getApplicationContext(), Student_Application_Forms.class);
+            i.putExtra("user",user);
+            startActivity(i);
+
+        } else if (id == R.id.nav_help) {
+            Intent i = new Intent(getApplicationContext(), FAQ.class);
+            i.putExtra("user",user);
+            startActivity(i);
+
+        } else if (id == R.id.nav_inst_profile) {
+            Intent i = new Intent(getApplicationContext(), Help_Students.class);
+            i.putExtra("user",user);
+            startActivity(i);
+
+        } else if(id == R.id.nav_signout){
+>>>>>>> e163f38a9195dbe1e94cd8f150a6c0cb43dd67f6
             onSignOutClicked();
         }
 
@@ -213,7 +333,18 @@ public class Student_ChangePassword extends AppCompatActivity
     }
 
     private void updateSignedOutUI() {
+<<<<<<< HEAD
         Intent intent = new Intent(Student_ChangePassword.this,LoginPage.class);
         startActivity(intent);
+=======
+        flag=1;
+        Intent intent = new Intent(Student_ChangePassword.this,LoginPage.class);
+        intent.putExtra("flag",flag);
+        startActivity(intent);
+        exit();
+    }
+    private void exit(){
+        Student_ChangePassword.this.finish();
+>>>>>>> e163f38a9195dbe1e94cd8f150a6c0cb43dd67f6
     }
 }

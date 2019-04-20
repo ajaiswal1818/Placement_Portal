@@ -7,6 +7,7 @@
     android:layout_height="match_parent"
     tools:context=".company_enrollments$PlaceholderFragment">
 
+<<<<<<< HEAD
     <TextView
         android:id="@+id/section_label"
         android:layout_width="wrap_content"
@@ -26,10 +27,20 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="@dimen/activity_vertical_margin"
+=======
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/enrolments_recycler"
+        android:layout_width="395dp"
+        android:layout_height="643dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+>>>>>>> e163f38a9195dbe1e94cd8f150a6c0cb43dd67f6
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+<<<<<<< HEAD
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/constraintLayout"
@@ -38,4 +49,8 @@
 
 
 
+=======
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+>>>>>>> e163f38a9195dbe1e94cd8f150a6c0cb43dd67f6
 </android.support.constraint.ConstraintLayout>

@@ -2,7 +2,15 @@ package com.group6.placementportal;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+<<<<<<< HEAD
 import android.content.Intent;
+=======
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+>>>>>>> e163f38a9195dbe1e94cd8f150a6c0cb43dd67f6
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -34,10 +42,17 @@ import com.microsoft.identity.client.exception.MsalClientException;
 import com.microsoft.identity.client.exception.MsalException;
 import com.microsoft.identity.client.exception.MsalServiceException;
 import com.microsoft.identity.client.exception.MsalUiRequiredException;
+<<<<<<< HEAD
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+=======
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+>>>>>>> e163f38a9195dbe1e94cd8f150a6c0cb43dd67f6
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -57,6 +72,7 @@ public class LoginPage extends AppCompatActivity {
     private String FullName;
     private Student user;
     private boolean firstTimeUser=false;
+<<<<<<< HEAD
 
     private ProgressDialog dialog;
 
@@ -70,6 +86,22 @@ public class LoginPage extends AppCompatActivity {
     Button callGraphButton;
 //    Button signOutButton;
 
+=======
+    SharedPreferences sp;
+    private int flag_2;
+    private ProgressDialog dialog;
+
+    /* Azure AD v2 Configs */
+    final static String SCOPES [] = {"https://graph.microsoft.com/User.Read"};
+    final static String MSGRAPH_URL = "https://graph.microsoft.com/v1.0/me";
+
+    /* UI & Debugging Variables */
+    private static final String TAG = LoginPage.class.getSimpleName();
+    private String userData;
+    Button callGraphButton;
+//    Button signOutButton;
+
+>>>>>>> e163f38a9195dbe1e94cd8f150a6c0cb43dd67f6
     /* Azure AD Variables */
     private PublicClientApplication sampleApp;
     private AuthenticationResult authResult;
@@ -79,6 +111,15 @@ public class LoginPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_loginpage);
 
+<<<<<<< HEAD
+=======
+        if(isNetworkAvailable()==false){
+            Toast.makeText(LoginPage.this,"NO INTERNET CONNECTION", Toast.LENGTH_LONG).show();
+            return;
+        }
+        flag_2=getIntent().getIntExtra("flag",0);
+
+>>>>>>> e163f38a9195dbe1e94cd8f150a6c0cb43dd67f6
         callGraphButton = findViewById(R.id.callGraph);
         //signOutButton = findViewById(R.id.clearCache);
         dialog = new ProgressDialog(LoginPage.this);
@@ -132,7 +173,18 @@ public class LoginPage extends AppCompatActivity {
         Webmail=findViewById(R.id.webmail_text);
         Password=findViewById(R.id.password_text);
         login_button=findViewById(R.id.btn_login);
+        sp = getSharedPreferences("login",MODE_PRIVATE);
+        if(flag_2==1){
+            sp.edit().putBoolean("logged",false).apply();
+        }
 
+<<<<<<< HEAD
+=======
+//        if(sp.getBoolean("logged",false)){
+//            updateSuccessUI();
+//        }
+
+>>>>>>> e163f38a9195dbe1e94cd8f150a6c0cb43dd67f6
         login_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -140,7 +192,6 @@ public class LoginPage extends AppCompatActivity {
                 dialog.show();
                 rollNo = Webmail.getText().toString();
                 password = Password.getText().toString();
-
                 Login_Details= FirebaseDatabase.getInstance().getReference();
                 Login_Details = Login_Details.child("Student").child(rollNo);
 
@@ -155,6 +206,10 @@ public class LoginPage extends AppCompatActivity {
                             dialog.hide();
                             Toast.makeText(LoginPage.this,user.getWebmailID(), Toast.LENGTH_LONG).show();
                             updateSuccessUI();
+<<<<<<< HEAD
+=======
+                            sp.edit().putBoolean("logged",true).apply();
+>>>>>>> e163f38a9195dbe1e94cd8f150a6c0cb43dd67f6
                         }
                         else{
                             dialog.hide();
@@ -169,7 +224,12 @@ public class LoginPage extends AppCompatActivity {
 
 
 
+<<<<<<< HEAD
                 });*/
+
+=======
+                });
+>>>>>>> e163f38a9195dbe1e94cd8f150a6c0cb43dd67f6
 
 
 
@@ -338,6 +398,16 @@ public class LoginPage extends AppCompatActivity {
 //        TextView graphText = findViewById(R.id.graphData);
 //        graphText.setText(graphResponse.toString());
 //    }
+<<<<<<< HEAD
+=======
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+    }
+
+>>>>>>> e163f38a9195dbe1e94cd8f150a6c0cb43dd67f6
 
     /* Set the UI for successful token acquisition data */
     private void updateSuccessUI(){
@@ -348,7 +418,11 @@ public class LoginPage extends AppCompatActivity {
             I = new Intent(getApplicationContext(),Student_Dashboard.class);
             I.putExtra("user",user);
         }else{
+<<<<<<< HEAD
             I = new Intent(getApplicationContext(),Student_Profile.class);
+=======
+            I = new Intent(getApplicationContext(),Student_Register.class);
+>>>>>>> e163f38a9195dbe1e94cd8f150a6c0cb43dd67f6
             I.putExtra("fullName",FullName);
             I.putExtra("Webmail",WebmailID);
             I.putExtra("rollNo",RollNo);

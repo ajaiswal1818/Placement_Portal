@@ -14,6 +14,10 @@ import android.widget.Toast;
 
 import com.google.firebase.database.core.Tag;
 import com.group6.placementportal.DatabasePackage.Jobs;
+<<<<<<< HEAD
+=======
+import com.group6.placementportal.DatabasePackage.Student;
+>>>>>>> e163f38a9195dbe1e94cd8f150a6c0cb43dd67f6
 
 import java.util.ArrayList;
 
@@ -21,11 +25,21 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
     Context context;
     ArrayList<Jobs> profiles;
+<<<<<<< HEAD
 
     public MyAdapter(Context c , ArrayList<Jobs> p)
     {
         context = c;
         profiles = p;
+=======
+    Student user;
+
+    public MyAdapter(Context c , ArrayList<Jobs> p, Student student)
+    {
+        context = c;
+        profiles = p;
+        user = student;
+>>>>>>> e163f38a9195dbe1e94cd8f150a6c0cb43dd67f6
     }
 
     @NonNull
@@ -44,6 +58,10 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
             public void onClick(View view) {
                 Intent intent = new Intent(context, Apply_For_Jobs.class);
                 intent.putExtra("job_profile", profiles.get(position));
+<<<<<<< HEAD
+=======
+                intent.putExtra("user", user);
+>>>>>>> e163f38a9195dbe1e94cd8f150a6c0cb43dd67f6
                 context.startActivity(intent);
             }
         });
