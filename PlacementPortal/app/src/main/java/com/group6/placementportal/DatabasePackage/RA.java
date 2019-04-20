@@ -129,6 +129,48 @@ public class RA extends Fragment {
                 from_duration.setText(date);
             }
         };
+        mDatabaseReference.child("Student").child(user.getWebmailID()).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.hasChild("ProfilePending")) {
+                    String var = dataSnapshot.child("ProfilePending").getValue(String.class);
+                    if (var.equals("Pending")) {
+                        AlertDialog.Builder mBuilder = new AlertDialog.Builder(getActivity());
+
+                        mBuilder.setTitle("Your Profile Request is Pending");
+                        mBuilder.setCancelable(false);
+                        mBuilder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                            }
+                        });
+                        AlertDialog mDialog = mBuilder.create();
+                        mDialog.show();
+                        apply.setEnabled(false);
+                    }
+                }
+                if (!dataSnapshot.hasChild("AcademicDetails")) {
+                    AlertDialog.Builder mBuilder = new AlertDialog.Builder(getActivity());
+                    mBuilder.setTitle("Complete Your Profile First");
+                    mBuilder.setCancelable(false);
+                    mBuilder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                        }
+                    });
+                    AlertDialog mDialog = mBuilder.create();
+                    mDialog.show();
+                    apply.setEnabled(false);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
 
         to_duration.setOnClickListener(new View.OnClickListener() {
             @Override

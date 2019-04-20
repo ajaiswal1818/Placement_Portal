@@ -155,6 +155,12 @@ public class Student_Complete_Profile extends AppCompatActivity {
                 }
                 else{
                     setTextBoxes();
+                    if(dataSnapshot.hasChild("AcademaicDetails")){
+                        academicDetails = dataSnapshot.child("AcademicDetails").getValue(AcademicDetails.class);
+                    }
+                    if(dataSnapshot.hasChild("PersonalDetails")){
+                        personalDetails = dataSnapshot.child("PersonalDetails").getValue(PersonalDetails.class);
+                    }
                 }
             }
 

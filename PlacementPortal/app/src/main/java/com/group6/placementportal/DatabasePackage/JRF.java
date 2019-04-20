@@ -59,7 +59,7 @@ public class JRF extends Fragment {
     private Button uploadphoto;
     private Button uploadsign;
     private Button apply;
-    private Uri pdfUriphoto,pdfUrisign;
+    private Uri pdfUriphoto, pdfUrisign;
 
     private ProgressDialog progressDialog;
 
@@ -67,10 +67,10 @@ public class JRF extends Fragment {
     private DatabaseReference mDatabaseReference;
     private TextView file_name_photo;
     private TextView file_name_sign;
-    private EditText application,programmingLanguage,year,project,post;
-    private String mapplication,mprogrammingLanguage,myear,mproject,mpost,mqualifies;
-    private RadioButton yesBtn,noBtn;
-    private boolean has_applied=false;
+    private EditText application, programmingLanguage, year, project, post;
+    private String mapplication, mprogrammingLanguage, myear, mproject, mpost, mqualifies;
+    private RadioButton yesBtn, noBtn;
+    private boolean has_applied = false;
 
     public JRF() {
     }
@@ -81,17 +81,60 @@ public class JRF extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         uploadphoto = getView().findViewById(R.id.btn_uploadphoto);
-        uploadsign =   getView().findViewById(R.id.btn_uploadsign);
+        uploadsign = getView().findViewById(R.id.btn_uploadsign);
         apply = getView().findViewById(R.id.btn_apply);
         file_name_photo = getView().findViewById(R.id.txt_uploadphoto);
         file_name_sign = getView().findViewById(R.id.txt_uploadsign);
-        application =  getView().findViewById(R.id.editApplication);
+        application = getView().findViewById(R.id.editApplication);
         programmingLanguage = getView().findViewById(R.id.editProgLang);
         year = getView().findViewById(R.id.editYear);
         project = getView().findViewById(R.id.editapplyproject);
         post = getView().findViewById(R.id.editapplypost);
         yesBtn = getView().findViewById(R.id.rbtnyes);
         noBtn = getView().findViewById(R.id.rbtnno);
+
+        mDatabaseReference.child("Student").child(user.getWebmailID()).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.hasChild("ProfilePending")) {
+                    String var = dataSnapshot.child("ProfilePending").getValue(String.class);
+                    if (var.equals("Pending")) {
+                        AlertDialog.Builder mBuilder = new AlertDialog.Builder(getActivity());
+
+                        mBuilder.setTitle("Your Profile Request is Pending");
+                        mBuilder.setCancelable(false);
+                        mBuilder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                            }
+                        });
+                        AlertDialog mDialog = mBuilder.create();
+                        mDialog.show();
+                        apply.setEnabled(false);
+                    }
+                }
+                if (!dataSnapshot.hasChild("AcademicDetails")) {
+                    AlertDialog.Builder mBuilder = new AlertDialog.Builder(getActivity());
+                    mBuilder.setTitle("Complete Your Profile First");
+                    mBuilder.setCancelable(false);
+                    mBuilder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                        }
+                    });
+                    AlertDialog mDialog = mBuilder.create();
+                    mDialog.show();
+                    apply.setEnabled(false);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
 
 
         uploadphoto.setOnClickListener(new View.OnClickListener() {
@@ -114,8 +157,8 @@ public class JRF extends Fragment {
                 mDatabaseReference.child("JRF").addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        has_applied= dataSnapshot.hasChild(user.getWebmailID());
-                        if(has_applied){
+                        has_applied = dataSnapshot.hasChild(user.getWebmailID());
+                        if (has_applied) {
                             AlertDialog.Builder mBuilder = new AlertDialog.Builder(getActivity());
                             mBuilder.setTitle("You have already applied");
                             mBuilder.setCancelable(false);
@@ -127,8 +170,7 @@ public class JRF extends Fragment {
                             });
                             AlertDialog mDialog = mBuilder.create();
                             mDialog.show();
-                        }
-                        else {
+                        } else {
 
                             mapplication = application.getText().toString();
                             mprogrammingLanguage = programmingLanguage.getText().toString();
@@ -189,7 +231,7 @@ public class JRF extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        user = (Student)getActivity().getIntent().getSerializableExtra("user");
+        user = (Student) getActivity().getIntent().getSerializableExtra("user");
 
         mDatabaseReference = FirebaseDatabase.getInstance().getReference();
         mStorageReference = FirebaseStorage.getInstance().getReference();
@@ -198,34 +240,30 @@ public class JRF extends Fragment {
 
     private void getPDFsign() {
         //so if the permission is not available user will go to the screen to allow storage permission
-        if(ContextCompat.checkSelfPermission(getActivity().getApplicationContext(), Manifest.permission.READ_EXTERNAL_STORAGE)== PackageManager.PERMISSION_GRANTED){
+        if (ContextCompat.checkSelfPermission(getActivity().getApplicationContext(), Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
             selectPDFsign();
-        }
-        else{
-            ActivityCompat.requestPermissions(getActivity(),new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},10);
+        } else {
+            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 10);
         }
     }
 
     private void getPDFphoto() {
         //so if the permission is not available user will go to the screen to allow storage permission
-        if(ContextCompat.checkSelfPermission(getActivity().getApplicationContext(), Manifest.permission.READ_EXTERNAL_STORAGE)== PackageManager.PERMISSION_GRANTED){
+        if (ContextCompat.checkSelfPermission(getActivity().getApplicationContext(), Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
             selectPDFphoto();
-        }
-        else{
-            ActivityCompat.requestPermissions(getActivity(),new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},9);
+        } else {
+            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 9);
         }
     }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        if(requestCode==9 && grantResults[0]==PackageManager.PERMISSION_GRANTED){
+        if (requestCode == 9 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
             selectPDFphoto();
-        }
-        else if(requestCode==10 && grantResults[0]==PackageManager.PERMISSION_GRANTED){
+        } else if (requestCode == 10 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
             selectPDFsign();
-        }
-        else{
-            Toast.makeText(getActivity().getApplicationContext(),"Permission Denied",Toast.LENGTH_LONG).show();
+        } else {
+            Toast.makeText(getActivity().getApplicationContext(), "Permission Denied", Toast.LENGTH_LONG).show();
         }
     }
 
@@ -233,29 +271,27 @@ public class JRF extends Fragment {
         Intent intent = new Intent();
         intent.setType("application/pdf");
         intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(intent,86);
+        startActivityForResult(intent, 86);
     }
 
     private void selectPDFphoto() {
         Intent intent = new Intent();
         intent.setType("application/pdf");
         intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(intent,87);
+        startActivityForResult(intent, 87);
     }
 
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if(requestCode==86 && resultCode==RESULT_OK && data!=null){
+        if (requestCode == 86 && resultCode == RESULT_OK && data != null) {
             pdfUrisign = data.getData();
             file_name_sign.setText(data.getData().getLastPathSegment());
-        }
-        else if(requestCode==87 && resultCode==RESULT_OK && data!=null){
+        } else if (requestCode == 87 && resultCode == RESULT_OK && data != null) {
             pdfUriphoto = data.getData();
             file_name_photo.setText(data.getData().getLastPathSegment());
-        }
-        else{
-            Toast.makeText(getActivity().getApplicationContext(),"Select a file",Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(getActivity().getApplicationContext(), "Select a file", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -276,7 +312,7 @@ public class JRF extends Fragment {
 
                                 String upload = uri.toString();
                                 mDatabaseReference.child("JRF").child(user.getWebmailID()).child("Sign").setValue(upload);
-                                Toast.makeText(getActivity(),"File Upload Successful",Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getActivity(), "File Upload Successful", Toast.LENGTH_SHORT).show();
 
                             }
                         });
@@ -301,7 +337,7 @@ public class JRF extends Fragment {
         progressDialog.setTitle("Please Wait");
         progressDialog.show();
 
-        final JRF_applications jrf_applications = new JRF_applications(mapplication,mprogrammingLanguage,myear,mproject,mpost,mqualifies,user.getFullName(),"","",user.getWebmailID());
+        final JRF_applications jrf_applications = new JRF_applications(mapplication, mprogrammingLanguage, myear, mproject, mpost, mqualifies, user.getFullName(), "", "", user.getWebmailID());
 
         final StorageReference ref = mStorageReference.child("Uploads").child("JRF").child(user.getWebmailID()).child("Photo");
         ref.putFile(data)
@@ -315,7 +351,7 @@ public class JRF extends Fragment {
                                 String upload = uri.toString();
                                 mDatabaseReference.child("JRF").child(user.getWebmailID()).child("Photo").setValue(upload);
                                 mDatabaseReference.child("JRF").child(user.getWebmailID()).setValue(jrf_applications);
-                                Toast.makeText(getActivity(),"File Upload Successful",Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getActivity(), "File Upload Successful", Toast.LENGTH_SHORT).show();
                             }
                         });
                     }
