@@ -17,20 +17,21 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:windowSoftInputMode="adjustPan">
-        <activity android:name=".about_iitg">
-        </activity>
+        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".about_iitg"></activity>
         <activity
             android:name=".GivePreference_Interns"
-            android:screenOrientation="portrait"
             android:label="@string/title_activity_give_preference__interns"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity
             android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
             android:name=".Student_View_Profile"
             android:label="@string/title_activity_student__view__profile"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Student_Register"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".Student_Register"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".admin_job_or_intern"
             android:label="@string/title_activity_admin_job_or_intern"
@@ -42,135 +43,148 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:screenOrientation="portrait"
             android:name=".Help_Students"
             android:label="@string/title_activity_help__students"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Company_Slots_Admin_second"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".Company_Slots_Admin"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".Company_Slots_Admin_second"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Company_Slots_Admin"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".admin_checkout_the_portal"
-            android:screenOrientation="portrait"
             android:label="@string/title_activity_admin_checkout_the_portal"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:screenOrientation="portrait"
             android:name=".admin_enrollments_screen1"
             android:label="@string/title_activity_admin_enrollments_screen1"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:screenOrientation="portrait"
             android:name=".company_enrolments_screen1"
             android:label="@string/title_activity_company_enrolments_screen1"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".LoginPage"
-            android:screenOrientation="portrait"/>
-        <activity
             android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".LoginPage"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".Student_Application_Forms"
             android:label="@string/title_activity_student__application__forms"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:screenOrientation="portrait"
             android:name=".GivePreference"
             android:label="@string/title_activity_give_preference"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:screenOrientation="portrait"
             android:name=".JRF_Approval_Profile"
             android:label="@string/title_activity_jrf__approval__profile"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:screenOrientation="portrait"
             android:name=".RA_Approval_Profile"
             android:label="@string/title_activity_jrf__approval__profile"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:screenOrientation="portrait"
             android:name=".Student_Profile_Approval"
             android:label="@string/title_activity_student__profile__approval"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:screenOrientation="portrait"
             android:name=".Student_Requests"
             android:label="@string/title_activity_student__requests"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Student_Complete_Profile"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".NoticeFromCompany"
-            android:screenOrientation="portrait"/>
-        <activity
             android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Student_Complete_Profile"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".NoticeFromCompany"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".Admin_ApproveNotice"
             android:label="@string/title_activity_admin__approve_notice"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:screenOrientation="portrait"
             android:name=".Apply_For_Jobs"
             android:label="@string/title_activity_apply__for__jobs"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".sending_emails"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".list_notification"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".Sending_Notifications"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".sending_emails"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".list_notification"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Sending_Notifications"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Apply_For_Interns"
-            android:screenOrientation="portrait"
             android:label="@string/title_activity_apply__for__interns"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".JRF_Application_Requests"
-            android:screenOrientation="portrait"
             android:label="@string/title_activity_jrf__application__requests"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:screenOrientation="portrait"
             android:name=".RA_Application_Requests"
             android:label="@string/title_activity_jrf__application__requests"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:screenOrientation="portrait"
             android:name=".Admin_DashBoard"
             android:label="@string/title_activity_admin__dash_board"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Login_Page_Admin"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".Login_Page_Admin"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".job_list"
             android:label=".job_list"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".intern_list"
-            android:screenOrientation="portrait"/>
         <activity
-            android:screenOrientation="portrait"
+            android:name=".intern_list"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".company_enrollments"
             android:label="@string/title_activity_company_enrollments"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".approve_company"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".company_change_password"
-            android:screenOrientation="portrait"/>
-        <activity
             android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".approve_company"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".company_change_password"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".admin_notices"
             android:label="@string/title_activity_admin_notices"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:screenOrientation="portrait"
             android:name=".company_notices"
             android:label="@string/title_activity_company_notices"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:screenOrientation="portrait"
             android:name=".company_profile"
             android:label="@string/title_activity_company_profile"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".MainLogin"
+        <activity
+            android:name=".MainLogin"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -180,30 +194,31 @@
         </activity>
         <activity
             android:name=".Student_ChangePassword"
-            android:screenOrientation="portrait"
             android:label="@string/title_activity_student__change_password"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:screenOrientation="portrait"
             android:name=".Student_Notifications"
             android:label="@string/title_activity_student__notifications"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:screenOrientation="portrait"
             android:name=".View_Jobs"
             android:label="@string/title_activity_view__jobs"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:screenOrientation="portrait"
             android:name=".View_Interns"
             android:label="@string/title_activity_view__interns"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:screenOrientation="portrait"
             android:name=".Student_Dashboard"
             android:label="@string/title_activity_student__dashboard"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name="com.microsoft.identity.client.BrowserTabActivity"
+        <activity
+            android:name="com.microsoft.identity.client.BrowserTabActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -223,18 +238,24 @@
             android:name=".Student_Foreground_Notifications"
             android:exported="false" />
 
-        <activity android:name=".company_dashboard"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".job_profile"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".intern_profile"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".Company_Application_Slots"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".company_login"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".view_pdf"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".company_dashboard"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".job_profile"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".intern_profile"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Company_Application_Slots"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".company_login"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view_pdf"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

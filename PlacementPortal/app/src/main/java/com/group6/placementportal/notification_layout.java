@@ -1,6 +1,8 @@
 package com.group6.placementportal;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -42,12 +44,20 @@ public class notification_layout extends RecyclerView.Adapter<notification_layou
     }
 
     @Override
-    public void onBindViewHolder(@NonNull notificationViewHolder notificationViewHolder, int i) {
+    public void onBindViewHolder(@NonNull final notificationViewHolder notificationViewHolder, int i) {
         Notifications_Admin currentItem = ncard.get(i);
 
         notificationViewHolder.subject.setText(currentItem.getSubject());
         notificationViewHolder.description.setText(currentItem.getDescription());
         notificationViewHolder.pdflink.setText(currentItem.getPdflink());
+        notificationViewHolder.pdflink.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse(notificationViewHolder.pdflink.getText().toString()));
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override
