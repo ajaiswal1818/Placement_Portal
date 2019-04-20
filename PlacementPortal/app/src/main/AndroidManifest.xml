@@ -78,6 +78,7 @@
         <activity
             android:name=".Student_Application_Forms"
             android:label="@string/title_activity_student__application__forms"
+            android:windowSoftInputMode="adjustPan"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
@@ -115,6 +116,10 @@
             android:name=".Admin_ApproveNotice"
             android:label="@string/title_activity_admin__approve_notice"
             android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".FAQ"
+            android:label="@string/title_activity_admin__approve_notice"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Apply_For_Jobs"

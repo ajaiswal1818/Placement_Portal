@@ -5,31 +5,31 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".Student_Dashboard"
-    >
+    tools:context=".Student_Dashboard">
 
     <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".Student_Complete_Profile"
-        android:padding="8dp">
+        android:layout_marginBottom="60dp"
+        android:padding="8dp"
+        tools:context=".Student_Complete_Profile">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
+
             <TextView
+                android:id="@+id/acad_details_header"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="Academic Details"
                 android:layout_gravity="center"
-                android:textSize="25sp"
                 android:layout_marginTop="20dp"
+                android:text="Academic Details"
                 android:textColor="@color/colorPrimary"
-                android:id="@+id/acad_details_header"
-                />
+                android:textSize="25sp" />
 
             <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
@@ -46,27 +46,28 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
                         android:text="Secondary"
                         android:textAlignment="center"
-                        android:textSize="20sp"
                         android:textColor="@color/colorAccent"
-                        android:layout_marginTop="10dp"/>
+                        android:textSize="20sp" />
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
                         android:layout_marginHorizontal="20dp"
-                        >
+                        android:orientation="vertical">
+
                         <TextView
+                            android:id="@+id/lbl_sec_perc"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:id="@+id/lbl_sec_perc"
-                            android:textSize="18sp"
-                            android:text="Percentage"
+                            android:layout_marginTop="2dp"
                             android:paddingLeft="10dp"
                             android:paddingTop="5dp"
-                            android:layout_marginTop="2dp"
-                            android:paddingBottom="5dp"/>
+                            android:paddingBottom="5dp"
+                            android:text="Percentage"
+                            android:textSize="18sp" />
 
                         <EditText
                             android:id="@+id/txt_sec_perc"
@@ -74,27 +75,28 @@
                             android:layout_height="match_parent"
                             android:layout_marginHorizontal="15dp"
                             android:paddingTop="5dp"
+                            android:paddingRight="5dp"
                             android:paddingBottom="5dp"
                             android:singleLine="true"
-                            android:paddingRight="5dp"
-                            />
+                            android:inputType="numberDecimal"/>
                     </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
                         android:layout_marginHorizontal="20dp"
-                        >
+                        android:orientation="vertical">
+
                         <TextView
+                            android:id="@+id/lbl_sec_yop"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:id="@+id/lbl_sec_yop"
-                            android:textSize="18sp"
-                            android:text="Year of Passing"
+                            android:layout_marginTop="2dp"
                             android:paddingLeft="10dp"
                             android:paddingTop="5dp"
-                            android:layout_marginTop="2dp"
-                            android:paddingBottom="5dp"/>
+                            android:paddingBottom="5dp"
+                            android:text="Year of Passing"
+                            android:textSize="18sp" />
 
                         <EditText
                             android:id="@+id/txt_sec_yop"
@@ -102,65 +104,66 @@
                             android:layout_height="match_parent"
                             android:layout_marginHorizontal="15dp"
                             android:paddingTop="5dp"
+                            android:paddingRight="5dp"
                             android:paddingBottom="5dp"
                             android:singleLine="true"
-                            android:paddingRight="5dp"
-                            />
+                            android:inputType="number"/>
                     </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
                         android:layout_marginHorizontal="20dp"
-                        >
+                        android:orientation="vertical">
+
                         <TextView
+                            android:id="@+id/lbl_sec_board"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:id="@+id/lbl_sec_board"
-                            android:textSize="18sp"
-                            android:text="Board"
+                            android:layout_marginTop="2dp"
                             android:paddingLeft="10dp"
                             android:paddingTop="5dp"
-                            android:layout_marginTop="2dp"
-                            android:paddingBottom="5dp"/>
+                            android:paddingBottom="5dp"
+                            android:text="Board"
+                            android:textSize="18sp" />
 
                         <EditText
                             android:id="@+id/txt_sec_board"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_marginHorizontal="15dp"
+                            android:inputType="text"
                             android:paddingTop="5dp"
-                            android:paddingBottom="5dp"
-                            android:singleLine="true"
                             android:paddingRight="5dp"
-                            android:inputType="date"
-                            />
+                            android:paddingBottom="5dp"
+                            android:singleLine="true" />
                     </LinearLayout>
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
                         android:text="Higher Secondary"
                         android:textAlignment="center"
-                        android:textSize="20sp"
                         android:textColor="@color/colorAccent"
-                        android:layout_marginTop="10dp"/>
+                        android:textSize="20sp" />
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
                         android:layout_marginHorizontal="20dp"
-                        >
+                        android:orientation="vertical">
+
                         <TextView
+                            android:id="@+id/lbl_hsec_perc"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:id="@+id/lbl_hsec_perc"
-                            android:textSize="18sp"
-                            android:text="Percentage"
+                            android:layout_marginTop="2dp"
                             android:paddingLeft="10dp"
                             android:paddingTop="5dp"
-                            android:layout_marginTop="2dp"
-                            android:paddingBottom="5dp"/>
+                            android:paddingBottom="5dp"
+                            android:text="Percentage"
+                            android:textSize="18sp" />
 
                         <EditText
                             android:id="@+id/txt_hsec_perc"
@@ -168,27 +171,28 @@
                             android:layout_height="match_parent"
                             android:layout_marginHorizontal="15dp"
                             android:paddingTop="5dp"
+                            android:paddingRight="5dp"
                             android:paddingBottom="5dp"
                             android:singleLine="true"
-                            android:paddingRight="5dp"
-                            />
+                            android:inputType="numberDecimal"/>
                     </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
                         android:layout_marginHorizontal="20dp"
-                        >
+                        android:orientation="vertical">
+
                         <TextView
+                            android:id="@+id/lbl_hsec_yop"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:id="@+id/lbl_hsec_yop"
-                            android:textSize="18sp"
-                            android:text="Year of Passing"
+                            android:layout_marginTop="2dp"
                             android:paddingLeft="10dp"
                             android:paddingTop="5dp"
-                            android:layout_marginTop="2dp"
-                            android:paddingBottom="5dp"/>
+                            android:paddingBottom="5dp"
+                            android:text="Year of Passing"
+                            android:textSize="18sp" />
 
                         <EditText
                             android:id="@+id/txt_hsec_yop"
@@ -196,65 +200,66 @@
                             android:layout_height="match_parent"
                             android:layout_marginHorizontal="15dp"
                             android:paddingTop="5dp"
+                            android:paddingRight="5dp"
                             android:paddingBottom="5dp"
                             android:singleLine="true"
-                            android:paddingRight="5dp"
-                            />
+                            android:inputType="number"/>
                     </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
                         android:layout_marginHorizontal="20dp"
-                        >
+                        android:orientation="vertical">
+
                         <TextView
+                            android:id="@+id/lbl_hsec_board"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:id="@+id/lbl_hsec_board"
-                            android:textSize="18sp"
-                            android:text="Board"
+                            android:layout_marginTop="2dp"
                             android:paddingLeft="10dp"
                             android:paddingTop="5dp"
-                            android:layout_marginTop="2dp"
-                            android:paddingBottom="5dp"/>
+                            android:paddingBottom="5dp"
+                            android:text="Board"
+                            android:textSize="18sp" />
 
                         <EditText
                             android:id="@+id/txt_hsec_board"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_marginHorizontal="15dp"
+                            android:inputType="text"
                             android:paddingTop="5dp"
-                            android:paddingBottom="5dp"
-                            android:singleLine="true"
                             android:paddingRight="5dp"
-                            android:inputType="date"
-                            />
+                            android:paddingBottom="5dp"
+                            android:singleLine="true"/>
                     </LinearLayout>
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
                         android:text="Graduation"
                         android:textAlignment="center"
-                        android:textSize="20sp"
                         android:textColor="@color/colorAccent"
-                        android:layout_marginTop="10dp"/>
+                        android:textSize="20sp" />
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
                         android:layout_marginHorizontal="20dp"
-                        >
+                        android:orientation="vertical">
+
                         <TextView
+                            android:id="@+id/lbl_g_course"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:id="@+id/lbl_g_course"
-                            android:textSize="18sp"
-                            android:text="Course Name"
+                            android:layout_marginTop="2dp"
                             android:paddingLeft="10dp"
                             android:paddingTop="5dp"
-                            android:layout_marginTop="2dp"
-                            android:paddingBottom="5dp"/>
+                            android:paddingBottom="5dp"
+                            android:text="Course Name"
+                            android:textSize="18sp" />
 
                         <EditText
                             android:id="@+id/txt_g_course"
@@ -262,27 +267,28 @@
                             android:layout_height="match_parent"
                             android:layout_marginHorizontal="15dp"
                             android:paddingTop="5dp"
+                            android:paddingRight="5dp"
                             android:paddingBottom="5dp"
                             android:singleLine="true"
-                            android:paddingRight="5dp"
-                            />
+                            android:inputType="text"/>
                     </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
                         android:layout_marginHorizontal="20dp"
-                        >
+                        android:orientation="vertical">
+
                         <TextView
+                            android:id="@+id/lbl_g_ub"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:id="@+id/lbl_g_ub"
-                            android:textSize="18sp"
-                            android:text="University Board"
+                            android:layout_marginTop="2dp"
                             android:paddingLeft="10dp"
                             android:paddingTop="5dp"
-                            android:layout_marginTop="2dp"
-                            android:paddingBottom="5dp"/>
+                            android:paddingBottom="5dp"
+                            android:text="University Board"
+                            android:textSize="18sp" />
 
                         <EditText
                             android:id="@+id/txt_g_ub"
@@ -290,33 +296,34 @@
                             android:layout_height="match_parent"
                             android:layout_marginHorizontal="15dp"
                             android:paddingTop="5dp"
+                            android:paddingRight="5dp"
                             android:paddingBottom="5dp"
                             android:singleLine="true"
-                            android:paddingRight="5dp"
-                            />
+                            android:inputType="text"/>
                     </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:gravity="center">
+                        android:gravity="center"
+                        android:orientation="horizontal">
 
                         <LinearLayout
                             android:layout_width="154dp"
                             android:layout_height="wrap_content"
-                            android:orientation="vertical"
                             android:layout_marginHorizontal="20dp"
-                            >
+                            android:orientation="vertical">
+
                             <TextView
+                                android:id="@+id/lbl_g_cpi1"
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
-                                android:id="@+id/lbl_g_cpi1"
-                                android:textSize="18sp"
-                                android:text="Sem 1 CPI"
+                                android:layout_marginTop="2dp"
                                 android:paddingLeft="10dp"
                                 android:paddingTop="5dp"
-                                android:layout_marginTop="2dp"
-                                android:paddingBottom="5dp"/>
+                                android:paddingBottom="5dp"
+                                android:text="Sem 1 CPI"
+                                android:textSize="18sp" />
 
                             <EditText
                                 android:id="@+id/txt_g_cpi1"
@@ -324,65 +331,67 @@
                                 android:layout_height="match_parent"
                                 android:layout_marginHorizontal="15dp"
                                 android:paddingTop="5dp"
+                                android:paddingRight="5dp"
                                 android:paddingBottom="5dp"
                                 android:singleLine="true"
-                                android:paddingRight="5dp"
-
+                                android:inputType="numberDecimal"
                                 />
                         </LinearLayout>
+
                         <LinearLayout
                             android:layout_width="154dp"
                             android:layout_height="wrap_content"
-                            android:orientation="vertical"
                             android:layout_marginHorizontal="20dp"
-                            >
+                            android:orientation="vertical">
+
                             <TextView
+                                android:id="@+id/lbl_g_yop1"
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
-                                android:id="@+id/lbl_g_yop1"
-                                android:textSize="18sp"
-                                android:text="Year of Passing"
+                                android:layout_marginTop="2dp"
                                 android:paddingLeft="10dp"
                                 android:paddingTop="5dp"
-                                android:layout_marginTop="2dp"
-                                android:paddingBottom="5dp"/>
+                                android:paddingBottom="5dp"
+                                android:text="Year of Passing"
+                                android:textSize="18sp" />
 
                             <EditText
                                 android:id="@+id/txt_g_yop1"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_marginHorizontal="15dp"
+                                android:inputType="number"
                                 android:paddingTop="5dp"
+                                android:paddingRight="5dp"
                                 android:paddingBottom="5dp"
                                 android:singleLine="true"
-                                android:paddingRight="5dp"
-                                android:inputType="date"
                                 />
                         </LinearLayout>
 
                     </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:gravity="center">
+                        android:gravity="center"
+                        android:orientation="horizontal">
 
                         <LinearLayout
                             android:layout_width="154dp"
                             android:layout_height="wrap_content"
-                            android:orientation="vertical"
                             android:layout_marginHorizontal="20dp"
-                            >
+                            android:orientation="vertical">
+
                             <TextView
+                                android:id="@+id/lbl_g_cpi2"
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
-                                android:id="@+id/lbl_g_cpi2"
-                                android:textSize="18sp"
-                                android:text="Sem 2 CPI"
+                                android:layout_marginTop="2dp"
                                 android:paddingLeft="10dp"
                                 android:paddingTop="5dp"
-                                android:layout_marginTop="2dp"
-                                android:paddingBottom="5dp"/>
+                                android:paddingBottom="5dp"
+                                android:text="Sem 2 CPI"
+                                android:textSize="18sp" />
 
                             <EditText
                                 android:id="@+id/txt_g_cpi2"
@@ -390,167 +399,36 @@
                                 android:layout_height="match_parent"
                                 android:layout_marginHorizontal="15dp"
                                 android:paddingTop="5dp"
+                                android:paddingRight="5dp"
                                 android:paddingBottom="5dp"
                                 android:singleLine="true"
-                                android:paddingRight="5dp"
-
+                                android:inputType="numberDecimal"
                                 />
                         </LinearLayout>
+
                         <LinearLayout
                             android:layout_width="154dp"
                             android:layout_height="wrap_content"
-                            android:orientation="vertical"
                             android:layout_marginHorizontal="20dp"
-                            >
+                            android:orientation="vertical">
+
                             <TextView
+                                android:id="@+id/lbl_g_yop2"
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
-                                android:id="@+id/lbl_g_yop2"
-                                android:textSize="18sp"
-                                android:text="Year of Passing"
+                                android:layout_marginTop="2dp"
                                 android:paddingLeft="10dp"
                                 android:paddingTop="5dp"
-                                android:layout_marginTop="2dp"
-                                android:paddingBottom="5dp"/>
+                                android:paddingBottom="5dp"
+                                android:text="Year of Passing"
+                                android:textSize="18sp" />
 
                             <EditText
                                 android:id="@+id/txt_g_yop2"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_marginHorizontal="15dp"
-                                android:paddingTop="5dp"
-                                android:paddingBottom="5dp"
-                                android:singleLine="true"
-                                android:paddingRight="5dp"
-                                android:inputType="date"
-                                />
-                        </LinearLayout>
-
-                    </LinearLayout>
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:gravity="center">
-
-                        <LinearLayout
-                            android:layout_width="154dp"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            android:layout_marginHorizontal="20dp"
-                            >
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:id="@+id/lbl_g_cpi3"
-                                android:textSize="18sp"
-                                android:text="Sem 3 CPI"
-                                android:paddingLeft="10dp"
-                                android:paddingTop="5dp"
-                                android:layout_marginTop="2dp"
-                                android:paddingBottom="5dp"/>
-
-                            <EditText
-                                android:id="@+id/txt_g_cpi3"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_marginHorizontal="15dp"
-                                android:paddingTop="5dp"
-                                android:paddingBottom="5dp"
-                                android:singleLine="true"
-                                android:paddingRight="5dp"
-
-                                />
-                        </LinearLayout>
-                        <LinearLayout
-                            android:layout_width="154dp"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            android:layout_marginHorizontal="20dp"
-                            >
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:id="@+id/lbl_g_yop3"
-                                android:textSize="18sp"
-                                android:text="Year of Passing"
-                                android:paddingLeft="10dp"
-                                android:paddingTop="5dp"
-                                android:layout_marginTop="2dp"
-                                android:paddingBottom="5dp"/>
-
-                            <EditText
-                                android:id="@+id/txt_g_yop3"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_marginHorizontal="15dp"
-                                android:paddingTop="5dp"
-                                android:paddingBottom="5dp"
-                                android:singleLine="true"
-                                android:paddingRight="5dp"
-                                android:inputType="date"
-                                />
-                        </LinearLayout>
-
-                    </LinearLayout>
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:gravity="center">
-
-                        <LinearLayout
-                            android:layout_width="154dp"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            android:layout_marginHorizontal="20dp"
-                            >
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:id="@+id/lbl_g_cpi4"
-                                android:textSize="18sp"
-                                android:text="Sem 4 CPI"
-                                android:paddingLeft="10dp"
-                                android:paddingTop="5dp"
-                                android:layout_marginTop="2dp"
-                                android:paddingBottom="5dp"/>
-
-                            <EditText
-                                android:id="@+id/txt_g_cpi4"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_marginHorizontal="15dp"
-                                android:paddingTop="5dp"
-                                android:paddingBottom="5dp"
-                                android:singleLine="true"
-                                android:paddingRight="5dp"
-
-                                />
-                        </LinearLayout>
-                        <LinearLayout
-                            android:layout_width="154dp"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            android:layout_marginHorizontal="20dp"
-                            >
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:id="@+id/lbl_g_yop4"
-                                android:textSize="18sp"
-                                android:text="Year of Passing"
-                                android:paddingLeft="10dp"
-                                android:paddingTop="5dp"
-                                android:layout_marginTop="2dp"
-                                android:paddingBottom="5dp"/>
-
-                            <EditText
-                                android:id="@+id/txt_g_yop4"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_marginHorizontal="15dp"
-                                android:inputType="date"
+                                android:inputType="number"
                                 android:paddingTop="5dp"
                                 android:paddingRight="5dp"
                                 android:paddingBottom="5dp"
@@ -558,28 +436,164 @@
                         </LinearLayout>
 
                     </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:gravity="center">
+                        android:gravity="center"
+                        android:orientation="horizontal">
 
                         <LinearLayout
                             android:layout_width="154dp"
                             android:layout_height="wrap_content"
-                            android:orientation="vertical"
                             android:layout_marginHorizontal="20dp"
-                            >
+                            android:orientation="vertical">
+
                             <TextView
+                                android:id="@+id/lbl_g_cpi3"
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
-                                android:id="@+id/lbl_g_cpi5"
-                                android:textSize="18sp"
-                                android:text="Sem 5 CPI"
+                                android:layout_marginTop="2dp"
                                 android:paddingLeft="10dp"
                                 android:paddingTop="5dp"
+                                android:paddingBottom="5dp"
+                                android:text="Sem 3 CPI"
+                                android:textSize="18sp" />
+
+                            <EditText
+                                android:id="@+id/txt_g_cpi3"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginHorizontal="15dp"
+                                android:paddingTop="5dp"
+                                android:paddingRight="5dp"
+                                android:paddingBottom="5dp"
+                                android:singleLine="true"
+                                android:inputType="numberDecimal"
+                                />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="154dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="20dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/lbl_g_yop3"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
                                 android:layout_marginTop="2dp"
-                                android:paddingBottom="5dp"/>
+                                android:paddingLeft="10dp"
+                                android:paddingTop="5dp"
+                                android:paddingBottom="5dp"
+                                android:text="Year of Passing"
+                                android:textSize="18sp" />
+
+                            <EditText
+                                android:id="@+id/txt_g_yop3"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginHorizontal="15dp"
+                                android:inputType="number"
+                                android:paddingTop="5dp"
+                                android:paddingRight="5dp"
+                                android:paddingBottom="5dp"
+                                android:singleLine="true" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="154dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="20dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/lbl_g_cpi4"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_marginTop="2dp"
+                                android:paddingLeft="10dp"
+                                android:paddingTop="5dp"
+                                android:paddingBottom="5dp"
+                                android:text="Sem 4 CPI"
+                                android:textSize="18sp" />
+
+                            <EditText
+                                android:id="@+id/txt_g_cpi4"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginHorizontal="15dp"
+                                android:paddingTop="5dp"
+                                android:paddingRight="5dp"
+                                android:paddingBottom="5dp"
+                                android:singleLine="true"
+                                android:inputType="numberDecimal"
+                                />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="154dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="20dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/lbl_g_yop4"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_marginTop="2dp"
+                                android:paddingLeft="10dp"
+                                android:paddingTop="5dp"
+                                android:paddingBottom="5dp"
+                                android:text="Year of Passing"
+                                android:textSize="18sp" />
+
+                            <EditText
+                                android:id="@+id/txt_g_yop4"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginHorizontal="15dp"
+                                android:inputType="number"
+                                android:paddingTop="5dp"
+                                android:paddingRight="5dp"
+                                android:paddingBottom="5dp"
+                                android:singleLine="true"
+                                />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="154dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="20dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/lbl_g_cpi5"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_marginTop="2dp"
+                                android:paddingLeft="10dp"
+                                android:paddingTop="5dp"
+                                android:paddingBottom="5dp"
+                                android:text="Sem 5 CPI"
+                                android:textSize="18sp" />
 
                             <EditText
                                 android:id="@+id/txt_g_cpi5"
@@ -587,65 +601,67 @@
                                 android:layout_height="match_parent"
                                 android:layout_marginHorizontal="15dp"
                                 android:paddingTop="5dp"
+                                android:paddingRight="5dp"
                                 android:paddingBottom="5dp"
                                 android:singleLine="true"
-                                android:paddingRight="5dp"
-
+                                android:inputType="numberDecimal"
                                 />
                         </LinearLayout>
+
                         <LinearLayout
                             android:layout_width="154dp"
                             android:layout_height="wrap_content"
-                            android:orientation="vertical"
                             android:layout_marginHorizontal="20dp"
-                            >
+                            android:orientation="vertical">
+
                             <TextView
+                                android:id="@+id/lbl_g_yop5"
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
-                                android:id="@+id/lbl_g_yop5"
-                                android:textSize="18sp"
-                                android:text="Year of Passing"
+                                android:layout_marginTop="2dp"
                                 android:paddingLeft="10dp"
                                 android:paddingTop="5dp"
-                                android:layout_marginTop="2dp"
-                                android:paddingBottom="5dp"/>
+                                android:paddingBottom="5dp"
+                                android:text="Year of Passing"
+                                android:textSize="18sp" />
 
                             <EditText
                                 android:id="@+id/txt_g_yop5"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_marginHorizontal="15dp"
+                                android:inputType="number"
                                 android:paddingTop="5dp"
+                                android:paddingRight="5dp"
                                 android:paddingBottom="5dp"
                                 android:singleLine="true"
-                                android:paddingRight="5dp"
-                                android:inputType="date"
                                 />
                         </LinearLayout>
 
                     </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:gravity="center">
+                        android:gravity="center"
+                        android:orientation="horizontal">
 
                         <LinearLayout
                             android:layout_width="154dp"
                             android:layout_height="wrap_content"
-                            android:orientation="vertical"
                             android:layout_marginHorizontal="20dp"
-                            >
+                            android:orientation="vertical">
+
                             <TextView
+                                android:id="@+id/lbl_g_cpi6"
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
-                                android:id="@+id/lbl_g_cpi6"
-                                android:textSize="18sp"
-                                android:text="Sem 6 CPI"
+                                android:layout_marginTop="2dp"
                                 android:paddingLeft="10dp"
                                 android:paddingTop="5dp"
-                                android:layout_marginTop="2dp"
-                                android:paddingBottom="5dp"/>
+                                android:paddingBottom="5dp"
+                                android:text="Sem 6 CPI"
+                                android:textSize="18sp" />
 
                             <EditText
                                 android:id="@+id/txt_g_cpi6"
@@ -653,28 +669,29 @@
                                 android:layout_height="match_parent"
                                 android:layout_marginHorizontal="15dp"
                                 android:paddingTop="5dp"
+                                android:paddingRight="5dp"
                                 android:paddingBottom="5dp"
                                 android:singleLine="true"
-                                android:paddingRight="5dp"
-
+                                android:inputType="numberDecimal"
                                 />
                         </LinearLayout>
+
                         <LinearLayout
                             android:layout_width="154dp"
                             android:layout_height="wrap_content"
-                            android:orientation="vertical"
                             android:layout_marginHorizontal="20dp"
-                            >
+                            android:orientation="vertical">
+
                             <TextView
+                                android:id="@+id/lbl_g_yop6"
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
-                                android:id="@+id/lbl_g_yop6"
-                                android:textSize="18sp"
-                                android:text="Year of Passing"
+                                android:layout_marginTop="2dp"
                                 android:paddingLeft="10dp"
                                 android:paddingTop="5dp"
-                                android:layout_marginTop="2dp"
-                                android:paddingBottom="5dp"/>
+                                android:paddingBottom="5dp"
+                                android:text="Year of Passing"
+                                android:textSize="18sp" />
 
                             <EditText
                                 android:id="@+id/txt_g_yop6"
@@ -682,36 +699,36 @@
                                 android:layout_height="match_parent"
                                 android:layout_marginHorizontal="15dp"
                                 android:paddingTop="5dp"
+                                android:paddingRight="5dp"
                                 android:paddingBottom="5dp"
                                 android:singleLine="true"
-                                android:paddingRight="5dp"
-                                android:inputType="date"
-                                />
+                                android:inputType="number"/>
                         </LinearLayout>
 
                     </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:gravity="center">
+                        android:gravity="center"
+                        android:orientation="horizontal">
 
                         <LinearLayout
                             android:layout_width="154dp"
                             android:layout_height="wrap_content"
-                            android:orientation="vertical"
                             android:layout_marginHorizontal="20dp"
-                            >
+                            android:orientation="vertical">
+
                             <TextView
+                                android:id="@+id/lbl_g_cpi7"
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
-                                android:id="@+id/lbl_g_cpi7"
-                                android:textSize="18sp"
-                                android:text="Sem 7 CPI"
+                                android:layout_marginTop="2dp"
                                 android:paddingLeft="10dp"
                                 android:paddingTop="5dp"
-                                android:layout_marginTop="2dp"
-                                android:paddingBottom="5dp"/>
+                                android:paddingBottom="5dp"
+                                android:text="Sem 7 CPI"
+                                android:textSize="18sp" />
 
                             <EditText
                                 android:id="@+id/txt_g_cpi7"
@@ -719,65 +736,66 @@
                                 android:layout_height="match_parent"
                                 android:layout_marginHorizontal="15dp"
                                 android:paddingTop="5dp"
+                                android:paddingRight="5dp"
                                 android:paddingBottom="5dp"
                                 android:singleLine="true"
-                                android:paddingRight="5dp"
-
+                                android:inputType="numberDecimal"
                                 />
                         </LinearLayout>
+
                         <LinearLayout
                             android:layout_width="154dp"
                             android:layout_height="wrap_content"
-                            android:orientation="vertical"
                             android:layout_marginHorizontal="20dp"
-                            >
+                            android:orientation="vertical">
+
                             <TextView
+                                android:id="@+id/lbl_g_yop7"
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
-                                android:id="@+id/lbl_g_yop7"
-                                android:textSize="18sp"
-                                android:text="Year of Passing"
+                                android:layout_marginTop="2dp"
                                 android:paddingLeft="10dp"
                                 android:paddingTop="5dp"
-                                android:layout_marginTop="2dp"
-                                android:paddingBottom="5dp"/>
+                                android:paddingBottom="5dp"
+                                android:text="Year of Passing"
+                                android:textSize="18sp" />
 
                             <EditText
                                 android:id="@+id/txt_g_yop7"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_marginHorizontal="15dp"
+                                android:inputType="number"
                                 android:paddingTop="5dp"
-                                android:paddingBottom="5dp"
-                                android:singleLine="true"
                                 android:paddingRight="5dp"
-                                android:inputType="date"
-                                />
+                                android:paddingBottom="5dp"
+                                android:singleLine="true" />
                         </LinearLayout>
 
                     </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:gravity="center">
+                        android:gravity="center"
+                        android:orientation="horizontal">
 
                         <LinearLayout
                             android:layout_width="154dp"
                             android:layout_height="wrap_content"
-                            android:orientation="vertical"
                             android:layout_marginHorizontal="20dp"
-                            >
+                            android:orientation="vertical">
+
                             <TextView
+                                android:id="@+id/lbl_g_cpi8"
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
-                                android:id="@+id/lbl_g_cpi8"
-                                android:textSize="18sp"
-                                android:text="Sem 8 CPI"
+                                android:layout_marginTop="2dp"
                                 android:paddingLeft="10dp"
                                 android:paddingTop="5dp"
-                                android:layout_marginTop="2dp"
-                                android:paddingBottom="5dp"/>
+                                android:paddingBottom="5dp"
+                                android:text="Sem 8 CPI"
+                                android:textSize="18sp" />
 
                             <EditText
                                 android:id="@+id/txt_g_cpi8"
@@ -785,40 +803,40 @@
                                 android:layout_height="match_parent"
                                 android:layout_marginHorizontal="15dp"
                                 android:paddingTop="5dp"
+                                android:paddingRight="5dp"
                                 android:paddingBottom="5dp"
                                 android:singleLine="true"
-                                android:paddingRight="5dp"
-
+                                android:inputType="numberDecimal"
                                 />
                         </LinearLayout>
+
                         <LinearLayout
                             android:layout_width="154dp"
                             android:layout_height="wrap_content"
-                            android:orientation="vertical"
                             android:layout_marginHorizontal="20dp"
-                            >
+                            android:orientation="vertical">
+
                             <TextView
+                                android:id="@+id/lbl_g_yop8"
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
-                                android:id="@+id/lbl_g_yop8"
-                                android:textSize="18sp"
-                                android:text="Year of Passing"
+                                android:layout_marginTop="2dp"
                                 android:paddingLeft="10dp"
                                 android:paddingTop="5dp"
-                                android:layout_marginTop="2dp"
-                                android:paddingBottom="5dp"/>
+                                android:paddingBottom="5dp"
+                                android:text="Year of Passing"
+                                android:textSize="18sp" />
 
                             <EditText
                                 android:id="@+id/txt_g_yop8"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_marginHorizontal="15dp"
+                                android:inputType="number"
                                 android:paddingTop="5dp"
-                                android:paddingBottom="5dp"
-                                android:singleLine="true"
                                 android:paddingRight="5dp"
-                                android:inputType="date"
-                                />
+                                android:paddingBottom="5dp"
+                                android:singleLine="true" />
                         </LinearLayout>
 
                     </LinearLayout>
@@ -829,17 +847,15 @@
             </android.support.v7.widget.CardView>
 
 
-
             <TextView
+                android:id="@+id/personal_details_header"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Personal Details"
                 android:layout_gravity="center"
-                android:textSize="25sp"
                 android:layout_marginTop="20dp"
+                android:text="Personal Details"
                 android:textColor="@color/colorPrimary"
-                android:id="@+id/personal_details_header"
-                />
+                android:textSize="25sp" />
 
             <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
@@ -852,22 +868,23 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical">
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
                         android:layout_marginHorizontal="20dp"
-                        >
+                        android:orientation="vertical">
+
                         <TextView
+                            android:id="@+id/lbl_name"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:id="@+id/lbl_name"
-                            android:textSize="18sp"
-                            android:text="Name"
+                            android:layout_marginTop="2dp"
                             android:paddingLeft="10dp"
                             android:paddingTop="5dp"
-                            android:layout_marginTop="2dp"
-                            android:paddingBottom="5dp"/>
+                            android:paddingBottom="5dp"
+                            android:text="Name"
+                            android:textSize="18sp" />
 
                         <EditText
                             android:id="@+id/txt_name"
@@ -875,27 +892,28 @@
                             android:layout_height="match_parent"
                             android:layout_marginHorizontal="15dp"
                             android:paddingTop="5dp"
+                            android:paddingRight="5dp"
                             android:paddingBottom="5dp"
                             android:singleLine="true"
-                            android:paddingRight="5dp"
-                            />
+                            android:inputType="textPersonName"/>
                     </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
                         android:layout_marginHorizontal="20dp"
-                        >
+                        android:orientation="vertical">
+
                         <TextView
+                            android:id="@+id/lbl_father_name"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:id="@+id/lbl_father_name"
-                            android:textSize="18sp"
-                            android:text="Father's Name"
+                            android:layout_marginTop="2dp"
                             android:paddingLeft="10dp"
                             android:paddingTop="5dp"
-                            android:layout_marginTop="2dp"
-                            android:paddingBottom="5dp"/>
+                            android:paddingBottom="5dp"
+                            android:text="Father's Name"
+                            android:textSize="18sp" />
 
                         <EditText
                             android:id="@+id/txt_father_name"
@@ -903,56 +921,58 @@
                             android:layout_height="match_parent"
                             android:layout_marginHorizontal="15dp"
                             android:paddingTop="5dp"
+                            android:paddingRight="5dp"
                             android:paddingBottom="5dp"
                             android:singleLine="true"
-                            android:paddingRight="5dp"
-                            />
+                            android:inputType="textPersonName"/>
                     </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
                         android:layout_marginHorizontal="20dp"
-                        >
+                        android:orientation="vertical">
+
                         <TextView
+                            android:id="@+id/lbl_dob"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:id="@+id/lbl_dob"
-                            android:textSize="18sp"
-                            android:text="Date of Birth"
+                            android:layout_marginTop="2dp"
                             android:paddingLeft="10dp"
                             android:paddingTop="5dp"
-                            android:layout_marginTop="2dp"
-                            android:paddingBottom="5dp"/>
+                            android:paddingBottom="5dp"
+                            android:text="Date of Birth"
+                            android:textSize="18sp" />
 
                         <EditText
                             android:id="@+id/txt_dob"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_marginHorizontal="15dp"
+                            android:inputType="date"
                             android:paddingTop="5dp"
+                            android:paddingRight="5dp"
                             android:paddingBottom="5dp"
                             android:singleLine="true"
-                            android:paddingRight="5dp"
-                            android:inputType="date"
                             />
                     </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
                         android:layout_marginHorizontal="20dp"
-                        >
+                        android:orientation="vertical">
+
                         <TextView
+                            android:id="@+id/lbl_gender"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:id="@+id/lbl_gender"
-                            android:textSize="18sp"
-                            android:text="Gender"
+                            android:layout_marginTop="2dp"
                             android:paddingLeft="10dp"
                             android:paddingTop="5dp"
-                            android:layout_marginTop="2dp"
-                            android:paddingBottom="5dp"/>
+                            android:paddingBottom="5dp"
+                            android:text="Gender"
+                            android:textSize="18sp" />
 
                         <EditText
                             android:id="@+id/txt_gender"
@@ -960,27 +980,28 @@
                             android:layout_height="match_parent"
                             android:layout_marginHorizontal="15dp"
                             android:paddingTop="5dp"
+                            android:paddingRight="5dp"
                             android:paddingBottom="5dp"
                             android:singleLine="true"
-                            android:paddingRight="5dp"
-                            />
+                            android:inputType="text"/>
                     </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
                         android:layout_marginHorizontal="20dp"
-                        >
+                        android:orientation="vertical">
+
                         <TextView
+                            android:id="@+id/lbl_category"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:id="@+id/lbl_category"
-                            android:textSize="18sp"
-                            android:text="Category"
+                            android:layout_marginTop="2dp"
                             android:paddingLeft="10dp"
                             android:paddingTop="5dp"
-                            android:layout_marginTop="2dp"
-                            android:paddingBottom="5dp"/>
+                            android:paddingBottom="5dp"
+                            android:text="Category"
+                            android:textSize="18sp" />
 
                         <EditText
                             android:id="@+id/txt_category"
@@ -988,27 +1009,28 @@
                             android:layout_height="match_parent"
                             android:layout_marginHorizontal="15dp"
                             android:paddingTop="5dp"
+                            android:paddingRight="5dp"
                             android:paddingBottom="5dp"
                             android:singleLine="true"
-                            android:paddingRight="5dp"
-                            />
+                            android:inputType="text"/>
                     </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
                         android:layout_marginHorizontal="20dp"
-                        >
+                        android:orientation="vertical">
+
                         <TextView
+                            android:id="@+id/lbl_religion"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:id="@+id/lbl_religion"
-                            android:textSize="18sp"
-                            android:text="Religion"
+                            android:layout_marginTop="2dp"
                             android:paddingLeft="10dp"
                             android:paddingTop="5dp"
-                            android:layout_marginTop="2dp"
-                            android:paddingBottom="5dp"/>
+                            android:paddingBottom="5dp"
+                            android:text="Religion"
+                            android:textSize="18sp" />
 
                         <EditText
                             android:id="@+id/txt_religion"
@@ -1016,27 +1038,28 @@
                             android:layout_height="match_parent"
                             android:layout_marginHorizontal="15dp"
                             android:paddingTop="5dp"
+                            android:paddingRight="5dp"
                             android:paddingBottom="5dp"
                             android:singleLine="true"
-                            android:paddingRight="5dp"
-                            />
+                            android:inputType="text"/>
                     </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
                         android:layout_marginHorizontal="20dp"
-                        >
+                        android:orientation="vertical">
+
                         <TextView
+                            android:id="@+id/lbl_state"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:id="@+id/lbl_state"
-                            android:textSize="18sp"
-                            android:text="State belongs to"
+                            android:layout_marginTop="2dp"
                             android:paddingLeft="10dp"
                             android:paddingTop="5dp"
-                            android:layout_marginTop="2dp"
-                            android:paddingBottom="5dp"/>
+                            android:paddingBottom="5dp"
+                            android:text="State belongs to"
+                            android:textSize="18sp" />
 
                         <EditText
                             android:id="@+id/txt_state"
@@ -1044,27 +1067,28 @@
                             android:layout_height="match_parent"
                             android:layout_marginHorizontal="15dp"
                             android:paddingTop="5dp"
+                            android:paddingRight="5dp"
                             android:paddingBottom="5dp"
                             android:singleLine="true"
-                            android:paddingRight="5dp"
-                            />
+                            android:inputType="text"/>
                     </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
                         android:layout_marginHorizontal="20dp"
-                        >
+                        android:orientation="vertical">
+
                         <TextView
+                            android:id="@+id/lbl_address"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:id="@+id/lbl_address"
-                            android:textSize="18sp"
-                            android:text="Address"
+                            android:layout_marginTop="2dp"
                             android:paddingLeft="10dp"
                             android:paddingTop="5dp"
-                            android:layout_marginTop="2dp"
-                            android:paddingBottom="5dp"/>
+                            android:paddingBottom="5dp"
+                            android:text="Address"
+                            android:textSize="18sp" />
 
                         <EditText
                             android:id="@+id/txt_address"
@@ -1072,27 +1096,28 @@
                             android:layout_height="match_parent"
                             android:layout_marginHorizontal="15dp"
                             android:paddingTop="5dp"
+                            android:paddingRight="5dp"
                             android:paddingBottom="5dp"
                             android:singleLine="true"
-                            android:paddingRight="5dp"
-                            />
+                            android:inputType="text"/>
                     </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
                         android:layout_marginHorizontal="20dp"
-                        >
+                        android:orientation="vertical">
+
                         <TextView
+                            android:id="@+id/lbl_mobile"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:id="@+id/lbl_mobile"
-                            android:textSize="18sp"
-                            android:text="Mobile Number"
+                            android:layout_marginTop="2dp"
                             android:paddingLeft="10dp"
                             android:paddingTop="5dp"
-                            android:layout_marginTop="2dp"
-                            android:paddingBottom="5dp"/>
+                            android:paddingBottom="5dp"
+                            android:text="Mobile Number"
+                            android:textSize="18sp" />
 
                         <EditText
                             android:id="@+id/txt_mobile"
@@ -1100,27 +1125,28 @@
                             android:layout_height="match_parent"
                             android:layout_marginHorizontal="15dp"
                             android:paddingTop="5dp"
+                            android:paddingRight="5dp"
                             android:paddingBottom="5dp"
                             android:singleLine="true"
-                            android:paddingRight="5dp"
-                            />
+                            android:inputType="number"/>
                     </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
                         android:layout_marginHorizontal="20dp"
-                        >
+                        android:orientation="vertical">
+
                         <TextView
+                            android:id="@+id/lbl_phone"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:id="@+id/lbl_phone"
-                            android:textSize="18sp"
-                            android:text="Phone Number"
+                            android:layout_marginTop="2dp"
                             android:paddingLeft="10dp"
                             android:paddingTop="5dp"
-                            android:layout_marginTop="2dp"
-                            android:paddingBottom="5dp"/>
+                            android:paddingBottom="5dp"
+                            android:text="Phone Number"
+                            android:textSize="18sp" />
 
                         <EditText
                             android:id="@+id/txt_phone"
@@ -1128,27 +1154,28 @@
                             android:layout_height="match_parent"
                             android:layout_marginHorizontal="15dp"
                             android:paddingTop="5dp"
+                            android:paddingRight="5dp"
                             android:paddingBottom="5dp"
                             android:singleLine="true"
-                            android:paddingRight="5dp"
-                            />
+                            android:inputType="number"/>
                     </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
                         android:layout_marginHorizontal="20dp"
-                        >
+                        android:orientation="vertical">
+
                         <TextView
+                            android:id="@+id/lbl_email"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:id="@+id/lbl_email"
-                            android:textSize="18sp"
-                            android:text="Email Id"
+                            android:layout_marginTop="2dp"
                             android:paddingLeft="10dp"
                             android:paddingTop="5dp"
-                            android:layout_marginTop="2dp"
-                            android:paddingBottom="5dp"/>
+                            android:paddingBottom="5dp"
+                            android:text="Email Id"
+                            android:textSize="18sp" />
 
                         <EditText
                             android:id="@+id/txt_email"
@@ -1156,11 +1183,74 @@
                             android:layout_height="match_parent"
                             android:layout_marginHorizontal="15dp"
                             android:paddingTop="5dp"
+                            android:paddingRight="5dp"
                             android:paddingBottom="5dp"
                             android:singleLine="true"
-                            android:paddingRight="5dp"
-                            />
+                            android:inputType="textEmailAddress"/>
                     </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="20dp"
+                        android:orientation="vertical"
+                        android:visibility="invisible">
+
+                        <TextView
+                            android:id="@+id/lbl_email2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginTop="2dp"
+                            android:paddingLeft="10dp"
+                            android:paddingTop="5dp"
+                            android:paddingBottom="5dp"
+                            android:text="Email Id"
+                            android:textSize="18sp"
+                            android:visibility="invisible" />
+
+                        <EditText
+                            android:id="@+id/txt_email2"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginHorizontal="15dp"
+                            android:paddingTop="5dp"
+                            android:paddingRight="5dp"
+                            android:paddingBottom="5dp"
+                            android:singleLine="true"
+                            android:visibility="invisible" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="20dp"
+                        android:orientation="vertical"
+                        android:visibility="invisible">
+
+                        <TextView
+                            android:id="@+id/lbl_email1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginTop="2dp"
+                            android:paddingLeft="10dp"
+                            android:paddingTop="5dp"
+                            android:paddingBottom="5dp"
+                            android:text="Email Id"
+                            android:textSize="18sp"
+                            android:visibility="invisible" />
+
+                        <EditText
+                            android:id="@+id/txt_email1"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginHorizontal="15dp"
+                            android:paddingTop="5dp"
+                            android:paddingRight="5dp"
+                            android:paddingBottom="5dp"
+                            android:singleLine="true"
+                            android:visibility="invisible" />
+                    </LinearLayout>
+
                 </LinearLayout>
 
 

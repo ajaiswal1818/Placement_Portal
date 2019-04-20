@@ -223,7 +223,7 @@ public class Student_ChangePassword extends AppCompatActivity
     }
 
     /* Clears an account's tokens from the cache.
-     * Logically similar to "sign out" but only signs out of this app.
+     * Logically similar to0 "sign out" but only signs out of this app.
      */
     private void onSignOutClicked() {
 

@@ -62,6 +62,15 @@ public class CardArrayAdapter extends RecyclerView.Adapter<CardArrayAdapter.MyVi
                     }
                 });
             }
+            else
+            {
+                holder.line3.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Toast.makeText(context,"No file available",Toast.LENGTH_LONG);
+                    }
+                });
+            }
 
         }
     }

@@ -3,6 +3,7 @@ package com.group6.placementportal;
 import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
@@ -12,6 +13,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -95,8 +97,48 @@ public class Apply_For_Jobs extends AppCompatActivity {
         mDatabaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if(dataSnapshot.child("Jobs").child(jobs.getJob_id()).child("Applied Students").hasChild(user.getWebmailID()) || dataSnapshot.child("Student").child(user.getWebmailID()).hasChild("has_given_preferences")){
+                if(!dataSnapshot.child("Student").child(user.getWebmailID()).hasChild("AcademicDetails")){
                     btn_apply.setEnabled(false);
+                    AlertDialog.Builder mBuilder = new AlertDialog.Builder(Apply_For_Jobs.this);
+                    mBuilder.setTitle("Please Complete Your Profile");
+                    mBuilder.setCancelable(false);
+                    mBuilder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                        }
+                    });
+                    AlertDialog mDialog = mBuilder.create();
+                    mDialog.show();
+                }
+                else {
+                    if(dataSnapshot.child("Jobs").child(jobs.getJob_id()).child("Applied Students").hasChild(user.getWebmailID())){
+                        AlertDialog.Builder mBuilder = new AlertDialog.Builder(Apply_For_Jobs.this);
+                        mBuilder.setTitle("You have already applied for this Job");
+                        mBuilder.setCancelable(false);
+                        mBuilder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                            }
+                        });
+                        AlertDialog mDialog = mBuilder.create();
+                        mDialog.show();
+                        btn_apply.setEnabled(false);
+                    }
+                    else if( dataSnapshot.child("Student").child(user.getWebmailID()).hasChild("has_given_preferences")){
+                        AlertDialog.Builder mBuilder = new AlertDialog.Builder(Apply_For_Jobs.this);
+                        mBuilder.setTitle("You have already set your preferences");
+                        mBuilder.setCancelable(false);
+                        mBuilder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                            }
+                        });
+                        AlertDialog mDialog = mBuilder.create();
+                        mDialog.show();
+                        btn_apply.setEnabled(false);
+                    }
                 }
             }
 
@@ -259,6 +301,7 @@ public class Apply_For_Jobs extends AppCompatActivity {
                                             mDatabaseReference.child("Jobs").child(jobs.getJob_id()).child("Applied Students").child(user.getWebmailID()).child("Approval").setValue("No");
                                             mDatabaseReference.child("Student").child(user.getWebmailID()).child("preferences").setValue(list);
                                             Toast.makeText(Apply_For_Jobs.this,"File Upload Successful",Toast.LENGTH_SHORT).show();
+                                            btn_apply.setEnabled(false);
                                         }
                                     });
                                 }

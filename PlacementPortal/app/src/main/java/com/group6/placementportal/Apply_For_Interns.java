@@ -3,6 +3,7 @@ package com.group6.placementportal;
 import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
@@ -12,9 +13,11 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,6 +40,7 @@ public class Apply_For_Interns extends AppCompatActivity {
     private Uri pdfUri;
     private Interns interns;
     private Student user;
+    private String list;
 
     //these are the views
     private TextView fileName;
@@ -48,7 +52,7 @@ public class Apply_For_Interns extends AppCompatActivity {
 
     //TextViews
     private TextView intern_profile,intern_requirements,salary,brochure,cutoff_cpi,intern_location,company_name,company_contact,company_email,company_headquarters;
-
+    private Button btn_apply;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,6 +63,7 @@ public class Apply_For_Interns extends AppCompatActivity {
             return;
         }
 
+        btn_apply=findViewById(R.id.buttonUploadFIle);
         interns = (Interns) getIntent().getSerializableExtra("intern_profile");
         user = (Student) getIntent().getSerializableExtra("user");
 
@@ -86,6 +91,62 @@ public class Apply_For_Interns extends AppCompatActivity {
         //getting firebase objects
         mStorageReference = FirebaseStorage.getInstance().getReference();
         mDatabaseReference = FirebaseDatabase.getInstance().getReference();
+
+        mDatabaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                if(!dataSnapshot.child("Student").child(user.getWebmailID()).hasChild("AcademicDetails")){
+                    btn_apply.setEnabled(false);
+                    AlertDialog.Builder mBuilder = new AlertDialog.Builder(Apply_For_Interns.this);
+                    mBuilder.setTitle("Please Complete Your Profile");
+                    mBuilder.setCancelable(false);
+                    mBuilder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                        }
+                    });
+                    AlertDialog mDialog = mBuilder.create();
+                    mDialog.show();
+                }
+                else {
+                    if(dataSnapshot.child("Interns").child(interns.getIntern_id()).child("Applied Students").hasChild(user.getWebmailID())){
+                        AlertDialog.Builder mBuilder = new AlertDialog.Builder(Apply_For_Interns.this);
+                        mBuilder.setTitle("You have already applied for this job");
+                        mBuilder.setCancelable(false);
+                        mBuilder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                            }
+                        });
+                        AlertDialog mDialog = mBuilder.create();
+                        mDialog.show();
+                        btn_apply.setEnabled(false);
+                    }
+                    else if(dataSnapshot.child("Student").child(user.getWebmailID()).hasChild("has_given_preferences_intern")){
+                        AlertDialog.Builder mBuilder = new AlertDialog.Builder(Apply_For_Interns.this);
+                        mBuilder.setTitle("You have already set your preferences for interns");
+                        mBuilder.setCancelable(false);
+                        mBuilder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                            }
+                        });
+                        AlertDialog mDialog = mBuilder.create();
+                        mDialog.show();
+                        btn_apply.setEnabled(false);
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
 
         Log.d("TAG",interns.getCompany_id()+" ");
         mDatabaseReference.child("Company").child(interns.getCompany_id()).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -176,42 +237,93 @@ public class Apply_For_Interns extends AppCompatActivity {
     //this method is uploading the file
     //the code is same as the previous tutorial
     //so we are not explaining it
-    private void uploadFile(Uri data) {
+    private void uploadFile(final Uri data) {
         progressDialog = new ProgressDialog(this);
         progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
         progressDialog.setTitle("Uploading...");
         progressDialog.setProgress(0);
         progressDialog.show();
 
-        final StorageReference ref = mStorageReference.child("Uploads_Interns").child(interns.getIntern_id()).child(user.getWebmailID());
-        ref.putFile(data)
-                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                    @Override
-                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                        ref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                            @Override
-                            public void onSuccess(Uri uri) {
-                                progressDialog.hide();
-                                String upload = uri.toString();
-                                mDatabaseReference.child("Interns").child(interns.getIntern_id()).child("Applied Students").child(user.getWebmailID()).child("CV").setValue(upload);
-                                mDatabaseReference.child("Interns").child(interns.getIntern_id()).child("Applied Students").child(user.getWebmailID()).child("Status").setValue("0");
-                                mDatabaseReference.child("Interns").child(interns.getIntern_id()).child("Applied Students").child(user.getWebmailID()).child("Approval").setValue("No");
-                                Toast.makeText(Apply_For_Interns.this,"File Upload Successful",Toast.LENGTH_SHORT).show();
-                            }
-                        });
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
+        final StorageReference ref = mStorageReference.child("Uploads").child(interns.getIntern_id()).child(user.getWebmailID());
+        mDatabaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onFailure(@NonNull Exception e) {
-                progressDialog.hide();
-                Toast.makeText(getApplicationContext(), "File Upload Failed", Toast.LENGTH_LONG).show();
-            }
-        }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot.child("Student").child(user.getWebmailID()).hasChild("preferences_interns")) {
+                    list = dataSnapshot.child("Student").child(user.getWebmailID()).child("preferences_interns").getValue(String.class);
+                    list += ",";
+                    list += (interns.getIntern_id());
+                    ref.putFile(data)
+                            .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                                @Override
+                                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                    ref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                        @Override
+                                        public void onSuccess(Uri uri) {
+                                            progressDialog.hide();
+                                            String upload = uri.toString();
+                                            mDatabaseReference.child("Interns").child(interns.getIntern_id()).child("Applied Students").child(user.getWebmailID()).child("CV").setValue(upload);
+                                            mDatabaseReference.child("Interns").child(interns.getIntern_id()).child("Applied Students").child(user.getWebmailID()).child("Status").setValue("0");
+                                            mDatabaseReference.child("Interns").child(interns.getIntern_id()).child("Applied Students").child(user.getWebmailID()).child("Approval").setValue("No");
+                                            mDatabaseReference.child("Student").child(user.getWebmailID()).child("preferences_interns").setValue(list);
+                                            Toast.makeText(Apply_For_Interns.this,"File Upload Successful",Toast.LENGTH_SHORT).show();
+                                            btn_apply.setEnabled(false);
+                                        }
+                                    });
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            progressDialog.hide();
+                            Toast.makeText(getApplicationContext(), "File Upload Failed", Toast.LENGTH_LONG).show();
+                        }
+                    }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
 
-                int progress = (int) (100*taskSnapshot.getBytesTransferred()/taskSnapshot.getTotalByteCount());
-                progressDialog.setProgress(progress);
+                            int progress = (int) (100*taskSnapshot.getBytesTransferred()/taskSnapshot.getTotalByteCount());
+                            progressDialog.setProgress(progress);
+                        }
+                    });
+                }else{
+                    list="";
+                    list+=interns.getIntern_id();
+                    ref.putFile(data)
+                            .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                                @Override
+                                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                    ref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                        @Override
+                                        public void onSuccess(Uri uri) {
+                                            progressDialog.hide();
+                                            String upload = uri.toString();
+                                            mDatabaseReference.child("Interns").child(interns.getIntern_id()).child("Applied Students").child(user.getWebmailID()).child("CV").setValue(upload);
+                                            mDatabaseReference.child("Interns").child(interns.getIntern_id()).child("Applied Students").child(user.getWebmailID()).child("Status").setValue("0");
+                                            mDatabaseReference.child("Interns").child(interns.getIntern_id()).child("Applied Students").child(user.getWebmailID()).child("Approval").setValue("No");
+                                            mDatabaseReference.child("Student").child(user.getWebmailID()).child("preferences_interns").setValue(list);
+                                            Toast.makeText(Apply_For_Interns.this,"File Upload Successful",Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            progressDialog.hide();
+                            Toast.makeText(getApplicationContext(), "File Upload Failed", Toast.LENGTH_LONG).show();
+                        }
+                    }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
+
+                            int progress = (int) (100*taskSnapshot.getBytesTransferred()/taskSnapshot.getTotalByteCount());
+                            progressDialog.setProgress(progress);
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
             }
         });
     }
