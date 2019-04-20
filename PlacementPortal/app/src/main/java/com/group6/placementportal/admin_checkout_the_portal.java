@@ -109,10 +109,26 @@ public class admin_checkout_the_portal extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                for(DataSnapshot dataSnapshot1:dataSnapshot.getChildren()){
-                   if(dataSnapshot1.child("has_given_preferences").exists() && dataSnapshot1.child("preferences").exists() && dataSnapshot1.child("selected_for_job_ids").exists()){
+                   if(dataSnapshot1.child("has_given_preferences").exists() && dataSnapshot1.child("preferences").exists() && (dataSnapshot1.child("selected_for_job_ids").exists() || dataSnapshot1.child("selected_for_intern_ids").exists())){
                        if(dataSnapshot1.child("has_given_preferences").getValue().equals("Completed")){
                            String sorted_preferences= (String) dataSnapshot1.child("preferences").getValue();
-                           String companies_selected=(String) dataSnapshot1.child("selected_for_job_ids").getValue();
+                           String companies_selected;
+                           if(dataSnapshot1.child("selected_for_job_ids").exists() ){
+
+                               companies_selected = (String) dataSnapshot1.child("selected_for_job_ids").getValue();
+
+                           }
+
+                           else{
+                                if(dataSnapshot1.child("selected_for_intern_ids").exists()){
+                                    companies_selected = (String) dataSnapshot1.child("selected_for_intern_ids").getValue();
+
+                                }
+                                else{
+                                    companies_selected="";
+                                }
+
+                           }
                            String[] preferences=sorted_preferences.split(",");
                            String[] companies_final=companies_selected.split(",");
 

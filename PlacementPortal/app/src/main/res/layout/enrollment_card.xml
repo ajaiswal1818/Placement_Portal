@@ -37,7 +37,7 @@
             android:textSize="18sp"
             android:textStyle="bold"
             android:text="sdgfsdgsgdfg" />
-        <TextView
+        <Button
             android:id="@+id/txt_student_cv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -45,6 +45,8 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:text="CV URL"
+
+
             android:textSize="16dp"/>
 
 

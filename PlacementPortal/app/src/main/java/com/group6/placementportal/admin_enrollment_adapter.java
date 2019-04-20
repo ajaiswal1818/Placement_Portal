@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
@@ -123,7 +124,17 @@ public class admin_enrollment_adapter extends RecyclerView.Adapter<admin_enrollm
         holder.job_location.setText(students.get(position).getLocation());*/
         holder.student_name.setText(students.get(position).getFullName());
         holder.student_rno.setText(students.get(position).getRollNo());
-        holder.CV.setText(cv.get(position));
+        holder.CV.setText("Click to View CV");
+        holder.CV.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse(cv.get(position)));
+                context.startActivity(intent);
+            }
+        });
+
         Log.w("adapter admin",Integer.toString(position)+" "+students.get(position).getWebmailID());
        // reference = FirebaseDatabase.getInstance().getReference().child("Jobs");
 //        Log.w("reference adpater",reference.getRef().toString());

@@ -63,8 +63,11 @@ public class company_enrollments extends AppCompatActivity {
                 recyclerView=findViewById(R.id.enrolments_recycler);
                 adapter=new enrolment_adapter(company_enrollments.this,list,job_id,position,cv,is_job);
 
+                if(recyclerView!=null){
+                    recyclerView.clearDisappearingChildren();
                     recyclerView.setLayoutManager((new LinearLayoutManager(company_enrollments.this)));
                     recyclerView.setAdapter(adapter);
+                }
 
             }
             else if(screen==1){
@@ -73,9 +76,11 @@ public class company_enrollments extends AppCompatActivity {
 
                 adapter1=new admin_enrollment_adapter(company_enrollments.this,list,job_id,position,cv,is_job);
                 recyclerView=findViewById(R.id.enrolments_recycler);
-
+                if(recyclerView!=null){
+                    recyclerView.clearDisappearingChildren();
                     recyclerView.setLayoutManager((new LinearLayoutManager(company_enrollments.this)));
                     recyclerView.setAdapter(adapter1);
+                }
 
 
             }
@@ -89,9 +94,12 @@ public class company_enrollments extends AppCompatActivity {
                 Log.d("adapter","changed");
                 recyclerView=findViewById(R.id.enrolments_recycler);
                 adapter=new enrolment_adapter(company_enrollments.this,list,job_id,position,cv,is_job);
-
+                if(recyclerView!=null){
+                    recyclerView.clearDisappearingChildren();
                     recyclerView.setLayoutManager((new LinearLayoutManager(company_enrollments.this)));
                     recyclerView.setAdapter(adapter);
+                }
+
 
             }
             else if(screen==1){
@@ -100,8 +108,13 @@ public class company_enrollments extends AppCompatActivity {
 
                 adapter1=new admin_enrollment_adapter(company_enrollments.this,list,job_id,position,cv,is_job);
                 recyclerView=findViewById(R.id.enrolments_recycler);
+                if(recyclerView!=null){
+                    recyclerView.clearDisappearingChildren();
+
                     recyclerView.setLayoutManager((new LinearLayoutManager(company_enrollments.this)));
                     recyclerView.setAdapter(adapter1);
+                }
+
 
 
             }
@@ -191,14 +204,25 @@ public class company_enrollments extends AppCompatActivity {
         super.onBackPressed();
         screen=getIntent().getIntExtra("Screen",0);
         if(screen==0){
-            Intent act=new Intent(this,company_dashboard.class);
-            finish();
-            startActivity(act);
+
+                Intent act=new Intent(this,company_enrolments_screen1.class);
+                act.putExtra("is_job",is_job);
+                startActivity(act);
+                company_enrollments.this.finish();
+
+
+
+
         }
         else{
           //  Intent act=new Intent(this,company_dashboard.class);
             //finish();
             //startActivity(act);
+            Intent act=new Intent(this,admin_enrollments_screen1.class);
+            act.putExtra("is_job",is_job);
+
+            startActivity(act);
+            company_enrollments.this.finish();
         }
 
     }
@@ -237,6 +261,7 @@ public class company_enrollments extends AppCompatActivity {
                         .replace(R.id.container, PlaceholderFragment.newInstance(position + 1))
                         .commit();
                 is_job=getIntent().getBooleanExtra("is_job",true);
+                screen=getIntent().getIntExtra("Screen",0);
 
                 if(is_job){
                     recyclerView=findViewById(R.id.enrolments_recycler);
