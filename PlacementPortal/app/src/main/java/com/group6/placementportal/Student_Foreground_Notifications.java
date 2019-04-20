@@ -23,6 +23,7 @@ public class Student_Foreground_Notifications extends IntentService {
     private DatabaseReference reference;
     private Notifications my_Notif;
     private int Notifications_ID = 234;
+    int flag=0;
     public Student_Foreground_Notifications() {
         super("Foreground Notifications");
     }
@@ -50,40 +51,44 @@ public class Student_Foreground_Notifications extends IntentService {
         }
         else {
             user = intent.getStringExtra("user");
+            flag = intent.getIntExtra("flag",0);
             Log.d("User", "Currently Logged In ");
         }
+        if(flag==0){
+            flag=1;
+        }
+        else{
+            reference.child("Student").child(user).child("List_of_Notification_IDs").addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull final DataSnapshot dataSnapshot) {
+                    String Notif = dataSnapshot.getValue(String.class);
+                    if(Notif!=null && !Notif.equals("")) {
+                        String[] split_IDs = Notif.split("\\,");
 
-        reference.child("Student").child(user).child("List_of_Notification_IDs").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull final DataSnapshot dataSnapshot) {
-                String Notif = dataSnapshot.getValue(String.class);
-                if(Notif!=null && !Notif.equals("")) {
-                    String[] split_IDs = Notif.split("\\,");
+                        Log.d("User", "Currently Logged In ");
 
-                    Log.d("User", "Currently Logged In ");
+                        final String index_Notif = split_IDs[split_IDs.length - 1];
+                        reference.child("Notifications").addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot1) {
+                                my_Notif = dataSnapshot1.child(index_Notif).getValue(Notifications.class);
+                                showNotif(my_Notif);
+                            }
 
-                    final String index_Notif = split_IDs[split_IDs.length - 1];
-                    reference.child("Notifications").addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot dataSnapshot1) {
-                            my_Notif = dataSnapshot1.child(index_Notif).getValue(Notifications.class);
-                            showNotif(my_Notif);
-                        }
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
 
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                        }
-                    });
+                            }
+                        });
+                    }
                 }
-            }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
 
-            }
-        });
-
+                }
+            });
+        }
     }
 
 

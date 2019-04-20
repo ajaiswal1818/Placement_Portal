@@ -75,6 +75,7 @@ public class Student_Dashboard extends AppCompatActivity
 
         Intent intent = new Intent(this, Student_Foreground_Notifications.class);
         intent.putExtra("user",user.getWebmailID());
+        intent.putExtra("flag",0);
         startService(intent);
 
         sampleApp = null;
