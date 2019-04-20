@@ -81,7 +81,14 @@ public class job_profile extends AppCompatActivity {
     private String prevActivity;
     private int check = 0;
     private String job_id;
+    private ProgressDialog dialog1;
     public job_profile() {
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        job_profile.this.finish();
     }
 
     @Override
@@ -100,6 +107,7 @@ public class job_profile extends AppCompatActivity {
             Toast.makeText(job_profile.this,"NO INTERNET CONNECTION", Toast.LENGTH_LONG).show();
             return;
         }
+
         prevActivity = (String) getIntent().getSerializableExtra("PrevActivity");
         id = getIntent().getStringExtra("MyClassID");
         file = "";
@@ -136,6 +144,10 @@ public class job_profile extends AppCompatActivity {
 
         if(prevActivity.equals("recycleview"))
         {
+            dialog1 = new ProgressDialog(job_profile.this);
+            dialog1.setMessage("Please Wait");
+            dialog1.setCancelable(false);
+            dialog1.show();
             add_comp = FirebaseDatabase.getInstance().getReference("Jobs");
             add_comp.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
@@ -148,7 +160,9 @@ public class job_profile extends AppCompatActivity {
 
                 @Override
                 public void onCancelled(@NonNull DatabaseError databaseError) {
-
+                    dialog1.setCancelable(true);
+                    dialog1.hide();
+                    Toast.makeText(job_profile.this, "Oops ... network error, can't fetch details", Toast.LENGTH_LONG).show();
                 }
             });
 
@@ -260,15 +274,18 @@ public class job_profile extends AppCompatActivity {
                 public void onClick(View v) {
                     if((cpi.getText().toString().matches("\\d+\\.?\\d+") ==false && cpi.getText().toString().matches("\\d")==false)){
                         cpi.setError("Invalid CPI");
+                        Toast.makeText(job_profile.this, "Invalid Input!", Toast.LENGTH_LONG).show();
                         return;
                     }
                     double cpi_double=Double.parseDouble(cpi.getText().toString());
                     if(cpi_double>10 || cpi_double<0){
                         cpi.setError("Invalid CPI");
+                        Toast.makeText(job_profile.this, "Invalid Input!", Toast.LENGTH_LONG).show();
                         return;
                     }
                     if((ctc.getText().toString().matches("\\d+\\.?\\d+") ==false && ctc.getText().toString().matches("\\d")==false)){
                         ctc.setError("CTC can only be decimal number");
+                        Toast.makeText(job_profile.this, "Invalid Input!", Toast.LENGTH_LONG).show();
                         return;
                     }
 
@@ -312,7 +329,7 @@ public class job_profile extends AppCompatActivity {
 
                                     Intent job_list = new Intent(job_profile.this, job_list.class);
                                     job_list.putExtra("id",id);
-                                    finish();
+                                    job_profile.this.finish();
                                     startActivity(job_list);
                                 }
                             }
@@ -322,10 +339,6 @@ public class job_profile extends AppCompatActivity {
 
                             }
                         });
-
-
-
-
 
                     }
 
@@ -554,9 +567,11 @@ public class job_profile extends AppCompatActivity {
         //upload.setText("View File");
         select.setVisibility(View.INVISIBLE);
 
-        status.setText(job_det.getBrochure());
+        status.setText("Click here to download brochure");
         status.setTextColor(Color.BLUE);
         status.setPaintFlags(status.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+        dialog1.setCancelable(true);
+        dialog1.hide();
 //getBrochure!=" " check
         if(!(job_det.getBrochure().equals("")))
         {
@@ -577,7 +592,12 @@ public class job_profile extends AppCompatActivity {
         }
         else
         {
-
+            status.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(job_profile.this, "No file ", Toast.LENGTH_SHORT).show();
+                }
+            });
         }
 
     }

@@ -191,6 +191,7 @@ public class admin_notices extends AppCompatActivity {
                     add_to_company();
                     Intent next = new Intent(admin_notices.this,Admin_DashBoard.class);
                     startActivity(next);
+                    admin_notices.this.finish();
                 }
 
             }

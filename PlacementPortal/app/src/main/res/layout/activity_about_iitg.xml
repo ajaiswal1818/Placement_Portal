@@ -58,17 +58,21 @@
                             android:background="@drawable/iitglogo" />
                     </LinearLayout>
                 </LinearLayout>
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
-
-                    android:text="INDIAN INSTITUTE OF TECHNOLOGY\nGUWAHATI,ASSAM"
-                    android:textSize="15dp"
-                    android:gravity="center"
-                    android:textColor="#ffffff"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginStart="0dp"
 
                     android:layout_marginTop="150dp"
-                    />
+                    android:layout_marginEnd="0dp"
+                    android:layout_marginBottom="5dp"
+                    android:gravity="center"
+                    android:text="INDIAN INSTITUTE OF TECHNOLOGY\nGUWAHATI,ASSAM"
+                    android:textColor="#ffffff"
+                    android:textSize="15dp" />
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -109,38 +113,54 @@
                                     android:layout_marginTop="10dp"
                                     android:layout_marginBottom="10dp"
                                     />
+
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:gravity="center_horizontal"
-                                    android:layout_marginTop="50dp"
+
+                                    android:layout_alignParentStart="true"
+                                    android:layout_alignParentEnd="true"
+                                    android:layout_alignParentBottom="true"
+                                    android:layout_marginStart="10dp"
                                     android:layout_marginLeft="10dp"
+                                    android:layout_marginTop="20dp"
+                                    android:layout_marginEnd="0dp"
                                     android:layout_marginRight="10dp"
-                                    android:text="           Indian Institute of Technology Guwahati,the sixth \n member of the IIT fraternity,was established in 1994.The \n academic programme of IIT Guwahati commenced in 1995. At present the Institute has eleven departments and five inter-disciplinary academic centres covering all the major engineering, science and humanities disciplines, offering BTech, BDes, MA, MDes, MTech, MSc and PhD programmes. Within a short period of time, IIT Guwahati has been able to build up world class infrastructure for carrying out advanced research and has been equipped with state-of-the-art scientific and engineering instruments.Indian Institute of Technology Guwahati's campus is on a sprawling 285 hectares plot of land on the north bank of the river Brahmaputra around 20 kms. from the heart of the city."/>
+                                    android:layout_marginBottom="203dp"
+                                    android:gravity="center_horizontal"
+                                    android:text="           Indian Institute of Technology Guwahati,the sixth \n member of the IIT fraternity,was established in 1994.The \n academic programme of IIT Guwahati commenced in 1995. At present the Institute has eleven departments and five inter-disciplinary academic centres covering all the major engineering, science and humanities disciplines, offering BTech, BDes, MA, MDes, MTech, MSc and PhD programmes. Indian Institute of Technology Guwahati's campus is on a sprawling 285 hectares plot of land on the north bank of the river Brahmaputra around 20 kms. from the heart of the city." />
+
                                 <TextView
 
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+
+                                    android:layout_alignParentStart="true"
+                                    android:layout_alignParentEnd="true"
+                                    android:layout_alignParentBottom="true"
+                                    android:layout_marginStart="120dp"
+                                    android:layout_marginLeft="110dp"
+                                    android:layout_marginTop="113dp"
+                                    android:layout_marginEnd="107dp"
+                                    android:layout_marginBottom="41dp"
+                                    android:gravity="center"
                                     android:text="Guwahati–781039,India\n
 Phone: +91-361-2583000\n
 Fax: +91-361-2690762\n
 Email: pro@iitg.ac.in\n"
-                                    android:gravity="center"
-                                    android:layout_marginTop="320dp"
-                                    android:layout_marginLeft="110dp"
-                                    android:textColor="@color/colorAccent"/>
+                                    android:textColor="@color/colorAccent" />
 
 
                             </RelativeLayout>
+
                             <TextView
-                                android:layout_marginTop="400dp"
-                                android:layout_marginLeft="120dp"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Leran more about IITG..."
+                                android:layout_marginLeft="120dp"
+                                android:layout_marginTop="400dp"
                                 android:gravity="center_horizontal"
-                                android:textColor="#008000"
-                                android:onClick="Learn"/>
+                                android:text="Learn more about IITG..."
+                                android:textColor="#008000" />
                         </android.support.v7.widget.CardView>
 
 

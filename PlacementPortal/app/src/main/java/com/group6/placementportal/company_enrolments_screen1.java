@@ -1,5 +1,6 @@
 package com.group6.placementportal;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -29,6 +30,7 @@ public class company_enrolments_screen1 extends AppCompatActivity {
     private enrolments_screen1_adpater adapter;
     private  ArrayList<Interns> list_i;
     private company c;
+    private ProgressDialog dialog1;
     private enrolments_screen1_adapter_intern adapter_i;
 //    public company user=company_login.getUser();
     @Override
@@ -38,8 +40,14 @@ public class company_enrolments_screen1 extends AppCompatActivity {
 
         if(isNetworkAvailable()==false){
             Toast.makeText(company_enrolments_screen1.this,"NO INTERNET CONNECTION", Toast.LENGTH_LONG).show();
+            dialog1.hide();
             return;
         }
+
+        dialog1 = new ProgressDialog(company_enrolments_screen1.this);
+        dialog1.setMessage("Please Wait");
+        dialog1.setCancelable(false);
+        dialog1.show();
 
         this.c=(company) getIntent().getSerializableExtra("MyClass");
         recyclerView =findViewById(R.id.recycler_view_jobs_enrolments);
@@ -74,6 +82,8 @@ public class company_enrolments_screen1 extends AppCompatActivity {
 
 
                     }
+                    dialog1.setCancelable(true);
+                    dialog1.hide();
                     adapter = new enrolments_screen1_adpater(company_enrolments_screen1.this,list);
                     recyclerView.setAdapter(adapter);
                 }
@@ -113,6 +123,8 @@ public class company_enrolments_screen1 extends AppCompatActivity {
 
 
                     }
+                    dialog1.setCancelable(true);
+                    dialog1.hide();
                     adapter_i = new enrolments_screen1_adapter_intern(company_enrolments_screen1.this,list_i);
                     recyclerView.setAdapter(adapter_i);
                 }

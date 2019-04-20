@@ -1,6 +1,7 @@
 package com.group6.placementportal;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
@@ -49,13 +50,20 @@ public class company_profile extends AppCompatActivity {
     public company_profile() {
         jobs=new ArrayList<job>();
     }
-
+    private ProgressDialog dialog1;
     private Activity activity;
 
 
     public void onAttach(Activity activity) {
         this.activity = activity;
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        company_profile.this.finish();
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -139,14 +147,16 @@ public class company_profile extends AppCompatActivity {
                     if(contact.getText().toString().length()==0)
                     {
                         proc.setEnabled(true);
-                        Toast.makeText(company_profile.this,"Can't leave any field empty",Toast.LENGTH_LONG).show();
+                        Toast.makeText(company_profile.this,"Can't leave any field empty",Toast.LENGTH_SHORT).show();
                     }
                     if(isNumeric(contact.getText().toString())==false){
                         contact.setError("Contact No. can contain only digits");
+                        Toast.makeText(company_profile.this, "Invalid Input!", Toast.LENGTH_SHORT).show();
                         return;
                     }
                     if(contact.getText().toString().length()!=10){
                         contact.setError("Contact No. should be of 10 digits");
+                        Toast.makeText(company_profile.this, "Invalid Input!", Toast.LENGTH_SHORT).show();
                         return;
                     }
 
@@ -169,12 +179,13 @@ public class company_profile extends AppCompatActivity {
                     if(email.getText().toString().length()==0)
                     {
                         proc.setEnabled(true);
-                        Toast.makeText(company_profile.this,"Can't leave any field empty",Toast.LENGTH_LONG).show();
+                        Toast.makeText(company_profile.this,"Can't leave any field empty",Toast.LENGTH_SHORT).show();
                     }
                     String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+[\\.+[a-z]+]+";
                     if(!email.getText().toString().matches(emailPattern))
                     {
                         email.setError("Email format is incorrect");
+                        Toast.makeText(company_profile.this, "Invalid Input!", Toast.LENGTH_SHORT).show();
                         return;
                     }
                 }
@@ -196,7 +207,7 @@ public class company_profile extends AppCompatActivity {
                     if(hq.getText().toString().length()==0)
                     {
                         proc.setEnabled(true);
-                        Toast.makeText(company_profile.this,"Can't leave any field empty",Toast.LENGTH_LONG).show();
+                        Toast.makeText(company_profile.this,"Can't leave any field empty",Toast.LENGTH_SHORT).show();
                     }
                 }
 
@@ -213,7 +224,8 @@ public class company_profile extends AppCompatActivity {
                 public void onClick(View v) {
                     if(contact.getText().toString().trim().equals("")||email.getText().toString().trim().equals("")||hq.getText().toString().trim().equals(""))
                     {
-                        Toast.makeText(company_profile.this,"Can't leave any field empty",Toast.LENGTH_LONG).show();
+                        Toast.makeText(company_profile.this,"Can't leave any field empty",Toast.LENGTH_SHORT).show();
+                        return;
                     }
                     else
                     {
@@ -224,7 +236,7 @@ public class company_profile extends AppCompatActivity {
 
                         valid= FirebaseDatabase.getInstance().getReference("Company");
                         valid.child(c1.getCompany_id()).setValue(c1);
-                        Toast.makeText(company_profile.this,"Changes saved",Toast.LENGTH_LONG).show();
+                        Toast.makeText(company_profile.this,"Changes saved",Toast.LENGTH_SHORT).show();
                     }
                 }
             });
@@ -310,6 +322,7 @@ public class company_profile extends AppCompatActivity {
                     pass.putExtra("MyClassID",c1.getCompany_id());
                     pass.putExtra("Class",c1);
                     startActivity(pass);
+                    company_profile.this.finish();
                 }
             });
 
@@ -345,25 +358,30 @@ public class company_profile extends AppCompatActivity {
                 public void onClick(View v) {
                     if(username.getText().toString().contains(".")||username.getText().toString().contains("_")||username.getText().toString().contains(",")||username.getText().toString().contains(":")||username.getText().toString().contains(" ")||username.getText().toString().contains(";")){
                         username.setError("Username can't contain any special characters ");
+                        Toast.makeText(company_profile.this, "Invalid Input!", Toast.LENGTH_LONG).show();
                         return;
                     }
                     if(isNumeric(contact.getText().toString())==false){
                         contact.setError("Contact No. can contain only digits");
+                        Toast.makeText(company_profile.this, "Invalid Input!", Toast.LENGTH_LONG).show();
                         return;
                     }
                     if(contact.getText().toString().length()!=10){
                         contact.setError("Contact No. should be of 10 digits");
+                        Toast.makeText(company_profile.this, "Invalid Input!", Toast.LENGTH_LONG).show();
                         return;
                     }
                     if(!(password.getText().toString().equals(password2.getText().toString())))
                     {
                         password2.setError("Re-enter correct password");
+                        Toast.makeText(company_profile.this, "Invalid Input!", Toast.LENGTH_LONG).show();
                         return;
                     }
                     String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+[\\.+[a-z]+]+";
                     if(!email.getText().toString().matches(emailPattern))
                     {
                         email.setError("Email format is incorrect");
+                        Toast.makeText(company_profile.this, "Invalid Input!", Toast.LENGTH_LONG).show();
                         return;
                     }
                     if(name.getText().toString().trim().equals("")||sector.getText().toString().trim().equals("")||contact.getText().toString().trim().equals("")||email.getText().toString().trim().equals("")||hq.getText().toString().trim().equals("")||username.getText().toString().trim().equals("")||password.getText().toString().trim().equals(""))
@@ -374,9 +392,14 @@ public class company_profile extends AppCompatActivity {
                     if(password.getText().toString().contains(" "))
                     {
                         password.setError("Password can't contain any spaces");
+                        Toast.makeText(company_profile.this, "Invalid Input!", Toast.LENGTH_LONG).show();
                         return;
                     }
                     else {
+                        dialog1 = new ProgressDialog(company_profile.this);
+                        dialog1.setMessage("Please Wait");
+                        dialog1.setCancelable(false);
+                        dialog1.show();
                         valid= FirebaseDatabase.getInstance().getReference("Company");
                         valid.addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
@@ -387,6 +410,9 @@ public class company_profile extends AppCompatActivity {
                                 if(dataSnapshot.exists()) {
                                     if (dataSnapshot.hasChild(username.getText().toString())) {
                                         Toast.makeText(company_profile.this, "Username already exists, choose another", Toast.LENGTH_LONG).show();
+                                        dialog1.setCancelable(true);
+                                        dialog1.hide();
+                                        return;
                                     }
                                     else {
                                         company c = new company(name.getText().toString().trim(), "1", sector.getText().toString().trim(), contact.getText().toString().trim(), email.getText().toString().trim(), hq.getText().toString().trim(), username.getText().toString().trim(), encryption.encryptOrNull(password.getText().toString().trim()), "Pending");
@@ -397,6 +423,8 @@ public class company_profile extends AppCompatActivity {
                                         Intent company_login = new Intent(company_profile.this, company_login.class);
                                         finish();
                                         startActivity(company_login);
+                                        dialog1.setCancelable(true);
+                                        dialog1.hide();
                                     }
                                 }
                                 else
@@ -409,6 +437,8 @@ public class company_profile extends AppCompatActivity {
                                     Intent company_login = new Intent(company_profile.this, company_login.class);
                                     finish();
                                     startActivity(company_login);
+                                    dialog1.setCancelable(true);
+                                    dialog1.hide();
                                 }
                             }
 

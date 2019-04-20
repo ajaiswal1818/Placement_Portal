@@ -48,10 +48,10 @@ public class CardArrayAdapter extends RecyclerView.Adapter<CardArrayAdapter.MyVi
         {
             holder.line1.setText("Title : " + String.valueOf(card_array.get(position).getLine1()));
             holder.line2.setText("Description" + String.valueOf(card_array.get(position).getLine2()));
-            holder.line3.setText(String.valueOf(card_array.get(position).getLine3()));
+            holder.line3.setText("Click here to download");
 
-            final String str=holder.line3.getText().toString();
-            if(!holder.line3.getText().toString().equals(""))
+            final String str=String.valueOf(card_array.get(position).getLine3());
+            if(!String.valueOf(card_array.get(position).getLine3()).equals(""))
             {
                 holder.line3.setOnClickListener(new View.OnClickListener() {
                     @Override
