@@ -21,6 +21,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.Task;
@@ -81,6 +82,10 @@ public class GivePreference extends AppCompatActivity
                     this.getApplicationContext(),
                     R.raw.auth_config);
         }
+
+        View header = navigationView.getHeaderView(0);
+        TextView name = header.findViewById(R.id.Name_of_user);
+        name.setText(user.getFullName());
 
         reference.child("Student").child(user.getWebmailID()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -204,14 +209,15 @@ public class GivePreference extends AppCompatActivity
                             @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                 list = new ArrayList<>();
-
-                                for (String jobId : list_applied) {
-                                    Log.d(TAG, jobId);
-                                    Jobs p = dataSnapshot.child(jobId).getValue(Jobs.class);
-                                    list.add(p);
+                                if(list!=null) {
+                                    for (String jobId : list_applied) {
+                                        Log.d(TAG, jobId);
+                                        Jobs p = dataSnapshot.child(jobId).getValue(Jobs.class);
+                                        list.add(p);
+                                    }
+                                    adapter = new Adapter_Selected_Preferences(GivePreference.this, list, user);
+                                    recyclerView.setAdapter(adapter);
                                 }
-                                adapter = new Adapter_Selected_Preferences(GivePreference.this, list, user);
-                                recyclerView.setAdapter(adapter);
                             }
 
                             @Override
@@ -240,7 +246,9 @@ public class GivePreference extends AppCompatActivity
             if (drawer.isDrawerOpen(GravityCompat.START)) {
                 drawer.closeDrawer(GravityCompat.START);
             } else {
-                super.onBackPressed();
+                Intent i = new Intent(getApplicationContext(), MainLogin.class);
+                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(i);
             }
         }
 

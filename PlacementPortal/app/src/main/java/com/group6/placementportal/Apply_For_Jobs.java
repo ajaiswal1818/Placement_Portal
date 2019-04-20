@@ -244,6 +244,7 @@ public class Apply_For_Jobs extends AppCompatActivity {
         progressDialog = new ProgressDialog(this);
         progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
         progressDialog.setTitle("Uploading...");
+        progressDialog.setCancelable(false);
         progressDialog.setProgress(0);
         progressDialog.show();
 

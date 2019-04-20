@@ -3,19 +3,19 @@
     <a href="https://nitish6174.github.io/resume-generator/">CLICK HERE TO GO TO CV GENERATOR</a>
 </string>
     <string name="app_name">Placement Portal</string>
-    <string name="impor">import</string>
-    <string name="gallery">gallery</string>
-    <string name="slideshow">slideshow</string>
-    <string name="tools">tools</string>
-    <string name="title_activity_student__profile">Student_Profile</string>
+    <string name="impor">Import</string>
+    <string name="gallery">Gallery</string>
+    <string name="slideshow">Slideshow</string>
+    <string name="tools">Tools</string>
+    <string name="title_activity_student__profile">Student Profile</string>
     <string-array name="gender_dropbox">
         <item> Male </item>
         <item> Female </item>
         <item> Others </item>
     </string-array>
-    <string name="title_activity_student__dashboard">Student_Dashboard</string>
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="title_activity_student__dashboard">Student Dashboard</string>
+    <string name="navigation_drawer_open">Open Navigation Drawer</string>
+    <string name="navigation_drawer_close">Close Navigation Drawer</string>
     <string name="nav_header_title">Android Studio</string>
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
@@ -34,30 +34,30 @@
         <item>EP</item>
     </string-array>
 
-    <string name="title_activity_view__jobs">View_Jobs</string>
-    <string name="title_activity_student__notifications">Student_Notifications</string>
-    <string name="title_activity_apply__for__jobs">Apply_For_Jobs</string>
-    <string name="title_activity_apply__for__interns">Apply_For_Jobs</string>
-    <string name="title_activity_view_uploads">ViewUploadsActivity</string>
-    <string name="title_activity_student__notices">Student_Notices</string>
-    <string name="title_activity_student__change_password">Student_ChangePassword</string>
-    <string name="title_activity_company_profile">company_profile</string>
+    <string name="title_activity_view__jobs">View Jobs</string>
+    <string name="title_activity_student__notifications">Student Notifications</string>
+    <string name="title_activity_apply__for__jobs">Apply For Jobs</string>
+    <string name="title_activity_apply__for__interns">Apply For Interns</string>
+    <string name="title_activity_view_uploads">View Uploads Activity</string>
+    <string name="title_activity_student__notices">Student Notices</string>
+    <string name="title_activity_student__change_password">Student Change Password</string>
+    <string name="title_activity_company_profile">Company Profile</string>
 
 
-    <string name="title_activity_company_notices">company_notices</string>
-    <string name="title_activity_admin_notices">admin_notices</string>
-    <string name="title_activity_recipients_tab">recipients_tab</string>
-    <string name="title_activity_company_enrollments">company_enrollments</string>
+    <string name="title_activity_company_notices">Company Notices</string>
+    <string name="title_activity_admin_notices">Admin Notices</string>
+    <string name="title_activity_recipients_tab">Recipients Tab</string>
+    <string name="title_activity_company_enrollments">Company Enrollments</string>
     <string name="action_settings">Settings</string>
     <string name="section_format">Hello World from section: %1$d</string>
-    <string name="title_activity_company_enrolments_screen1">company_enrolments_screen1</string>
-    <string name="title_activity_admin_enrollments_screen1">admin_enrollments_screen1</string>
-    <string name="title_activity_admin_enrollments">admin_enrollments</string>
-    <string name="title_activity_admin_checkout_the_portal">admin_checkout_the_portal</string>
-    <string name="title_activity_admin__dash_board">Admin_DashBoard</string>
-    <string name="title_activity_jrf__application__requests">JRF_Application_Requests</string>
-    <string name="title_activity_admin__approve_notice">Admin_ApproveNotice</string>
-    <string name="dialog_title">Student-Emails</string>
+    <string name="title_activity_company_enrolments_screen1">Company Enrolments Screen</string>
+    <string name="title_activity_admin_enrollments_screen1">Admin Enrollments Screen</string>
+    <string name="title_activity_admin_enrollments">Admin Enrollments</string>
+    <string name="title_activity_admin_checkout_the_portal">Admin Checkout The Portal</string>
+    <string name="title_activity_admin__dash_board">Admin DashBoard</string>
+    <string name="title_activity_jrf__application__requests">JRF Application Requests</string>
+    <string name="title_activity_admin__approve_notice">Admin ApproveNotice</string>
+    <string name="dialog_title">Student Emails</string>
     <string name="ok_label">OK</string>
     <string name="dismiss_label">DISMISS</string>
     <string name="clear_all_label">Clear all</string>
@@ -70,23 +70,23 @@
         <item>aryamanaranya@gmail.com</item>
         <item>sunnykr1530@gmail.com</item>
     </string-array>
-    <string name="title_activity_student__requests">Student_Requests</string>
-    <string name="title_activity_student__profile__approval">Student_Profile_Approval</string>
-    <string name="title_activity_jrf__approval__profile">JRF_Approval_Profile</string>
-    <string name="title_activity_all__company__slots">All_Company_Slots</string>
-    <string name="title_activity_application__forms">Application_Forms</string>
-    <string name="title_activity_student__application__forms">Student_Application_Forms</string>
-    <string name="title_activity_view__interns">Student_Application_Forms</string>
+    <string name="title_activity_student__requests">Student Requests</string>
+    <string name="title_activity_student__profile__approval">Student Profile Approval</string>
+    <string name="title_activity_jrf__approval__profile">JRF Approval Profile</string>
+    <string name="title_activity_all__company__slots">All Company Slots</string>
+    <string name="title_activity_application__forms">Application Forms</string>
+    <string name="title_activity_student__application__forms">Student Application Forms</string>
+    <string name="title_activity_view__interns">Student Application Forms</string>
     <string name="tab_text_1">Tab 1</string>
     <string name="tab_text_2">Tab 2</string>
     <string name="tab_text_3">Tab 3</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="title_activity_give_preference">GivePreference</string>
-    <string name="title_activity_help__students">Help_Students</string>
-    <string name="title_activity_job_or_intern">job_or_intern</string>
-    <string name="title_activity_admin_job_or_intern">admin_job_or_intern</string>
-    <string name="title_activity_student__view__profile">Student_View_Profile</string>
-    <string name="title_activity_give_preference__interns">GivePreference_Interns</string>
+    <string name="title_activity_give_preference">Give Preference</string>
+    <string name="title_activity_help__students">Help Students</string>
+    <string name="title_activity_job_or_intern">Job Or Intern</string>
+    <string name="title_activity_admin_job_or_intern">Admin Job Or Intern</string>
+    <string name="title_activity_student__view__profile">Student View Profile</string>
+    <string name="title_activity_give_preference__interns">Give Preference Interns</string>
 </resources>

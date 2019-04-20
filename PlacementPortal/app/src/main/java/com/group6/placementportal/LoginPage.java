@@ -93,6 +93,7 @@ public class LoginPage extends AppCompatActivity {
         callGraphButton = findViewById(R.id.callGraph);
         //signOutButton = findViewById(R.id.clearCache);
         dialog = new ProgressDialog(LoginPage.this);
+        dialog.setCancelable(false);
 
         dialog.setMessage("Please Wait");
 
@@ -121,21 +122,21 @@ public class LoginPage extends AppCompatActivity {
         /* Attempt to get a user and acquireTokenSilent
          * If this fails we do an interactive request
          */
-        List<IAccount> accounts = null;
-
-        try {
-            accounts = sampleApp.getAccounts();
-
-            if (accounts != null && accounts.size() == 1) {
-                /* We have 1 account */
-                sampleApp.acquireTokenSilentAsync(SCOPES, accounts.get(0), getAuthSilentCallback());
-//                Toast.makeText(LoginPage.this,accounts.get(0).getUsername(), Toast.LENGTH_LONG).show();
-            } else {
-                /* We have no account or >1 account */
-            }
-        } catch (IndexOutOfBoundsException e) {
-            Log.d(TAG, "Account at this position does not exist: " + e.toString());
-        }
+//        List<IAccount> accounts = null;
+//
+//        try {
+//            accounts = sampleApp.getAccounts();
+//
+//            if (accounts != null && accounts.size() == 1) {
+//                /* We have 1 account */
+//                sampleApp.acquireTokenSilentAsync(SCOPES, accounts.get(0), getAuthSilentCallback());
+////                Toast.makeText(LoginPage.this,accounts.get(0).getUsername(), Toast.LENGTH_LONG).show();
+//            } else {
+//                /* We have no account or >1 account */
+//            }
+//        } catch (IndexOutOfBoundsException e) {
+//            Log.d(TAG, "Account at this position does not exist: " + e.toString());
+//        }
 
         Login_Details= FirebaseDatabase.getInstance().getReference();
 
@@ -381,6 +382,7 @@ public class LoginPage extends AppCompatActivity {
             I.putExtra("programme",Programme);
         }
         startActivity(I);
+        LoginPage.this.finish();
 
     }
 

@@ -36,7 +36,10 @@ public class company_notices extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        company_notices.this.finish();
+        Intent i=new Intent(company_notices.this,company_dashboard.class);
+        i.putExtra("MyClass",c);
+        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(i);
     }
 
     @Override
@@ -78,9 +81,9 @@ public class company_notices extends AppCompatActivity {
                 Toast.makeText(company_notices.this, "Oops ... something is wrong", Toast.LENGTH_LONG).show();
             }
         });
-            adapter = new CardArrayAdapter(company_notices.this,list);
-            recyclerView.setAdapter(adapter);
-        }
+        adapter = new CardArrayAdapter(company_notices.this,list);
+        recyclerView.setAdapter(adapter);
+    }
 
     private boolean isNetworkAvailable() {
         ConnectivityManager connectivityManager
@@ -90,5 +93,4 @@ public class company_notices extends AppCompatActivity {
     }
 
 }
-
 

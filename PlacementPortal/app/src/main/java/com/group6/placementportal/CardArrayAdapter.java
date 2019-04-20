@@ -67,7 +67,7 @@ public class CardArrayAdapter extends RecyclerView.Adapter<CardArrayAdapter.MyVi
                 holder.line3.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Toast.makeText(context,"No file available",Toast.LENGTH_LONG);
+                        Toast.makeText(context,"No file available",Toast.LENGTH_SHORT).show();
                     }
                 });
             }

@@ -243,6 +243,7 @@ public class Apply_For_Interns extends AppCompatActivity {
         progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
         progressDialog.setTitle("Uploading...");
         progressDialog.setProgress(0);
+        progressDialog.setCancelable(false);
         progressDialog.show();
 
         final StorageReference ref = mStorageReference.child("Uploads").child(interns.getIntern_id()).child(user.getWebmailID());

@@ -18,6 +18,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.database.DatabaseReference;
@@ -82,6 +83,10 @@ public class Student_ChangePassword extends AppCompatActivity
 //      student= Bundle data
         user = (Student) getIntent().getSerializableExtra("user");
 
+        View header = navigationView.getHeaderView(0);
+        TextView name = header.findViewById(R.id.Name_of_user);
+        name.setText(user.getFullName());
+
         sampleApp = null;
         if (sampleApp == null) {
             sampleApp = new PublicClientApplication(
@@ -134,7 +139,9 @@ public class Student_ChangePassword extends AppCompatActivity
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+            Intent i = new Intent(getApplicationContext(), MainLogin.class);
+            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(i);
         }
     }
 

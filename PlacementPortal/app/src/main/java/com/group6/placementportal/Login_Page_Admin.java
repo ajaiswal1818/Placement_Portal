@@ -48,7 +48,7 @@ public class Login_Page_Admin extends AppCompatActivity {
         Password = findViewById(R.id.password_text);
         login_button = findViewById(R.id.btn_login);
         dialog = new ProgressDialog(Login_Page_Admin.this);
-
+        dialog.setCancelable(false);
         dialog.setMessage("Please Wait");
         login_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,7 +86,7 @@ public class Login_Page_Admin extends AppCompatActivity {
                     private void updateSuccessUI() {
                         dialog.hide();
                         Intent I;
-                        I = new Intent(getApplicationContext(), Admin_DashBoard.class);
+                        I = new Intent(getApplicationContext(), Student_Requests.class);
                         startActivity(I);
 
                     }

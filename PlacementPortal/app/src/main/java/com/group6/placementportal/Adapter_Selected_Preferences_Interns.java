@@ -50,11 +50,11 @@ public class Adapter_Selected_Preferences_Interns extends RecyclerView.Adapter<A
     @Override
     public void onBindViewHolder(final MyViewHolder holder, int position) {
 
-
-        holder.company_name.setText(profiles.get(position).getCompany_name());
-        holder.job_profile.setText(profiles.get(position).getProfile());
-        holder.job_location.setText(profiles.get(position).getLocation());
-
+        if(profiles!=null) {
+            holder.company_name.setText(profiles.get(position).getCompany_name());
+            holder.job_profile.setText(profiles.get(position).getProfile());
+            holder.job_location.setText(profiles.get(position).getLocation());
+        }
     }
 
     @Override

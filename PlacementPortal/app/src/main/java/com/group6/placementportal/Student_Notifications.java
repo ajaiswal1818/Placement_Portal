@@ -17,6 +17,8 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
@@ -47,7 +49,7 @@ public class Student_Notifications extends AppCompatActivity
     private PublicClientApplication sampleApp;
     private int flag;
 
-    private static final String TAG = Student_Dashboard.class.getSimpleName();
+    private static final String TAG = Student_Notifications.class.getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,33 +83,55 @@ public class Student_Notifications extends AppCompatActivity
                     R.raw.auth_config);
         }
 
+        View header = navigationView.getHeaderView(0);
+        TextView name = header.findViewById(R.id.Name_of_user);
+        name.setText(user.getFullName());
 
-        reference = FirebaseDatabase.getInstance().getReference().child("Notifications");
-        reference.addValueEventListener(new ValueEventListener() {
+
+        reference = FirebaseDatabase.getInstance().getReference();
+        reference.child("Student").child(user.getWebmailID()).addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+            public void onDataChange(@NonNull final DataSnapshot dataSnapshot) {
                 list = new ArrayList<>();
-                for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
-                    Notifications p = dataSnapshot1.getValue(Notifications.class);
-                    String ID = p.getNotification_ID();
-                    //TO DO TASK LEFT
-                    //check for id in students list of notifications IDS and then add to the list
-                    String list_of_IDs = user.getList_of_Notification_IDs();
-                    String[] split_IDs = list_of_IDs.split("\\,");
-                    boolean flag1 = false;
-                    for (int i = 0; i < split_IDs.length; i++) {
-                        Log.d("myTag", split_IDs[i] + " " + ID + " " + split_IDs[i].equals(ID));
-                        if (split_IDs[i].equals(ID)) {
-                            flag1 = true;
+                final String list_of_IDs = dataSnapshot.child("List_of_Notification_IDs").getValue(String.class);
+                reference.child("Notifications").addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot1) {
+                        for (DataSnapshot dataSnapshot2 : dataSnapshot1.getChildren()) {
+                            Notifications p = dataSnapshot2.getValue(Notifications.class);
+                            String ID = p.getNotification_ID();
+                            //TO DO TASK LEFT
+                            //check for id in students list of notifications IDS and then add to the list
+                            if(list_of_IDs==null || list_of_IDs.equals("")){
+                                return;
+                            }
+                            else{
+                                String[] split_IDs = list_of_IDs.split("\\,");
+                                boolean flag1 = false;
+                                for (int i = 0; i < split_IDs.length; i++) {
+                                    Log.d("myTag", split_IDs[i] + " " + ID + " " + split_IDs[i].equals(ID));
+                                    if (split_IDs[i].equals(ID)) {
+                                        flag1 = true;
+                                    }
+                                }
+                                if (flag1 == true) {
+                                    list.add(p);
+                                }
+                            }
+
                         }
+                        Collections.reverse(list);
+                        adapter = new MyAdapter_Notifications(Student_Notifications.this, list);
+                        recyclerView.setAdapter(adapter);
+
                     }
-                    if (flag1 == true) {
-                        list.add(p);
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
                     }
-                }
-                Collections.reverse(list);
-                adapter = new MyAdapter_Notifications(Student_Notifications.this, list);
-                recyclerView.setAdapter(adapter);
+                });
+
             }
 
             @Override
@@ -130,16 +154,12 @@ public class Student_Notifications extends AppCompatActivity
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+            Intent i = new Intent(getApplicationContext(), MainLogin.class);
+            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(i);
         }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.activity_student__dashboard_drawer, menu);
-        return true;
-    }
 
 
     @SuppressWarnings("StatementWithEmptyBody")

@@ -320,14 +320,14 @@ public class RA_Approval_Profile extends AppCompatActivity {
     private void initData2() {
 
 
-        reference.child("Student").child(user).child("PersonalDetails").addListenerForSingleValueEvent(new ValueEventListener() {
+        reference.child("Student").child(user).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 listDataHeader = new ArrayList<>();
                 listHashMap = new HashMap<>();
                 boolean check = dataSnapshot.hasChild("PersonalDetails");
                 if (check) {
-                    pers = dataSnapshot.getValue(PersonalDetails.class);
+                    pers = dataSnapshot.child("PersonalDetails").getValue(PersonalDetails.class);
                 }
                 if (pers == null) {
                     pers = new PersonalDetails("", "", "", "", "", "", "", "", "", "", "");
@@ -378,14 +378,14 @@ public class RA_Approval_Profile extends AppCompatActivity {
     private void initData() {
 
 
-        reference.child("Student").child(user).child("AcademicDetails").addListenerForSingleValueEvent(new ValueEventListener() {
+        reference.child("Student").child(user).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 listDataHeader = new ArrayList<>();
                 listHashMap = new HashMap<>();
                 boolean check = dataSnapshot.hasChild("AcademicDetails");
                 if (check) {
-                    acads = dataSnapshot.getValue(AcademicDetails.class);
+                    acads = dataSnapshot.child("AcademicDetails").getValue(AcademicDetails.class);
                 }
                 if (acads == null) {
                     acads = new AcademicDetails("", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "");

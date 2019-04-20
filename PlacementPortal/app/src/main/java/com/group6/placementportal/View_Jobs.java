@@ -16,6 +16,8 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
@@ -78,6 +80,10 @@ public class View_Jobs extends AppCompatActivity
                     R.raw.auth_config);
         }
 
+        View header = navigationView.getHeaderView(0);
+        TextView name = header.findViewById(R.id.Name_of_user);
+        name.setText(user.getFullName());
+
 
         reference = FirebaseDatabase.getInstance().getReference().child("Jobs");
         reference.addValueEventListener(new ValueEventListener() {
@@ -136,7 +142,9 @@ public class View_Jobs extends AppCompatActivity
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+            Intent i = new Intent(getApplicationContext(), MainLogin.class);
+            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(i);
         }
     }
 

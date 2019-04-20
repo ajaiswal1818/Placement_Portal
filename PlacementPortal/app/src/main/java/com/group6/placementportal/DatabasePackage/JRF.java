@@ -114,7 +114,7 @@ public class JRF extends Fragment {
                         apply.setEnabled(false);
                     }
                 }
-                if (!dataSnapshot.hasChild("AcademicDetails")) {
+                else if (!dataSnapshot.hasChild("AcademicDetails")) {
                     AlertDialog.Builder mBuilder = new AlertDialog.Builder(getActivity());
                     mBuilder.setTitle("Complete Your Profile First");
                     mBuilder.setCancelable(false);

@@ -54,10 +54,6 @@ public class Student_Foreground_Notifications extends IntentService {
             flag = intent.getIntExtra("flag",0);
             Log.d("User", "Currently Logged In ");
         }
-        if(flag==0){
-            flag=1;
-        }
-        else{
             reference.child("Student").child(user).child("List_of_Notification_IDs").addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull final DataSnapshot dataSnapshot) {
@@ -72,7 +68,12 @@ public class Student_Foreground_Notifications extends IntentService {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot1) {
                                 my_Notif = dataSnapshot1.child(index_Notif).getValue(Notifications.class);
-                                showNotif(my_Notif);
+                                if(flag==0){
+                                    flag=1;
+                                }
+                                else {
+                                    showNotif(my_Notif);
+                                }
                             }
 
                             @Override
@@ -88,7 +89,7 @@ public class Student_Foreground_Notifications extends IntentService {
 
                 }
             });
-        }
+
     }
 
 

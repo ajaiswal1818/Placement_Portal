@@ -272,30 +272,36 @@ public class job_profile extends AppCompatActivity {
             submit.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    submit.setEnabled(false);
                     if((cpi.getText().toString().matches("\\d+\\.?\\d+") ==false && cpi.getText().toString().matches("\\d")==false)){
                         cpi.setError("Invalid CPI");
                         Toast.makeText(job_profile.this, "Invalid Input!", Toast.LENGTH_LONG).show();
+                        submit.setEnabled(true);
                         return;
                     }
                     double cpi_double=Double.parseDouble(cpi.getText().toString());
                     if(cpi_double>10 || cpi_double<0){
                         cpi.setError("Invalid CPI");
                         Toast.makeText(job_profile.this, "Invalid Input!", Toast.LENGTH_LONG).show();
+                        submit.setEnabled(true);
                         return;
                     }
                     if((ctc.getText().toString().matches("\\d+\\.?\\d+") ==false && ctc.getText().toString().matches("\\d")==false)){
                         ctc.setError("CTC can only be decimal number");
                         Toast.makeText(job_profile.this, "Invalid Input!", Toast.LENGTH_LONG).show();
+                        submit.setEnabled(true);
                         return;
                     }
 
                     if (profile.getText().toString().trim().equals("") || ctc.getText().toString().trim().equals("") || location.getText().toString().trim().equals("")||cpi.getText().toString().equals("") || dep.equals("") || job_requirements.getText().toString().equals("")) {
                         Toast.makeText(job_profile.this, "Can't leave any field empty", Toast.LENGTH_LONG).show();
+                        submit.setEnabled(true);
                         return;
                     }
                     if(file.equals(""))
                     {
                         Toast.makeText(job_profile.this, "Please upload a pdf file", Toast.LENGTH_LONG).show();
+                        submit.setEnabled(true);
                         return;
                     }
                     else {
@@ -491,7 +497,7 @@ public class job_profile extends AppCompatActivity {
                 progressDialog.setProgress(currentProgress);
                 if (currentProgress == 100) {
                     progressDialog.hide();
-                   // Toast.makeText(job_profile.this, "Successfully Uploaded", Toast.LENGTH_LONG).show();
+                    // Toast.makeText(job_profile.this, "Successfully Uploaded", Toast.LENGTH_LONG).show();
                     // remove.setVisibility(View.VISIBLE);
                 }
             }
@@ -578,11 +584,11 @@ public class job_profile extends AppCompatActivity {
             status.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                     // missing 'http://' will cause crashed
+                    // missing 'http://' will cause crashed
                     Intent intent = new Intent(Intent.ACTION_VIEW);
                     intent.setData(Uri.parse(job_det.getBrochure()));
                     startActivity(intent);
-                   // Uri uri = Uri.parse(job_det.getBrochure());
+                    // Uri uri = Uri.parse(job_det.getBrochure());
                    /* Intent view_pdf = new Intent(job_profile.this, view_pdf.class);
                     view_pdf.putExtra("url",job_det.getBranches());
                     startActivity(view_pdf);*/

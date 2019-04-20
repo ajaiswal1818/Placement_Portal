@@ -28,7 +28,7 @@
             android:layout_marginTop="20dp"
             app:cardCornerRadius="30dp"
             android:elevation="30dp"
-            app:cardBackgroundColor="#ADFF2F">
+            app:cardBackgroundColor="#673AB7">
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -47,7 +47,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     android:textSize="20dp"
-                    android:textColor="@color/colorPrimaryDark"
+                    android:textColor="@color/colorWhite"
                     android:textStyle="bold"/>
 
             </RelativeLayout>
@@ -60,7 +60,7 @@
             android:layout_marginTop="20dp"
             app:cardCornerRadius="30dp"
             android:elevation="30dp"
-            app:cardBackgroundColor="#fff0"
+            app:cardBackgroundColor="#673AB7"
             >
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -85,7 +85,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     android:textSize="20dp"
-                    android:textColor="@color/colorPrimaryDark"
+                    android:textColor="@color/colorWhite"
                     android:textStyle="bold"/>
 
             </RelativeLayout>

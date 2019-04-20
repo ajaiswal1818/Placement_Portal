@@ -40,6 +40,7 @@ public class Company_Slots_Admin_Adapter extends RecyclerView.Adapter<Company_Sl
                 Intent intent =new Intent(context,Company_Slots_Admin_second.class);
                 intent.putExtra("id",new_class.getCompanyId());
                 intent.putExtra("name",new_class.getCompanyName());
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(intent);
             }
         });

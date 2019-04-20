@@ -2,6 +2,7 @@ package com.group6.placementportal;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -23,6 +24,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.group6.placementportal.DatabasePackage.AcademicDetails;
+import com.group6.placementportal.DatabasePackage.Notifications;
 import com.group6.placementportal.DatabasePackage.PersonalDetails;
 import com.group6.placementportal.DatabasePackage.Student;
 
@@ -585,6 +587,17 @@ public class Student_Complete_Profile extends AppCompatActivity {
         databaseReference.child("Student").child(user.getWebmailID()).child("ProfilePending").setValue("Pending");
         save.setEnabled(false);
         databaseReference.child("Approve_Students").child(user.getWebmailID()).child("Student").setValue(user);
+        AlertDialog.Builder mBuilder = new AlertDialog.Builder(Student_Complete_Profile.this);
+        mBuilder.setTitle("Details Saved and left to admin for approval");
+        mBuilder.setCancelable(false);
+        mBuilder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Student_Complete_Profile.this.finish();
+            }
+        });
+        AlertDialog mDialog = mBuilder.create();
+        mDialog.show();
 
     }
 

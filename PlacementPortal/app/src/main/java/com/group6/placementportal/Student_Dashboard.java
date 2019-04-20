@@ -131,7 +131,9 @@ public class Student_Dashboard extends AppCompatActivity
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+            Intent i = new Intent(getApplicationContext(), MainLogin.class);
+            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(i);
         }
     }
 
@@ -152,7 +154,6 @@ public class Student_Dashboard extends AppCompatActivity
             Intent i = new Intent(getApplicationContext(), Student_Notifications.class);
             i.putExtra("user",user);
             startActivity(i);
-            exit();
 
         } else if (id == R.id.nav_prefr_job) {
             Intent i = new Intent(getApplicationContext(), GivePreference.class);

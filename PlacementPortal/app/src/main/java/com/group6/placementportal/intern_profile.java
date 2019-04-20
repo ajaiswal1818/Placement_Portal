@@ -272,30 +272,36 @@ public class intern_profile extends AppCompatActivity {
             submit.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    submit.setEnabled(false);
                     if((cpi.getText().toString().matches("\\d+\\.?\\d+") ==false && cpi.getText().toString().matches("\\d")==false)){
                         cpi.setError("Invalid CPI");
                         Toast.makeText(intern_profile.this, "Invalid Input!", Toast.LENGTH_LONG).show();
+                        submit.setEnabled(true);
                         return;
                     }
                     double cpi_double=Double.parseDouble(cpi.getText().toString());
                     if(cpi_double>10 || cpi_double<0){
                         cpi.setError("Invalid CPI");
                         Toast.makeText(intern_profile.this, "Invalid Input!", Toast.LENGTH_LONG).show();
+                        submit.setEnabled(true);
                         return;
                     }
                     if((ctc.getText().toString().matches("\\d+\\.?\\d+") ==false && ctc.getText().toString().matches("\\d")==false)){
                         ctc.setError("CTC can only be decimal number");
                         Toast.makeText(intern_profile.this, "Invalid Input!", Toast.LENGTH_LONG).show();
+                        submit.setEnabled(true);
                         return;
                     }
 
                     if (profile.getText().toString().trim().equals("") || ctc.getText().toString().trim().equals("") || location.getText().toString().trim().equals("")||cpi.getText().toString().equals("") || dep.equals("") || intern_requirements.getText().toString().equals("")) {
                         Toast.makeText(intern_profile.this, "Can't leave any field empty", Toast.LENGTH_LONG).show();
+                        submit.setEnabled(true);
                         return;
                     }
                     if(file.equals(""))
                     {
                         Toast.makeText(intern_profile.this, "Please upload a pdf file", Toast.LENGTH_LONG).show();
+                        submit.setEnabled(true);
                         return;
                     }
                     else {

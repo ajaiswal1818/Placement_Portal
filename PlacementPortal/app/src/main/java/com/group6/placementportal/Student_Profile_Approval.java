@@ -239,9 +239,9 @@ public class Student_Profile_Approval extends AppCompatActivity {
                                     notif.setRead(false);
                                     notif.setSubject("STUDENT PROFILE REQUEST");
                                     reference.child("Notifications").child(ID).setValue(notif);
-                                    Toast.makeText(getApplicationContext(),(acads==null)+"",Toast.LENGTH_SHORT).show();
-                                    mDatabaseReference.child("Student").child("AcademicDetails").setValue(acads);
-                                    mDatabaseReference.child("Student").child("PersonalDetails").setValue(pers);
+//                                    Toast.makeText(getApplicationContext(),(acads==null)+"",Toast.LENGTH_SHORT).show();
+                                    mDatabaseReference.child("Student").child(user.getWebmailID()).child("AcademicDetails").setValue(acads);
+                                    mDatabaseReference.child("Student").child(user.getWebmailID()).child("PersonalDetails").setValue(pers);
                                     reference.child("Student").child(user.getWebmailID()).child("ProfilePending").setValue("Completed");
                                     reference.child("Approve_Students").child(user.getWebmailID()).child("Action_Taken").setValue(true);
                                     Intent company_login=new Intent(Student_Profile_Approval.this, Student_Requests.class);

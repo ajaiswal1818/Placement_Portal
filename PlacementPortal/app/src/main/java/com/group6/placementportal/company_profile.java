@@ -245,7 +245,7 @@ public class company_profile extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
 
-
+                    goto_jobs.setEnabled(false);
                     valid= FirebaseDatabase.getInstance().getReference("Company").child(c1.getCompany_id());
                     valid.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
@@ -270,7 +270,7 @@ public class company_profile extends AppCompatActivity {
 
                         @Override
                         public void onCancelled(@NonNull DatabaseError databaseError) {
-
+                            goto_jobs.setEnabled(true);
                         }
                     });
 
@@ -283,7 +283,7 @@ public class company_profile extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
 
-
+                    goto_interns.setEnabled(false);
                     valid= FirebaseDatabase.getInstance().getReference("Company").child(c1.getCompany_id());
                     valid.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
@@ -308,7 +308,7 @@ public class company_profile extends AppCompatActivity {
 
                         @Override
                         public void onCancelled(@NonNull DatabaseError databaseError) {
-
+                            goto_interns.setEnabled(true);
                         }
                     });
 
@@ -318,6 +318,7 @@ public class company_profile extends AppCompatActivity {
             change_password.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    change_password.setEnabled(false);
                     Intent pass=new Intent(company_profile.this, company_change_password.class);
                     pass.putExtra("MyClassID",c1.getCompany_id());
                     pass.putExtra("Class",c1);
@@ -415,13 +416,14 @@ public class company_profile extends AppCompatActivity {
                                         return;
                                     }
                                     else {
+                                        proc.setEnabled(false);
                                         company c = new company(name.getText().toString().trim(), "1", sector.getText().toString().trim(), contact.getText().toString().trim(), email.getText().toString().trim(), hq.getText().toString().trim(), username.getText().toString().trim(), encryption.encryptOrNull(password.getText().toString().trim()), "Pending");
                                         c.setCompany_id(username.getText().toString());
                                         valid.child(c.getCompany_id()).setValue(c);
                                         valid.child("Max_entry").setValue(String.valueOf(max_id+1));
                                         Toast.makeText(company_profile.this, "Your request has been sent to the admin for approval.", Toast.LENGTH_LONG).show();
                                         Intent company_login = new Intent(company_profile.this, company_login.class);
-                                        finish();
+                                        company_login.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                         startActivity(company_login);
                                         dialog1.setCancelable(true);
                                         dialog1.hide();
@@ -429,13 +431,14 @@ public class company_profile extends AppCompatActivity {
                                 }
                                 else
                                 {
+                                    proc.setEnabled(false);
                                     company c = new company(name.getText().toString().trim(), "1", sector.getText().toString().trim(), contact.getText().toString().trim(), email.getText().toString().trim(), hq.getText().toString().trim(), username.getText().toString().trim(), encryption.encryptOrNull(password.getText().toString().trim()), "Pending");
                                     c.setCompany_id(username.getText().toString());
                                     valid.child(c.getCompany_id()).setValue(c);
                                     valid.child("Max_entry").setValue("1");
                                     Toast.makeText(company_profile.this, "Your request has been sent to the admin for approval.", Toast.LENGTH_LONG).show();
                                     Intent company_login = new Intent(company_profile.this, company_login.class);
-                                    finish();
+                                    company_login.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                     startActivity(company_login);
                                     dialog1.setCancelable(true);
                                     dialog1.hide();

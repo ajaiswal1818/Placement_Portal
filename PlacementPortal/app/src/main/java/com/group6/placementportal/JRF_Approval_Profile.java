@@ -84,6 +84,7 @@ public class JRF_Approval_Profile extends AppCompatActivity{
         jrf_applications = (JRF_applications) getIntent().getSerializableExtra("job_profile");
         user = jrf_applications.getWebmail();
 
+
         Log.d("TAG", user);
         reference = FirebaseDatabase.getInstance().getReference();
         mDatabaseReference = FirebaseDatabase.getInstance().getReference();
@@ -324,51 +325,84 @@ public class JRF_Approval_Profile extends AppCompatActivity{
 
     private void initData2() {
 
-
-        reference.child("Student").child(user).child("PersonalDetails").addListenerForSingleValueEvent(new ValueEventListener() {
+        reference.child("Student").child(user).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 listDataHeader = new ArrayList<>();
                 listHashMap = new HashMap<>();
-                boolean check = dataSnapshot.hasChild("PersonalDetails");
-                if (check) {
-                    pers = dataSnapshot.getValue(PersonalDetails.class);
+                if (dataSnapshot.hasChild("PersonalDetails")) {
+                    pers = dataSnapshot.child("PersonalDetails").getValue(PersonalDetails.class);
+
+                    listDataHeader.add("Personal Details");
+
+                    List<Data> PersonalDetails = new ArrayList<>();
+
+                    data = new Data("Name", pers.getName());
+                    PersonalDetails.add(data);
+                    data = new Data("Father's Name", pers.getFather_Name());
+                    PersonalDetails.add(data);
+                    data = new Data("Date of Birth", pers.getDOB());
+                    PersonalDetails.add(data);
+                    data = new Data("Gender", pers.getGender());
+                    PersonalDetails.add(data);
+                    data = new Data("Category", pers.getCategory());
+                    PersonalDetails.add(data);
+                    data = new Data("Religion", pers.getReligion());
+                    PersonalDetails.add(data);
+                    data = new Data("State belongs to", pers.getState());
+                    PersonalDetails.add(data);
+                    data = new Data("Address", pers.getAddress());
+                    PersonalDetails.add(data);
+                    data = new Data("Mobile Number", pers.getMobile());
+                    PersonalDetails.add(data);
+                    data = new Data("Phone Number", pers.getPhone());
+                    PersonalDetails.add(data);
+                    data = new Data("Email Id", pers.getEmail());
+                    PersonalDetails.add(data);
+
+
+                    listHashMap.put(listDataHeader.get(0), PersonalDetails);
+                    listAdapter = new com.group6.placementportal.ExpandableList_ViewProfile(getApplicationContext(), listDataHeader, listHashMap);
+                    listView2.setAdapter(listAdapter);
                 }
-                if (pers == null) {
-                    pers = new PersonalDetails("", "", "", "", "", "", "", "", "", "", "");
+                else{
+                    if (pers == null) {
+                        pers = new PersonalDetails("", "", "", "", "", "", "", "", "", "", "");
+                    }
+
+                    listDataHeader.add("Personal Details");
+
+                    List<Data> PersonalDetails = new ArrayList<>();
+
+                    data = new Data("Name", pers.getName());
+                    PersonalDetails.add(data);
+                    data = new Data("Father's Name", pers.getFather_Name());
+                    PersonalDetails.add(data);
+                    data = new Data("Date of Birth", pers.getDOB());
+                    PersonalDetails.add(data);
+                    data = new Data("Gender", pers.getGender());
+                    PersonalDetails.add(data);
+                    data = new Data("Category", pers.getCategory());
+                    PersonalDetails.add(data);
+                    data = new Data("Religion", pers.getReligion());
+                    PersonalDetails.add(data);
+                    data = new Data("State belongs to", pers.getState());
+                    PersonalDetails.add(data);
+                    data = new Data("Address", pers.getAddress());
+                    PersonalDetails.add(data);
+                    data = new Data("Mobile Number", pers.getMobile());
+                    PersonalDetails.add(data);
+                    data = new Data("Phone Number", pers.getPhone());
+                    PersonalDetails.add(data);
+                    data = new Data("Email Id", pers.getEmail());
+                    PersonalDetails.add(data);
+
+
+                    listHashMap.put(listDataHeader.get(0), PersonalDetails);
+                    listAdapter = new com.group6.placementportal.ExpandableList_ViewProfile(getApplicationContext(), listDataHeader, listHashMap);
+                    listView2.setAdapter(listAdapter);
                 }
 
-                listDataHeader.add("Personal Details");
-
-                List<Data> PersonalDetails = new ArrayList<>();
-
-                data = new Data("Name", pers.getName());
-                PersonalDetails.add(data);
-                data = new Data("Father's Name", pers.getFather_Name());
-                PersonalDetails.add(data);
-                data = new Data("Date of Birth", pers.getDOB());
-                PersonalDetails.add(data);
-                data = new Data("Gender", pers.getGender());
-                PersonalDetails.add(data);
-                data = new Data("Category", pers.getCategory());
-                PersonalDetails.add(data);
-                data = new Data("Religion", pers.getReligion());
-                PersonalDetails.add(data);
-                data = new Data("State belongs to", pers.getState());
-                PersonalDetails.add(data);
-                data = new Data("Address", pers.getAddress());
-                PersonalDetails.add(data);
-                data = new Data("Mobile Number", pers.getMobile());
-                PersonalDetails.add(data);
-                data = new Data("Phone Number", pers.getPhone());
-                PersonalDetails.add(data);
-                data = new Data("Email Id", pers.getEmail());
-                PersonalDetails.add(data);
-
-
-                listHashMap.put(listDataHeader.get(0), PersonalDetails);
-                listAdapter = new com.group6.placementportal.ExpandableList_ViewProfile(getApplicationContext(), listDataHeader, listHashMap);
-                listView2.setAdapter(listAdapter);
             }
 
             @Override
@@ -383,83 +417,150 @@ public class JRF_Approval_Profile extends AppCompatActivity{
     private void initData() {
 
 
-        reference.child("Student").child(user).child("AcademicDetails").addListenerForSingleValueEvent(new ValueEventListener() {
+        reference.child("Student").child(user).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 listDataHeader = new ArrayList<>();
                 listHashMap = new HashMap<>();
-                boolean check = dataSnapshot.hasChild("AcademicDetails");
-                if (check) {
-                    acads = dataSnapshot.getValue(AcademicDetails.class);
+                if (dataSnapshot.hasChild("AcademicDetails")) {
+                    acads = dataSnapshot.child("AcademicDetails").getValue(AcademicDetails.class);
+
+                    listDataHeader.add("Secondary");
+                    listDataHeader.add("Higher Secondary");
+                    listDataHeader.add("Graduation");
+
+                    List<Data> Secondary = new ArrayList<>();
+                    data = new Data("Percentage", acads.getSec_perc());
+                    Secondary.add(data);
+                    data = new Data("Year of Passing", acads.getSec_year());
+                    Secondary.add(data);
+                    data = new Data("Board", acads.getSec_board());
+                    Secondary.add(data);
+
+                    List<Data> HigherSecondary = new ArrayList<>();
+                    data = new Data("Percentage", acads.getHighsec_perc());
+                    HigherSecondary.add(data);
+                    data = new Data("Year of Passing", acads.getHighsec_year());
+                    HigherSecondary.add(data);
+                    data = new Data("Board", acads.getHighsec_board());
+                    HigherSecondary.add(data);
+
+                    List<Data> Graduation = new ArrayList<>();
+                    data = new Data("Course Name", acads.getCourse());
+                    Graduation.add(data);
+                    data = new Data("University Board", acads.getUniv_board());
+                    Graduation.add(data);
+                    data = new Data("Semester 1 CPI", acads.getSem1cpi());
+                    Graduation.add(data);
+                    data = new Data("Date of Passing", acads.getSem1date());
+                    Graduation.add(data);
+                    data = new Data("Semester 2 CPI", acads.getSem2cpi());
+                    Graduation.add(data);
+                    data = new Data("Date of Passing", acads.getSem2date());
+                    Graduation.add(data);
+                    data = new Data("Semester 3 CPI", acads.getSem3cpi());
+                    Graduation.add(data);
+                    data = new Data("Date of Passing", acads.getSem3date());
+                    Graduation.add(data);
+                    data = new Data("Semester 4 CPI", acads.getSem4cpi());
+                    Graduation.add(data);
+                    data = new Data("Date of Passing", acads.getSem4date());
+                    Graduation.add(data);
+                    data = new Data("Semester 5 CPI", acads.getSem5cpi());
+                    Graduation.add(data);
+                    data = new Data("Date of Passing", acads.getSem5date());
+                    Graduation.add(data);
+                    data = new Data("Semester 6 CPI", acads.getSem6cpi());
+                    Graduation.add(data);
+                    data = new Data("Date of Passing", acads.getSem6date());
+                    Graduation.add(data);
+                    data = new Data("Semester 7 CPI", acads.getSem7cpi());
+                    Graduation.add(data);
+                    data = new Data("Date of Passing", acads.getSem7date());
+                    Graduation.add(data);
+                    data = new Data("Semester 8 CPI", acads.getSem8cpi());
+                    Graduation.add(data);
+                    data = new Data("Date of Passing", acads.getSem8date());
+                    Graduation.add(data);
+
+
+                    listHashMap.put(listDataHeader.get(0), Secondary);
+                    listHashMap.put(listDataHeader.get(1), HigherSecondary);
+                    listHashMap.put(listDataHeader.get(2), Graduation);
+                    listAdapter = new com.group6.placementportal.ExpandableList_ViewProfile(getApplicationContext(), listDataHeader, listHashMap);
+                    listView.setAdapter(listAdapter);
                 }
-                if (acads == null) {
-                    acads = new AcademicDetails("", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "");
+                else{
+                    if (acads == null) {
+                        acads = new AcademicDetails("", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "");
+                    }
+
+                    listDataHeader.add("Secondary");
+                    listDataHeader.add("Higher Secondary");
+                    listDataHeader.add("Graduation");
+
+                    List<Data> Secondary = new ArrayList<>();
+                    data = new Data("Percentage", acads.getSec_perc());
+                    Secondary.add(data);
+                    data = new Data("Year of Passing", acads.getSec_year());
+                    Secondary.add(data);
+                    data = new Data("Board", acads.getSec_board());
+                    Secondary.add(data);
+
+                    List<Data> HigherSecondary = new ArrayList<>();
+                    data = new Data("Percentage", acads.getHighsec_perc());
+                    HigherSecondary.add(data);
+                    data = new Data("Year of Passing", acads.getHighsec_year());
+                    HigherSecondary.add(data);
+                    data = new Data("Board", acads.getHighsec_board());
+                    HigherSecondary.add(data);
+
+                    List<Data> Graduation = new ArrayList<>();
+                    data = new Data("Course Name", acads.getCourse());
+                    Graduation.add(data);
+                    data = new Data("University Board", acads.getUniv_board());
+                    Graduation.add(data);
+                    data = new Data("Semester 1 CPI", acads.getSem1cpi());
+                    Graduation.add(data);
+                    data = new Data("Date of Passing", acads.getSem1date());
+                    Graduation.add(data);
+                    data = new Data("Semester 2 CPI", acads.getSem2cpi());
+                    Graduation.add(data);
+                    data = new Data("Date of Passing", acads.getSem2date());
+                    Graduation.add(data);
+                    data = new Data("Semester 3 CPI", acads.getSem3cpi());
+                    Graduation.add(data);
+                    data = new Data("Date of Passing", acads.getSem3date());
+                    Graduation.add(data);
+                    data = new Data("Semester 4 CPI", acads.getSem4cpi());
+                    Graduation.add(data);
+                    data = new Data("Date of Passing", acads.getSem4date());
+                    Graduation.add(data);
+                    data = new Data("Semester 5 CPI", acads.getSem5cpi());
+                    Graduation.add(data);
+                    data = new Data("Date of Passing", acads.getSem5date());
+                    Graduation.add(data);
+                    data = new Data("Semester 6 CPI", acads.getSem6cpi());
+                    Graduation.add(data);
+                    data = new Data("Date of Passing", acads.getSem6date());
+                    Graduation.add(data);
+                    data = new Data("Semester 7 CPI", acads.getSem7cpi());
+                    Graduation.add(data);
+                    data = new Data("Date of Passing", acads.getSem7date());
+                    Graduation.add(data);
+                    data = new Data("Semester 8 CPI", acads.getSem8cpi());
+                    Graduation.add(data);
+                    data = new Data("Date of Passing", acads.getSem8date());
+                    Graduation.add(data);
+
+
+                    listHashMap.put(listDataHeader.get(0), Secondary);
+                    listHashMap.put(listDataHeader.get(1), HigherSecondary);
+                    listHashMap.put(listDataHeader.get(2), Graduation);
+                    listAdapter = new com.group6.placementportal.ExpandableList_ViewProfile(getApplicationContext(), listDataHeader, listHashMap);
+                    listView.setAdapter(listAdapter);
                 }
 
-                listDataHeader.add("Secondary");
-                listDataHeader.add("Higher Secondary");
-                listDataHeader.add("Graduation");
-
-                List<Data> Secondary = new ArrayList<>();
-                data = new Data("Percentage", acads.getSec_perc());
-                Secondary.add(data);
-                data = new Data("Year of Passing", acads.getSec_year());
-                Secondary.add(data);
-                data = new Data("Board", acads.getSec_board());
-                Secondary.add(data);
-
-                List<Data> HigherSecondary = new ArrayList<>();
-                data = new Data("Percentage", acads.getHighsec_perc());
-                HigherSecondary.add(data);
-                data = new Data("Year of Passing", acads.getHighsec_year());
-                HigherSecondary.add(data);
-                data = new Data("Board", acads.getHighsec_board());
-                HigherSecondary.add(data);
-
-                List<Data> Graduation = new ArrayList<>();
-                data = new Data("Course Name", acads.getCourse());
-                Graduation.add(data);
-                data = new Data("University Board", acads.getUniv_board());
-                Graduation.add(data);
-                data = new Data("Semester 1 CPI", acads.getSem1cpi());
-                Graduation.add(data);
-                data = new Data("Date of Passing", acads.getSem1date());
-                Graduation.add(data);
-                data = new Data("Semester 2 CPI", acads.getSem2cpi());
-                Graduation.add(data);
-                data = new Data("Date of Passing", acads.getSem2date());
-                Graduation.add(data);
-                data = new Data("Semester 3 CPI", acads.getSem3cpi());
-                Graduation.add(data);
-                data = new Data("Date of Passing", acads.getSem3date());
-                Graduation.add(data);
-                data = new Data("Semester 4 CPI", acads.getSem4cpi());
-                Graduation.add(data);
-                data = new Data("Date of Passing", acads.getSem4date());
-                Graduation.add(data);
-                data = new Data("Semester 5 CPI", acads.getSem5cpi());
-                Graduation.add(data);
-                data = new Data("Date of Passing", acads.getSem5date());
-                Graduation.add(data);
-                data = new Data("Semester 6 CPI", acads.getSem6cpi());
-                Graduation.add(data);
-                data = new Data("Date of Passing", acads.getSem6date());
-                Graduation.add(data);
-                data = new Data("Semester 7 CPI", acads.getSem7cpi());
-                Graduation.add(data);
-                data = new Data("Date of Passing", acads.getSem7date());
-                Graduation.add(data);
-                data = new Data("Semester 8 CPI", acads.getSem8cpi());
-                Graduation.add(data);
-                data = new Data("Date of Passing", acads.getSem8date());
-                Graduation.add(data);
-
-
-                listHashMap.put(listDataHeader.get(0), Secondary);
-                listHashMap.put(listDataHeader.get(1), HigherSecondary);
-                listHashMap.put(listDataHeader.get(2), Graduation);
-                listAdapter = new com.group6.placementportal.ExpandableList_ViewProfile(getApplicationContext(), listDataHeader, listHashMap);
-                listView.setAdapter(listAdapter);
             }
 
             @Override
