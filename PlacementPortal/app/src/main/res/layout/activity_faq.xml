@@ -232,4 +232,4 @@ recruitment pattern."
             </android.support.v7.widget.CardView>
         </LinearLayout>
     </ScrollView>
-</android.support.constraint.ConstraintLayout>
+</ScrollView>
