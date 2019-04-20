@@ -282,7 +282,7 @@ public class company_enrollments extends AppCompatActivity {
                             {
 
                                 p = dataSnapshot1.getValue(Student.class);
-                                if(s_list.contains(p.getWebmailID()) && dataSnapshot1.child("preferences").exists() && dataSnapshot1.child("preferences").equals("Completed")){
+                                if(s_list.contains(p.getWebmailID())     ){
                                     Log.w("added a student lev1 in jobs",p.getWebmailID());
                                     check_if_to_be_shown(p,job_id,position);
 
@@ -321,13 +321,13 @@ public class company_enrollments extends AppCompatActivity {
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                             recyclerView=findViewById(R.id.enrolments_recycler);
                             list = new ArrayList<Student>();
-                            Log.w("Interns","yeaa ");
+                            Log.w("Interns!!!!","yeaa ");
                             ArrayList <String> s_list= getIntent().getStringArrayListExtra("MyClass");
                             for(DataSnapshot dataSnapshot1: dataSnapshot.getChildren())
                             {
 
                                 p = dataSnapshot1.getValue(Student.class);
-                                if(s_list.contains(p.getWebmailID())){
+                                if(s_list.contains(p.getWebmailID()) ){
                                     Log.w("added a student lev1",p.getWebmailID());
                                     check_if_to_be_shown(p,job_id,position);
 

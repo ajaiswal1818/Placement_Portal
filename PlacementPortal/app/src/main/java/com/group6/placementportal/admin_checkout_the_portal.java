@@ -131,13 +131,21 @@ public class admin_checkout_the_portal extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                for(DataSnapshot dataSnapshot1:dataSnapshot.getChildren()){
-                   if(dataSnapshot1.child("has_given_preferences").exists() && dataSnapshot1.child("preferences").exists() && (dataSnapshot1.child("selected_for_job_ids").exists() || dataSnapshot1.child("selected_for_intern_ids").exists())){
-                       if(dataSnapshot1.child("has_given_preferences").getValue().equals("Completed")){
-                           String sorted_preferences= (String) dataSnapshot1.child("preferences").getValue();
+                   if( ( dataSnapshot1.child("has_given_preferences").exists() || dataSnapshot1.child("has_given_preferences_intern").exists() ) && (dataSnapshot1.child("preferences").exists() || dataSnapshot1.child("preferences_intern").exists() )&& (dataSnapshot1.child("selected_for_job_ids").exists() || dataSnapshot1.child("selected_for_intern_ids").exists())){
+                       if( dataSnapshot1.child("has_given_preferences").getValue().equals("Completed")){
+                           String sorted_preferences;
+
                            String companies_selected;
                            if(dataSnapshot1.child("selected_for_job_ids").exists() ){
 
                                companies_selected = (String) dataSnapshot1.child("selected_for_job_ids").getValue();
+                               if(dataSnapshot1.child("preferences").exists()){
+                                   sorted_preferences = (String) dataSnapshot1.child("preferences").getValue();
+                               }
+                               else{
+                                   sorted_preferences="";
+                               }
+
 
                            }
 
@@ -149,6 +157,12 @@ public class admin_checkout_the_portal extends AppCompatActivity {
                                 else{
                                     companies_selected="";
                                 }
+                               if(dataSnapshot1.child("preferences_intern").exists()){
+                                   sorted_preferences = (String) dataSnapshot1.child("preferences_intern").getValue();
+                               }
+                               else{
+                                   sorted_preferences="";
+                               }
 
                            }
                            String[] preferences=sorted_preferences.split(",");
