@@ -65,15 +65,6 @@ public class Student_Profile_Approval extends AppCompatActivity {
         }
 
 
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-
         mDatabaseReference = FirebaseDatabase.getInstance().getReference();
         mDatabaseReference2 = FirebaseDatabase.getInstance().getReference();
         mDatabaseReference3 = FirebaseDatabase.getInstance().getReference();

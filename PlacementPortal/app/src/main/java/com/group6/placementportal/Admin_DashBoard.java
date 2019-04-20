@@ -74,22 +74,26 @@ public class Admin_DashBoard extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_jrf_application_requests) {
-            Intent i = new Intent(getApplicationContext(), RA_Application_Requests.class);
+            Intent i = new Intent(getApplicationContext(), JRF_Application_Requests.class);
             startActivity(i);
 
         } else if (id == R.id.nav_approve_notice) {
             Intent i = new Intent(getApplicationContext(), Admin_ApproveNotice.class);
             startActivity(i);
-        }
-        else if (id== R.id.Company_slots){
+
+        } else if (id== R.id.Company_slots){
             Intent i = new Intent(getApplicationContext(), Company_Slots_Admin.class);
             startActivity(i);
-        }else if(id==R.id.nav_signout){
+
+        } else if(id==R.id.nav_signout){
+            Intent intent = new Intent(getApplicationContext(), Admin_DashBoard.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
             Intent i = new Intent(getApplicationContext(), Login_Page_Admin.class);
             startActivity(i);
-            Admin_DashBoard.this.finish();
-        }
-        else if (id== R.id.nav_approve_company){
+            exit();
+
+        } else if (id== R.id.nav_approve_company){
             reference= FirebaseDatabase.getInstance().getReference("Company");
             reference.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
@@ -126,31 +130,47 @@ public class Admin_DashBoard extends AppCompatActivity
                 }
             });
 
-        }
-        else if (id== R.id.nav_manage_enroll){
+        } else if (id== R.id.nav_manage_enroll){
             Intent i = new Intent(getApplicationContext(), admin_job_or_intern.class);
             startActivity(i);
-        }
-        else if (id== R.id.nav_notice_to_company){
+
+        } else if (id== R.id.nav_notice_to_company){
             Intent i = new Intent(getApplicationContext(), admin_notices.class);
             startActivity(i);
-        }
-        else if (id== R.id.nav_checkout){
+
+        } else if (id== R.id.nav_checkout){
             Intent i = new Intent(getApplicationContext(), admin_checkout_the_portal.class);
             startActivity(i);
-        }
-        else if (id== R.id.nav_list_notifications){
+
+        } else if (id== R.id.nav_list_notifications){
             Intent i = new Intent(getApplicationContext(), list_notification.class);
             startActivity(i);
-        }
-        else if (id== R.id.nav_emails){
+
+        } else if (id== R.id.nav_emails){
             Intent i = new Intent(getApplicationContext(), sending_emails.class);
             startActivity(i);
+
+        } else if (id== R.id.nav_approve_student){
+            Intent i = new Intent(getApplicationContext(), Student_Profile_Approval.class);
+            startActivity(i);
+
+        } else if (id== R.id.nav_ra_application_requests){
+            Intent i = new Intent(getApplicationContext(), RA_Application_Requests.class);
+            startActivity(i);
+
+        } else if (id== R.id.nav_change_pass){
+            Intent i = new Intent(getApplicationContext(), admin_change_password.class);
+            startActivity(i);
+
         }
 
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void exit(){
+        Admin_DashBoard.this.finish();
     }
 }

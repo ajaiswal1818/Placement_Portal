@@ -17,10 +17,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:windowSoftInputMode="adjustPan">
+        <activity android:name=".about_iitg"></activity>
         <activity
             android:name=".Student_View_Profile"
             android:label="@string/title_activity_student__view__profile"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Student_Register" />
         <activity
             android:name=".admin_job_or_intern"
@@ -85,7 +86,7 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".sending_emails" />
         <activity android:name=".list_notification" />
-        <activity android:name=".Sending_Notifications"></activity>
+        <activity android:name=".Sending_Notifications" />
         <activity
             android:name=".Apply_For_Interns"
             android:label="@string/title_activity_apply__for__interns"
@@ -132,7 +133,6 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
         <activity
             android:name=".Student_ChangePassword"

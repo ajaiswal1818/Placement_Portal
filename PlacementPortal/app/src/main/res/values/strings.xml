@@ -1,6 +1,6 @@
 <resources>
     <string name="linktoapp">
-    <a href = "https://nitish6174.github.io/resume-generator/">CLICK HERE TO GO TO CV GENERATOR</a>
+    <a href="https://nitish6174.github.io/resume-generator/">CLICK HERE TO GO TO CV GENERATOR</a>
 </string>
     <string name="app_name">Placement Portal</string>
     <string name="impor">import</string>

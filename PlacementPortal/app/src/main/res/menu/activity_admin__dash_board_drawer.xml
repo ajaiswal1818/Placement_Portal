@@ -3,37 +3,45 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
-
     <item
-        android:id="@+id/nav_jrf_application_requests"
-        android:title="JRF Applications" />
-    <item
-        android:id="@+id/nav_approve_notice"
-        android:title="Company Notices" />
-    <item
-        android:id="@+id/Company_slots"
-        android:title="Company_Slots" />
+        android:id="@+id/nav_approve_student"
+        android:title="STUDENT APPROVAL" />
     <item
         android:id="@+id/nav_approve_company"
-        android:title="Approve Company" />
+        android:title="COMPANY APPROVAL" />
+    <item
+        android:id="@+id/nav_jrf_application_requests"
+        android:title="JRF APPLICATIONS" />
+    <item
+        android:id="@+id/nav_ra_application_requests"
+        android:title="RA APPLICATIONS" />
+    <item
+        android:id="@+id/nav_approve_notice"
+        android:title="ADVERTISEMENTS" />
+    <item
+        android:id="@+id/Company_slots"
+        android:title="COMPANY SLOTS" />
     <item
         android:id="@+id/nav_list_notifications"
-        android:title="Notifications" />
-    <item
-        android:id="@+id/nav_emails"
-        android:title="Send Email" />
+        android:title="NOTIFICATIONS" />
     <item
         android:id="@+id/nav_manage_enroll"
-        android:title="Manage Enrollments" />
+        android:title="MANAGE ENROLLMENTS" />
+    <item
+        android:id="@+id/nav_emails"
+        android:title="SEND EMAILS" />
     <item
         android:id="@+id/nav_notice_to_company"
-        android:title="Company Notices" />
+        android:title="SEND NOTICES" />
+    <item
+        android:id="@+id/nav_change_pass"
+        android:title="CHANGE PASSWORD" />
     <item
         android:id="@+id/nav_checkout"
-        android:title="Checkout" />
+        android:title="CHECKOUT" />
     <item
         android:id="@+id/nav_signout"
-        android:title="Sign Out" />
+        android:title="SIGN OUT" />
 
 
 </menu>
