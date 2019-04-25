@@ -204,6 +204,7 @@ public class Student_Register extends AppCompatActivity {
                 //INSERT STUDENT DATA TO FIREBASE
                 ref=FirebaseDatabase.getInstance().getReference("Student");
                 ref.child(webmail).setValue(user);
+                ref.child(webmail).child("List_of_Notification_IDs").setValue("");
                 //NEW ACTIVITY
                 Intent I = new Intent(Student_Register.this, Student_Dashboard.class);
                 I.putExtra("user",user);

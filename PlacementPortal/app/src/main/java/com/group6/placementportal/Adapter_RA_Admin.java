@@ -42,6 +42,7 @@ Adapter_RA_Admin extends RecyclerView.Adapter<Adapter_RA_Admin.MyViewHolder> {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, RA_Approval_Profile.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 intent.putExtra("job_profile", profiles.get(position));
                 context.startActivity(intent);
             }

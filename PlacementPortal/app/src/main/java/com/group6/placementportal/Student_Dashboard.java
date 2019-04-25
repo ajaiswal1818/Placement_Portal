@@ -214,6 +214,7 @@ public class Student_Dashboard extends AppCompatActivity
 
         } else if(id == R.id.nav_signout){
             onSignOutClicked();
+            stopService(new Intent(Student_Dashboard.this,Student_Foreground_Notifications.class));
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);

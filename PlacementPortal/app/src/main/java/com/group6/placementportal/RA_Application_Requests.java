@@ -123,9 +123,6 @@ public class RA_Application_Requests extends AppCompatActivity
             exit();
 
         } else if(id==R.id.nav_signout){
-            Intent intent = new Intent(getApplicationContext(), JRF_Application_Requests.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            startActivity(intent);
             Intent i = new Intent(getApplicationContext(), Login_Page_Admin.class);
             startActivity(i);
             exit();

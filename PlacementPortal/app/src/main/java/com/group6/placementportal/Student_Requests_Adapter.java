@@ -43,6 +43,7 @@ public class Student_Requests_Adapter extends RecyclerView.Adapter<Student_Reque
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, Student_Profile_Approval.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 intent.putExtra("user",profiles.get(position));
                 context.startActivity(intent);
             }

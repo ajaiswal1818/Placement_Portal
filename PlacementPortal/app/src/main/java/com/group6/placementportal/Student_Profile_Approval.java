@@ -130,6 +130,7 @@ public class Student_Profile_Approval extends AppCompatActivity {
                                 public void onClick(DialogInterface dialog, int which) {
                                     Intent company_login = new Intent(Student_Profile_Approval.this, Student_Requests.class);
                                     startActivity(company_login);
+                                    Student_Profile_Approval.this.finish();
                                 }
                             });
                             AlertDialog mDialog = mBuilder.create();
@@ -217,6 +218,7 @@ public class Student_Profile_Approval extends AppCompatActivity {
                                     reference.child("Student").child(user.getWebmailID()).child("ProfilePending").setValue("Completed");
                                     Intent company_login=new Intent(Student_Profile_Approval.this, Student_Requests.class);
                                     startActivity(company_login);
+                                    Student_Profile_Approval.this.finish();
                                 }
                             });
                             AlertDialog mDialog = mBuilder.create();
@@ -246,6 +248,7 @@ public class Student_Profile_Approval extends AppCompatActivity {
                                     reference.child("Approve_Students").child(user.getWebmailID()).child("Action_Taken").setValue(true);
                                     Intent company_login=new Intent(Student_Profile_Approval.this, Student_Requests.class);
                                     startActivity(company_login);
+                                    Student_Profile_Approval.this.finish();
                                 }
                             });
                             AlertDialog mDialog = mBuilder.create();
